@@ -10,9 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_15_084326) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_15_092048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "connections", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "pet_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pet_id"], name: "index_connections_on_pet_id"
+    t.index ["user_id"], name: "index_connections_on_user_id"
+  end
+
+  create_table "pets", force: :cascade do |t|
+    t.string "name"
+    t.string "species"
+    t.integer "age"
+    t.string "size"
+    t.string "activity_level"
+    t.string "breed"
+    t.string "gender"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.boolean "neutered"
+    t.string "medical_conditions"
+    t.boolean "sociable_with_animals"
+    t.boolean "sociable_with_children"
+    t.boolean "certified"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_pets_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,7 +52,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_15_084326) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "age"
+    t.string "location"
+    t.boolean "provider"
+    t.text "about_me"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "connections", "pets"
+  add_foreign_key "connections", "users"
+  add_foreign_key "pets", "users"
 end
