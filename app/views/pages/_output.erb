@@ -1,7 +1,25 @@
 
+<div style="border: 1px solid #ccc; padding: 10px;">
+  <% if @output.present? %>
+    <p><%= @output %></p>
+  <% else %>
+    <p>This is where the output from OpenAI will be shown</p>
+  <% end %>
+</div>
 
-<% if @output.present? %>
-  <p><%= @output %></p>
-<% else %>
-  <p>There's nothing to present</p>
-<% end %>
+<div style="border: 1px solid rgba(100, 0, 0, 0.81); padding: 10px;">
+  <% if @output.present? %>
+    <% parsed_database = JSON.parse(@text.database) %>
+    <% selected_pet = parsed_database.find { |pet| pet["id"] == @output.to_i } %>
+    <% if selected_pet %>
+      <p><%= selected_pet["name"] %> - <%= selected_pet["species"] %> - <%= selected_pet["breed"] %> - <%= selected_pet["description"] %></p>
+    <% else %>
+      <p>No matching pet found</p>
+    <% end %>
+  <% else %>
+    <% parsed_database = JSON.parse(@text.database) %>
+    <% parsed_database.each do |pet| %>
+      <p><%= pet["name"] %> - <%= pet["species"] %> - <%= pet["breed"] %> - <%= pet["description"] %></p>
+    <% end %>
+  <% end %>
+</div>
