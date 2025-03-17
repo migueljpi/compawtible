@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   get "test" => "pages#test", as: :test
   resources :texts, only: [:create]
   resources :users, only: [:show]
+  resources :adoption_locations, only: [:create]
 end
