@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "test" => "pages#test", as: :test
   resources :texts, only: [:create]
+  resources :users, only: [:show]
 end
