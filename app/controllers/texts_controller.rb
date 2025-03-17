@@ -2,7 +2,11 @@ class TextsController < ApplicationController
 
   def create
     @text = Text.new(text_params)
+    @text.database = Pet.all.to_json # This will be changed later
+    puts "THIS IS THE INPUT-----------------"
     puts @text.input
+    puts "THIS IS THE DATABASE-----------------"
+    puts @text.database
     if @text.save
       puts "it saved"
       @input = @text.input
