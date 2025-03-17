@@ -6,6 +6,7 @@ class PagesController < ApplicationController
     @text.database = Pet.all.to_json # This will be changed later
     @output = params[:output]
     @users = User.all
+    @pets = Pet.all
 
     location = params.dig(:adoption_location, :location)
     radius = params.dig(:adoption_location, :radius)

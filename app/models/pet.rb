@@ -46,11 +46,9 @@ class Pet < ApplicationRecord
 
 belongs_to :user
 has_many :connections, dependent: :destroy
-has_many :users, through: :connections
+# has_many :users, through: :connections
 validates :name, presence: true
 validates :description, presence: true
-validates :species, presence: true
-validates :breed, presence: true
 
 
 
