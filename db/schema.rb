@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_17_162145) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_17_183149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adoption_locations", force: :cascade do |t|
+    t.string "location"
+    t.integer "radius"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
+  end
 
   create_table "connections", force: :cascade do |t|
     t.bigint "user_id", null: false

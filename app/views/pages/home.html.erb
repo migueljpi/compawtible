@@ -1,10 +1,25 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
+<%= render "test" %>
+
+<% if @users_nearby.any? %>
+  <h3>Animals within this distance:</h3>
+
+  <% @users_nearby.each do |user| %>
+    <p><%= user.first_name %> <%= user.last_name %></p>
+  <% end %>
+<% else %>
+  <h3>No animals within this distance</h3>
+<% end %>
+
+
+<h2>---------USER INPUT AND OUTPUT---------</h2>
+
 <%= render "user_input" %>
 <%= render "output" %>
 
-<h2>---------USERS BELOW---------</h2>
+<h2>---------USERS---------</h2>
 
 <% @users.each do |user| %>
   <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
