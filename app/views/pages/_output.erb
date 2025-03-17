@@ -1,7 +1,15 @@
 
+<div style="border: 1px solid #325869; padding: 10px;">
+  <% if @input.present? %>
+    <p>This was the input: <%= @input %></p>
+  <% else %>
+    <p>This is where the input will be shown</p>
+  <% end %>
+</div>
+
 <div style="border: 1px solid #ccc; padding: 10px;">
   <% if @output.present? %>
-    <p><%= @output %></p>
+    <p>This was the output from OpenAI: <%= @output %></p>
   <% else %>
     <p>This is where the output from OpenAI will be shown</p>
   <% end %>
@@ -11,6 +19,7 @@
   <% if @output.present? %>
     <% parsed_database = JSON.parse(@text.database) %>
     <% selected_pet = parsed_database.find { |pet| pet["id"] == @output.to_i } %>
+    <p>This was OpenAI best match</p>
     <% if selected_pet %>
       <p><%= selected_pet["name"] %> - <%= selected_pet["species"] %> - <%= selected_pet["breed"] %> - <%= selected_pet["description"] %></p>
     <% else %>
@@ -18,6 +27,7 @@
     <% end %>
   <% else %>
     <% parsed_database = JSON.parse(@text.database) %>
+    <p>This is the pet database:</p>
     <% parsed_database.each do |pet| %>
       <p><%= pet["name"] %> - <%= pet["species"] %> - <%= pet["breed"] %> - <%= pet["description"] %></p>
     <% end %>

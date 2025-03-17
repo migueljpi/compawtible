@@ -9,18 +9,30 @@ provider = User.create!(
   first_name: "John",
   last_name: "Doe",
   age: 30,
-  location: "Lisbon, Portugal",
+  location: "Zanzibar City, Zanzibar, Tanzania",
   provider: true,
   about_me: "I love animals and help them find loving homes!"
 )
 
-adopter = User.create!(
-  email: "adopter@adopter.com",
+adopter1 = User.create!(
+  email: "adopter1@adopter.com",
   password: "123456",
-  first_name: "João",
-  last_name: "Ferreira",
+  first_name: "Luis",
+  last_name: "Marín",
   age: 28,
+  location: "Madrid, España",
   provider: false
+)
+
+adopter2 = User.create!(
+  email: "adopter2@adopter.com",
+  password: "123456",
+  first_name: "Maria",
+  last_name: "Fernandes",
+  age: 28,
+  location: "Lisbon, Portugal",
+  provider: false,
+  about_me: "I have always loved animals and am looking to adopt a furry friend to join my home."
 )
 
 pets = [
