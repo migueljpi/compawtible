@@ -1,6 +1,10 @@
 <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 <h2><%= @user.email %></h2>
 <h2><%= @user.location %></h2>
+<% @user.pets.each do |pet| %>
+  <h3><%= pet.name %> - <%= pet.species %> - <%= pet.breed %></h3>
+  <p><%= pet.description %></p>
+<% end %>
 
 <div style="width: 100%; height: 600px;"
   data-controller="map"

@@ -8,11 +8,15 @@
 
   <% @users_nearby.each do |user| %>
     <p><%= user.first_name %> <%= user.last_name %></p>
+
+    <% user.pets.each do |pet| %>
+      <%= pet.name %> - <%= pet.species %> - <%= pet.breed %> - <%= pet.description %>
+    <% end %>
+
   <% end %>
 <% else %>
   <h3>No animals within this distance</h3>
 <% end %>
-
 
 <h2>---------USER INPUT AND OUTPUT---------</h2>
 
@@ -21,6 +25,10 @@
 
 <h2>---------USERS---------</h2>
 
-<% @users.each do |user| %>
-  <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
-<% end %>
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
+    </li>
+  <% end %>
+</ul>
