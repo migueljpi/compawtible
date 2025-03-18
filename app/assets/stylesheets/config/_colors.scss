@@ -1,10 +1,32 @@
 // Define variables for your color scheme
 
-// For example:
-$red: #FD1015;
-$blue: #0D6EFD;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+
+// General
+$white: #FFFFFF;
+$black: #000000;
+$grey: #8E8E93;
+$dark-blue: #1B435D;
+
+
+// Semantic colors
+$green: #4B9560;
+$yellow: #E4B86D;
+$red: #B94735;
+$blue: #3D7A99;
+
+// Primary  (buttons, sliders, links, etc.)
+$blue-main:#257180;
+$blue-medium:#349CB0;
+$blue-light:#40CAE5;
+// Secondary  (secondary buttons, and interactive elements.)
+$orange-main:#FD8B51;
+$orange-medium:#F7A47A;
+$orange-light:#FFC3A5;
+// Neutral  (backgrounds, surfaces, or cards)
+$beije-main:#F2E5BF;
+$beije-medium:#F6F0DE;
+$beije-light:#E7E6E0;
+// Accent (warning messages, delete buttons, or other important alerts)
+$rusty-red-main:#CB6040;
+$rusty-red-medium:#E18164;
+$rusty-red-light:#FF8B73;
