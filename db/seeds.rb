@@ -69,7 +69,7 @@ provider_users.each_with_index do |provider, index|
   cat = pets[index + 5]
 
   Pet.create!(
-    user: provider,
+    provider: provider,
     name: dog[:name],
     species: dog[:species],
     breed: dog[:breed],
@@ -85,7 +85,7 @@ provider_users.each_with_index do |provider, index|
   )
 
   Pet.create!(
-    user: provider,
+    provider: provider,
     name: cat[:name],
     species: cat[:species],
     breed: cat[:breed],

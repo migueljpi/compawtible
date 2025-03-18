@@ -54,13 +54,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
   end
 
   create_table "interactions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "adopter_id", null: false
     t.bigint "pet_id", null: false
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["adopter_id"], name: "index_interactions_on_adopter_id"
     t.index ["pet_id"], name: "index_interactions_on_pet_id"
-    t.index ["user_id"], name: "index_interactions_on_user_id"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
     t.string "breed"
     t.string "gender"
     t.text "description"
-    t.bigint "user_id", null: false
+    t.bigint "provider_id", null: false
     t.boolean "neutered"
     t.string "medical_conditions"
     t.boolean "sociable_with_animals"
@@ -80,7 +80,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
     t.boolean "certified"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_pets_on_user_id"
+    t.index ["provider_id"], name: "index_pets_on_provider_id"
   end
 
   create_table "texts", force: :cascade do |t|
@@ -115,6 +115,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "adoption_locations", "texts"
   add_foreign_key "interactions", "pets"
-  add_foreign_key "interactions", "users"
-  add_foreign_key "pets", "users"
+  add_foreign_key "interactions", "users", column: "adopter_id"
+  add_foreign_key "pets", "users", column: "provider_id"
 end
