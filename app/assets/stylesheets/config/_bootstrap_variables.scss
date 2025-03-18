@@ -7,16 +7,20 @@
 // General style
 $font-family-sans-serif: $body-font;
 $headings-font-family:   $headers-font;
-$body-bg:                $light-gray;
+// $body-bg:                $light-gray;
 $font-size-base:         1rem;
 
 // Colors
-$body-color: $gray;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
+$body-color: $dark-blue;
+$color-primary:    $blue-main; // buttons, sliders, links, etc.
+$color-secondary:  $orange-main; // secondary buttons, and interactive elements
+$color-neutral:    $beije-main;
+$color-accent:    $rusty-red-main;
+
+$color-success:    $green;
+$color-warning:    $yellow;
+$color-info:       $blue;
+$color-danger:     $red;
 
 // Buttons & inputs' radius
 $border-radius-sm:            .0625rem;
