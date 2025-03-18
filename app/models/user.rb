@@ -7,8 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :pets, dependent: :destroy
-  has_many :connections, dependent: :destroy
-  # has_many :pets, through: :connections
+  has_many :interactions, dependent: :destroy
+  has_many :pets, through: :interactions
   has_one_attached :photo
 
   validates :first_name, presence: true

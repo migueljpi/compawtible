@@ -2,7 +2,7 @@ AdoptionLocation.destroy_all
 Text.destroy_all
 Pet.destroy_all
 User.destroy_all
-Connection.destroy_all
+Interaction.destroy_all
 
 # Create providers
 providers = [

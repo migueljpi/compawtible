@@ -1,4 +1,4 @@
-class Connection < ApplicationRecord
+class Interaction < ApplicationRecord
   belongs_to :user
   belongs_to :pet
   # validates :status, presence: true
