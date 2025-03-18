@@ -9,7 +9,7 @@ class CreatePets < ActiveRecord::Migration[7.2]
       t.string :breed
       t.string :gender
       t.text :description
-      t.references :user, null: false, foreign_key: true
+      t.references :provider, null: false, foreign_key: { to_table: :users }
       t.boolean :neutered
       t.string :medical_conditions
       t.boolean :sociable_with_animals
