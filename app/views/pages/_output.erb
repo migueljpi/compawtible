@@ -1,35 +1,46 @@
-
-<div style="border: 1px solid #325869; padding: 10px;">
-  <% if @input.present? %>
-    <p>This was the input: <%= @input %></p>
-  <% else %>
-    <p>This is where the input will be shown</p>
-  <% end %>
-</div>
-
-<div style="border: 1px solid #ccc; padding: 10px;">
-  <% if @output.present? %>
-    <p>This was the output from OpenAI: <%= @output %></p>
-  <% else %>
-    <p>This is where the output from OpenAI will be shown</p>
-  <% end %>
-</div>
-
-<div style="border: 1px solid rgba(100, 0, 0, 0.81); padding: 10px;">
-  <% if @output.present? %>
-    <% parsed_database = JSON.parse(@text.database) %>
-    <% selected_pet = parsed_database.find { |pet| pet["id"] == @output.to_i } %>
-    <p>This was OpenAI best match</p>
-    <% if selected_pet %>
-      <p><%= selected_pet["name"] %> - <%= selected_pet["species"] %> - <%= selected_pet["breed"] %> - <%= selected_pet["description"] %></p>
+<div id="output"> # This is the id that Turbo Stream will target
+  <div style="border: 1px solid #325869; padding: 10px;">
+    <h2>INPUT</h2>
+    <% if @text&.input.present? %>
+      <p>This was the input: <%= @text.input %></p>
     <% else %>
-      <p>No matching pet found</p>
+      <p>This is where the input will be shown</p>
     <% end %>
-  <% else %>
-    <% parsed_database = JSON.parse(@text.database) %>
-    <p>This is the pet database:</p>
-    <% parsed_database.each do |pet| %>
-      <p><%= pet["name"] %> - <%= pet["species"] %> - <%= pet["breed"] %> - <%= pet["description"] %></p>
+  </div>
+
+  <div style="border: 1px solid #325869; padding: 10px;">
+    <h2>DATABASE SENT</h2>
+    <% if @text&.input.present? %>
+      <p>This was the database sent: <%= @text.database %></p>
+    <% else %>
+      <p>This is where the input will be shown</p>
     <% end %>
-  <% end %>
+  </div>
+
+  <div style="border: 1px solid #ccc; padding: 10px;">
+    <h2>OUTPUT FROM OPENAI</h2>
+    <% if @output.present? %>
+      <p>This was the output from OpenAI: <%= @output %></p>
+    <% else %>
+      <p>This is where the output will be shown</p>
+    <% end %>
+  </div>
+
+  <div style="border: 1px solid #ccc; padding: 10px;">
+    <h2>BEST MATCH</h2>
+    <% if @output.present? && @text&.database.present? %>
+      <% JSON.parse(@text.database).each do |pet| %>
+        <% if pet["id"].to_s == @output.to_s %>
+          <p>This was the best match:</p>
+          <p><%= pet["name"] %></p>
+          <p><%= pet["species"] %></p>
+          <p><%= pet["breed"] %></p>
+          <p><%= pet["description"] %></p>
+          <%= link_to "Learn more about this pet", pet_path(pet["id"]) %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>This is where the best match will be shown</p>
+    <% end %>
+  </div>
 </div>

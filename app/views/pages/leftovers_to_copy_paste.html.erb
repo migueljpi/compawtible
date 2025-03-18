@@ -1,0 +1,18 @@
+<%= render "location" %>
+
+<% if @users_nearby.any? %>
+  <h3>Animals within this distance:</h3>
+
+  <% @users_nearby.each do |user| %>
+    <p><%= user.first_name %> <%= user.last_name %></p>
+
+    <ul>
+      <% user.pets.each do |pet| %>
+        <li><%= pet.name %> - <%= pet.species %> - <%= pet.breed %> - <%= pet.description %></li>
+      <% end %>
+    </ul>
+
+  <% end %>
+<% else %>
+  <h3>No animals within this distance</h3>
+<% end %>
