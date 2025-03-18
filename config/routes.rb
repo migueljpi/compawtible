@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+  post "/", to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -17,4 +18,5 @@ Rails.application.routes.draw do
   resources :texts, only: [:create]
   resources :users, only: [:show]
   resources :adoption_locations, only: [:create]
+  resources :pets, only: [:show]
 end

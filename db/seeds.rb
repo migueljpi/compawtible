@@ -1,64 +1,33 @@
+AdoptionLocation.destroy_all
+Text.destroy_all
 Pet.destroy_all
 User.destroy_all
 Connection.destroy_all
 
-# Create user
-provider = User.create!(
-  email: "provider@provider.com",
-  password: "123456",
-  first_name: "John",
-  last_name: "Doe",
-  age: 30,
-  location: "Zanzibar City, Zanzibar, Tanzania",
-  provider: true,
-  about_me: "I love animals and help them find loving homes!"
-)
+# Create providers
+providers = [
+  { email: "provider1@provider.com", first_name: "John", last_name: "Doe", age: 30, location: "Zanzibar City, Zanzibar, Tanzania", about_me: "I love animals and help them find loving homes!" },
+  { email: "provider2@provider.com", first_name: "Anna", last_name: "Schmidt", age: 35, location: "Berlin, Berlin, Germany", about_me: "Passionate about rescuing stray cats and finding them the perfect forever homes." },
+  { email: "provider3@provider.com", first_name: "Luca", last_name: "Rossi", age: 42, location: "Milan, Lombardy, Italy", about_me: "Dedicated to rehabilitating abandoned dogs and giving them a second chance at happiness." },
+  { email: "provider4@provider.com", first_name: "Sofia", last_name: "Fernandez", age: 28, location: "Madrid, Madrid, Spain", about_me: "I work with shelters to ensure every pet gets the care and love they deserve." },
+  { email: "provider5@provider.com", first_name: "Oliver", last_name: "Dupont", age: 38, location: "Paris, Île-de-France, France", about_me: "Helping animals find new homes while advocating for responsible pet adoption." }
+]
 
-provider1 = User.create!(
-  email: "anna.shelter@provider.com",
-  password: "123456",
-  first_name: "Anna",
-  last_name: "Schmidt",
-  age: 35,
-  location: "Berlin, Berlin, Germany",
-  provider: true,
-  about_me: "Passionate about rescuing stray cats and finding them the perfect forever homes."
-)
+providers.each do |provider|
+  User.create!(
+    email: provider[:email],
+    password: "123456",
+    first_name: provider[:first_name],
+    last_name: provider[:last_name],
+    age: provider[:age],
+    location: provider[:location],
+    provider: true,
+    about_me: provider[:about_me]
+  )
+end
 
-provider2 = User.create!(
-  email: "luca.rescue@provider.com",
-  password: "123456",
-  first_name: "Luca",
-  last_name: "Rossi",
-  age: 42,
-  location: "Milan, Lombardy, Italy",
-  provider: true,
-  about_me: "Dedicated to rehabilitating abandoned dogs and giving them a second chance at happiness."
-)
-
-provider3 = User.create!(
-  email: "sofia.animals@provider.com",
-  password: "123456",
-  first_name: "Sofia",
-  last_name: "Fernandez",
-  age: 28,
-  location: "Madrid, Madrid, Spain",
-  provider: true,
-  about_me: "I work with shelters to ensure every pet gets the care and love they deserve."
-)
-
-provider4 = User.create!(
-  email: "oliver.pets@provider.com",
-  password: "123456",
-  first_name: "Oliver",
-  last_name: "Dupont",
-  age: 38,
-  location: "Paris, Île-de-France, France",
-  provider: true,
-  about_me: "Helping animals find new homes while advocating for responsible pet adoption."
-)
-
-adopter1 = User.create!(
+# Create adopters
+User.create!(
   email: "adopter1@adopter.com",
   password: "123456",
   first_name: "Luis",
@@ -68,7 +37,7 @@ adopter1 = User.create!(
   provider: false
 )
 
-adopter2 = User.create!(
+User.create!(
   email: "adopter2@adopter.com",
   password: "123456",
   first_name: "Maria",
@@ -79,23 +48,59 @@ adopter2 = User.create!(
   about_me: "I have always loved animals and am looking to adopt a furry friend to join my home."
 )
 
+# Assign each provider a unique cat and dog
+provider_users = User.where(provider: true)
+
 pets = [
-  { name: "Bobby", species: "Dog", breed: "Golden Retriever", age: 3, size: "Large", activity_level: "High", gender: "Male", neutered: true, sociable_with_animals: true, sociable_with_children: true, certified: false, description: "Bobby is an energetic and affectionate Golden Retriever who loves playing fetch at the beach. He is always eager to meet new people and other dogs. A loyal and loving companion for any active household." },
-  { name: "Luna", species: "Dog", breed: "Poodle", age: 5, size: "Medium", activity_level: "Moderate", gender: "Female", neutered: true, sociable_with_animals: true, sociable_with_children: true, certified: true, description: "Luna is a sweet and intelligent Poodle with a gentle temperament. She enjoys long walks and cuddles on the couch. Her hypoallergenic coat makes her a great pet for allergy-sensitive owners." },
-  { name: "Max", species: "Dog", breed: "Labrador Retriever", age: 2, size: "Large", activity_level: "High", gender: "Male", neutered: false, sociable_with_animals: true, sociable_with_children: true, certified: false, description: "Max is a playful and adventurous Labrador who loves swimming and running. He’s always up for a new challenge and enjoys learning new tricks. Perfect for an active family looking for a fun-loving pet." },
-  { name: "Mia", species: "Dog", breed: "Beagle", age: 4, size: "Medium", activity_level: "Moderate", gender: "Female", neutered: true, sociable_with_animals: true, sociable_with_children: false, certified: false, description: "Mia is a curious Beagle with a great nose for adventure. She loves exploring new scents on her daily walks. She’s independent but loves snuggling up after a long day." },
-  { name: "Simba", species: "Cat", breed: "Maine Coon", age: 3, size: "Large", activity_level: "Low", gender: "Male", neutered: true, sociable_with_animals: false, sociable_with_children: true, certified: false, description: "Simba is a majestic Maine Coon with a fluffy coat and a gentle nature. He loves lounging by the window and watching birds. A calm and affectionate companion for a quiet home." },
-  { name: "Cleo", species: "Cat", breed: "Siamese", age: 2, size: "Medium", activity_level: "High", gender: "Female", neutered: true, sociable_with_animals: true, sociable_with_children: false, certified: false, description: "Cleo is a talkative and energetic Siamese who loves attention. She enjoys playing with feather toys and climbing high places. A perfect match for someone who wants a vocal and interactive pet." },
-  { name: "Whiskers", species: "Cat", breed: "British Shorthair", age: 6, size: "Medium", activity_level: "Low", gender: "Male", neutered: true, sociable_with_animals: false, sociable_with_children: false, certified: false, description: "Whiskers is a dignified and independent British Shorthair. He prefers quiet spaces and enjoys watching the world go by from a cozy perch. A great pet for someone looking for a calm and low-maintenance companion." },
-  { name: "Rocky", species: "Rabbit", breed: "Netherland Dwarf", age: 1, size: "Small", activity_level: "Moderate", gender: "Male", neutered: false, sociable_with_animals: false, sociable_with_children: true, certified: false, description: "Rocky is a tiny and playful Netherland Dwarf rabbit with a big personality. He enjoys hopping around and nibbling on fresh veggies. Perfect for a gentle and caring owner." },
-  { name: "Blue", species: "Parrot", breed: "Macaw", age: 8, size: "Large", activity_level: "High", gender: "Male", neutered: false, sociable_with_animals: true, sociable_with_children: true, certified: true, description: "Blue is a vibrant Macaw with a talent for mimicking sounds. He loves engaging with people and showing off his colorful feathers. He needs a dedicated owner willing to provide plenty of social interaction." },
-  { name: "Shelly", species: "Turtle", breed: "Red-Eared Slider", age: 5, size: "Small", activity_level: "Low", gender: "Female", neutered: false, sociable_with_animals: false, sociable_with_children: false, certified: false, description: "Shelly is a calm and quiet Red-Eared Slider who enjoys basking under the heat lamp. She requires minimal maintenance but loves fresh leafy greens. A great choice for someone looking for a peaceful pet." }
+  { species: "Dog", breed: "Golden Retriever", name: "Bobby", description: "Friendly and playful, Bobby loves to fetch and is great with kids." },
+  { species: "Dog", breed: "Poodle", name: "Luna", description: "Smart and affectionate, Luna enjoys long walks and snuggles." },
+  { species: "Dog", breed: "Labrador Retriever", name: "Max", description: "Energetic and adventurous, Max loves swimming and running outside." },
+  { species: "Dog", breed: "Beagle", name: "Mia", description: "Curious and independent, Mia loves to explore and sniff around." },
+  { species: "Dog", breed: "Border Collie", name: "Charlie", description: "Super intelligent and active, Charlie is great at learning new tricks." },
+  { species: "Cat", breed: "Maine Coon", name: "Simba", description: "A fluffy and calm cat, Simba enjoys lounging and getting belly rubs." },
+  { species: "Cat", breed: "Siamese", name: "Cleo", description: "Lively and talkative, Cleo loves climbing high places and playing with toys." },
+  { species: "Cat", breed: "British Shorthair", name: "Whiskers", description: "A quiet and independent cat who loves cozy spots to nap in." },
+  { species: "Cat", breed: "Persian", name: "Milo", description: "Sweet and affectionate, Milo enjoys gentle cuddles and relaxing." },
+  { species: "Cat", breed: "Ragdoll", name: "Bella", description: "Friendly and social, Bella loves being around people and getting attention." }
 ]
 
-pets.each do |pet|
-  pet = Pet.new(pet)
-  pet.user = provider3
-  pet.save!
+provider_users.each_with_index do |provider, index|
+  dog = pets[index]
+  cat = pets[index + 5]
+
+  Pet.create!(
+    user: provider,
+    name: dog[:name],
+    species: dog[:species],
+    breed: dog[:breed],
+    age: rand(1..7),
+    size: ["Small", "Medium", "Large"].sample,
+    activity_level: ["Low", "Moderate", "High"].sample,
+    gender: ["Male", "Female"].sample,
+    neutered: [true, false].sample,
+    sociable_with_animals: [true, false].sample,
+    sociable_with_children: [true, false].sample,
+    certified: [true, false].sample,
+    description: dog[:description]
+  )
+
+  Pet.create!(
+    user: provider,
+    name: cat[:name],
+    species: cat[:species],
+    breed: cat[:breed],
+    age: rand(1..7),
+    size: ["Small", "Medium", "Large"].sample,
+    activity_level: ["Low", "Moderate", "High"].sample,
+    gender: ["Male", "Female"].sample,
+    neutered: [true, false].sample,
+    sociable_with_animals: [true, false].sample,
+    sociable_with_children: [true, false].sample,
+    certified: [true, false].sample,
+    description: cat[:description]
+  )
 end
+
+
 
 puts "Seeded #{User.count} users and #{Pet.count} pets!"

@@ -1,22 +1,8 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
-<%= render "test" %>
 
-<% if @users_nearby.any? %>
-  <h3>Animals within this distance:</h3>
 
-  <% @users_nearby.each do |user| %>
-    <p><%= user.first_name %> <%= user.last_name %></p>
-
-    <% user.pets.each do |pet| %>
-      <%= pet.name %> - <%= pet.species %> - <%= pet.breed %> - <%= pet.description %>
-    <% end %>
-
-  <% end %>
-<% else %>
-  <h3>No animals within this distance</h3>
-<% end %>
 
 <h2>---------USER INPUT AND OUTPUT---------</h2>
 
