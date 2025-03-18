@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ConnectionsControllerTest < ActionDispatch::IntegrationTest
+class InteractionsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

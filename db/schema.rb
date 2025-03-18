@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_18_153118) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,14 +53,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_153118) do
     t.index ["text_id"], name: "index_adoption_locations_on_text_id"
   end
 
-  create_table "connections", force: :cascade do |t|
+  create_table "interactions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "pet_id", null: false
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pet_id"], name: "index_connections_on_pet_id"
-    t.index ["user_id"], name: "index_connections_on_user_id"
+    t.index ["pet_id"], name: "index_interactions_on_pet_id"
+    t.index ["user_id"], name: "index_interactions_on_user_id"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -114,7 +114,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_153118) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "adoption_locations", "texts"
-  add_foreign_key "connections", "pets"
-  add_foreign_key "connections", "users"
+  add_foreign_key "interactions", "pets"
+  add_foreign_key "interactions", "users"
   add_foreign_key "pets", "users"
 end
