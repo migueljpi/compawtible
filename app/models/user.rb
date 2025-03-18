@@ -6,9 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :pets, through: :interactions
   has_many :pets, class_name: "Pet", foreign_key: :provider_id, dependent: :destroy
   has_many :interactions, foreign_key: "adopter_id", dependent: :destroy
-  has_many :pets, through: :interactions
   has_one_attached :photo
 
   validates :first_name, presence: true
