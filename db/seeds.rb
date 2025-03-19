@@ -1,8 +1,12 @@
+# Destroy existing records
+puts "Destroying existing records..."
 AdoptionLocation.destroy_all
-Text.destroy_all
+Prompt.destroy_all
 Pet.destroy_all
 User.destroy_all
 Interaction.destroy_all
+puts "Existing records destroyed!"
+
 
 # Create providers
 providers = [
@@ -13,6 +17,8 @@ providers = [
   { email: "provider5@provider.com", first_name: "Oliver", last_name: "Dupont", age: 38, location: "Paris, Île-de-France, France", about_me: "Helping animals find new homes while advocating for responsible pet adoption." }
 ]
 
+
+puts "Creating providers..."
 providers.each do |provider|
   User.create!(
     email: provider[:email],
@@ -21,12 +27,16 @@ providers.each do |provider|
     last_name: provider[:last_name],
     age: provider[:age],
     location: provider[:location],
-    provider: true,
+    role: "provider", # Use the role column
     about_me: provider[:about_me]
   )
 end
+puts "Providers created!"
+
+
 
 # Create adopters
+puts "Creating adopters..."
 User.create!(
   email: "adopter1@adopter.com",
   password: "123456",
@@ -34,7 +44,7 @@ User.create!(
   last_name: "Marín",
   age: 28,
   location: "Madrid, España",
-  provider: false
+  role: "adopter"
 )
 
 User.create!(
@@ -44,12 +54,13 @@ User.create!(
   last_name: "Fernandes",
   age: 28,
   location: "Lisbon, Portugal",
-  provider: false,
+  role: "adopter",
   about_me: "I have always loved animals and am looking to adopt a furry friend to join my home."
 )
+puts "Adopters created!"
 
 # Assign each provider a unique cat and dog
-provider_users = User.where(provider: true)
+provider_users = User.where(role: "provider")
 
 pets = [
   { species: "Dog", breed: "Golden Retriever", name: "Bobby", description: "Friendly and playful, Bobby loves to fetch and is great with kids." },
@@ -64,12 +75,14 @@ pets = [
   { species: "Cat", breed: "Ragdoll", name: "Bella", description: "Friendly and social, Bella loves being around people and getting attention." }
 ]
 
+puts "Creating pets..."
 provider_users.each_with_index do |provider, index|
   dog = pets[index]
   cat = pets[index + 5]
 
   Pet.create!(
-    provider: provider,
+    location: provider.location,
+    provider: provider, # Use the provider user
     name: dog[:name],
     species: dog[:species],
     breed: dog[:breed],
@@ -85,7 +98,8 @@ provider_users.each_with_index do |provider, index|
   )
 
   Pet.create!(
-    provider: provider,
+    location: provider.location,
+    provider: provider, # Use the provider user
     name: cat[:name],
     species: cat[:species],
     breed: cat[:breed],
@@ -100,7 +114,6 @@ provider_users.each_with_index do |provider, index|
     description: cat[:description]
   )
 end
-
-
+puts "Pets created!"
 
 puts "Seeded #{User.count} users and #{Pet.count} pets!"

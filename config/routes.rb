@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "test" => "pages#test", as: :test
-  resources :texts, only: [:create]
+  resources :prompts, only: [:create]
   resources :users, only: [:show]
   resources :adoption_locations, only: [:create]
   resources :pets, only: [:show]
