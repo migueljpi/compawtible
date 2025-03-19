@@ -1,8 +1,8 @@
 <div id="output"> # This is the id that Turbo Stream will target
   <div style="border: 1px solid #325869; padding: 10px;">
     <h2>INPUT</h2>
-    <% if @text&.input.present? %>
-      <p>This was the input: <%= @text.input %></p>
+    <% if @prompt&.input.present? %>
+      <p>This was the input: <%= @prompt.input %></p>
     <% else %>
       <p>This is where the input will be shown</p>
     <% end %>
@@ -10,8 +10,8 @@
 
   <div style="border: 1px solid #325869; padding: 10px;">
     <h2>DATABASE SENT</h2>
-    <% if @text&.input.present? %>
-      <p>This was the database sent: <%= @text.database %></p>
+    <% if @prompt&.input.present? %>
+      <p>This was the database sent: <%= @prompt.pets_for_prompt %></p>
     <% else %>
       <p>This is where the input will be shown</p>
     <% end %>
@@ -28,8 +28,8 @@
 
   <div style="border: 1px solid #ccc; padding: 10px;">
     <h2>BEST MATCH</h2>
-    <% if @output.present? && @text&.database.present? %>
-      <% JSON.parse(@text.database).each do |pet| %>
+    <% if @output.present? && @prompt&.pets_for_prompt.present? %>
+      <% JSON.parse(@prompt.pets_for_prompt).each do |pet| %>
         <% if pet["id"].to_s == @output.to_s %>
           <p>This was the best match:</p>
           <p><%= pet["name"] %></p>

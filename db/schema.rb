@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_19_231339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,8 +49,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
-    t.bigint "text_id", null: false
-    t.index ["text_id"], name: "index_adoption_locations_on_text_id"
+    t.bigint "prompt_id", null: false
+    t.index ["prompt_id"], name: "index_adoption_locations_on_prompt_id"
   end
 
   create_table "interactions", force: :cascade do |t|
@@ -80,15 +80,20 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
     t.boolean "certified"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "location"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["provider_id"], name: "index_pets_on_provider_id"
   end
 
-  create_table "texts", force: :cascade do |t|
+  create_table "prompts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "input"
     t.string "output"
-    t.string "database"
+    t.string "pets_for_prompt"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_prompts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -103,18 +108,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_192640) do
     t.string "last_name"
     t.integer "age"
     t.string "location"
-    t.boolean "provider"
     t.text "about_me"
     t.float "latitude"
     t.float "longitude"
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "adoption_locations", "texts"
+  add_foreign_key "adoption_locations", "prompts"
   add_foreign_key "interactions", "pets"
   add_foreign_key "interactions", "users", column: "adopter_id"
   add_foreign_key "pets", "users", column: "provider_id"
+  add_foreign_key "prompts", "users"
 end

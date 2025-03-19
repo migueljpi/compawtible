@@ -1,4 +1,6 @@
 class Pet < ApplicationRecord
+  geocoded_by :location
+  after_validation :geocode, if: :will_save_change_to_location?
   SPECIES = {
     "Dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Poodle", "Bulldog", "Beagle", "Chihuahua", "Dachshund", "Siberian Husky", "Boxer", "Doberman", "Shih Tzu", "Border Collie", "Great Dane", "Rottweiler", "Cocker Spaniel", "Pomeranian", "Maltese", "Australian Shepherd", "Other"],
     "Cat" => ["Siamese", "Persian", "Maine Coon", "Bengal", "Ragdoll", "British Shorthair", "Sphynx", "Abyssinian", "Scottish Fold", "Norwegian Forest Cat", "Russian Blue", "Birman", "Savannah", "Oriental Shorthair", "Turkish Angora", "Other"],
@@ -46,7 +48,7 @@ class Pet < ApplicationRecord
 
 belongs_to :provider, class_name: 'User'
 has_many :interactions, dependent: :destroy
-has_many :adopters, through: :interactions
+has_one :adopters, through: :interactions, source: :user
 validates :name, presence: true
 validates :description, presence: true
 
