@@ -1,0 +1,10 @@
+<h1>OTHER MATCHES</h1>
+
+<h2>Input: <%= @prompt.input %></h2>
+
+<ul>
+  <% @best_matches.each do |match| %>
+
+    <li><%= link_to match.name, pet_path(match.id) %> - <%= match.breed %> - <%= match.species %> - <%= match.description %> - <%= match.location %></li>
+  <% end %>
+</ul>
