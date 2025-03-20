@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :interacted_pets, through: :interactions, source: :pet
   has_one_attached :photo
 
-  enum role: { adopter: "adopter", provider: "provider" }
+  enum role: { adopter: "adopter", provider: "provider"}
 
   # Validations
   validates :first_name, presence: true
