@@ -1,20 +1,4 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
-
-
-
-<h2>---------USER INPUT AND OUTPUT---------</h2>
-
-<%= render "user_input" %>
-<%= render "output" %>
-
-<h2>---------USERS---------</h2>
-
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %> - <%= user.location %> - <%= user.role %>
-    </li>
-  <% end %>
-</ul>
+<%= link_to "Search for a pet!", search_path %>
