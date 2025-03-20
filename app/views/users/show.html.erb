@@ -22,12 +22,12 @@
 
     <div class="user-animals">
       <div>
-        <h3 id="your-animals"><strong>Your animals ()</strong></h3>
+        <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
         <% @user.pets.each do |pet| %>
           <div>
           <%= image_tag "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", id: "image-profile-pet" %>
           </div>
-          <p><%= pet.name %>, <%= pet.breed %></p>
+          <p><%= pet.name %>, <%= pet.species %>, <%= pet.breed %></p>
         <% end %>
       </div>
       <div class="user-buttons">
