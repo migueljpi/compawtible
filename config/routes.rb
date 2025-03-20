@@ -21,4 +21,7 @@ Rails.application.routes.draw do
   resources :pets, only: [:show]
   get "search" => "pages#search", as: :search
   post "/search", to: "pages#search"
+  post "/search", to: "pages#search"
+  get "/other_matches", to: "pages#other_matches", as: :other_matches # Route for other_matches page
+
 end

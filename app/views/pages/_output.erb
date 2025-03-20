@@ -36,6 +36,7 @@
           <%= link_to pet.name, pet_path(pet.id) %>- <%= pet.breed %> <%= pet.species %> - <%= pet.location %> - <%= pet.description %></p>
         </div>
       <% end %>
+      <%= link_to "Check out other amazing matches!", other_matches_path(prompt_id: @prompt.id) %>
     <% else %>
       <p>This is where the best matches will be shown</p>
     <% end %>

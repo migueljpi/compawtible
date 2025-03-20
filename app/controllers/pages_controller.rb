@@ -24,8 +24,11 @@ class PagesController < ApplicationController
 
         if @prompt.save
           @output = @prompt.output # OUTPUT
-          Rails.logger.info("Prompt saved with output: " + @output)
+          Rails.logger.info("Prompt saved with output: " + @output) # for debuggin
           ids = JSON.parse(@output) # Parse the IDs
+          @prompt.update(best_matches: ids) # Update the best_matches column with the IDs, to use later
+
+
           @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact # PETS ID MATCHING THE OUTPUT, mapped
 
           respond_to do |format|
@@ -41,6 +44,14 @@ class PagesController < ApplicationController
         render :home, status: :unprocessable_entity
       end
     end
+  end
+
+  def other_matches
+    @prompt = Prompt.find(params[:prompt_id])
+    pet_ids = @prompt.best_matches
+
+
+    @best_matches = pet_ids.map { |id| Pet.find_by(id: id) }.compact
   end
 
   private
