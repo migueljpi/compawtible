@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :adoption_locations, only: [:create]
   resources :pets, only: [:show]
+  get "search" => "pages#search", as: :search
+  post "/search", to: "pages#search"
 end

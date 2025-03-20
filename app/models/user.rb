@@ -21,13 +21,13 @@ class User < ApplicationRecord
   validates :age, presence: true, numericality: { greater_than: 16, only_integer: true }
   # validates :provider, inclusion: { in: [true, false] }
 
-  def provider?
-    role == "provider"
-  end
+  # def provider?
+  #   role == "provider"
+  # end
 
-  def adopter?
-    role == "adopter"
-  end
+  # def adopter?
+  #   role == "adopter"
+  # end
 
   validates :location, presence: true, if: :provider?
   validates :about_me, presence: true, if: :provider?

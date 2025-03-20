@@ -11,6 +11,8 @@
   <div style="border: 1px solid #325869; padding: 10px;">
     <h2>DATABASE SENT</h2>
     <% if @prompt&.input.present? %>
+      <% pets_array = JSON.parse(@prompt.pets_for_prompt) %> <!-- Parse the JSON string -->
+      <p><%= pets_array.count %> pets were sent for appreciation</p>
       <p>This was the database sent: <%= @prompt.pets_for_prompt %></p>
     <% else %>
       <p>This is where the input will be shown</p>

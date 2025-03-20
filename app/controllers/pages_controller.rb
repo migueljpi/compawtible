@@ -2,6 +2,10 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home]
 
   def home
+
+  end
+
+  def search
     @users = User.all
     @pets = Pet.all
     @prompt = Prompt.new
@@ -15,13 +19,12 @@ class PagesController < ApplicationController
       radius = params[:radius].to_i
 
       if location.present? && radius > 0
-        @pets_nearby = Pet.near(location, radius)
-        @prompt.pets_for_prompt = @pets_nearby.map do |pet|
-          { id: pet.id, species: pet.species, breed: pet.breed, description: pet.description }
-        end.flatten.to_json
+        @pets_nearby = FindPetsService.call(location, radius)
+        @prompt.pets_for_prompt = @pets_nearby.to_json # PETS FOR PROMPT
 
         if @prompt.save
           @output = @prompt.output # OUTPUT
+          Rails.logger.info("Prompt saved with output: " + @output)
           ids = JSON.parse(@output) # Parse the IDs
           @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact # PETS ID MATCHING THE OUTPUT, mapped
 

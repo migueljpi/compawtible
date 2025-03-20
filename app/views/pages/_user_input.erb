@@ -1,4 +1,4 @@
-<%= simple_form_for @prompt, url: root_path, method: :post, data: { turbo: true } do |f| %>
+<%= simple_form_for @prompt, url: search_path, method: :post, data: { turbo: true } do |f| %>
   <div>
     <%= f.input :input, label: "Input for OpenAI" %>
   </div>
