@@ -17,11 +17,14 @@ class PagesController < ApplicationController
       if location.present? && radius > 0
         @pets_nearby = Pet.near(location, radius)
         @prompt.pets_for_prompt = @pets_nearby.map do |pet|
-          { id: pet.id, name: pet.name, species: pet.species, breed: pet.breed, description: pet.description, location: pet.location }
+          { id: pet.id, species: pet.species, breed: pet.breed, description: pet.description }
         end.flatten.to_json
 
         if @prompt.save
           @output = @prompt.output # OUTPUT
+          ids = JSON.parse(@output) # Parse the IDs
+          @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact # PETS ID MATCHING THE OUTPUT, mapped
+
           respond_to do |format|
             format.turbo_stream # IN CASE IT IS A TURBO REQUEST
             format.html { redirect_to root_path } # IN CASE IT IS A REGULAR REQUEST (if we have not clicked submit yet for example)
