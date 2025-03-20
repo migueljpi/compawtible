@@ -7,113 +7,92 @@ User.destroy_all
 Interaction.destroy_all
 puts "Existing records destroyed!"
 
-
-# Create providers
-providers = [
-  { email: "provider1@provider.com", first_name: "John", last_name: "Doe", age: 30, location: "Zanzibar City, Zanzibar, Tanzania", about_me: "I love animals and help them find loving homes!" },
-  { email: "provider2@provider.com", first_name: "Anna", last_name: "Schmidt", age: 35, location: "Berlin, Berlin, Germany", about_me: "Passionate about rescuing stray cats and finding them the perfect forever homes." },
-  { email: "provider3@provider.com", first_name: "Luca", last_name: "Rossi", age: 42, location: "Milan, Lombardy, Italy", about_me: "Dedicated to rehabilitating abandoned dogs and giving them a second chance at happiness." },
-  { email: "provider4@provider.com", first_name: "Sofia", last_name: "Fernandez", age: 28, location: "Madrid, Madrid, Spain", about_me: "I work with shelters to ensure every pet gets the care and love they deserve." },
-  { email: "provider5@provider.com", first_name: "Oliver", last_name: "Dupont", age: 38, location: "Paris, Île-de-France, France", about_me: "Helping animals find new homes while advocating for responsible pet adoption." }
+COUNTRIES = [
+  { name: "Portugal", cities: ["Lisbon", "Porto"], providers: ["João", "Ana"], adopter: "Miguel", last_name: "Silva" },
+  { name: "Spain", cities: ["Madrid", "Barcelona"], providers: ["Carlos", "Maria"], adopter: "Javier", last_name: "García" },
+  { name: "France", cities: ["Paris", "Lyon"], providers: ["Pierre", "Camille"], adopter: "Jean", last_name: "Dubois" },
+  { name: "The Netherlands", cities: ["Amsterdam", "Rotterdam"], providers: ["Daan", "Emma"], adopter: "Lars", last_name: "Jansen" },
+  { name: "Belgium", cities: ["Brussels", "Antwerp"], providers: ["Mathieu", "Elise"], adopter: "Benoît", last_name: "Dupont" },
+  { name: "Luxembourg", cities: ["Luxembourg City", "Esch-sur-Alzette"], providers: ["Marc", "Anne"], adopter: "Luc", last_name: "Schmit" },
+  { name: "Switzerland", cities: ["Zurich", "Geneva"], providers: ["Luca", "Sophie"], adopter: "Noah", last_name: "Müller" },
+  { name: "Italy", cities: ["Rome", "Milan"], providers: ["Luca", "Giulia"], adopter: "Matteo", last_name: "Rossi" },
+  { name: "United Kingdom", cities: ["London", "Manchester"], providers: ["James", "Sophie"], adopter: "Oliver", last_name: "Smith" },
+  { name: "Ireland", cities: ["Dublin", "Cork"], providers: ["Liam", "Aoife"], adopter: "Sean", last_name: "O'Connor" }
 ]
 
+puts "Creating users..."
+COUNTRIES.each do |country|
+  country_code = country[:name].downcase.gsub(" ", "")
 
-puts "Creating providers..."
-providers.each do |provider|
+  country[:cities].each_with_index do |city, index|
+    provider_name = country[:providers][index]
+    User.create!(
+      email: "provider#{index + 1}.#{country_code}@provider.com",
+      password: "123456",
+      first_name: provider_name,
+      last_name: country[:last_name],
+      age: rand(25..60),
+      location: city,
+      role: "provider",
+      about_me: "Passionate about pet adoption and finding animals a loving home."
+    )
+  end
+
   User.create!(
-    email: provider[:email],
+    email: "adopter.#{country_code}@adopter.com",
     password: "123456",
-    first_name: provider[:first_name],
-    last_name: provider[:last_name],
-    age: provider[:age],
-    location: provider[:location],
-    role: "provider", # Use the role column
-    about_me: provider[:about_me]
+    first_name: country[:adopter],
+    last_name: country[:last_name],
+    age: rand(18..70),
+    location: country[:cities].sample,
+    role: "adopter",
+    about_me: "Looking for a new furry friend to adopt!"
   )
 end
-puts "Providers created!"
+puts "Users created!"
 
+SPECIES = {
+  "Dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Poodle", "Bulldog", "Beagle", "Chihuahua", "Dachshund", "Siberian Husky", "Boxer", "Doberman", "Shih Tzu", "Border Collie", "Great Dane", "Rottweiler", "Cocker Spaniel", "Pomeranian", "Maltese", "Australian Shepherd", "Other"],
+  "Cat" => ["Siamese", "Persian", "Maine Coon", "Bengal", "Ragdoll", "British Shorthair", "Sphynx", "Abyssinian", "Scottish Fold", "Norwegian Forest Cat", "Russian Blue", "Birman", "Savannah", "Oriental Shorthair", "Turkish Angora", "Other"],
+  "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Flemish Giant", "Lionhead", "Rex", "Mini Lop", "English Angora", "French Lop", "Dutch", "Harlequin", "Other"],
+  "Bird" => ["Canary", "Finch", "Budgerigar", "Cockatiel", "Lovebird", "Dove", "Pigeon", "Other"]
+}
 
-
-# Create adopters
-puts "Creating adopters..."
-User.create!(
-  email: "adopter1@adopter.com",
-  password: "123456",
-  first_name: "Luis",
-  last_name: "Marín",
-  age: 28,
-  location: "Madrid, España",
-  role: "adopter"
-)
-
-User.create!(
-  email: "adopter2@adopter.com",
-  password: "123456",
-  first_name: "Maria",
-  last_name: "Fernandes",
-  age: 28,
-  location: "Lisbon, Portugal",
-  role: "adopter",
-  about_me: "I have always loved animals and am looking to adopt a furry friend to join my home."
-)
-puts "Adopters created!"
-
-# Assign each provider a unique cat and dog
-provider_users = User.where(role: "provider")
-
-pets = [
-  { species: "Dog", breed: "Golden Retriever", name: "Bobby", description: "Friendly and playful, Bobby loves to fetch and is great with kids." },
-  { species: "Dog", breed: "Poodle", name: "Luna", description: "Smart and affectionate, Luna enjoys long walks and snuggles." },
-  { species: "Dog", breed: "Labrador Retriever", name: "Max", description: "Energetic and adventurous, Max loves swimming and running outside." },
-  { species: "Dog", breed: "Beagle", name: "Mia", description: "Curious and independent, Mia loves to explore and sniff around." },
-  { species: "Dog", breed: "Border Collie", name: "Charlie", description: "Super intelligent and active, Charlie is great at learning new tricks." },
-  { species: "Cat", breed: "Maine Coon", name: "Simba", description: "A fluffy and calm cat, Simba enjoys lounging and getting belly rubs." },
-  { species: "Cat", breed: "Siamese", name: "Cleo", description: "Lively and talkative, Cleo loves climbing high places and playing with toys." },
-  { species: "Cat", breed: "British Shorthair", name: "Whiskers", description: "A quiet and independent cat who loves cozy spots to nap in." },
-  { species: "Cat", breed: "Persian", name: "Milo", description: "Sweet and affectionate, Milo enjoys gentle cuddles and relaxing." },
-  { species: "Cat", breed: "Ragdoll", name: "Bella", description: "Friendly and social, Bella loves being around people and getting attention." }
+PET_NAMES = ["Buddy", "Luna", "Charlie", "Bella", "Max", "Daisy", "Rocky", "Milo", "Ruby", "Simba"]
+PET_DESCRIPTIONS = [
+  "A friendly and energetic companion who loves to play.",
+  "Loves cuddles and is very affectionate.",
+  "Enjoys long walks and being around people.",
+  "A curious and intelligent pet that learns quickly.",
+  "Gentle and loving, perfect for families.",
+  "A quiet and observant pet, great for small apartments.",
+  "Full of energy and always ready for an adventure.",
+  "Loves attention and is great with children.",
+  "A loyal and protective companion.",
+  "Playful and loves interactive toys."
 ]
 
 puts "Creating pets..."
-provider_users.each_with_index do |provider, index|
-  dog = pets[index]
-  cat = pets[index + 5]
-
-  Pet.create!(
-    location: provider.location,
-    provider: provider, # Use the provider user
-    name: dog[:name],
-    species: dog[:species],
-    breed: dog[:breed],
-    age: rand(1..7),
-    size: ["Small", "Medium", "Large"].sample,
-    activity_level: ["Low", "Moderate", "High"].sample,
-    gender: ["Male", "Female"].sample,
-    neutered: [true, false].sample,
-    sociable_with_animals: [true, false].sample,
-    sociable_with_children: [true, false].sample,
-    certified: [true, false].sample,
-    description: dog[:description]
-  )
-
-  Pet.create!(
-    location: provider.location,
-    provider: provider, # Use the provider user
-    name: cat[:name],
-    species: cat[:species],
-    breed: cat[:breed],
-    age: rand(1..7),
-    size: ["Small", "Medium", "Large"].sample,
-    activity_level: ["Low", "Moderate", "High"].sample,
-    gender: ["Male", "Female"].sample,
-    neutered: [true, false].sample,
-    sociable_with_animals: [true, false].sample,
-    sociable_with_children: [true, false].sample,
-    certified: [true, false].sample,
-    description: cat[:description]
-  )
+User.where(role: "provider").each do |provider|
+  2.times do
+    species, breeds = SPECIES.to_a.sample
+    Pet.create!(
+      location: provider.location,
+      provider: provider,
+      name: PET_NAMES.sample,
+      species: species,
+      breed: breeds.sample,
+      age: rand(1..10),
+      size: ["Small", "Medium", "Large"].sample,
+      activity_level: ["Low", "Moderate", "High"].sample,
+      gender: ["Male", "Female"].sample,
+      neutered: [true, false].sample,
+      sociable_with_animals: [true, false].sample,
+      sociable_with_children: [true, false].sample,
+      certified: [true, false].sample,
+      description: PET_DESCRIPTIONS.sample
+    )
+  end
 end
 puts "Pets created!"
-
 puts "Seeded #{User.count} users and #{Pet.count} pets!"
