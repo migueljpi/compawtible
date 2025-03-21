@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :interacted_pets, through: :interactions, source: :pet
   has_one_attached :photo
 
-  enum role: { adopter: "adopter", provider: "provider" }
+  enum role: { adopter: "adopter", provider: "provider"}
 
   # Validations
   validates :first_name, presence: true
@@ -21,13 +21,13 @@ class User < ApplicationRecord
   validates :age, presence: true, numericality: { greater_than: 16, only_integer: true }
   # validates :provider, inclusion: { in: [true, false] }
 
-  def provider?
-    role == "provider"
-  end
+  # def provider?
+  #   role == "provider"
+  # end
 
-  def adopter?
-    role == "adopter"
-  end
+  # def adopter?
+  #   role == "adopter"
+  # end
 
   validates :location, presence: true, if: :provider?
   validates :about_me, presence: true, if: :provider?

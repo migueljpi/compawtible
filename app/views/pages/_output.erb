@@ -1,4 +1,4 @@
-<div id="output"> # This is the id that Turbo Stream will target
+<div id="output" class="mt-5">
   <div style="border: 1px solid #325869; padding: 10px;">
     <h2>INPUT</h2>
     <% if @prompt&.input.present? %>
@@ -11,6 +11,8 @@
   <div style="border: 1px solid #325869; padding: 10px;">
     <h2>DATABASE SENT</h2>
     <% if @prompt&.input.present? %>
+      <% pets_array = JSON.parse(@prompt.pets_for_prompt) %> <!-- Parse the JSON string -->
+      <p><%= pets_array.count %> pets were sent for appreciation</p>
       <p>This was the database sent: <%= @prompt.pets_for_prompt %></p>
     <% else %>
       <p>This is where the input will be shown</p>
@@ -28,20 +30,15 @@
 
   <div style="border: 1px solid #ccc; padding: 10px;">
     <h2>BEST MATCH</h2>
-    <% if @output.present? && @prompt&.pets_for_prompt.present? %>
-      <% JSON.parse(@prompt.pets_for_prompt).each do |pet| %>
-        <% if pet["id"].to_s == @output.to_s %>
-          <p>This was the best match:</p>
-          <p><%= pet["name"] %></p>
-          <p><%= pet["species"] %></p>
-          <p><%= pet["breed"] %></p>
-          <p><%= pet["description"] %></p>
-          <p><%= pet["location"] %></p>
-          <%= link_to "Learn more about this pet", pet_path(pet["id"]) %>
-        <% end %>
+    <% if @best_matches.present? %>
+      <% @best_matches.each do |pet| %>
+        <div style="border: 1px solid #ddd; margin-bottom: 10px; padding: 10px;">
+          <%= link_to pet.name, pet_path(pet.id) %>- <%= pet.breed %> <%= pet.species %> - <%= pet.location %> - <%= pet.description %></p>
+        </div>
       <% end %>
+      <%= link_to "Check out other amazing matches!", other_matches_path(prompt_id: @prompt.id) %>
     <% else %>
-      <p>This is where the best match will be shown</p>
+      <p>This is where the best matches will be shown</p>
     <% end %>
   </div>
 </div>

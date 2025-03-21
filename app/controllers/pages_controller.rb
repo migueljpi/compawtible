@@ -2,6 +2,10 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home]
 
   def home
+
+  end
+
+  def search
     @users = User.all
     @pets = Pet.all
     @prompt = Prompt.new
@@ -15,13 +19,18 @@ class PagesController < ApplicationController
       radius = params[:radius].to_i
 
       if location.present? && radius > 0
-        @pets_nearby = Pet.near(location, radius)
-        @prompt.pets_for_prompt = @pets_nearby.map do |pet|
-          { id: pet.id, name: pet.name, species: pet.species, breed: pet.breed, description: pet.description, location: pet.location }
-        end.flatten.to_json
+        @pets_nearby = FindPetsService.call(location, radius)
+        @prompt.pets_for_prompt = @pets_nearby.to_json # PETS FOR PROMPT
 
         if @prompt.save
           @output = @prompt.output # OUTPUT
+          Rails.logger.info("Prompt saved with output: " + @output) # for debuggin
+          ids = JSON.parse(@output) # Parse the IDs
+          @prompt.update(best_matches: ids) # Update the best_matches column with the IDs, to use later
+
+
+          @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact # PETS ID MATCHING THE OUTPUT, mapped
+
           respond_to do |format|
             format.turbo_stream # IN CASE IT IS A TURBO REQUEST
             format.html { redirect_to root_path } # IN CASE IT IS A REGULAR REQUEST (if we have not clicked submit yet for example)
@@ -35,6 +44,14 @@ class PagesController < ApplicationController
         render :home, status: :unprocessable_entity
       end
     end
+  end
+
+  def other_matches
+    @prompt = Prompt.find(params[:prompt_id])
+    pet_ids = @prompt.best_matches
+
+
+    @best_matches = pet_ids.map { |id| Pet.find_by(id: id) }.compact
   end
 
   private

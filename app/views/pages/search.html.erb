@@ -1,0 +1,28 @@
+<div class="header-top">
+  <h1>Tell us about yourself and the friend you are looking for.</h1>
+</div>
+
+
+<div class="input-form">
+  <%= render "user_input" %>
+</div>
+
+
+
+
+
+
+<div class="empty-space">
+</div>
+<%= render "output" %>
+<div class="mt-5">
+  <h2>---------USERS---------</h2>
+</div>
+
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %> - <%= user.location %> - <%= user.role %>
+    </li>
+  <% end %>
+</ul>
