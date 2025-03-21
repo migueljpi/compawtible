@@ -1,3 +1,20 @@
-<h1><%= @pet.name %></h1>
+<div class="container">
+  <h1><%= @pet.name %></h1>
 
-<p><%= @pet.description %></p>
+  <p><%= @pet.species %></p>
+  <p><%= @pet.breed %></p>
+  <p><%= @pet.age %></p>
+  <p><%= @pet.size %></p>
+  <p><%= @pet.gender %></p>
+
+  <p><%= @pet.description %></p>
+  <p><%= @pet.activity_level %></p>
+
+  <p><%= @pet.neutered %></p>
+  <p><%= @pet.medical_conditions %></p>
+  <p><%= @pet.sociable_with_animals %></p>
+  <p><%= @pet.sociable_with_children %></p>
+  <p><%= @pet.certified %></p>
+
+  <%= cl_image_tag @pet.photo.key, height: 300, width: 400, crop: :fill %>
+</div>

@@ -11,11 +11,9 @@
                   input_html: { autocomplete: "first_name" }%>
       <%= f.input :last_name,
                   required: true,
-                  autofocus: true,
                   input_html: { autocomplete: "last_name" }%>
       <%= f.input :email,
                   required: true,
-                  autofocus: true,
                   input_html: { autocomplete: "email" }%>
       <%= f.input :password,
                   required: true,
@@ -26,17 +24,14 @@
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :age,
                   required: true,
-                  autofocus: true,
                   input_html: { autocomplete: "age" }%>
-      <%= f.input :provider, checked_value: :true, unchecked_value: :false,
+      <%# <%= f.input :provider, checked_value: :true, unchecked_value: :false,
                   required: true,
-                  autofocus: true,
                   input_html: { autocomplete: "provider" }%>
+      <%= f.input :provider, as: :boolean, required: true %>
       <%= f.input :location,
-                  autofocus: true,
                   input_html: { autocomplete: "location" }%>
       <%= f.input :about_me,
-                  autofocus: true,
                   input_html: { autocomplete: "about_me" }%>
       <%= f.input :photo, as: :file %>
     </div>
