@@ -37,6 +37,10 @@ class Pet < ApplicationRecord
     "Other" => ["Other"]
   }
 
+  SIZE = ["Small", "Medium", "Large"]
+  ACTIVITY_LEVEL = ["Low", "Moderate", "High"]
+  GENDER = ["Male", "Female"]
+
   validates :species, presence: true, inclusion: { in: SPECIES.keys }
   validates :breed, presence: true
   validate :breed_matches_species
@@ -59,8 +63,8 @@ class Pet < ApplicationRecord
   validates :description, presence: true
 
 # photos
-  has_one_attached :photo
-  # has_many_attached :photos
+  # has_one_attached :photo
+  has_many_attached :photos
   # validate :limit_of_photos
 
   # def limit_of_photos
