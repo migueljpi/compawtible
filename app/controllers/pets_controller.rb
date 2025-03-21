@@ -1,25 +1,23 @@
 class PetsController < ApplicationController
+  before_action :set_user, only: [:show, :new, :create, :edit, :update]
+  before_action :set_pet, only: [:show, :edit, :update]
+
   def index
     @pets = Pet.all
   end
 
   def show
-    @user = current_user
-    @pet = Pet.find(params[:id])
   end
 
   def new
     @pet = Pet.new
-    @user = current_user
     @url_action = params[:action]
     @pet.location = current_user.location
   end
 
   def create
-    @user = current_user
-    @pet = Pet.new(pet_params)
+    @pet = Pet.new(pet_params_new)
     @pet.provider = current_user
-    @pet.location = current_user.location
     if @pet.save
       # redirect_to user_path(current_user)
       redirect_to user_pet_path(@user, @pet)
@@ -31,15 +29,11 @@ class PetsController < ApplicationController
 
   def edit
     # raise
-    @pet = Pet.find(params[:id])
-    @user = current_user
     @url_action = params[:action]
   end
 
   def update
-    @pet = Pet.find(params[:id])
-    @user = current_user
-    if @pet.update(pet_params)
+    if @pet.update(pet_params_edit)
       if params[:pet][:photos].present?
         params[:pet][:photos].each do |photo|
           @pet.photos.attach(photo)
@@ -53,7 +47,19 @@ class PetsController < ApplicationController
 
   private
 
-  def pet_params
+  def set_user
+    @user = current_user
+  end
+
+  def set_pet
+    @pet = Pet.find(params[:id])
+  end
+
+  def pet_params_new
+    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size, :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified, photos: [])
+  end
+
+  def pet_params_edit
     params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size, :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified)
   end
 end
