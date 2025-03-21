@@ -1,6 +1,5 @@
 # Destroy existing records
 puts "Destroying existing records..."
-# AdoptionLocation.destroy_all
 Prompt.destroy_all
 Pet.destroy_all
 User.destroy_all
