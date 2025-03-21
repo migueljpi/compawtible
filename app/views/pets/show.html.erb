@@ -3,6 +3,7 @@
 
   <p><%= @pet.species %></p>
   <p><%= @pet.breed %></p>
+  <p><%= @pet.location %></p>
   <p><%= @pet.age %></p>
   <p><%= @pet.size %></p>
   <p><%= @pet.gender %></p>
@@ -16,5 +17,9 @@
   <p><%= @pet.sociable_with_children %></p>
   <p><%= @pet.certified %></p>
 
-  <%= cl_image_tag @pet.photo.key, height: 300, width: 400, crop: :fill %>
+<% @pet.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+  <%= link_to 'Edit', edit_user_pet_path(@user, @pet) %>
+
 </div>

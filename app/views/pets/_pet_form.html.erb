@@ -1,0 +1,51 @@
+<%= simple_form_for [@user, @pet] do |f| %>
+      <%= f.input :name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "name" } %>
+      <%= f.input :species,
+                  collection: Pet::SPECIES.keys,
+                  required: true,
+                  input_html: { autocomplete: "species" } %>
+      <%# <%= f.input :breed, collection: Pet::SPECIES,
+                  required: true,
+                  input_html: { autocomplete: "species" } %>
+      <%= f.input :breed,
+                  required: true,
+                  input_html: { autocomplete: "breed" } %>
+      <%= f.input :location,
+                  required: true,
+                  input_html: { autocomplete: @pet.location } %>
+      <%= f.input :age,
+                  label: "Age (in years)",
+                  input_html: { autocomplete: "age" }%>
+      <%= f.input :size,
+                  collection: Pet::SIZE,
+                  input_html: { autocomplete: "size" } %>
+      <%= f.input :activity_level,
+                  collection: Pet::ACTIVITY_LEVEL,
+                  input_html: { autocomplete: "activity level" } %>
+      <%= f.input :gender,
+                  collection: Pet::GENDER,
+                  input_html: { autocomplete: "gender" } %>
+      <%= f.input :description,
+                  required: true,
+                  input_html: { autocomplete: "description" } %>
+      <%= f.input :medical_conditions,
+                  input_html: { autocomplete: "medical conditions" } %>
+      <%= f.input :sociable_with_animals, as: :boolean %>
+      <%= f.input :sociable_with_children, as: :boolean %>
+      <%= f.input :neutered, as: :boolean %>
+      <%= f.input :certified, as: :boolean %>
+      <%= f.input :photos, as: :file,
+                  input_html: { multiple: true } %>
+    <% if @url_action == "edit" %>
+      <div class="form-actions">
+        <%= f.button :submit, "Edit Pet", class: "btn btn-primary" %>
+      </div>
+    <% else %>
+      <div class="form-actions">
+        <%= f.button :submit, "Add Pet", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+<% end %>
