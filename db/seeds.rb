@@ -90,7 +90,7 @@ User.where(role: "provider").each do |provider|
       sociable_with_children: [true, false].sample,
       certified: [true, false].sample,
       description: PET_DESCRIPTIONS.sample
-      # photo: "image public id"
+      # photo: "dfjskldjflksafjlakjflajsf"
     )
   end
 end
