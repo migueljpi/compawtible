@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   root to: "pages#home"
   post "/", to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -20,11 +20,12 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "test" => "pages#test", as: :test
   resources :prompts, only: [:create]
-  # resources :users, only: [:show]
-  # resources :pets, only: [:show, :create]
+
 
   get "search" => "pages#search", as: :get_search
   post "/search", to: "pages#search", as: :search
+  resources :users, only: [:show]
+
   get "/other_matches", to: "pages#other_matches", as: :other_matches # Route for other_matches page
 
 end
