@@ -31,7 +31,7 @@
         <% end %>
       </div>
       <div class="user-buttons">
-        <div class="button"><%= link_to "Add a pet", root_path, class: "btn btn-primary" %></div>
+        <div class="button"><%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %></div>
         <div class="button"><%= link_to "Remove a pet", root_path, class: "btn btn-primary" %></div>
       </div>
     </div>

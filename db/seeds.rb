@@ -1,6 +1,5 @@
 # Destroy existing records
 puts "Destroying existing records..."
-AdoptionLocation.destroy_all
 Prompt.destroy_all
 Pet.destroy_all
 User.destroy_all
@@ -91,6 +90,7 @@ User.where(role: "provider").each do |provider|
       sociable_with_children: [true, false].sample,
       certified: [true, false].sample,
       description: PET_DESCRIPTIONS.sample
+      # photo: "image public id"
     )
   end
 end

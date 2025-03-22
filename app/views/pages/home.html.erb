@@ -2,3 +2,7 @@
 <p>Find me in app/views/pages/home.html.erb</p>
 
 <%= link_to "Search for a pet!", search_path %>
+
+<% if user_signed_in?  %>
+  <p><%= current_user.role %></p>
+<% end %>

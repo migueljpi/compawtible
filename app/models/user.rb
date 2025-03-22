@@ -13,7 +13,9 @@ class User < ApplicationRecord
   has_many :interacted_pets, through: :interactions, source: :pet
   has_one_attached :photo
 
-  enum role: { adopter: "adopter", provider: "provider" }
+  # enum role: { adopter: "adopter", provider: "provider"}
+  # enum :role, { adopter: "adopter", provider: "provider"}, default: :adopter, validate: true
+  enum :role, { adopter: "adopter", provider: "provider"}, validate: true
 
   # Validations
   validates :first_name, presence: true
@@ -28,7 +30,7 @@ class User < ApplicationRecord
   # def adopter?
   #   role == "adopter"
   # end
-
+  # validates :role, presence: true
   validates :location, presence: true, if: :provider?
   validates :about_me, presence: true, if: :provider?
 

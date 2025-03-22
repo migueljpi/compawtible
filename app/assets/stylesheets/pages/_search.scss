@@ -1,0 +1,73 @@
+.empty-space {
+  height: 500px;
+  // background-color: $beije-light;
+}
+
+.large-input {
+  font-size: 1.2rem;
+  // font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 2px solid #AFAEAE;
+  border-radius: 15px;
+  background-color: $beije-light;
+  height: 150px;
+}
+
+.small-input {
+  font-size: 1.2rem;
+  // font-weight: bold;
+  padding: 15px;
+  border: 2px solid #AFAEAE;
+  border-radius: 15px;
+  background-color: $beije-light;
+  // margin-right: 15px;
+  // height: 150px;
+}
+.input-form {
+  margin-bottom: 50px;
+  padding: 0px 30px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.thick-slider {
+  height: 10px;
+  // background: #d3d3d3;
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  // padding-left: 20px;
+}
+
+.thick-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default browser styling for the thumb */
+  appearance: none;
+  width: 20px; /* Width of the thumb */
+  height: 20px; /* Height of the thumb */
+  background: #007bff; /* Color of the thumb */
+  border-radius: 50%; /* Make the thumb circular */
+  cursor: pointer; /* Change the cursor to a pointer */
+}
+
+// .thick-slider::-moz-range-thumb {
+//   width: 20px;
+//   height: 60px;
+//   background: #007bff;
+//   border-radius: 50%;
+//   cursor: pointer;
+// }
+
+// .thick-slider::-ms-thumb {
+//   width: 20px;
+//   height: 20px;
+//   background: #007bff;
+//   border-radius: 50%;
+//   cursor: pointer;
+// }

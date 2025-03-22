@@ -1,11 +1,23 @@
-<h1>THIS IS WHERE THE SEARCH WILL HAPPEN</h1>
+<div class="header-top">
+  <h1>Tell us about yourself and the friend you are looking for.</h1>
+</div>
 
-<h2>---------USER INPUT AND OUTPUT---------</h2>
 
-<%= render "user_input" %>
+<div class="input-form">
+  <%= render "user_input" %>
+</div>
+
+
+
+
+
+
+<div class="empty-space">
+</div>
 <%= render "output" %>
-
-<h2>---------USERS---------</h2>
+<div class="mt-5">
+  <h2>---------USERS---------</h2>
+</div>
 
 <ul>
   <% @users.each do |user| %>

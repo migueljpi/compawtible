@@ -12,15 +12,17 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+  resources :users, only: [:show] do
+    resources :pets, only: [:show, :new, :create, :edit, :update, :destroy]
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
   get "test" => "pages#test", as: :test
   resources :prompts, only: [:create]
   resources :users, only: [:show]
-  resources :adoption_locations, only: [:create]
-  resources :pets, only: [:show]
+  resources :pets, only: [:show, :create]
   get "search" => "pages#search", as: :search
-  post "/search", to: "pages#search"
   post "/search", to: "pages#search"
   get "/other_matches", to: "pages#other_matches", as: :other_matches # Route for other_matches page
 
