@@ -1,7 +1,7 @@
 class Prompt < ApplicationRecord
   belongs_to :user
-  has_one :adoption_location, dependent: :destroy
-  accepts_nested_attributes_for :adoption_location
+  # has_one :adoption_location, dependent: :destroy
+  # accepts_nested_attributes_for :adoption_location
 
 
   def output

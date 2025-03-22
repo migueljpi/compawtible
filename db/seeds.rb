@@ -1,3 +1,4 @@
+require "open-uri"
 # Destroy existing records
 puts "Destroying existing records..."
 Prompt.destroy_all
@@ -75,7 +76,7 @@ puts "Creating pets..."
 User.where(role: "provider").each do |provider|
   2.times do
     species, breeds = SPECIES.to_a.sample
-    Pet.create!(
+    pet = Pet.new(
       location: provider.location,
       provider: provider,
       name: PET_NAMES.sample,
@@ -92,6 +93,48 @@ User.where(role: "provider").each do |provider|
       description: PET_DESCRIPTIONS.sample
       # photo: "dfjskldjflksafjlakjflajsf"
     )
+    if pet.species == "Bird"
+      puts "retrieving bird photos"
+      file = File.open(Rails.root.join("app/assets/images/bird1.jpg"))
+      file2 = File.open(Rails.root.join("app/assets/images/bird2.jpg"))
+      puts "file opened"
+      puts "file2 opened"
+      puts "attaching photos"
+      pet.photos.attach([{io: file, filename: "bird1.jpg", content_type: "image/jpeg"},
+                        {io: file2, filename: "bird2.jpg", content_type: "image/jpeg"}])
+      puts "photos attached"
+    elsif pet.species == "Dog"
+      puts "retrieving dog photos"
+      file = File.open(Rails.root.join("app/assets/images/dog1.jpg"))
+      file2 = File.open(Rails.root.join("app/assets/images/dog2.jpg"))
+      puts "file opened"
+      puts "file2 opened"
+      puts "attaching photos"
+      pet.photos.attach([{io: file, filename: "dog1.jpg", content_type: "image/jpeg"},
+                        {io: file2, filename: "dog2.jpg", content_type: "image/jpeg"}])
+      puts "photos attached"
+    elsif pet.species == "Cat"
+      puts "retrieving cat photos"
+      file = File.open(Rails.root.join("app/assets/images/cat1.jpg"))
+      file2 = File.open(Rails.root.join("app/assets/images/cat2.jpg"))
+      puts "file opened"
+      puts "file2 opened"
+      puts "attaching photos"
+      pet.photos.attach([{io: file, filename: "cat1.jpg", content_type: "image/jpeg"},
+                        {io: file2, filename: "cat2.jpg", content_type: "image/jpeg"}])
+      puts "photos attached"
+    elsif pet.species == "Rabbit"
+      puts "retrieving rabbit photos"
+      file = File.open(Rails.root.join("app/assets/images/rabbit1.jpg"))
+      file2 = File.open(Rails.root.join("app/assets/images/rabbit2.jpg"))
+      puts "file opened"
+      puts "file2 opened"
+      puts "attaching photos"
+      pet.photos.attach([{io: file, filename: "rabbit1.jpg", content_type: "image/jpeg"},
+                        {io: file2, filename: "rabbit2.jpg", content_type: "image/jpeg"}])
+      puts "photos attached"
+    end
+    pet.save!
   end
 end
 puts "Pets created!"
