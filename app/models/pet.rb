@@ -48,7 +48,7 @@ class Pet < ApplicationRecord
 
 belongs_to :provider, class_name: 'User'
 has_many :interactions, dependent: :destroy
-has_one :adopters, through: :interactions, source: :user
+has_many :adopters, through: :interactions, source: :user
 validates :name, presence: true
 validates :description, presence: true
 
