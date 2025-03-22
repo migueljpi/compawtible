@@ -23,6 +23,6 @@ class PromptsController < ApplicationController
   private
 
   def prompt_params
-    params.require(:prompt).permit(:input, :pets_for_prompt, adoption_location_attributes: [:location, :radius], :user_id)
+    params.require(:prompt).permit(:input, :pets_for_prompt,  :user_id)
   end
 end

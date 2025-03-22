@@ -5,6 +5,6 @@
 <ul>
   <% @best_matches.each do |match| %>
 
-    <li><%= link_to match.name, pet_path(match.id) %> - <%= match.breed %> - <%= match.species %> - <%= match.description %> - <%= match.location %></li>
+    <li><%= link_to match.name, user_pet_path(match.provider.id, match.id) %> - <%= match.breed %> - <%= match.species %> - <%= match.description %> - <%= match.location %></li>
   <% end %>
 </ul>
