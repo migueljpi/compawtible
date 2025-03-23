@@ -24,8 +24,12 @@ Rails.application.routes.draw do
 
   get "search" => "pages#search", as: :get_search
   post "/search", to: "pages#search", as: :search
-  resources :users, only: [:show]
+
 
   get "/other_matches", to: "pages#other_matches", as: :other_matches # Route for other_matches page
+
+
+  # delete '/pets/:id', to: 'pets#destroy', as: 'remove_pet'
+  delete '/users/:user_id/pets/:id', to: 'pets#destroy', as: 'remove_pet'
 
 end
