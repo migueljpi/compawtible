@@ -12,10 +12,10 @@ class User < ApplicationRecord
   has_many :interactions, foreign_key: "adopter_id", dependent: :destroy
   has_many :interacted_pets, through: :interactions, source: :pet
   has_one_attached :photo
+  has_many :messages
+  has_many :chatrooms, through: :messages
 
-  # enum role: { adopter: "adopter", provider: "provider"}
-  # enum :role, { adopter: "adopter", provider: "provider"}, default: :adopter, validate: true
-  enum :role, { adopter: "adopter", provider: "provider"}, validate: true
+  enum :role, { adopter: "adopter", provider: "provider" }, validate: true
 
   # Validations
   validates :first_name, presence: true
@@ -23,13 +23,6 @@ class User < ApplicationRecord
   validates :age, presence: true, numericality: { greater_than: 16, only_integer: true }
   # validates :provider, inclusion: { in: [true, false] }
 
-  # def provider?
-  #   role == "provider"
-  # end
-
-  # def adopter?
-  #   role == "adopter"
-  # end
   # validates :role, presence: true
   validates :location, presence: true, if: :provider?
   validates :about_me, presence: true, if: :provider?
