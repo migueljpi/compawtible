@@ -50,3 +50,18 @@
 //   border-radius: 50%;
 //   cursor: pointer;
 // }
+
+.top-three {
+  margin: 0px 100px;
+  padding:  30px;
+  background-color: $beije-main;
+  border-radius: 15px;
+  // height: 500px;
+}
+
+.square-image {
+  width: 100%; /* Make the image take up the full width of the parent */
+  aspect-ratio: 1 / 1; /* Maintain a 1:1 aspect ratio (square) */
+  object-fit: cover; /* Ensure the image covers the square area without distortion */
+  display: block; /* Remove any inline spacing issues */
+}

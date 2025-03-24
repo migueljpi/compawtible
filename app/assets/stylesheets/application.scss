@@ -26,3 +26,24 @@ h1, h2, h3, h4, h5 {
 span, a {
   font-family: $special-font;
 }
+
+body {
+  position: relative; /* Ensure the pseudo-element is positioned relative to the body */
+  min-height: 100vh; /* Ensure the body takes up the full viewport height */
+  margin: 0; /* Remove default margin */
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://res.cloudinary.com/du1ev4qra/image/upload/v1742582207/wpqhdmkz1kbg99vgevqq.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    opacity: 0.6;
+    z-index: -1;
+  }
+}

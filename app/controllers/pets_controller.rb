@@ -1,23 +1,33 @@
 class PetsController < ApplicationController
-  before_action :set_user, only: [:show, :new, :create, :edit, :update]
-  before_action :set_pet, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :new, :create, :edit, :update, :destroy]
+  before_action :set_pet, only: [:show, :edit, :update, :destroy]
+
 
   def index
     @pets = Pet.all
   end
 
   def show
+    @user = User.find(params[:user_id])
+    @pet = @user.pets.find(params[:id])
   end
 
   def new
     @pet = Pet.new
     @url_action = params[:action]
     @pet.location = current_user.location
+    @pet.skip_breed_validations = true
+    # @pet.skip_description_validations = true
   end
 
   def create
+    # raise
     @pet = Pet.new(pet_params_new)
     @pet.provider = current_user
+
+    @pet.skip_breed_validations = false
+    # @pet.skip_description_validations = false
+
     if @pet.save
       # redirect_to user_path(current_user)
       redirect_to user_pet_path(@user, @pet)
@@ -43,6 +53,17 @@ class PetsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    Rails.logger.debug "params[:user_id]: #{params[:user_id]}"  # Print out the user_id to check
+    @pet.destroy
+    redirect_to user_path(@user), notice: 'Pet was successfully removed.'
+  end
+  
+  def update_breeds
+    @pet = Pet.new(species: pet_params_new[:pet][:species])
+    render partial: "breeds_select", locals: { f:  ActionView::Helpers::FormBuilder.new(:pet, @pet, self, {}) }
   end
 
   private

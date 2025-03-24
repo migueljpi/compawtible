@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   resources :users, only: [:show] do
-    resources :pets, only: [:show, :new, :create, :edit, :update, :destroy]
+    resources :pets, only: [:show, :new, :create, :edit, :update, :destroy] do
+      collection do
+        post :update_breeds
+      end
+    end
   end
 
   # Defines the root path route ("/")
@@ -24,8 +28,12 @@ Rails.application.routes.draw do
 
   get "search" => "pages#search", as: :get_search
   post "/search", to: "pages#search", as: :search
-  resources :users, only: [:show]
+
 
   get "/other_matches", to: "pages#other_matches", as: :other_matches # Route for other_matches page
+
+
+  # delete '/pets/:id', to: 'pets#destroy', as: 'remove_pet'
+  delete '/users/:user_id/pets/:id', to: 'pets#destroy', as: 'remove_pet'
 
 end

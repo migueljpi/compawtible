@@ -7,6 +7,25 @@
   <%= render "user_input" %>
 </div>
 
+<div id="output-three" class="modal d-none" tabindex="-1" role="dialog" aria-labelledby="outputThreeLabel" aria-hidden="true" data-controller="output" data-output-target="outputThree">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="outputThreeLabel">Top Matches</h5>
+        <button type="button" class="close" data-action="output#hideModal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render "output_three", best_matches: @best_matches&.first(3) %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-action="output#hideModal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
