@@ -17,6 +17,8 @@
   <p><%= @pet.sociable_with_children %></p>
   <p><%= @pet.certified %></p>
 
+  <p>Provider: <%= link_to "#{@pet.provider.first_name} #{@pet.provider.last_name}", user_path(@pet.provider) %></p>
+
 <% @pet.photos.each do |photo| %>
   <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
 <% end %>
