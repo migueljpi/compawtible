@@ -43,16 +43,23 @@
 
 .nav-link {
   color: black;
-  font-weight: 500;
+  font-weight: 450;
+  font-size: 1.3rem;
+  font-family: $headers-font;
   display: flex;
   align-items: center;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   padding: 10px 16px;
   border-radius: 8px;
+
   &:hover {
-    transform: scale(1.1);
     color: $orange-main;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(1);
   }
 }
 
@@ -73,13 +80,13 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  // background-color: $white;
-  // box-shadow: $black;
-  // transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-color: $white;
+  box-shadow: $black;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
   &:hover {
     transform: scale(1.1);
-    // box-shadow: 0 0 8px rgba($orange-main, 0.5);
+    box-shadow: 0 0 8px rgba($orange-main, 0.5);
   }
 }
 
@@ -122,12 +129,6 @@
 .navbar-lewagon .dropdown-menu .dropdown-item:hover {
   background-color: rgba($orange-main, 0.2);
   border-radius: 5px;
-}
-
-.navbar-lewagon .avatar:hover + .dropdown-menu {
-  display: block;
-  visibility: visible;
-  opacity: 1;
 }
 
 .navbar-lewagon .dropdown-menu-end {

@@ -21,9 +21,13 @@
   <body>
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
-    <div class="application-image">
-    <div class="container">
-      <%= yield %>
+    <div class="main-content">
+      <div class="application-image">
+        <div class="container">
+          <%= render "shared/footer" %>
+          <%= yield %>
+       </div>
+      </div>
     </div>
   </body>
 </html>

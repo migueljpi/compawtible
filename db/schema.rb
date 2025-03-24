@@ -42,6 +42,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_20_151215) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "adoption_locations", force: :cascade do |t|
+    t.string "location"
+    t.integer "radius"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "prompt_id", null: false
+    t.index ["prompt_id"], name: "index_adoption_locations_on_prompt_id"
+  end
+
   create_table "interactions", force: :cascade do |t|
     t.bigint "adopter_id", null: false
     t.bigint "pet_id", null: false
@@ -108,6 +119,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_20_151215) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "adoption_locations", "prompts"
   add_foreign_key "interactions", "pets"
   add_foreign_key "interactions", "users", column: "adopter_id"
   add_foreign_key "pets", "users", column: "provider_id"

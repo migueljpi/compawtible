@@ -11,8 +11,9 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-
-
+@import "pages/layout";
+@import "components/navbar";
+@import "components/footer";
 
 body, p {
   font-family: $body-font;
@@ -25,5 +26,3 @@ h1, h2, h3, h4, h5 {
 span, a {
   font-family: $special-font;
 }
-@import "pages/layout";
-@import "components/navbar";

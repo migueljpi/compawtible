@@ -12,7 +12,7 @@ html, body {
   align-items: center;
   height: 100vh;
   text-align: center;
-  padding: 50px 10px 0 0;
+  padding: 20px 0 0 0;
 }
 
 .home-title {
@@ -22,6 +22,7 @@ html, body {
   color: $orange-main;
   margin-bottom: 20px;
   text-align: center;
+  padding-top: 30px;
 }
 
 .home-subtitle {
@@ -42,7 +43,7 @@ html, body {
   border-radius: 10px;
   text-transform: uppercase;
   transition: all 0.3s ease;
-  margin-top: -120px;
+  margin-top: -150px;
 
   &:hover {
     background-color: darken($orange-main, 10%);
@@ -62,7 +63,7 @@ html, body {
 }
 
 .home-banner .home-logo-img {
-  width: 80px;
+  width: 70px;
   height: auto;
   position: relative;
   top: -16px;

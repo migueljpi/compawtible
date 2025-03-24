@@ -1,19 +1,3 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-
-<%= link_to "Search for a pet!", get_search_path %>
-=======
-<p><%= link_to "Search for a pet!", search_path %></p>
-
-<p><%= link_to "Find a match!", search_path %></p>
-
-<p>For testing</p>
-<% if user_signed_in?  %>
-  <p><%= current_user.role %></p>
-<% end %>
-
-<%= link_to "test path", test_path %>
-
 <div class="home-banner">
   <section class="home-title">
     <h1>
@@ -31,13 +15,12 @@
     <%= image_tag "landing_page_photo.png", alt: "Landing-page-photo", class: "home-landing-img" %>
   </section>
 
-  <section class="home-action">
-    <%= link_to "Search for a pet!", search_path, class: "btn btn-primary home-button" %>
+  <section class="home-action-btn">
+    <% if current_user&.provider? %>
+      <%= link_to "Go to profile", user_path(current_user), class: "btn btn-primary home-button" %>
+    <% else %>
+      <%= link_to "Search for a pet!", get_search_path, class: "btn btn-primary home-button" %>
+    <% end %>
   </section>
 
-  <%# if user_signed_in? %>
-    <%# <section class="user-info">
-      <p><%= current_user.role %></p>
-    <%# </section> %>
-  <%# end %>
 </div>
