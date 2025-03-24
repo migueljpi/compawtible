@@ -17,7 +17,4 @@ export default class extends Controller {
     this.outputThreeTarget.classList.add("d-none");
   }
 
-  testEvent() {
-    console.log("turbo:submit-end event fired");
-  }
 }
