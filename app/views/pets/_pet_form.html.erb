@@ -4,15 +4,15 @@
                   autofocus: true,
                   input_html: { autocomplete: "name" } %>
       <%= f.input :species,
-                  collection: Pet::SPECIES.keys,
+                  collection: Pet::SPECIES,
                   required: true,
-                  input_html: { autocomplete: "species" } %>
-      <%# <%= f.input :breed, collection: Pet::SPECIES,
-                  required: true,
-                  input_html: { autocomplete: "species" } %>
-      <%= f.input :breed,
-                  required: true,
-                  input_html: { autocomplete: "breed" } %>
+                  input_html: { autocomplete: "species",
+                                    data: { turbo_frame: "breed_select" },
+                                    onchange: "this.form.submit();" }%>
+      <turbo-frame id="breed_select">
+        <%= render "breeds_select", f: f, selected_species: @pet.species %>
+      </turbo-frame>
+
       <%= f.input :location,
                   required: true,
                   input_html: { autocomplete: @pet.location } %>

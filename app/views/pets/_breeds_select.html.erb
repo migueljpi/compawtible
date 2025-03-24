@@ -1,0 +1,6 @@
+<%= f.input :breed,
+            collection: Pet::BREEDS[selected_species] || [],
+            # collection: Pet::BREEDS[@pet.species] || [],
+            required: true %>
+
+<%# # <%= f.select :breed, options_for_select(Pet::BREEDS[@pet.species] || []), { prompt: "Select a breed" }, class: "form-control" %>
