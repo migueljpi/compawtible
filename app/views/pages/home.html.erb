@@ -1,16 +1,26 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="home-banner">
+  <section class="home-title">
+    <h1>
+      Looking for a furry friend to bring love and joy into your life?
+      <span class="logo-container">
+        <span class="navbar-title home-logo-title">Compawtible </span>
+        <%= image_tag "logo_paw_print.png", alt: "Logo", class: "navbar-logo home-logo-img" %>
+      </span>
+      connects you with pets in need of a forever home.
+    </h1>
+    <p class="home-subtitle">Your perfect match is waiting. Start your adoption journey today!</p>
+  </section>
 
-<%= link_to "Search for a pet!", get_search_path %>
-=======
-<p><%= link_to "Search for a pet!", search_path %></p>
+  <section class="home-image">
+    <%= image_tag "landing_page_photo.png", alt: "Landing-page-photo", class: "home-landing-img" %>
+  </section>
 
-<p><%= link_to "Find a match!", search_path %></p>
+  <section class="home-action-btn">
+    <% if current_user&.provider? %>
+      <%= link_to "Go to profile", user_path(current_user), class: "btn btn-primary home-button" %>
+    <% else %>
+      <%= link_to "Search for a pet!", get_search_path, class: "btn btn-primary home-button" %>
+    <% end %>
+  </section>
 
-<p>For testing</p>
-<% if user_signed_in?  %>
-  <p><%= current_user.role %></p>
-<% end %>
-
-<%= link_to "test path", test_path %>
-
+</div>

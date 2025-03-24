@@ -1,0 +1,85 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #EEEEEE;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  height: 45px;
+  width: 100%;
+  padding: 0px 24px;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.8rem;
+  font-family: $headers-font;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: black;
+  font-weight: 450;
+  font-size: 1.3rem;
+  font-family: $headers-font;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: $orange-main;
+    transform: scale(1.1);
+  }
+}
+
+.footer-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  flex-wrap: wrap;
+}
+
+.footer-text p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: $headers-font;
+}
+
+.fa-heart {
+  color: $orange-main;
+  margin: 0 5px;
+  transition: color 0.3s ease;
+}
+
+.footer-title.home-logo-title {
+  font-size: 0.8rem;
+  font-family: $headers-font;
+  color: black;
+  margin: 0 5px;
+}
+
+.logo-container-footer {
+  display: inline-flex;
+  align-items: center;
+}
+
+.home-logo-img-footer {
+  width: 20px;
+  height: auto;
+  position: relative;
+  top: -6px;
+  right: -35px;
+  margin-left: -47px;
+}
+
+.footer-text p span {
+  margin-right: 34px;
+}

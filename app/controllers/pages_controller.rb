@@ -2,7 +2,6 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home]
 
   def home
-
   end
 
   def search
@@ -60,7 +59,6 @@ class PagesController < ApplicationController
   def other_matches
     @prompt = Prompt.find(params[:prompt_id])
     pet_ids = @prompt.best_matches
-
 
     @best_matches = pet_ids.map { |id| Pet.find_by(id: id) }.compact
   end
