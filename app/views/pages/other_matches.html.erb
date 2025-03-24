@@ -17,7 +17,7 @@
             <div class="animal-images">
               <% if pet.photos.attached? %>
                 <%= link_to user_pet_path(pet.provider, pet) do %>
-                  <%= cl_image_tag pet.photos.first.key, height: 300, width: 300, crop: :fill, style: "border-radius: 15px" %>
+                  <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
                 <% end %>
               <% else %>
                 <%= link_to user_pet_path(pet.provider, pet) do %>

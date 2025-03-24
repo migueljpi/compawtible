@@ -58,3 +58,10 @@
   border-radius: 15px;
   // height: 500px;
 }
+
+.square-image {
+  width: 100%; /* Make the image take up the full width of the parent */
+  aspect-ratio: 1 / 1; /* Maintain a 1:1 aspect ratio (square) */
+  object-fit: cover; /* Ensure the image covers the square area without distortion */
+  display: block; /* Remove any inline spacing issues */
+}
