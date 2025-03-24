@@ -1,4 +1,7 @@
 <div class="container">
+
+  <%= link_to 'Back', user_path(@user) %>
+
   <h1><%= @pet.name %></h1>
 
   <p><%= @pet.species.humanize %></p>
@@ -11,17 +14,17 @@
   <p><%= @pet.description %></p>
   <p><%= @pet.activity_level %></p>
 
-  <p><%= @pet.neutered %></p>
+  <p><%= @pet.neutered.humanize %></p>
   <p><%= @pet.medical_conditions %></p>
-  <p><%= @pet.sociable_with_animals %></p>
-  <p><%= @pet.sociable_with_children %></p>
-  <p><%= @pet.certified %></p>
+  <p><%= @pet.sociable_with_animals.humanize %></p>
+  <p><%= @pet.sociable_with_children.humanize %></p>
+  <p><%= @pet.certified.humanize %></p>
 
   <p>Provider: <%= link_to "#{@pet.provider.first_name} #{@pet.provider.last_name}", user_path(@pet.provider) %></p>
 
 <% @pet.photos.each do |photo| %>
   <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
 <% end %>
-  <%= link_to 'Edit', edit_user_pet_path(@user, @pet) %>
-
+  <%= link_to 'Edit', edit_user_pet_path(@user, @pet), class: "btn btn-primary" %>
+  <%= link_to 'Remove Pet', remove_pet_path(@user, @pet), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
 </div>
