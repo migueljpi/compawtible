@@ -1,4 +1,4 @@
-<%= simple_form_for @prompt, url: search_path, method: :post, data: { turbo: true, action: "turbo:submit-end->output#showOutput" } do |f| %>
+<%= simple_form_for @prompt, url: search_path, method: :post, data: { turbo: true, action: "turbo:submit-end->output#showModal" } do |f| %>
     <div class="row">
       <div class="d-flex justify-content-between">
         <div id="location" class="md-5 col-5">
