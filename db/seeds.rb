@@ -25,7 +25,7 @@ COUNTRIES.each do |country|
   country_code = country[:name].downcase.gsub(" ", "")
 
   # Create a personal provider
-  User.create!(
+  personal_provider = User.new(
     email: "provider1.#{country_code}@provider.com",
     password: "123456",
     first_name: country[:provider_person],
@@ -36,8 +36,15 @@ COUNTRIES.each do |country|
     about_me: "Passionate about pet adoption and finding animals a loving home."
   )
 
+  file = File.open(Rails.root.join("app/assets/images/man2.jpg"))
+  puts "man photo opened"
+  puts "attaching photo"
+  personal_provider.photo.attach(io: file, filename: "personal.jpg", content_type: "image/jpeg")
+  puts "photo attached!"
+  personal_provider.save!
+
   # Create an institutional provider
-  User.create!(
+  institution = User.new(
     email: "provider2.#{country_code}@provider.com",
     password: "123456",
     first_name: country[:provider_institution],
@@ -47,9 +54,16 @@ COUNTRIES.each do |country|
     role: "provider",
     about_me: "A dedicated institution committed to rescuing and rehoming animals in need."
   )
+  file = File.open(Rails.root.join("app/assets/images/shelter.jpg"))
+  puts "sgelter photo opened"
+  puts "attaching photo"
+  institution.photo.attach(io: file, filename: "shelter.jpg", content_type: "image/jpeg")
+  puts "photo attached!"
+  institution.save!
+
 
   # Create an adopter
-  User.create!(
+  adopter = User.new(
     email: "adopter.#{country_code}@adopter.com",
     password: "123456",
     first_name: country[:adopter],
@@ -59,6 +73,12 @@ COUNTRIES.each do |country|
     role: "adopter",
     about_me: "Looking for a new furry friend to adopt!"
   )
+  file = File.open(Rails.root.join("app/assets/images/man.jpg"))
+  puts "man photo opened"
+  puts "attaching photo"
+  adopter.photo.attach(io: file, filename: "personal.jpg", content_type: "image/jpeg")
+  puts "photo attached!"
+  adopter.save!
 end
 puts "Users created!"
 
@@ -124,17 +144,7 @@ User.where(role: "provider").each do |provider|
       certified: [true, false].sample,
       description: PET_DESCRIPTIONS.sample
     )
-    if pet.species == "Chicken"
-      puts "retrieving bird photos"
-      file = File.open(Rails.root.join("app/assets/images/chicken1.jpg"))
-      file2 = File.open(Rails.root.join("app/assets/images/chicken2.jpg"))
-      puts "file opened"
-      puts "file2 opened"
-      puts "attaching photos"
-      pet.photos.attach([{io: file, filename: "chicken1.jpg", content_type: "image/jpeg"},
-                        {io: file2, filename: "chicken2.jpg", content_type: "image/jpeg"}])
-      puts "photos attached"
-    elsif pet.species == "Dog"
+    if pet.species == "Dog"
       puts "retrieving dog photos"
       file = File.open(Rails.root.join("app/assets/images/dog1.jpg"))
       file2 = File.open(Rails.root.join("app/assets/images/dog2.jpg"))
@@ -153,16 +163,6 @@ User.where(role: "provider").each do |provider|
       puts "attaching photos"
       pet.photos.attach([{io: file, filename: "cat1.jpg", content_type: "image/jpeg"},
                         {io: file2, filename: "cat2.jpg", content_type: "image/jpeg"}])
-      puts "photos attached"
-    elsif pet.species == "Rabbit"
-      puts "retrieving rabbit photos"
-      file = File.open(Rails.root.join("app/assets/images/rabbit1.jpg"))
-      file2 = File.open(Rails.root.join("app/assets/images/rabbit2.jpg"))
-      puts "file opened"
-      puts "file2 opened"
-      puts "attaching photos"
-      pet.photos.attach([{io: file, filename: "rabbit1.jpg", content_type: "image/jpeg"},
-                        {io: file2, filename: "rabbit2.jpg", content_type: "image/jpeg"}])
       puts "photos attached"
     end
     pet.save!
