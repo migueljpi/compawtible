@@ -3,42 +3,42 @@ class Pet < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_location?
 
   BREEDS = {
-    "dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Poodle", "Bulldog",
+    "Dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Poodle", "Bulldog",
               "Beagle", "Chihuahua", "Dachshund", "Siberian Husky", "Boxer", "Doberman", "Shih Tzu", "Border Collie",
               "Great Dane", "Rottweiler", "Cocker Spaniel", "Pomeranian", "Maltese", "Australian Shepherd", "Other"],
-    "cat" => ["Siamese", "Persian", "Maine Coon", "Bengal", "Ragdoll", "British Shorthair", "Sphynx", "Abyssinian",
+    "Cat" => ["Siamese", "Persian", "Maine Coon", "Bengal", "Ragdoll", "British Shorthair", "Sphynx", "Abyssinian",
               "Scottish Fold", "Norwegian Forest Cat", "Russian Blue", "Birman", "Savannah", "Oriental Shorthair",
               "Turkish Angora", "Other"],
-    "rabbit" => ["Holland Lop", "Netherland Dwarf", "Flemish Giant", "Lionhead", "Rex", "Mini Lop", "English Angora",
+    "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Flemish Giant", "Lionhead", "Rex", "Mini Lop", "English Angora",
                 "French Lop", "Dutch", "Harlequin", "Other"],
-    "hamster" => ["Syrian Hamster", "Dwarf Campbell Russian Hamster", "Dwarf Winter White Russian Hamster",
+    "Hamster" => ["Syrian Hamster", "Dwarf Campbell Russian Hamster", "Dwarf Winter White Russian Hamster",
                   "Roborovski Hamster", "Chinese Hamster", "Other"],
-    "guinea_pig" => ["American", "Abyssinian", "Peruvian", "Teddy", "Silkie", "Texel", "Himalayan", "Baldwin", "Other"],
-    "ferret" => ["Standard", "Albino", "Sable", "Black Sable", "Chocolate", "Cinnamon", "Champagne", "Other"],
-    "bird" => ["Canary", "Finch", "Budgerigar", "Cockatiel", "Lovebird", "Dove", "Pigeon", "Other"],
-    "turtle" => ["Red-Eared Slider", "Box Turtle", "Painted Turtle", "Musk Turtle", "Wood Turtle", "Other"],
-    "fish" => ["Betta", "Goldfish", "Guppy", "Tetra", "Angelfish", "Cichlid", "Molly", "Platy", "Catfish", "Koi", "Other"],
-    "mouse" => ["Fancy Mouse", "Hairless Mouse", "Other"],
-    "rat" => ["Dumbo Rat", "Standard Rat", "Hairless Rat", "Other"],
-    "chinchilla" => ["Standard Gray", "Black Velvet", "Beige", "White", "Other"],
-    "lizard" => ["Bearded Dragon", "Leopard Gecko", "Crested Gecko", "Green Iguana", "Blue-Tongued Skink", "Tegu", "Other"],
-    "tarantula" => ["Mexican Red Knee", "Chilean Rose", "Goliath Birdeater", "Pink Toe", "Other"],
-    "frog" => ["White’s Tree Frog", "Poison Dart Frog", "Pacman Frog", "African Clawed Frog", "Other"],
-    "goat" => ["Nubian", "Pygmy", "Boer", "Alpine", "Saanen", "Toggenburg", "Other"],
-    "pig" => ["Pot-Bellied Pig", "Juliana Pig", "Kunekune", "Gloucestershire Old Spot", "Other"],
-    "chicken" => ["Rhode Island Red", "Leghorn", "Plymouth Rock", "Silkie", "Sussex", "Orpington", "Other"],
-    "duck" => ["Pekin", "Mallard", "Muscovy", "Khaki Campbell", "Indian Runner", "Rouen", "Other"],
-    "horse" => ["Thoroughbred", "Quarter Horse", "Arabian", "Friesian", "Clydesdale", "Mustang", "Paint", "Andalusian",
+    "Guinea pig" => ["American", "Abyssinian", "Peruvian", "Teddy", "Silkie", "Texel", "Himalayan", "Baldwin", "Other"],
+    "Ferret" => ["Standard", "Albino", "Sable", "Black Sable", "Chocolate", "Cinnamon", "Champagne", "Other"],
+    "Bird" => ["Canary", "Finch", "Budgerigar", "Cockatiel", "Lovebird", "Dove", "Pigeon", "Other"],
+    "Turtle" => ["Red-Eared Slider", "Box Turtle", "Painted Turtle", "Musk Turtle", "Wood Turtle", "Other"],
+    "Fish" => ["Betta", "Goldfish", "Guppy", "Tetra", "Angelfish", "Cichlid", "Molly", "Platy", "Catfish", "Koi", "Other"],
+    "Mouse" => ["Fancy Mouse", "Hairless Mouse", "Other"],
+    "Rat" => ["Dumbo Rat", "Standard Rat", "Hairless Rat", "Other"],
+    "Chinchilla" => ["Standard Gray", "Black Velvet", "Beige", "White", "Other"],
+    "Lizard" => ["Bearded Dragon", "Leopard Gecko", "Crested Gecko", "Green Iguana", "Blue-Tongued Skink", "Tegu", "Other"],
+    "Tarantula" => ["Mexican Red Knee", "Chilean Rose", "Goliath Birdeater", "Pink Toe", "Other"],
+    "Frog" => ["White’s Tree Frog", "Poison Dart Frog", "Pacman Frog", "African Clawed Frog", "Other"],
+    "Goat" => ["Nubian", "Pygmy", "Boer", "Alpine", "Saanen", "Toggenburg", "Other"],
+    "Pig" => ["Pot-Bellied Pig", "Juliana Pig", "Kunekune", "Gloucestershire Old Spot", "Other"],
+    "Chicken" => ["Rhode Island Red", "Leghorn", "Plymouth Rock", "Silkie", "Sussex", "Orpington", "Other"],
+    "Duck" => ["Pekin", "Mallard", "Muscovy", "Khaki Campbell", "Indian Runner", "Rouen", "Other"],
+    "Horse" => ["Thoroughbred", "Quarter Horse", "Arabian", "Friesian", "Clydesdale", "Mustang", "Paint", "Andalusian",
                 "Appaloosa", "Other"],
-    "donkey" => ["Standard Donkey", "Miniature Donkey", "Mammoth Donkey", "Other"],
-    "sheep" => ["Merino", "Suffolk", "Dorset", "Hampshire", "Jacob", "Other"],
-    "cow" => ["Holstein", "Jersey", "Angus", "Hereford", "Charolais", "Other"],
-    "alpaca" => ["Huacaya", "Suri", "Other"],
-    "parrot" => ["Macaw", "African Grey", "Cockatoo", "Amazon", "Eclectus", "Conure", "Parakeet", "Other"],
-    "other" => ["Other"]
+    "Donkey" => ["Standard Donkey", "Miniature Donkey", "Mammoth Donkey", "Other"],
+    "Sheep" => ["Merino", "Suffolk", "Dorset", "Hampshire", "Jacob", "Other"],
+    "Cow" => ["Holstein", "Jersey", "Angus", "Hereford", "Charolais", "Other"],
+    "Alpaca" => ["Huacaya", "Suri", "Other"],
+    "Parrot" => ["Macaw", "African Grey", "Cockatoo", "Amazon", "Eclectus", "Conure", "Parakeet", "Other"],
+    "Other" => ["Other"]
   }.freeze
 
-  SPECIES = BREEDS.keys.map { |key| [key.capitalize.gsub('_', ' '), key] }.to_h.freeze
+  SPECIES = BREEDS.keys.freeze
 
   SIZE = ["Small", "Medium", "Large"].freeze
   ACTIVITY_LEVEL = ["Low", "Moderate", "High"].freeze
@@ -60,18 +60,18 @@ class Pet < ApplicationRecord
   # end
 
   # attr_accessor :skip_breed_validations, :skip_description_validations
-  attr_accessor :skip_breed_validations
+  # attr_accessor :skip_breed_validations
 
   # Validations trigger on final form submission
   validates :name, presence: true
-  validates :species, presence: true, inclusion: { in: SPECIES.values }
-  validates :breed, presence: true, unless: :skip_breed_validations
+  validates :species, presence: true, inclusion: { in: SPECIES }
+  validates :breed, presence: true
   # validates :breed, presence: true
   # validates :description, presence: true, unless: :skip_description_validations
   validates :description, presence: true
 
-  validate :breed_matches_species, unless: :skip_breed_validations
-  # validate :breed_matches_species
+  # validate :breed_matches_species, unless: :skip_breed_validations
+  validate :breed_matches_species
 
   private
 

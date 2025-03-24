@@ -16,7 +16,7 @@ class PetsController < ApplicationController
     @pet = Pet.new
     @url_action = params[:action]
     @pet.location = current_user.location
-    @pet.skip_breed_validations = true
+    # @pet.skip_breed_validations = true
     # @pet.skip_description_validations = true
   end
 
@@ -25,7 +25,7 @@ class PetsController < ApplicationController
     @pet = Pet.new(pet_params_new)
     @pet.provider = current_user
 
-    @pet.skip_breed_validations = false
+    # @pet.skip_breed_validations = false
     # @pet.skip_description_validations = false
 
     if @pet.save
