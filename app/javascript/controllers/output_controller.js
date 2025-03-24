@@ -7,17 +7,7 @@ export default class extends Controller {
     console.log("OutputController connected");
   }
 
-  showModal() {
-    console.log("Showing modal");
+  showOutput() {
     this.outputThreeTarget.classList.remove("d-none");
-  }
-
-  hideModal() {
-    console.log("Hiding modal");
-    this.outputThreeTarget.classList.add("d-none");
-  }
-
-  testEvent() {
-    console.log("turbo:submit-end event fired");
   }
 }
