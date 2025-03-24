@@ -7,7 +7,7 @@
   <%= render "user_input" %>
 </div>
 
-<div id="output-three">
+<div id="output-three" class="<%= params[:prompt_id].present? ? '' : 'd-none' %>" data-controller="output" data-output-target="outputThree">
   <%= render "output_three", best_matches: @best_matches&.first(3) %>
 </div>
 
