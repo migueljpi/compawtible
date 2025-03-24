@@ -1,25 +1,14 @@
-<%= render "location" %>
 
-<% if @users_nearby.any? %>
-  <h3>Animals within this distance:</h3>
-
-  <% @users_nearby.each do |user| %>
-    <p><%= user.first_name %> <%= user.last_name %></p>
-
-    <ul>
-      <% user.pets.each do |pet| %>
-        <li><%= pet.name %> - <%= pet.species %> - <%= pet.breed %> - <%= pet.description %></li>
-      <% end %>
-    </ul>
-
-  <% end %>
-<% else %>
-  <h3>No animals within this distance</h3>
-<% end %>
-
---------------------------------------------
-
-<% best_matches.each do |pet| %>
+<div class="top-three">
+  <div class="d-flex justify-content-center">
+    <h2>Here are the top picks!</h2>
+  </div>
+  <div class="row mt-2">
+    <% if best_matches.present? %>
+      <% if best_matches.count == 0 %>
+        <p>Sorry, no matches found.</p>
+      <% else %>
+        <% best_matches.each do |pet| %>
           <div class="col-md-4">
             <div class="pet-image-main">
               <div class="animal-images">
@@ -40,3 +29,12 @@
             </div>
           </div>
         <% end %>
+      <% end %>
+    <div class="d-flex justify-content-center mt-4">
+      <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn-secondary" %>
+    </div>
+    <% else %>
+      <p>This is where your matches will show up</p>
+    <% end %>
+  </div>
+</div>

@@ -1,12 +1,15 @@
 class PetsController < ApplicationController
-  before_action :set_user, only: [:show, :new, :create, :edit, :update]
-  before_action :set_pet, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :new, :create, :edit, :update, :destroy]
+  before_action :set_pet, only: [:show, :edit, :update, :destroy]
+
 
   def index
     @pets = Pet.all
   end
 
   def show
+    @user = User.find(params[:user_id])
+    @pet = @user.pets.find(params[:id])
   end
 
   def new
@@ -52,6 +55,12 @@ class PetsController < ApplicationController
     end
   end
 
+  def destroy
+    Rails.logger.debug "params[:user_id]: #{params[:user_id]}"  # Print out the user_id to check
+    @pet.destroy
+    redirect_to user_path(@user), notice: 'Pet was successfully removed.'
+  end
+  
   def update_breeds
     @pet = Pet.new(species: pet_params_new[:pet][:species])
     render partial: "breeds_select", locals: { f:  ActionView::Helpers::FormBuilder.new(:pet, @pet, self, {}) }
@@ -66,10 +75,6 @@ class PetsController < ApplicationController
   def set_pet
     @pet = Pet.find(params[:id])
   end
-
-  # def pet_params
-  #   params.require(:pet).permit(:species, :breed)
-  # end
 
   def pet_params_new
     params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size, :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified, photos: [])
