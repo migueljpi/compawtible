@@ -8,7 +8,7 @@ class PetsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user_id])
+    # @user = User.find(params[:user_id])
     @pet = @user.pets.find(params[:id])
   end
 
@@ -56,11 +56,12 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    Rails.logger.debug "params[:user_id]: #{params[:user_id]}"  # Print out the user_id to check
+    # Rails.logger.debug "params[:user_id]: #{params[:user_id]}"  # Print out the user_id to check
     @pet.destroy
+    # raise
     redirect_to user_path(@user), notice: 'Pet was successfully removed.'
   end
-  
+
   def update_breeds
     @pet = Pet.new(species: pet_params_new[:pet][:species])
     render partial: "breeds_select", locals: { f:  ActionView::Helpers::FormBuilder.new(:pet, @pet, self, {}) }
