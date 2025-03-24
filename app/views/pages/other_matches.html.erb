@@ -1,10 +1,38 @@
-<h1>OTHER MATCHES</h1>
+<div class="header-top">
+  <h1>Here are some other matches for you.</h1>
+</div>
 
-<h2>Input: <%= @prompt.input %></h2>
-
-<ul>
-  <% @best_matches.each do |match| %>
-
-    <li><%= link_to match.name, user_pet_path(match.provider.id, match.id) %> - <%= match.breed %> - <%= match.species %> - <%= match.description %> - <%= match.location %></li>
+<h1>
+  <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: true } do %>
+    <i class="fa-solid fa-arrow-left"></i>
   <% end %>
-</ul>
+</h1>
+
+
+  <div class="row mt-2 d-flex">
+    <% if @best_matches.present? %>
+      <% @best_matches.each do |pet| %>
+        <div class="col-md-3">
+          <div class="pet-image-main">
+            <div class="animal-images">
+              <% if pet.photos.attached? %>
+                <%= link_to user_pet_path(pet.provider, pet) do %>
+                  <%= cl_image_tag pet.photos.first.key, height: 300, width: 300, crop: :fill, style: "border-radius: 15px" %>
+                <% end %>
+              <% else %>
+                <%= link_to user_pet_path(pet.provider, pet) do %>
+                  <%= image_tag "dog.jpg", id: "image-profile-pet" %>
+                <% end %>
+              <% end %>
+              <div class="animal-info">
+                <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
+                <p><%= pet.description %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>This is where your matches will show up</p>
+    <% end %>
+  </div>
