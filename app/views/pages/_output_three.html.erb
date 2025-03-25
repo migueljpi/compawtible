@@ -1,4 +1,4 @@
-<turbo-frame id="output-three" data-controller="output" data-output-prompt-id="<%= @prompt&.id %>">
+<turbo-frame id="output-three" data-controller="output" data-output-prompt-id="<%= @prompt&.id %>" data-output-has-output="<%= @prompt&.output.present? %>">
   <div data-output-target="outputThree" class="d-none">
     <div class="top-three">
       <div class="d-flex justify-content-center">
