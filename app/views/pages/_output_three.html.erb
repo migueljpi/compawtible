@@ -2,14 +2,15 @@
   <div data-output-target="outputThree" class="modal fade d-none" tabindex="-1" role="dialog" aria-labelledby="outputThreeLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="outputThreeLabel">Here are the top picks!</h5>
-          <button type="button" class="close" data-action="output#hideOutput" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+        <div class="modal-header d-flex justify-content-center align-items-center position-relative">
+          <h2 class="modal-title" id="outputThreeLabel">Here are your top matches!</h2>
+          <!-- Custom close button -->
+          <button type="button" class="position-absolute" style="top: 12px; right: 20px; background: none; border: none;" data-action="output#hideOutput" aria-label="Close">
+            <h1><i class="fa-solid fa-xmark"></i></h1>
           </button>
         </div>
         <div class="modal-body">
-          <div class="row d-flex justify-content- mt-2">
+          <div class="row d-flex justify-content-center">
             <% if best_matches.present? %>
               <% if best_matches.count == 0 %>
                 <p>Sorry, no matches found.</p>
@@ -35,7 +36,7 @@
                     </div>
                   </div>
                 <% end %>
-                <div class="text-center mt-3">
+                <div class="text-center my-5">
                   <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn btn-secondary", data: { turbo: false } %>
                 </div>
               <% end %>
@@ -43,9 +44,6 @@
               <p>This is where your matches will show up</p>
             <% end %>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-action="output#hideOutput">Close</button>
         </div>
       </div>
     </div>

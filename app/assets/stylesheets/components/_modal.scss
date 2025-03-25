@@ -1,19 +1,43 @@
 .modal {
-  pointer-events: auto !important;
+  position: fixed !important; /* Ensure the modal is in the correct stacking context */
+  z-index: 1060 !important; /* Ensure the modal is above the navbar */
 }
 
 .modal-backdrop {
-  z-index: 1049 !important; /* Um nível abaixo do modal */
+  position: fixed !important; /* Ensure it covers the entire viewport */
+  z-index: 1055 !important; /* Ensure the backdrop is above the navbar */
 }
 
 .modal-content {
-  z-index: 1051 !important; /* Um nível acima do backdrop */
-  width: 1000px !important;
-  margin: 0 auto;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  position: relative;
-  pointer-events: auto !important;
+  position: relative !important; /* Ensure the modal content is positioned within the stacking context */
+  z-index: 1060 !important; /* Ensure the modal content is above the backdrop */
+
+
+  margin: 0 auto !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+  padding: 5px !important;
+  // pointer-events: auto !important;
+  // margin: 0px ;
+  background-color: $beije-main !important;
+  border-radius: 15px !important;
+}
+
+.modal-body {
+  padding: 0px !important;
+  // height: 100% !important;
+  // width: 1000px !important;
+}
+
+.modal-dialog {
+  max-width: 1100px !important; /* Override Bootstrap’s max-width */
+  width: 100% !important; /* Ensure it respects the max-width */
+
+}
+
+.modal-header {
+  border-bottom: none !important; /* Remove the horizontal line below the title */
+}
+
+.modal-footer {
+  border-top: none !important; /* Remove the horizontal line above the footer */
 }
