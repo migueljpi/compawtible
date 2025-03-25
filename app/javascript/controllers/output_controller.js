@@ -18,22 +18,34 @@ export default class extends Controller {
       }
     });
 
-    // On page load, check if we should show the div
+    // On page load, check if we should show the modal
     document.addEventListener("turbo:load", () => {
       if (promptId && hasOutput) {
         console.log("Prompt with output detected, showing output...");
         this.showOutput();
       } else {
-        console.log("No prompt with output detected, keeping output hidden.");
+        console.log("No prompt with output detected, keeping modal hidden.");
       }
     });
   }
 
+
+
   showOutput() {
     console.log("OutputController showOutput");
+
     if (this.hasOutputThreeTarget) {
-      this.outputThreeTarget.classList.remove("d-none"); // Remove d-none to show the partial
-      localStorage.setItem("showOutput", "true"); // Store state in localStorage
+      setTimeout(() => {
+        this.outputThreeTarget.classList.remove("d-none");
+
+        let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
+        if (!modal) {
+          modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: false, focus: false });
+        }
+        modal.show();
+
+        console.log("Modal should be visible now");
+      }, 100);
     } else {
       console.error("Output target not found!");
     }
@@ -41,8 +53,15 @@ export default class extends Controller {
 
   hideOutput() {
     console.log("OutputController hideOutput");
+
     if (this.hasOutputThreeTarget) {
-      this.outputThreeTarget.classList.add("d-none"); // Add d-none to hide the partial
+      const modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
+      modal.hide(); // Hide the modal
+
+      setTimeout(() => {
+        this.outputThreeTarget.classList.add("d-none"); // ADD d-none after modal is hidden
+      }, 300); // Delay slightly to let Bootstrap animation complete
+
       localStorage.setItem("showOutput", "false"); // Store state in localStorage
     } else {
       console.error("Output target not found!");

@@ -1,66 +1,19 @@
-/* Ensure the modal is centered and styled properly */
-#output-three.modal {
-  display: flex; /* Use flexbox to center the modal */
-  justify-content: center;
-  align-items: center;
-  position: fixed; /* Fix the modal to the viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
-  z-index: 1050; /* Ensure it appears above other elements */
+.modal {
+  pointer-events: auto !important;
 }
 
-/* Hide the modal when the d-none class is applied */
-#output-three.d-none {
-  display: none !important;
+.modal-backdrop {
+  z-index: 1049 !important; /* Um nível abaixo do modal */
 }
 
-/* Style the modal content */
-#output-three .modal-dialog {
-  max-width: 600px; /* Set a maximum width for the modal */
-  width: 90%; /* Make it responsive */
-  background-color: #fff; /* White background for the modal content */
-  border-radius: 10px; /* Add rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  overflow: hidden; /* Ensure content doesn't overflow */
-}
-
-/* Style the modal header */
-#output-three .modal-header {
-  background-color: #f8f9fa; /* Light gray background */
-  padding: 15px;
-  border-bottom: 1px solid #dee2e6;
-}
-
-/* Style the modal title */
-#output-three .modal-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-}
-
-/* Style the modal body */
-#output-three .modal-body {
+.modal-content {
+  z-index: 1051 !important; /* Um nível acima do backdrop */
+  width: 1000px !important;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  font-size: 16px;
-  color: #333;
-}
-
-/* Style the modal footer */
-#output-three .modal-footer {
-  padding: 15px;
-  border-top: 1px solid #dee2e6;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* Style the close button */
-#output-three .close {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: #333;
-  cursor: pointer;
+  position: relative;
+  pointer-events: auto !important;
 }

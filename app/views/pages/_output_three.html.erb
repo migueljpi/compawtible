@@ -1,42 +1,52 @@
-<turbo-frame id="output-three" data-controller="output" data-output-prompt-id="<%= @prompt&.id %>" data-output-has-output="<%= @prompt&.output.present? %>">
-  <div data-output-target="outputThree" class="d-none">
-    <div class="top-three">
-      <div class="d-flex justify-content-center">
-        <h2>Here are the top picks!</h2>
-      </div>
-      <div class="row d-flex justify-content- mt-2">
-        <% if best_matches.present? %>
-          <% if best_matches.count == 0 %>
-            <p>Sorry, no matches found.</p>
-          <% else %>
-            <% best_matches.each do |pet| %>
-              <div class="col-md-4">
-                <div class="pet-image-main">
-                  <div class="animal-images">
-                    <% if pet.photos.attached? %>
-                      <%= link_to user_pet_path(pet.provider, pet) do %>
-                        <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
-                      <% end %>
-                    <% else %>
-                      <%= link_to user_pet_path(pet.provider, pet) do %>
-                        <%= image_tag "dog.jpg", id: "image-profile-pet" %>
-                      <% end %>
-                    <% end %>
-                    <div class="animal-info">
-                      <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
-                      <p><%= pet.description %></p>
+<turbo-frame id="output-three" data-controller="output" data-output-prompt-id="<%= @prompt&.id %>" data-output-has-output="<%= @prompt&.output.present? %>" loading="lazy">
+  <div data-output-target="outputThree" class="modal fade d-none" tabindex="-1" role="dialog" aria-labelledby="outputThreeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="outputThreeLabel">Here are the top picks!</h5>
+          <button type="button" class="close" data-action="output#hideOutput" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row d-flex justify-content- mt-2">
+            <% if best_matches.present? %>
+              <% if best_matches.count == 0 %>
+                <p>Sorry, no matches found.</p>
+              <% else %>
+                <% best_matches.each do |pet| %>
+                  <div class="col-md-4">
+                    <div class="pet-image-main">
+                      <div class="animal-images">
+                        <% if pet.photos.attached? %>
+                          <%= link_to user_pet_path(pet.provider, pet), data: { turbo: false } do %>
+                            <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to user_pet_path(pet.provider, pet) do %>
+                            <%= image_tag "dog.jpg", id: "image-profile-pet" %>
+                          <% end %>
+                        <% end %>
+                        <div class="animal-info">
+                          <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
+                          <p><%= pet.description %></p>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                <% end %>
+                <div class="text-center mt-3">
+                  <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn btn-secondary", data: { turbo: false } %>
                 </div>
-              </div>
+              <% end %>
+            <% else %>
+              <p>This is where your matches will show up</p>
             <% end %>
-          <% end %>
-        <div class="d-flex justify-content-center mt-4">
-          <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn-secondary", data: { turbo: "false" } %>
+          </div>
         </div>
-        <% else %>
-          <p>This is where your matches will show up</p>
-        <% end %>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-action="output#hideOutput">Close</button>
+        </div>
       </div>
     </div>
   </div>
