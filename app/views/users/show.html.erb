@@ -20,7 +20,7 @@
       <h3><%= @user.about_me %></h3>
     </div>
     <div>
-      <%= image_tag "https://plus.unsplash.com/premium_photo-1663133505223-238b6bd6fbcb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YW5pbWFsJTIwc2hlbHRlcnxlbnwwfHwwfHx8MA%3D%3D", id: "image-profile-user" %>
+      <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, class: "image-profile-user" %>
     </div>
   </div>
 
@@ -35,94 +35,113 @@
       </div>
     </div>
 
-
-<div class="user-animals">
-  <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
-  <div class="row mt-5">
-    <% @user.pets.each_with_index do |pet, index| %>
-      <div class="col-md-4">
-        <div class="pet-image-main">
-          <div class="animal-images">
-
-<% if pet.photos.attached? %>
-  <div id="carouselExampleControls_<%= index %>" class="carousel slide">
-    <div class="carousel-inner">
-      <% pet.photos.each_with_index do |photo, idx| %>
-        <div class="carousel-item <%= 'active' if idx == 0 %>">
-          <% if photo.present? %>
-            <%= image_tag(photo, id: "image-profile-pet") %>
-          <% else %>
-            <%= image_tag('dog.jpg', id: "image-profile-pet") %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-
-
-
-            <% else %>
-              <!-- Placeholder carousel images -->
-              <div id="carouselExampleControls_<%= index %>" class="carousel slide">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <%= image_tag("dog.jpg", id: "image-profile-pet") %>
+    <div class="user-animals">
+      <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
+      <div class="row mt-5">
+        <% @user.pets.each_with_index do |pet, index| %>
+          <div class="col-md-4">
+            <div class="pet-image-main">
+              <div class="animal-images">
+              <% if pet.photos.attached? %>
+                <div id="carouselExampleControls_<%= index %>" class="carousel slide">
+                  <div class="carousel-inner">
+                    <% pet.photos.each_with_index do |photo, idx| %>
+                      <div class="carousel-item <%= 'active' if idx == 0 %>">
+                        <% if photo.present? %>
+                          <%= image_tag(photo, id: "image-profile-pet") %>
+                        <% else %>
+                          <%= image_tag('dog.jpg', id: "image-profile-pet") %>
+                        <% end %>
+                      </div>
+                    <% end %>
                   </div>
-                  <div class="carousel-item">
-                    <%= image_tag("cat.jpg", id: "image-profile-pet") %>
-                  </div>
-                  <div class="carousel-item">
-                    <%= image_tag("rabbit.jpg", id: "image-profile-pet") %>
-                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
+              <% else %>
+                <!-- Placeholder carousel images -->
+                <div id="carouselExampleControls_<%= index %>" class="carousel slide">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <%= image_tag("dog.jpg", id: "image-profile-pet") %>
+                    </div>
+                    <div class="carousel-item">
+                      <%= image_tag("cat.jpg", id: "image-profile-pet") %>
+                    </div>
+                    <div class="carousel-item">
+                      <%= image_tag("rabbit.jpg", id: "image-profile-pet") %>
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              <% end %>
               </div>
-            <% end %>
+              <div class="animal-info">
+                <p><strong>Name:</strong> <%= pet.name %></p>
+                <p><strong>Species:</strong> <%= pet.species %></p>
+                <p><strong>Breed:</strong> <%= pet.breed %></p>
+              </div>
 
-
+              <!-- Add the Remove Pet button -->
+              <div class= "user-button">
+                <%= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary" %>
+                <%= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+              </div>
+            </div>
           </div>
-          <div class="animal-info">
-            <p><strong>Name:</strong> <%= pet.name %></p>
-            <p><strong>Species:</strong> <%= pet.species %></p>
-            <p><strong>Breed:</strong> <%= pet.breed %></p>
-          </div>
-
-          <!-- Add the Remove Pet button -->
-          <div class= "user-button">
-            <%= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary" %>
-            <%= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
-          </div>
-
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+    <div class="button-add-pet"><%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %></div>
   </div>
-</div>
-
-<div class="button-add-pet"><%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %></div>
-
 
 <%# if @user.adopter? %>
 
 <% else %>
-  <h2>Hi! I'm an adopter</h2>
+  <h1 id="user-greeting">Hello <%= @user.first_name %></h1>
+  <div class="user-card">
+    <div class="user-info">
+      <h3><strong>Name:</strong></h3>
+      <h3><strong>Role:</strong></h3>
+      <h3><strong>Age:</strong></h3>
+      <h3><strong>Email:</strong></h3>
+      <h3><strong>Address:</strong></h3>
+      <h3><strong>About me:</strong></h3>
+    </div>
+    <div class="user-input">
+      <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+      <h3><%= @user.role %></h3>
+      <h3><%= @user.age %></h3>
+      <h3><%= @user.email %></h3>
+      <h3><%= @user.location %></h3>
+      <h3><%= @user.about_me %></h3>
+    </div>
+
+    <div>
+      <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, class: "image-profile-user" %>
+    </div>
+  </div>
+
+  <div class="user-animals">
+    <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
+  </div>
+
+  <div class= "user-button">
+    <%#= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary" %>
+    <%#= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+  </div>
+  <div class="button-add-pet"><%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %></div>
 <% end %>
-
-
-</div>
