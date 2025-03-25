@@ -9,7 +9,8 @@ class PetsController < ApplicationController
 
   def show
     # @user = User.find(params[:user_id])
-    @pet = @user.pets.find(params[:id])
+    # @pet = @user.pets.find(params[:id])
+    @provider = @pet.provider
   end
 
   def new

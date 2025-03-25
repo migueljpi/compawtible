@@ -2,29 +2,73 @@
 
   <%= link_to 'Back to Profile', user_path(@user) %>
 
-  <h1><%= @pet.name %></h1>
+  <div class="row">
 
-  <p><%= @pet.species %></p>
-  <p><%= @pet.breed %></p>
-  <p><%= @pet.location %></p>
-  <p><%= @pet.age %></p>
-  <p><%= @pet.size %></p>
-  <p><%= @pet.gender %></p>
+    <h1 class="my-4"><strong><%= @pet.name %></strong></h1>
 
-  <p><%= @pet.description %></p>
-  <p><%= @pet.activity_level %></p>
+    <div class="col-md-9">
+      <% [
+        ["Species", @pet.species],
+        ["Breed", @pet.breed],
+        ["Location", @pet.location],
+        ["Age (in years)", @pet.age],
+        ["Size", @pet.size],
+        ["Gender", @pet.gender],
+        ["Activity level", @pet.activity_level],
+        ["Description", @pet.description],
+        ["Sociable with animals", @pet.sociable_with_animals],
+        ["Sociable with children", @pet.sociable_with_children],
+        ["Neutered", @pet.neutered],
+        ["Certified", @pet.certified],
+        ["Medical conditions", @pet.medical_conditions],
 
-  <p><%= @pet.neutered.humanize %></p>
-  <p><%= @pet.medical_conditions %></p>
-  <p><%= @pet.sociable_with_animals.humanize %></p>
-  <p><%= @pet.sociable_with_children.humanize %></p>
-  <p><%= @pet.certified.humanize %></p>
+        # ["Provider", link_to("#{@pet.provider.first_name} #{@pet.provider.last_name}", user_path(@pet.provider))]
+        ["Provider", link_to("#{@provider.first_name}", user_path(@provider))]
+      ].each do |label, value| %>
+        <% if value.present? %>
+          <div class="d-flex align-items-start my-2">
+            <div class="col-md-5"><h3><%= label %>:</h3></div>
+            <% if [true, false].include?(value) %>
+              <div class="col-md-7 mb-0"><p><%= value.humanize %></p></div>
+            <% else %>
+              <div class="col-md-7 mb-0"><p><%= value %></p></div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
 
-  <p>Provider: <%= link_to "#{@pet.provider.first_name} #{@pet.provider.last_name}", user_path(@pet.provider) %></p>
+    <!-- Main Pet Photo -->
+    <div class="col-md-3 text-center">
+      <% if @pet.photos.any? %>
+        <%= cl_image_tag @pet.photos.first.key, class: "img-fluid image-pet" %>
+      <% else %>
+        <p>No image available</p>
+      <% end %>
+    </div>
 
-<% @pet.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
-  <%= link_to 'Edit', edit_user_pet_path(@user, @pet), class: "btn btn-primary" %>
-  <%= link_to 'Remove Pet', remove_pet_path(@user, @pet), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+    <!-- Additional Pet Photos -->
+    <% if @pet.photos.any? %>
+    <h3 class="my-3">Photos (<%= @pet.photos.count %>)</h3>
+      <% @pet.photos.each do |photo| %>
+      <div class="col-md-3 my-2">
+        <%= cl_image_tag photo.key, class: "img-fluid image-pet", crop: :fill %>
+      </div>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <% if @pet.provider == current_user %>
+    <div class="my-5">
+        <%= link_to 'Edit', edit_user_pet_path(@user, @pet), class: "btn btn-primary" %>
+        <%= link_to 'Remove Pet', remove_pet_path(@user, @pet), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+    </div>
+
+  <% else %>
+    <div class="my-5">
+      <%= link_to 'Message Provider', "#", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
 </div>
