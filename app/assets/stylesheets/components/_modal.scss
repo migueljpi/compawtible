@@ -1,7 +1,6 @@
 .modal {
   position: fixed !important; /* Ensure the modal is in the correct stacking context */
   z-index: 1060 !important; /* Ensure the modal is above the navbar */
-  pointer-events: auto !important;
 }
 
 .modal-backdrop {
@@ -11,7 +10,7 @@
 
 .modal-content {
   position: relative !important; /* Ensure the modal content is positioned within the stacking context */
-  // z-index: 1060 !important; /* Ensure the modal content is above the backdrop */
+  z-index: 1060 !important; /* Ensure the modal content is above the backdrop */
 
 
   margin: 0 auto !important;
