@@ -13,12 +13,21 @@ export default class extends Controller {
         this.showOutput();
       }
     });
+
+    // On page load, check if we should show the div
+    document.addEventListener("turbo:load", () => {
+      const shouldShow = localStorage.getItem("showOutput");
+      if (shouldShow === "true") {
+        this.showOutput();
+      }
+    });
   }
 
   showOutput() {
     console.log("OutputController showOutput");
     if (this.hasOutputThreeTarget) {
       this.outputThreeTarget.classList.remove("d-none");
+      localStorage.setItem("showOutput", "true"); // Store state
     } else {
       console.error("Output target not found!");
     }
@@ -28,6 +37,7 @@ export default class extends Controller {
     console.log("OutputController hideOutput");
     if (this.hasOutputThreeTarget) {
       this.outputThreeTarget.classList.add("d-none");
+      localStorage.setItem("showOutput", "false"); // Store state
     } else {
       console.error("Output target not found!");
     }
