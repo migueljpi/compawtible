@@ -32,7 +32,7 @@
             <% end %>
           <% end %>
         <div class="d-flex justify-content-center mt-4">
-          <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn-secondary" %>
+          <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn-secondary", data: { turbo: "false" } %>
         </div>
         <% else %>
           <p>This is where your matches will show up</p>
