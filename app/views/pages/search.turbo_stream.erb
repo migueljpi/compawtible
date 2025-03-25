@@ -1,9 +1,0 @@
-<%#= turbo_stream.replace "output" do %>
-  <%#= render "output", prompt: @prompt, output: @output %>
-<%# end %>
-
-<%= turbo_stream.replace "output-three" do %>
-  <div id="output-three">
-    <%= render "output_three", best_matches: @best_matches.first(3) %>
-  </div>
-<% end %>
