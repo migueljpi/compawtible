@@ -40,10 +40,8 @@ class PagesController < ApplicationController
             @prompt.update(best_matches: ids) # Update the best_matches column with the IDs
             @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
 
-            respond_to do |format|
-              format.turbo_stream # Handle Turbo Stream updates
-              format.html { redirect_to search_path(prompt_id: @prompt.id) }
-            end
+            # Render the Turbo Frame content
+            render turbo_frame: "output-three", partial: "pages/output_three", locals: { best_matches: @best_matches&.first(3) }
           else
             flash.now[:alert] = "There was an error saving the data."
             render :search, status: :unprocessable_entity

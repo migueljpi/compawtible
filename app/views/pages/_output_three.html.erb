@@ -1,40 +1,43 @@
-
-<div class="top-three">
-  <div class="d-flex justify-content-center">
-    <h2>Here are the top picks!</h2>
-  </div>
-  <div class="row d-flex justify-content- mt-2">
-    <% if best_matches.present? %>
-      <% if best_matches.count == 0 %>
-        <p>Sorry, no matches found.</p>
-      <% else %>
-        <% best_matches.each do |pet| %>
-          <div class="col-md-4">
-            <div class="pet-image-main">
-              <div class="animal-images">
-                <% if pet.photos.attached? %>
-                  <%= link_to user_pet_path(pet.provider, pet) do %>
-                    <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
-                  <% end %>
-                <% else %>
-                  <%= link_to user_pet_path(pet.provider, pet) do %>
-                    <%= image_tag "dog.jpg", id: "image-profile-pet" %>
-                  <% end %>
-                <% end %>
-                <div class="animal-info">
-                  <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
-                  <p><%= pet.description %></p>
+<turbo-frame id="output-three" data-controller="output">
+  <div data-output-target="outputThree" class="d-none">
+    <div class="top-three">
+      <div class="d-flex justify-content-center">
+        <h2>Here are the top picks!</h2>
+      </div>
+      <div class="row d-flex justify-content- mt-2">
+        <% if best_matches.present? %>
+          <% if best_matches.count == 0 %>
+            <p>Sorry, no matches found.</p>
+          <% else %>
+            <% best_matches.each do |pet| %>
+              <div class="col-md-4">
+                <div class="pet-image-main">
+                  <div class="animal-images">
+                    <% if pet.photos.attached? %>
+                      <%= link_to user_pet_path(pet.provider, pet) do %>
+                        <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to user_pet_path(pet.provider, pet) do %>
+                        <%= image_tag "dog.jpg", id: "image-profile-pet" %>
+                      <% end %>
+                    <% end %>
+                    <div class="animal-info">
+                      <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
+                      <p><%= pet.description %></p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            <% end %>
+          <% end %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn-secondary" %>
+        </div>
+        <% else %>
+          <p>This is where your matches will show up</p>
         <% end %>
-      <% end %>
-    <div class="d-flex justify-content-center mt-4">
-      <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn-secondary" %>
+      </div>
     </div>
-    <% else %>
-      <p>This is where your matches will show up</p>
-    <% end %>
   </div>
-</div>
+</turbo-frame>
