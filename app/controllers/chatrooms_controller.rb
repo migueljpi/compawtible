@@ -1,13 +1,17 @@
 class ChatroomsController < ApplicationController
-  before_action :set_chatroom, only: [:show]
+  before_action :set_user, only: [:index]
 
-  def show
-    @messages = @chatroom.messages.includes(:user)
+  def index
+    @chatrooms = current_user.chatrooms
   end
+
+  # def user_messages
+
+  # end
 
   private
 
-  def set_chatroom
-    @chatroom = Chatroom.find(params[:id])
+  def set_user
+    @user = User.find(params[:user_id])
   end
 end
