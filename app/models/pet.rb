@@ -66,6 +66,7 @@ class Pet < ApplicationRecord
   validates :name, presence: true
   validates :species, presence: true, inclusion: { in: SPECIES }
   validates :breed, presence: true
+  validates :location, presence: true
   # validates :breed, presence: true
   # validates :description, presence: true, unless: :skip_description_validations
   validates :description, presence: true

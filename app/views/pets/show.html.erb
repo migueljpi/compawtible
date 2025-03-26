@@ -26,13 +26,17 @@
         ["Provider", link_to("#{@provider.first_name}", user_path(@provider))]
       ].each do |label, value| %>
         <% if value.present? %>
-          <div class="d-flex align-items-start my-2">
-            <div class="col-md-5"><h3><%= label %>:</h3></div>
-            <% if [true, false].include?(value) %>
-              <div class="col-md-7 mb-0"><p><%= value.humanize %></p></div>
-            <% else %>
-              <div class="col-md-7 mb-0"><p><%= value %></p></div>
-            <% end %>
+          <div class="row my-2">
+            <div class="col-md-5 align-self-start">
+              <h3 class="mb-0 fw-semibold"><%= label %>:</h3>
+            </div>
+            <div class="col-md-7">
+              <% if [true, false].include?(value) %>
+                <p class="mb-0"><%= value.humanize %></p>
+              <% else %>
+                <p class="mb-0"><%= value %></p>
+              <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>
@@ -45,14 +49,22 @@
       <% else %>
         <p>No image available</p>
       <% end %>
+
+      <h3 class="fw-semibold">Map</h3>
+      <div class="map-pet-show"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+      </div>
     </div>
+
 
     <!-- Additional Pet Photos -->
     <% if @pet.photos.any? %>
-    <h3 class="my-3">Photos (<%= @pet.photos.count %>)</h3>
+    <h3 class="my-3 fw-semibold">Photos (<%= @pet.photos.count %>)</h3>
       <% @pet.photos.each do |photo| %>
-      <div class="col-md-3 my-2">
-        <%= cl_image_tag photo.key, class: "img-fluid image-pet", crop: :fill %>
+      <div class="col-md-4 my-2">
+        <%= cl_image_tag photo.key, class: "img-fluid image-pet" %>
       </div>
       <% end %>
     <% end %>
