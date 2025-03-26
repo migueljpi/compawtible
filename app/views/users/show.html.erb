@@ -2,6 +2,7 @@
 
 <% if @user.provider? %>
   <h1 id="user-greeting">Hello <%= @user.first_name %></h1>
+  <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
   <div class="user-card">
     <div class="user-info">
       <h3><strong>Name:</strong></h3>
@@ -112,6 +113,7 @@
 
 <% else %>
   <h1 id="user-greeting">Hello <%= @user.first_name %></h1>
+  <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
   <div class="user-card">
     <div class="user-info">
       <h3><strong>Name:</strong></h3>
