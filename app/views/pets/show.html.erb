@@ -49,11 +49,19 @@
       <% else %>
         <p>No image available</p>
       <% end %>
+
+      <h3 class="fw-semibold">Map</h3>
+      <div class="map-pet-show"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+      </div>
     </div>
+
 
     <!-- Additional Pet Photos -->
     <% if @pet.photos.any? %>
-    <h3 class="my-3">Photos (<%= @pet.photos.count %>)</h3>
+    <h3 class="my-3 fw-semibold">Photos (<%= @pet.photos.count %>)</h3>
       <% @pet.photos.each do |photo| %>
       <div class="col-md-4 my-2">
         <%= cl_image_tag photo.key, class: "img-fluid image-pet" %>
