@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :interacted_pets, through: :interactions, source: :pet
   has_one_attached :photo
   has_many :messages
-  has_many :chatrooms, through: :messages
+  has_many :chatrooms, -> { distinct }, through: :messages
 
   enum :role, { adopter: "adopter", provider: "provider" }, validate: true
 

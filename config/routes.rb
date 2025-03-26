@@ -14,8 +14,12 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :pets, only: [:show, :new, :create, :edit, :update, :destroy]
-    resources :chatrooms, only: [:create, :update, :show] do
-      resources :messages, only: [:show]
+    resources :chatrooms, only: [:index, :create, :update] do
+      resources :messages, only: [:create, :update] do
+        collection do
+          get :chatroom_messages
+        end
+      end
     end
   end
 
