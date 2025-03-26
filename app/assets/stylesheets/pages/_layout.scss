@@ -23,13 +23,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  z-index: -1; // This will make the image to be behind the content
+  z-index: -1;
   flex-grow: 1;
 }
 
 .container {
   position: relative;
   z-index: 1;
+  padding-bottom: 40px;
 }
 
 .main-content {
