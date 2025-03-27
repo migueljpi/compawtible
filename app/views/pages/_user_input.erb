@@ -4,8 +4,7 @@
       <div id="location" class="md-5 col-5">
         <% if current_user %>
           <div>
-            <%= label_tag :location, "Where should we search for your pet?" %>
-            <%= text_field_tag :location, current_user.location, class: "form-control small-input" %>
+            <%= text_field_tag :location, current_user.location, placeholder: "Where should we search for your pet?", class: "form-control small-input" %>
           </div>
         <% else %>
           <div>
