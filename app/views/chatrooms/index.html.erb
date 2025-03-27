@@ -20,20 +20,18 @@
     </ul>
   </div>
 
-  <div class="chat-main" data-chatroom-subscription-target="messages">
+  <div class="chat-main" >
     <div class="chat-header">
       <%# <img src="avatar4.jpg" alt="Kevin Miller"> %>
-      <%# <h3><%= other_user_name_from_chatroom(current_user.chatrooms) %></h3> %>
+      <%# <h3><%= other_user_name_from_chatroom(current_user.chatrooms) %></h3>
     </div>
-    <div class="chat-messages">
-      <p>New message</p>
-      <%# <% @messages.each do |message| %>
-        <%# <p><%= message.content.present? ? message.content : "No content" %></p>
-      <%# <% end %>
+    <div class="chat-messages" data-chatroom-subscription-target="messages">
     </div>
     <div class="chat-input">
       <input type="text" placeholder="Type here..." data-chatroom-subscription-target="input">
-      <button data-action="click->chatroom-subscription#sendMessage"><i class="icon-send"></i></button>
+      <button type="submit" data-action="click->chatroom-subscription#sendMessage">
+      <i class="icon-send"></i>
+      </button>
     </div>
   </div>
 </div>
