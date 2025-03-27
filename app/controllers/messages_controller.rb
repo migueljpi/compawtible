@@ -10,22 +10,29 @@ class MessagesController < ApplicationController
     end
   end
 
-  # def create
-  #   @chatroom = Chatroom.find(params[:booking_id])
-  #   @message = Message.new(message_params)
-  #   @message.chatroom = @chatroom
-  #   @message.user = current_user
-  #   if @message.save
-  #     redirect_to chatroom_path(@chatroom)
-  #   else
-  #     render "chatrooms/show", status: :unprocessable_entity
-  #   end
-  # end
-  #
-  #
+  def create # rubocop:disable Metrics/MethodLength
+    @chatroom = Chatroom.find(params[:chatroom_id])
+    @message = @chatroom.messages.new(message_params)
+    @message.user = current_user
+
+    if @message.save
+      respond_to do |format|
+        format.json { render json: @message }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: @message.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_chatroom
     @chatroom = Chatroom.find(params[:chatroom_id])
+  end
+
+  def message_params
+    params.require(:message).permit(:content)
   end
 end

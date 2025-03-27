@@ -3,11 +3,9 @@ class ChatroomsController < ApplicationController
 
   def index
     @chatrooms = current_user.chatrooms
+    @chatroom = @chatrooms.find_by(id: params[:chatroom_id])
+    @message = @chatroom.messages.new if @chatroom
   end
-
-  # def user_messages
-
-  # end
 
   private
 
