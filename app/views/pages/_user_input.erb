@@ -1,23 +1,17 @@
 <%= simple_form_for @prompt, url: search_path, method: :post, data: { turbo_frame: "output-three", action: "turbo:submit-end->output#showOutput" } do |f| %>
   <div class="row">
-    <div class="d-flex justify-content-between">
-      <div id="location" class="md-5 col-5">
-        <% if current_user %>
-          <div>
-            <%= text_field_tag :location, current_user.location, placeholder: "Where should we search for your pet?", class: "form-control small-input" %>
-          </div>
-        <% else %>
-          <div>
-            <%= label_tag :location, "Location" %>
-            <%= text_field_tag :location, nil, class: "form-control small-input" %>
-          </div>
-        <% end %>
-      </div>
-      <div data-controller="radius" class="col-6">
-        <span id="radius-value" class="" data-radius-target="output">100 km</span>
+    <div class="col-md-4" id="location">
+      <%= text_field_tag :location, current_user.location, placeholder: "Where should we search for your pet?", class: "form-control small-input" %>
+    </div>
+    <div class="col-md-2"></div> <!-- Empty column for gap -->
+    <div class="col-md-6 slider-container d-flex justify-content-center" data-controller="radius" id="radius">
+      <span id="radius-value" class="radius-text" data-radius-target="output">100 km</span>
+      <div class="slider">
         <input step="50" type="range" id="radius-slider" name="radius" min="50" max="500" value="100" class="thick-slider form-range" data-radius-target="slider" data-action="input->radius#update">
       </div>
     </div>
+    <%# <div class="col-md-1"></div> <!-- Empty column for gap --> %>
+
   </div>
 
   <div>
