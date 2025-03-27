@@ -5,6 +5,7 @@
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
+  // display: block !important;
 }
 
 .modal-backdrop {
@@ -45,5 +46,10 @@
 .modal-footer {
   border-top: none !important;
 }
+
+// .show-modal {
+//   display: block !important;
+//   opacity: 1 !important;
+// }
 
 // end of search modal
