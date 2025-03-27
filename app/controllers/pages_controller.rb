@@ -41,6 +41,7 @@ class PagesController < ApplicationController
             @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
 
             # Render the Turbo Frame content
+            sleep(5)
             render turbo_frame: "output-three", partial: "pages/output_three", locals: { best_matches: @best_matches&.first(3) }
           else
             flash.now[:alert] = "There was an error saving the data."

@@ -7,5 +7,5 @@
   <%= render "user_input" %>
 </div>
 
-
-      <%= render "output_three", best_matches: @best_matches&.first(3) %>
+<%= render "loading" %>
+<%= render "output_three", best_matches: @best_matches&.first(3) %>

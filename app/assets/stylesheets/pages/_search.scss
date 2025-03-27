@@ -16,13 +16,40 @@
   margin-bottom: 50px;
 }
 
+.slider-container {
+  background-color: $beije-light;
+  border: 2px solid #AFAEAE;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  display: flex; /* Use Flexbox for layout */
+  align-items: center; /* Vertically align items */
+  justify-content: space-between; /* Ensure proper spacing */
+
+}
+.slider {
+  flex: 1; /* Allow the slider to take up the remaining space */
+
+  // display: flex;
+  // // justify-content: space-between;
+  // align-items: center;
+}
+
 .thick-slider {
+  // background: #007bff;
   height: 10px;
   // background: #d3d3d3;
   border-radius: 5px;
   outline: none;
   -webkit-appearance: none;
   // padding-left: 20px;
+  width: 100% !important;
+}
+
+.thick-slider::-webkit-slider-runnable-track {
+  background: $orange-light; /* Color of the slider bar */
+  height: 10px;
+  border-radius: 5px;
 }
 
 .thick-slider::-webkit-slider-thumb {
@@ -33,6 +60,11 @@
   background: #007bff; /* Color of the thumb */
   border-radius: 50%; /* Make the thumb circular */
   cursor: pointer; /* Change the cursor to a pointer */
+}
+
+.radius-text {
+  flex: 0 0 auto;
+  padding-right: 15px;
 }
 
 // .thick-slider::-moz-range-thumb {
