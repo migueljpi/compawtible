@@ -6,6 +6,12 @@ export default class extends Controller {
   connect() {
     console.log("OutputController connected to:", this.element);
 
+    const promptId = this.getRailsParam("prompt_id");
+      if (promptId) {
+        console.log("✅ Prompt ID detected:", promptId);
+        this.showOutput();
+      }
+
     document.addEventListener("turbo:frame-load", (event) => {
       if (event.target.id === "output-three") {
         console.log("showing output modal");
@@ -48,4 +54,9 @@ export default class extends Controller {
     }
   }
 
+
+  getRailsParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
 }
