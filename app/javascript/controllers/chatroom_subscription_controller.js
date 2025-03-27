@@ -10,9 +10,6 @@ export default class extends Controller {
     this.userId = this.element.dataset.userId;
 
   }
-  // getUserId() {
-  //   return this.userId = document.body.dataset.userId;
-  // }
 
   selectChatroom(event) {
     this.chatroomId = event.currentTarget.dataset.chatroomId;
@@ -39,25 +36,35 @@ export default class extends Controller {
       .catch(error => console.error("Error loading messages:", error));
   }
 
-  // sendMessage(event) {
-  //   const input = event.target.closest('.chat-input').querySelector('input')
-  //   const messageContent = input.value
+  sendMessage(event) {
+    event.preventDefault();
 
-  //   if (messageContent.trim()) {
-  //     this.subscription.send({ content: messageContent })
-  //     input.value = ""  // Clear the input after sending the message
-  //   }
-  // }
+    if (!this.chatroomId) {
+      console.error("Chatroom ID is missing!");
+      return;
+    }
 
-  // received(data) {
-  //   // Dynamically append the new message to the chat
-  //   const chatMessagesTarget = this.messagesTarget
-  //   const newMessage = document.createElement('div')
-  //   newMessage.classList.add('message', data.user == this.currentUser ? 'sent' : 'received')
-  //   newMessage.textContent = data.content
+    const input = this.inputTarget;
+    const content = input.value.trim();
 
-  //   chatMessagesTarget.appendChild(newMessage)
-  //   chatMessagesTarget.scrollTop = chatMessagesTarget.scrollHeight
-  // }
+    if (!content) return;
+
+    fetch(`/users/${this.userId}/chatrooms/${this.chatroomId}/messages`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
+      },
+      body: JSON.stringify({ message: { content: content} }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.messagesTarget.insertAdjacentHTML("beforeend", `
+        <div class="message sent"><p>${data.content}</p></div>
+      `);
+      input.value = "";
+    })
+    .catch(error => console.error("Error sending message:", error));
+  }
 
 }
