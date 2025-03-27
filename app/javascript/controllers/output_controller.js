@@ -1,70 +1,75 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["outputThree"];
+  static targets = ["outputThree", "loadingModal"];
 
   connect() {
-    console.log("OutputController connected");
+    console.log("✅ OutputController connected");
 
-    // Get the prompt ID and output attribute from the Turbo Frame data attributes
-    const promptId = this.element.dataset.outputPromptId;
-    const hasOutput = !!this.element.dataset.outputHasOutput; // Check if the output attribute exists
-
-    // Listen for Turbo Frame load (triggers when Turbo replaces the frame)
-    document.addEventListener("turbo:frame-load", (event) => {
-      if (event.target.id === "output-three" && hasOutput) {
-        console.log("Turbo Frame updated, showing output...");
-        this.showOutput();
-      }
+    document.addEventListener("turbo:submit-start", () => {
+      console.log("🚀 Form submitted, showing loading modal...");
+      this.showLoadingModal();
     });
 
-    // On page load, check if we should show the modal
-    document.addEventListener("turbo:load", () => {
-      if (promptId && hasOutput) {
-        console.log("Prompt with output detected, showing output...");
+    document.addEventListener("turbo:frame-load", (event) => {
+      if (event.target.id === "output-three") {
+        console.log("✅ Data received, hiding loading modal...");
+        this.hideLoadingModal();
         this.showOutput();
-      } else {
-        console.log("No prompt with output detected, keeping modal hidden.");
       }
     });
   }
 
+  showLoadingModal() {
+    if (this.hasLoadingModalTarget) {
+      this.loadingModalTarget.classList.remove("d-none");
 
+      let modal = bootstrap.Modal.getInstance(this.loadingModalTarget);
+      if (!modal) {
+        modal = new bootstrap.Modal(this.loadingModalTarget, { backdrop: false, keyboard: false });
+      }
+      modal.show();
+    } else {
+      console.error("❌ Loading modal not found!");
+    }
+  }
+
+  hideLoadingModal() {
+    if (this.hasLoadingModalTarget) {
+      let modal = bootstrap.Modal.getInstance(this.loadingModalTarget);
+      if (modal) {
+        modal.hide();
+      }
+      setTimeout(() => {
+        this.loadingModalTarget.classList.add("d-none");
+      }, 300);
+    }
+  }
 
   showOutput() {
-    console.log("OutputController showOutput");
-
+    console.log("🔍 Showing main output modal...");
     if (this.hasOutputThreeTarget) {
-      setTimeout(() => {
-        this.outputThreeTarget.classList.remove("d-none");
+      this.outputThreeTarget.classList.remove("d-none");
 
-        let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
-        if (!modal) {
-          modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: false, focus: false });
-        }
-        modal.show();
-
-        console.log("Modal should be visible now");
-      }, 100);
+      let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
+      if (!modal) {
+        modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: false, focus: false });
+      }
+      modal.show();
     } else {
-      console.error("Output target not found!");
+      console.error("❌ Output modal not found!");
     }
   }
 
   hideOutput() {
-    console.log("OutputController hideOutput");
-
     if (this.hasOutputThreeTarget) {
-      const modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
-      modal.hide(); // Hide the modal
-
+      let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
+      if (modal) {
+        modal.hide();
+      }
       setTimeout(() => {
-        this.outputThreeTarget.classList.add("d-none"); // ADD d-none after modal is hidden
-      }, 300); // Delay slightly to let Bootstrap animation complete
-
-      localStorage.setItem("showOutput", "false"); // Store state in localStorage
-    } else {
-      console.error("Output target not found!");
+        this.outputThreeTarget.classList.add("d-none");
+      }, 300);
     }
   }
 }
