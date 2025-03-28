@@ -1,10 +1,12 @@
 <div data-controller="loading" id="loading_modal">
   <div data-loading-target="loadingModal" class="modal fade d-none" tabindex="-1" aria-labelledby="loadingModalLabel" inert>
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-retry" role="document">
       <div class="modal-content text-center p-4">
-        <h3>Finding your perfect pet...</h3>
-        <div class="spinner-border text-primary mt-3" role="status">
-          <span>Loading...</span>
+        <div class="modal-header-retry">
+          <h3>Finding your perfect pet...</h3>
+        </div>
+        <div>
+          <%= image_tag("loading.gif", width: 400, height: 400) %>
         </div>
       </div>
     </div>
