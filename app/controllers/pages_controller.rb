@@ -6,11 +6,16 @@ class PagesController < ApplicationController
 
   def search
     if params[:prompt_id].present?
-      # Case 1: A prompt_id is provided, retrieve the existing prompt
       @prompt = Prompt.find(params[:prompt_id])
-      @output = @prompt.output # Retrieve the stored output
-      ids = JSON.parse(@output) if @output.present?
-      @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact if ids.present?
+      @output = @prompt.generate_output
+
+      if @output.nil?
+        @retry = true # Flag to indicate invalid response
+        @best_matches = [] # No matches to display
+      else
+        ids = JSON.parse(@output)
+        @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
+      end
     else
       # Case 2: No prompt_id is provided, initialize a new prompt
       @prompt = Prompt.new
@@ -31,14 +36,18 @@ class PagesController < ApplicationController
 
           if @prompt.save
             @output = @prompt.generate_output # Explicitly generate the output
-            Rails.logger.info("Prompt saved with output: " + @output)
-            ids = JSON.parse(@output) # Parse the IDs
-            @prompt.update(best_matches: ids) # Update the best_matches column with the IDs
-            @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
+
+            if @output.nil?
+              @retry = true # Flag to indicate invalid response
+              @best_matches = [] # No matches to display
+            else
+              Rails.logger.info("Prompt saved with output: " + @output)
+              ids = JSON.parse(@output) # Parse the IDs
+              @prompt.update(best_matches: ids) # Update the best_matches column with the IDs
+              @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
+            end
 
             # Render the Turbo Frame content
-            sleep(3)
-
             render turbo_frame: "output-three", partial: "pages/output_three", locals: { best_matches: @best_matches }
           else
             flash.now[:alert] = "There was an error saving the data."

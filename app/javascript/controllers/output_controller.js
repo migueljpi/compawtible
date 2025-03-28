@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = ["outputThree"];
 
   connect() {
+    console.log("✅ OutputController connected after navigation:", this.element);
     console.log("OutputController connected to:", this.element);
 
     const promptId = this.getRailsParam("prompt_id");
@@ -13,6 +14,7 @@ export default class extends Controller {
       }
 
     document.addEventListener("turbo:frame-load", (event) => {
+      console.log("🚀 Turbo frame loaded:", event.target.id);
       if (event.target.id === "output-three") {
         console.log("showing output modal");
         this.showOutput();
@@ -58,5 +60,9 @@ export default class extends Controller {
   getRailsParam(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
+  }
+
+  disconnect() {
+    console.log("❌ OutputController disconnected from:", this.element);
   }
 }
