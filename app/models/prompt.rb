@@ -48,8 +48,8 @@ class Prompt < ApplicationRecord
     rescue => e
       retries += 1
       puts "⚠️ Invalid response format. Retrying... (Attempt #{retries}/#{max_retries})"
-      sleep(5)
-      retry if retries <= max_retries
+      sleep(2)
+      retry if retries < max_retries
 
       # If all retries fail, return a placeholder output for rendering the modal
       puts "❌ Failed after #{max_retries} retries: #{e.message}"

@@ -19,7 +19,7 @@ export default class extends Controller {
     });
   }
 
-  // We can remove event listeners to prevent duplicates
+  // We can remove event listeners to prevent duplicates.
   disconnect() {
     document.removeEventListener("turbo:submit-start", this.showLoadingModal());
     document.removeEventListener("turbo:frame-load", this.hideLoadingModal());
