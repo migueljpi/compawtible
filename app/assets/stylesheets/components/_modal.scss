@@ -29,27 +29,47 @@
 }
 
 .modal-body {
-  padding: 0px !important;
+  // padding: 0px !important;
   // height: 100% !important;
   // width: 1000px !important;
 }
 
 .modal-dialog {
-  max-width: 1100px !important;
+  max-width: 1300px;
   width: 100% !important;
 }
 
 .modal-header {
+  margin-top: 25px;
   border-bottom: none !important;
+}
+.modal-header-retry {
+  border-bottom: none !important;
+  margin: 25px;
 }
 
 .modal-footer {
   border-top: none !important;
 }
 
+.modal-subheader {
+  margin: 15px !important;
+}
+
 // .show-modal {
 //   display: block !important;
 //   opacity: 1 !important;
 // }
+
+.pet-three-row {
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.modal-retry {
+  max-width: fit-content !important;
+  width: auto !important;
+  margin: auto !important;
+}
 
 // end of search modal
