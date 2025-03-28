@@ -8,13 +8,13 @@ export default class extends Controller {
 
     document.addEventListener("turbo:submit-start", () => { //triggers after submit
       console.log(":rocket: Form submitted, showing loading modal...");
-      this.showLoadingModal.bind(this); // We can add bind to make sure it happens once
+      this.showLoadingModal(); // We can add bind to make sure it happens once
     });
 
     document.addEventListener("turbo:frame-load", (event) => { //triggers after new content is loaded
       if (event.target.id === "output-three") { // output-three is the new content
         console.log(":white_check_mark: Data received, hiding loading modal...");
-        this.hideLoadingModal.bind(this); // Same here
+        this.hideLoadingModal(); // Same here
       }
     });
   }
@@ -26,6 +26,7 @@ export default class extends Controller {
   }
 
   showLoadingModal() {
+    console.log("Showing loading modal...");
     if (this.loadingModalTarget) {
       this.loadingModalTarget.classList.remove("d-none");
 
@@ -47,13 +48,13 @@ export default class extends Controller {
         // <start>
         this.loadingModalTarget.addEventListener("hidden.bs.modal", () => { // This is triggered by finishing modal.hide()
           this.loadingModalTarget.classList.add("d-none");
-        }, { once: true });
+      },{ once: true });
         // <end>
         modal.hide(); //bootstrap will hide modal
       }
-      setTimeout(() => { //set timeout to allow bootstrap to finish hiding modal before adding "d-none"
-        this.loadingModalTarget.classList.add("d-none");
-      }, 300);
+      // setTimeout(() => { //set timeout to allow bootstrap to finish hiding modal before adding "d-none"
+      //   this.loadingModalTarget.classList.add("d-none");
+      // }, 300);
     }
   }
 }

@@ -5,7 +5,6 @@ export default class extends Controller {
 
   connect() {
     console.log("✅ OutputController connected after navigation:", this.element);
-    console.log("OutputController connected to:", this.element);
 
     const promptId = this.getRailsParam("prompt_id");
       if (promptId) {
@@ -22,8 +21,12 @@ export default class extends Controller {
     });
   }
 
+  disconnect() {
+    document.removeEventListener("turbo:frame-load", this.hideOutput());
+  }
+
+
   showOutput() {
-    console.log("Showing main output modal...");
     console.log("OutputThreeTarget:", this.outputThreeTarget);
 
     if (this.outputThreeTarget) {
@@ -31,7 +34,6 @@ export default class extends Controller {
 
       let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
       if (!modal) {
-        console.log("!!!!!!!!!Creating new modal instance");
         modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: false, focus: true });
         console.log("Modal instance created:", modal);
       }
@@ -48,11 +50,16 @@ export default class extends Controller {
     if (this.outputThreeTarget) {
       let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
       if (modal) {
+        //We can try to replace settimeout with this to make sure the event happens only once
+        // <start>
+        this.outputThreeTarget.addEventListener("hidden.bs.modal", () => { // This is triggered by finishing modal.hide()
+          this.outputThreeTarget.classList.add("d-none");
+      },{ once: true });
         modal.hide();
+      // setTimeout(() => {
+      //   this.this.outputThreeTarget.classList.add("d-none");
+      // }, 300);
       }
-      setTimeout(() => {
-        this.this.outputThreeTarget.classList.add("d-none");
-      }, 300);
     }
   }
 
