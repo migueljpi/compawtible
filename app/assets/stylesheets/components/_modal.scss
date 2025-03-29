@@ -1,25 +1,17 @@
 .modal {
   position: fixed !important;
-  z-index: 99999 !important; /* Much higher z-index */
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
+  // z-index: 99999 !important; /* Much higher z-index */
   // display: block !important;
 }
 
 .modal-backdrop {
   position: fixed !important;
-  z-index: 99998 !important; /* Just below modal */
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
+  // z-index: 99998 !important; /* Just below modal */
 }
 
 .modal-content {
   position: relative !important;
-  z-index: 100000 !important; /* Above modal */
+  // z-index: 100000 !important;
   margin: 0 auto !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
   padding: 5px !important;
