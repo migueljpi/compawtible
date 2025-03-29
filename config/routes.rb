@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :pets, only: [:show, :new, :create, :edit, :update, :destroy] do
+      resources :chatrooms, only: [:create]
       collection do
         post :update_breeds
       end
