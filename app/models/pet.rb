@@ -1,26 +1,27 @@
 class Pet < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
-  SPECIES = {
+
+  BREEDS = {
     "Dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Poodle", "Bulldog",
-              "Beagle", "Chihuahua", "Dachshund", "Siberian Husky", "Boxer", "Doberman", "Shih Tzu", "Border Collie", "Great Dane", "Rottweiler", "Cocker Spaniel", "Pomeranian", "Maltese", "Australian Shepherd", "Other"],
+              "Beagle", "Chihuahua", "Dachshund", "Siberian Husky", "Boxer", "Doberman", "Shih Tzu", "Border Collie",
+              "Great Dane", "Rottweiler", "Cocker Spaniel", "Pomeranian", "Maltese", "Australian Shepherd", "Other"],
     "Cat" => ["Siamese", "Persian", "Maine Coon", "Bengal", "Ragdoll", "British Shorthair", "Sphynx", "Abyssinian",
-              "Scottish Fold", "Norwegian Forest Cat", "Russian Blue", "Birman", "Savannah", "Oriental Shorthair", "Turkish Angora", "Other"],
+              "Scottish Fold", "Norwegian Forest Cat", "Russian Blue", "Birman", "Savannah", "Oriental Shorthair",
+              "Turkish Angora", "Other"],
     "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Flemish Giant", "Lionhead", "Rex", "Mini Lop", "English Angora",
-                 "French Lop", "Dutch", "Harlequin", "Other"],
+                "French Lop", "Dutch", "Harlequin", "Other"],
     "Hamster" => ["Syrian Hamster", "Dwarf Campbell Russian Hamster", "Dwarf Winter White Russian Hamster",
                   "Roborovski Hamster", "Chinese Hamster", "Other"],
-    "Guinea Pig" => ["American", "Abyssinian", "Peruvian", "Teddy", "Silkie", "Texel", "Himalayan", "Baldwin", "Other"],
+    "Guinea pig" => ["American", "Abyssinian", "Peruvian", "Teddy", "Silkie", "Texel", "Himalayan", "Baldwin", "Other"],
     "Ferret" => ["Standard", "Albino", "Sable", "Black Sable", "Chocolate", "Cinnamon", "Champagne", "Other"],
     "Bird" => ["Canary", "Finch", "Budgerigar", "Cockatiel", "Lovebird", "Dove", "Pigeon", "Other"],
     "Turtle" => ["Red-Eared Slider", "Box Turtle", "Painted Turtle", "Musk Turtle", "Wood Turtle", "Other"],
-    "Fish" => ["Betta", "Goldfish", "Guppy", "Tetra", "Angelfish", "Cichlid", "Molly", "Platy", "Catfish", "Koi",
-               "Other"],
+    "Fish" => ["Betta", "Goldfish", "Guppy", "Tetra", "Angelfish", "Cichlid", "Molly", "Platy", "Catfish", "Koi", "Other"],
     "Mouse" => ["Fancy Mouse", "Hairless Mouse", "Other"],
     "Rat" => ["Dumbo Rat", "Standard Rat", "Hairless Rat", "Other"],
     "Chinchilla" => ["Standard Gray", "Black Velvet", "Beige", "White", "Other"],
-    "Lizard" => ["Bearded Dragon", "Leopard Gecko", "Crested Gecko", "Green Iguana", "Blue-Tongued Skink", "Tegu",
-                 "Other"],
+    "Lizard" => ["Bearded Dragon", "Leopard Gecko", "Crested Gecko", "Green Iguana", "Blue-Tongued Skink", "Tegu", "Other"],
     "Tarantula" => ["Mexican Red Knee", "Chilean Rose", "Goliath Birdeater", "Pink Toe", "Other"],
     "Frog" => ["White’s Tree Frog", "Poison Dart Frog", "Pacman Frog", "African Clawed Frog", "Other"],
     "Goat" => ["Nubian", "Pygmy", "Boer", "Alpine", "Saanen", "Toggenburg", "Other"],
@@ -35,35 +36,19 @@ class Pet < ApplicationRecord
     "Alpaca" => ["Huacaya", "Suri", "Other"],
     "Parrot" => ["Macaw", "African Grey", "Cockatoo", "Amazon", "Eclectus", "Conure", "Parakeet", "Other"],
     "Other" => ["Other"]
-  }
+  }.freeze
 
-  SIZE = ["Small", "Medium", "Large"]
-  ACTIVITY_LEVEL = ["Low", "Moderate", "High"]
-  GENDER = ["Male", "Female"]
+  SPECIES = BREEDS.keys.freeze
 
-  validates :species, presence: true, inclusion: { in: SPECIES.keys }
-  validates :breed, presence: true
-  validate :breed_matches_species
-
-  def breed_matches_species
-    if species.blank? || breed.blank?
-      errors.add(:base, "Species and breed must be provided")
-      return
-    end
-
-    unless SPECIES[species]&.include?(breed)
-      errors.add(:breed, "is not a valid breed for the selected species")
-    end
-  end
+  SIZE = ["Small", "Medium", "Large"].freeze
+  ACTIVITY_LEVEL = ["Low", "Moderate", "High"].freeze
+  GENDER = ["Male", "Female"].freeze
 
   belongs_to :provider, class_name: 'User'
   has_many :interactions, dependent: :destroy
   has_one :adopters, through: :interactions, source: :user
-  validates :name, presence: true
-  validates :description, presence: true
 
-
-# photos
+  # photos
   # has_one_attached :photo
   has_many_attached :photos
   # validate :limit_of_photos
@@ -71,6 +56,42 @@ class Pet < ApplicationRecord
   # def limit_of_photos
   #   if images.length > 5
   #     errors.add(:images, "You can only attach up to 5 photos.")
+  #   end
+  # end
+
+  # attr_accessor :skip_breed_validations, :skip_description_validations
+  # attr_accessor :skip_breed_validations
+
+  # Validations trigger on final form submission
+  validates :name, presence: true
+  validates :species, presence: true, inclusion: { in: SPECIES }
+  validates :breed, presence: true
+  validates :location, presence: true
+  # validates :breed, presence: true
+  # validates :description, presence: true, unless: :skip_description_validations
+  validates :description, presence: true
+
+  # validate :breed_matches_species, unless: :skip_breed_validations
+  validate :breed_matches_species
+
+  private
+
+  def breed_matches_species
+    return if species.blank? || breed.blank?
+
+    unless BREEDS[species]&.include?(breed)
+      errors.add(:breed, "is not a valid breed for the selected species")
+    end
+  end
+
+  # def breed_matches_species
+  #   if species.blank? || breed.blank?
+  #     errors.add(:base, "Species and breed must be provided")
+  #     return
+  #   end
+
+  #   unless SPECIES[species]&.include?(breed)
+  #     errors.add(:breed, "is not a valid breed for the selected species")
   #   end
   # end
 

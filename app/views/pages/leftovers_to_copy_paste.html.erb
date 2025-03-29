@@ -16,3 +16,57 @@
 <% else %>
   <h3>No animals within this distance</h3>
 <% end %>
+
+--------------------------------------------
+
+<% best_matches.each do |pet| %>
+          <div class="col-md-4">
+            <div class="pet-image-main">
+              <div class="animal-images">
+                <% if pet.photos.attached? %>
+                  <%= link_to user_pet_path(pet.provider, pet) do %>
+                    <%= cl_image_tag pet.photos.first.key, height: 300, width: 300, crop: :fill, style: "border-radius: 15px" %>
+                  <% end %>
+                <% else %>
+                  <%= link_to user_pet_path(pet.provider, pet) do %>
+                    <%= image_tag "dog.jpg", id: "image-profile-pet" %>
+                  <% end %>
+                <% end %>
+                <div class="animal-info">
+                  <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
+                  <p><%= pet.description %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+______________________
+
+<%= turbo_stream.replace "output-three" do %>
+  <div id="output-three" class="d-none" data-controller="output">
+    <div data-output-target="outputThree">
+      <%= render "output_three", best_matches: @best_matches.first(3) %>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+------------------------
+
+<div class="empty-space">
+</div>
+<%= render "output" %>
+<div class="mt-5">
+  <h2>---------USERS---------</h2>
+</div>
+
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %> - <%= user.location %> - <%= user.role %>
+    </li>
+  <% end %>
+</ul>

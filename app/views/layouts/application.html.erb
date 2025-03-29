@@ -16,15 +16,26 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
     <%= javascript_importmap_tags %>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </head>
 
-  <body style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(145, 145, 145, 0.3)),
-              url('https://res-console.cloudinary.com/du1ev4qra/thumbnails/v1/image/upload/v1742582207/d3BxaGRta3oxa2JnOTl2Z2V2cXE=/drilldown'); background-size: cover; background-attachment: fixed;">
+  <body>
+
+
+  <body>
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
-    <div class="container">
-      <%= yield %>
+    <div class="main-content">
+      <div class="application-image">
+        <div class="container">
+          <%= render "shared/footer" %>
+          <%= yield %>
+        </div>
+      </div>
     </div>
+
 
   </body>
 </html>

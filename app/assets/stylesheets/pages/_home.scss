@@ -1,1 +1,106 @@
-// Specific CSS for your home-page
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.home-banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: 20px 0 0 0;
+}
+
+.home-title {
+  font-family: $headers-font;
+  font-size: 3rem;
+  font-weight: bold;
+  color: $orange-main;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.home-subtitle {
+  font-family: $body-font;
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: $dark-blue;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.home-button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: $blue-main;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  margin-top: -150px;
+
+  &:hover {
+    background-color: darken($orange-main, 10%);
+    transform: scale(1.05);
+  }
+}
+
+.home-banner .home-logo-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+}
+
+.home-banner .logo-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+.home-banner .home-logo-img {
+  width: 70px;
+  height: auto;
+  position: relative;
+  top: -16px;
+  margin-left: -52px;
+}
+
+.home-landing-img {
+  width: 90%;
+  height: auto;
+  margin-top: -140px;
+}
+
+@media (max-width: 768px) {
+  .home-landing-img {
+    margin-top: -30px;
+    width: 90%;
+  }
+
+  .home-title {
+    top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-landing-img {
+    margin-top: -20px;
+    width: 100%;
+  }
+
+  .home-title {
+    top: 0px;
+  }
+}
+
+@media (max-width: 375px) {
+  .home-landing-img {
+    margin-top: -10px;
+    width: 100%;
+  }
+}

@@ -7,17 +7,35 @@
 @import "buttons";
 @import "map";
 @import "form_inputs";
+@import "modal";
 
 #user-greeting {
-  margin-left: 20px;
-  margin-top: 30px;
+  margin-left: 40px;
+  margin-top: 0px;
+  padding-top: 30px
 }
 
 #location-shelter {
-  margin-left: 30px;
-  margin-bottom: 30px;
+  margin-left: 0px;
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 #your-animals {
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+
+.container {
+
+}
+
+#user-role {
+  color: $green;
+}
+
+#your-favourites {
+  margin-bottom: 0px;
+  margin-top: 50px;
+  margin-left: 10px;
 }

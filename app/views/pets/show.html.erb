@@ -1,25 +1,90 @@
 <div class="container">
-  <h1><%= @pet.name %></h1>
 
-  <p><%= @pet.species %></p>
-  <p><%= @pet.breed %></p>
-  <p><%= @pet.location %></p>
-  <p><%= @pet.age %></p>
-  <p><%= @pet.size %></p>
-  <p><%= @pet.gender %></p>
+  <%= link_to 'Back to Profile', user_path(@user) %>
 
-  <p><%= @pet.description %></p>
-  <p><%= @pet.activity_level %></p>
+  <div class="row">
 
-  <p><%= @pet.neutered %></p>
-  <p><%= @pet.medical_conditions %></p>
-  <p><%= @pet.sociable_with_animals %></p>
-  <p><%= @pet.sociable_with_children %></p>
-  <p><%= @pet.certified %></p>
+    <h1 class="my-4"><strong><%= @pet.name %></strong></h1>
 
-<% @pet.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
-  <%= link_to 'Edit', edit_user_pet_path(@user, @pet) %>
+    <div class="col-md-9">
+      <% [
+        ["Species", @pet.species],
+        ["Breed", @pet.breed],
+        ["Location", @pet.location],
+        ["Age (in years)", @pet.age],
+        ["Size", @pet.size],
+        ["Gender", @pet.gender],
+        ["Activity level", @pet.activity_level],
+        ["Description", @pet.description],
+        ["Sociable with animals", @pet.sociable_with_animals],
+        ["Sociable with children", @pet.sociable_with_children],
+        ["Neutered", @pet.neutered],
+        ["Certified", @pet.certified],
+        ["Medical conditions", @pet.medical_conditions],
+
+        # ["Provider", link_to("#{@pet.provider.first_name} #{@pet.provider.last_name}", user_path(@pet.provider))]
+        ["Provider", link_to("#{@provider.first_name}", user_path(@provider))]
+      ].each do |label, value| %>
+        <% if value.present? %>
+          <div class="row my-2">
+            <div class="col-md-5 align-self-start">
+              <h3 class="mb-0 fw-semibold"><%= label %>:</h3>
+            </div>
+            <div class="col-md-7">
+              <% if [true, false].include?(value) %>
+                <%# <p class="mb-0"><%= value.humanize %></p>
+              <% else %>
+                <p class="mb-0"><%= value %></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Main Pet Photo -->
+    <div class="col-md-3 text-center">
+      <% if @pet.photos.any? %>
+        <%= cl_image_tag @pet.photos.first.key, class: "img-fluid image-pet" %>
+      <% else %>
+        <p>No image available</p>
+      <% end %>
+
+      <h3 class="fw-semibold">Map</h3>
+      <div class="map-pet-show"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+      </div>
+    </div>
+
+
+    <!-- Additional Pet Photos -->
+    <% if @pet.photos.any? %>
+    <h3 class="my-3 fw-semibold">Photos (<%= @pet.photos.count %>)</h3>
+      <% @pet.photos.each do |photo| %>
+      <div class="col-md-4 my-2">
+        <%= cl_image_tag photo.key, class: "img-fluid image-pet" %>
+      </div>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <% if @pet.provider == current_user %>
+    <div class="my-5">
+        <%= link_to 'Edit', edit_user_pet_path(@user, @pet), class: "btn btn-primary" %>
+        <%= link_to 'Remove Pet', remove_pet_path(@user, @pet), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+    </div>
+
+  <% else %>
+    <div class="my-5">
+      <%# I don't know the path to the messages yet but sg like: %>
+      <%= render "messages" %>
+      <%= link_to 'Message Provider', "#", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+
 
 </div>
