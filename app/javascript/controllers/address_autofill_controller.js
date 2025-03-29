@@ -22,13 +22,16 @@ export default class extends Controller {
       const location = event.target.value
       const accessToken = 'pk.eyJ1IjoibWlndWVsanBpIiwiYSI6ImNtOGQ5ZGF6aTFjZDcyaXM1dW80MWUwNDQifQ.KXuPqIDaEnTkIjUJTNZ_Uw'
       const apiEndpoint = `https://api.mapbox.com/search/geocode/v6/forward?q=${location}&access_token=${accessToken}`
-
+      const locationOptions = document.getElementById("location-options");
+      locationOptions.innerHTML = '';
       fetch(apiEndpoint)
         .then(response => response.json())
         .then(data => {
           const locations = data.features.map(feature => {
-            // document.getElementById("cars").insertAdjacentHTML('beforeend', `<option value="${feature.properties.context.place.name}">${feature.properties.context.place.name}</option>`);
-            // return feature.properties.context.place.name;
+            console.log(feature.properties.full_address);
+            console.log(feature.properties.context.place);
+            locationOptions.insertAdjacentHTML('beforeend', `<option value="${feature.properties.full_address}">${feature.properties.full_address}</option>`);
+            return feature.properties.full_address;
           });
         });
       }
