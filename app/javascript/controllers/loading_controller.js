@@ -32,7 +32,7 @@ export default class extends Controller {
 
       let modal = bootstrap.Modal.getInstance(this.loadingModalTarget);
       if (!modal) {
-        modal = new bootstrap.Modal(this.loadingModalTarget, { backdrop: false, keyboard: false });
+        modal = new bootstrap.Modal(this.loadingModalTarget, { backdrop: true, keyboard: false });
       }
       modal.show();
     } else {
