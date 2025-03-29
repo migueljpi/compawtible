@@ -34,7 +34,7 @@ export default class extends Controller {
 
       let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
       if (!modal) {
-        modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: false, focus: true });
+        modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: true, focus: true });
         console.log("Modal instance created:", modal);
       }
 
