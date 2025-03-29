@@ -16,6 +16,10 @@ class MessagesController < ApplicationController
     @message.user = current_user
 
     if @message.save
+      ChatroomChannel.broadcast_to(
+        @chatroom,
+        @message.as_json(only: %i[id content user_id created_at])
+      )
       respond_to do |format|
         format.json { render json: @message }
       end

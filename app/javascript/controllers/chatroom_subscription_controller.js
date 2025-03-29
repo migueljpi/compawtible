@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { createConsumer } from "@rails/actioncable";
 
 // Connects to data-controller="chatroom-subscription"
 export default class extends Controller {
@@ -6,21 +7,42 @@ export default class extends Controller {
 
 
   connect() {
-    this.chatroomId = null;
+    this.chatroomId = this.element.dataset.chatroomId;
     this.userId = this.element.dataset.userId;
+  }
 
+  disconnect() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   selectChatroom(event) {
     this.chatroomId = event.currentTarget.dataset.chatroomId;
-
-    console.log(this.chatroomId)
 
     const url = new URL(window.location);
     url.searchParams.set("chatroom_id", this.chatroomId);
     window.history.pushState({}, "", url);
 
     this.loadMessages();
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
+    this.subscription = createConsumer().subscriptions.create(
+      {channel: "ChatroomChannel", chatroom_id: this.chatroomId},
+      {received: (data) => {
+        const messageElement = `
+          <div class="message ${data.user_id == this.userId ? 'sent' : 'received'}">
+            <p>${data.content}</p>
+          </div>
+        `;
+
+        this.messagesTarget.insertAdjacentHTML("beforeend", messageElement);
+        this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight);
+      }}
+    )
   }
 
   loadMessages() {
@@ -58,13 +80,10 @@ export default class extends Controller {
       body: JSON.stringify({ message: { content: content} }),
     })
     .then(response => response.json())
-    .then(data => {
-      this.messagesTarget.insertAdjacentHTML("beforeend", `
-        <div class="message sent"><p>${data.content}</p></div>
-      `);
+    .then(() => {
       input.value = "";
+      input.focus();
     })
     .catch(error => console.error("Error sending message:", error));
   }
-
 }
