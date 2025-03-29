@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_23_075739) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_28_111600) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,26 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_23_075739) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "adoption_locations", force: :cascade do |t|
+    t.string "location"
+    t.integer "radius"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "prompt_id", null: false
+    t.index ["prompt_id"], name: "index_adoption_locations_on_prompt_id"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "pet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pet_id"], name: "index_bookmarks_on_pet_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "interactions", force: :cascade do |t|
@@ -109,6 +129,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_23_075739) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "adoption_locations", "prompts"
+  add_foreign_key "bookmarks", "pets"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "interactions", "pets"
   add_foreign_key "interactions", "users", column: "adopter_id"
   add_foreign_key "pets", "users", column: "provider_id"

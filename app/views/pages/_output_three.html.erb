@@ -19,15 +19,20 @@
                   <div class="col-md-4">
                     <div class="pet-image-main">
                       <div class="animal-images">
-                        <% if pet.photos.attached? %>
-                          <%= link_to user_pet_path(pet.provider, pet), data: { turbo: false } do %>
-                            <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
+                        <div class="image-container">
+                          <%= button_to bookmarks_path(pet_id: pet.id), method: :post, remote: true, class: "bookmark-btn" do %>
+                            <i class="fa-regular fa-heart"></i>
                           <% end %>
-                        <% else %>
-                          <%= link_to user_pet_path(pet.provider, pet) do %>
-                            <%= image_tag "dog.jpg", id: "image-profile-pet" %>
+                          <% if pet.photos.attached? %>
+                            <%= link_to user_pet_path(pet.provider, pet), data: { turbo: false } do %>
+                              <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
+                            <% end %>
+                          <% else %>
+                            <%= link_to user_pet_path(pet.provider, pet) do %>
+                              <%= image_tag "dog.jpg", id: "image-profile-pet" %>
+                            <% end %>
                           <% end %>
-                        <% end %>
+                        </div>
                         <div class="animal-info">
                           <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
                           <p><%= pet.description %></p>

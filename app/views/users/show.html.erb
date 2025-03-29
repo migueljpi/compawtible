@@ -139,6 +139,12 @@
 
   <div class="user-animals">
     <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
+    <ul>
+      <% @user.bookmarked_pets.each do |pet| %>
+      <li><%= link_to pet.name, user_pet_path(pet) %></li>
+      <% end %>
+    </ul>
+
   </div>
 
   <div class= "user-button">

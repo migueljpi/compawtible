@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   # delete '/pets/:id', to: 'pets#destroy', as: 'remove_pet'
   delete '/users/:user_id/pets/:id', to: 'pets#destroy', as: 'remove_pet'
 
+  resources :bookmarks, only: [:create, :destroy]
+
 end
