@@ -6,23 +6,31 @@ export default class extends Controller {
   connect() {
     console.log(":white_check_mark: LoadingController connected");
 
-    document.addEventListener("turbo:submit-start", () => { //triggers after submit
+    this.form = document.getElementById("search-form");
+    console.log("This is the form:", this.form);
+    this.form.addEventListener("turbo:submit-start", () => {
       console.log(":rocket: Form submitted, showing loading modal...");
-      this.showLoadingModal(); // We can add bind to make sure it happens once
+      this.showLoadingModal();
     });
 
-    document.addEventListener("turbo:frame-load", (event) => { //triggers after new content is loaded
-      if (event.target.id === "output-three") { // output-three is the new content
+    document.addEventListener("turbo:frame-load", (event) => {
+      if (event.target.id === "output-three") {
         console.log(":white_check_mark: Data received, hiding loading modal...");
-        this.hideLoadingModal(); // Same here
+        this.hideLoadingModal();
       }
     });
   }
 
   // We can remove event listeners to prevent duplicates.
   disconnect() {
-    document.removeEventListener("turbo:submit-start", this.showLoadingModal());
-    document.removeEventListener("turbo:frame-load", this.hideLoadingModal());
+    console.log(":x: LoadingController disconnected");
+    document.removeEventListener("turbo:before-cache", this.cleanup);
+
+    if (this.form) {
+      this.form.removeEventListener("turbo:submit-start", this.showLoadingModal);
+    }
+
+    document.removeEventListener("turbo:frame-load", this.hideLoadingModal);
   }
 
   showLoadingModal() {
