@@ -28,16 +28,14 @@
 
 .modal-dialog {
   max-width: 1300px;
-  width: 100% !important;
+  // width: 100% !important;
 }
 
 .modal-header {
-  margin-top: 25px;
   border-bottom: none !important;
 }
 .modal-header-retry {
   border-bottom: none !important;
-  margin: 25px;
 }
 
 .modal-footer {
@@ -54,14 +52,31 @@
 // }
 
 .pet-three-row {
-  margin-right: 25px;
-  margin-left: 25px;
+  margin: 25px;
 }
 
 .modal-retry {
   max-width: fit-content !important;
   width: auto !important;
   margin: auto !important;
+}
+
+.square-image {
+  width: 300px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.other-matches-btn-div {
+  margin-bottom: 25px;
 }
 
 // end of search modal
