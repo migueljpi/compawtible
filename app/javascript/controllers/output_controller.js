@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["outputThree"];
 
   connect() {
-    console.log("✅ OutputController connected after navigation:", this.element);
 
     const promptId = this.getRailsParam("prompt_id");
       if (promptId) {
@@ -13,9 +12,7 @@ export default class extends Controller {
       }
 
     document.addEventListener("turbo:frame-load", (event) => {
-      console.log("🚀 Turbo frame loaded:", event.target.id);
       if (event.target.id === "output-three") {
-        console.log("showing output modal");
         this.showOutput();
       }
     });
@@ -27,15 +24,12 @@ export default class extends Controller {
 
 
   showOutput() {
-    console.log("OutputThreeTarget:", this.outputThreeTarget);
-
     if (this.outputThreeTarget) {
       this.outputThreeTarget.classList.remove("d-none");
 
       let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
       if (!modal) {
         modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: true, focus: true });
-        console.log("Modal instance created:", modal);
       }
 
       modal.show();

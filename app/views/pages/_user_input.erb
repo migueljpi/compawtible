@@ -1,9 +1,11 @@
 <%= simple_form_for @prompt, url: search_path, method: :post,
+  html: { novalidate: false },
   data: { turbo_frame: "output-three", action: "turbo:submit-start->output#showLoadingModal turbo:submit-end->output#showOutput" } do |f| %>
 
   <div class="row">
     <div class="col-md-4" id="location" data-controller="address-autofill">
       <%= text_field_tag :location, current_user.location,
+            required: true,
             class: "form-control small-input",
             placeholder: "Where should we search for your pet?",
             list: "location-options",
@@ -23,7 +25,7 @@
   </div>
 
   <div>
-    <%= f.input :input, label: false, as: :text,
+    <%= f.input :input, label: false, as: :text, required: true,
       input_html: { class: "large-input", placeholder: "Describe your lifestyle in just a few words. Feel free to add some traits that you would like to see in your future pet." } %>
   </div>
 
