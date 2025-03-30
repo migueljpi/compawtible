@@ -14,8 +14,19 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :pets, only: [:show, :new, :create, :edit, :update, :destroy] do
+      # member do
+      #   post :create_chatroom
+      # end
+      post 'create_chatroom', to: 'chatrooms#create_chatroom', as: 'create_chatroom'
       collection do
         post :update_breeds
+      end
+    end
+    resources :chatrooms, only: [:index, :create] do
+      resources :messages, only: [:create, :update] do
+        collection do
+          get :chatroom_messages
+        end
       end
     end
   end

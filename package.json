@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@rails/actioncable": "^8.0.200"
+  }
+}

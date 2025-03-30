@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-7">
               <% if [true, false].include?(value) %>
-                <p class="mb-0"><%= value.humanize %></p>
+                <%# <p class="mb-0"><%= value.humanize %></p>
               <% else %>
                 <p class="mb-0"><%= value %></p>
               <% end %>
@@ -84,5 +84,7 @@
       <%= link_to 'Message Provider', "#", class: "btn btn-primary" %>
     </div>
   <% end %>
+
+  <%= render "contact_provider" %>
 
 </div>

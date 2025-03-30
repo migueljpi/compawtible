@@ -1,0 +1,37 @@
+<div class="chats-container p-2" data-controller="chatroom-subscription"  data-user-id="<%= current_user.id %>" >
+  <div class="chat-sidebar">
+    <h2>Chats</h2>
+    <ul class="chat-list">
+      <% current_user.chatrooms.each do |chatroom| %>
+
+      <li class="chat-item" data-action="click->chatroom-subscription#selectChatroom" data-chatroom-id="<%= chatroom.id %>">
+        <%# <img src="avatar2.jpg" alt="John D."> %>
+        <div>
+          <p class="chat-name"> <%= other_user_name_from_chatroom(chatroom.users.map()) %> </p>
+          <p class="chat-preview">
+            <%= chatroom.messages.last&.user&.first_name || "No messages yet" %>:
+            <%= chatroom.messages.last&.content || "No messages yet" %>
+          </p>
+        </div>
+        <%# <span class="chat-time">20:13</span> %>
+      </li>
+    <% end %>
+
+    </ul>
+  </div>
+
+  <div class="chat-main" >
+    <div class="chat-header">
+      <%# <img src="avatar4.jpg" alt="Kevin Miller"> %>
+      <%# <h3><%= other_user_name_from_chatroom(current_user.chatrooms) %></h3>
+    </div>
+    <div class="chat-messages" data-chatroom-subscription-target="messages">
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Type here..." data-chatroom-subscription-target="input">
+      <button type="submit" data-action="click->chatroom-subscription#sendMessage">
+      <i class="icon-send"></i>
+      </button>
+    </div>
+  </div>
+</div>
