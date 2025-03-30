@@ -47,6 +47,7 @@ class Pet < ApplicationRecord
   belongs_to :provider, class_name: 'User'
   has_many :interactions, dependent: :destroy
   has_one :adopters, through: :interactions, source: :user
+  has_many :chatrooms
 
   # photos
   # has_one_attached :photo
