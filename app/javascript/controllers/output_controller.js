@@ -4,24 +4,33 @@ export default class extends Controller {
   static targets = ["outputThree"];
 
   connect() {
+    console.log("✅ OutputController connected");
+
+    // Bind the methods to the controller instance
+    this.handleFrameLoad = this.handleFrameLoad.bind(this);
+
+    // Add the event listener
+    document.addEventListener("turbo:frame-load", this.handleFrameLoad);
 
     const promptId = this.getRailsParam("prompt_id");
-      if (promptId) {
-        console.log("✅ Prompt ID detected:", promptId);
-        this.showOutput();
-      }
-
-    document.addEventListener("turbo:frame-load", (event) => {
-      if (event.target.id === "output-three") {
-        this.showOutput();
-      }
-    });
+    if (promptId) {
+      console.log("✅ Prompt ID detected:", promptId);
+      this.showOutput();
+    }
   }
 
   disconnect() {
-    document.removeEventListener("turbo:frame-load", this.hideOutput());
+    console.log("❌ OutputController disconnected");
+
+    // Remove the event listener
+    document.removeEventListener("turbo:frame-load", this.handleFrameLoad);
   }
 
+  handleFrameLoad(event) {
+    if (event.target.id === "output-three") {
+      this.showOutput();
+    }
+  }
 
   showOutput() {
     if (this.outputThreeTarget) {
@@ -44,26 +53,20 @@ export default class extends Controller {
     if (this.outputThreeTarget) {
       let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
       if (modal) {
-        //We can try to replace settimeout with this to make sure the event happens only once
-        // <start>
-        this.outputThreeTarget.addEventListener("hidden.bs.modal", () => { // This is triggered by finishing modal.hide()
-          this.outputThreeTarget.classList.add("d-none");
-      },{ once: true });
+        this.outputThreeTarget.addEventListener(
+          "hidden.bs.modal",
+          () => {
+            this.outputThreeTarget.classList.add("d-none");
+          },
+          { once: true }
+        );
         modal.hide();
-      // setTimeout(() => {
-      //   this.this.outputThreeTarget.classList.add("d-none");
-      // }, 300);
       }
     }
   }
 
-
   getRailsParam(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
-  }
-
-  disconnect() {
-    console.log("❌ OutputController disconnected from:", this.element);
   }
 }
