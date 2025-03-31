@@ -2,6 +2,18 @@
 
   <%= link_to 'Back to Profile', user_path(@user) %>
 
+<div class="image-container" id="favorite_icon_<%= @pet.id %>">
+  <% if current_user.favorited?(@pet) %>
+    <%= button_to user_pet_favorite_path(current_user, @pet), method: :delete, data: { turbo_stream: "favorites" } do %>
+      <i class="fa-solid fa-heart"></i> <!-- Filled heart if the pet is favorited -->
+    <% end %>
+  <% else %>
+    <%= button_to user_pet_favorites_path(current_user, @pet), method: :post, data: { turbo_stream: "favorites" } do %>
+      <i class="fa-regular fa-heart"></i> <!-- Empty heart if the pet is not favorited -->
+    <% end %>
+  <% end %>
+</div>
+
   <div class="row">
 
     <h1 class="my-4"><strong><%= @pet.name %></strong></h1>
@@ -86,18 +98,6 @@
   <% end %>
 
   <%= render "contact_provider" %>
-
-<div class="image-container" id="favorite_icon_<%= @pet.id %>">
-  <% if current_user.favorited?(@pet) %>
-    <%= button_to user_pet_favorite_path(current_user, @pet), method: :delete, data: { turbo_stream: "favorites" } do %>
-      <i class="fa-solid fa-heart"></i> <!-- Filled heart if the pet is favorited -->
-    <% end %>
-  <% else %>
-    <%= button_to user_pet_favorites_path(current_user, @pet), method: :post, data: { turbo_stream: "favorites" } do %>
-      <i class="fa-regular fa-heart"></i> <!-- Empty heart if the pet is not favorited -->
-    <% end %>
-  <% end %>
-</div>
 
 
 </div>

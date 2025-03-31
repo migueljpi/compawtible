@@ -16,15 +16,16 @@
           <div class="pet-image-main">
             <div class="animal-images">
               <div class="image-container" id="favorite_icon_<%= pet.id %>">
-              <% if current_user.favorited?(@pet) %>
-                  <%= button_to user_pet_favorite_path(current_user, pet), method: :delete, data: { turbo_stream: "favorites" } do %>
+              <% if current_user.favorited?(pet) %>
+                  <%= button_to user_pet_favorite_path(current_user, pet, pet.id), method: :delete, data: { turbo_stream: true }, class: "favorite-button" do %>
                     <i class="fa-solid fa-heart"></i>
                   <% end %>
                 <% else %>
-                  <%= button_to user_pet_favorites_path(current_user, pet), method: :post, data: { turbo_stream: "favorites" } do %>
+                  <%= button_to user_pet_favorites_path(current_user, pet, pet.id), method: :post, data: { turbo_stream: true }, class: "favorite-button" do %>
                     <i class="fa-regular fa-heart"></i>
                   <% end %>
                 <% end %>
+              </div>
                 <% if pet.photos.attached? %>
                 <%= link_to user_pet_path(pet.provider, pet) do %>
                   <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
@@ -34,7 +35,6 @@
                   <%= image_tag "dog.jpg", id: "image-profile-pet" %>
                 <% end %>
               <% end %>
-              </div>
               <div class="animal-info">
                 <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
                 <p><%= pet.description %></p>

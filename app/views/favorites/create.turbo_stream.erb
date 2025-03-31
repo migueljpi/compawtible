@@ -1,6 +1,7 @@
 <%= turbo_stream.replace "favorite_icon_#{@pet.id}" do %>
+  <p> CREATE </p>
   <div id="favorite_icon_<%= @pet.id %>">
-    <%= button_to user_pet_favorites_path(current_user, @pet), method: :delete, data: { turbo_stream: true } do %>
+    <%= button_to user_pet_favorites_path(current_user, @pet, @pet.id), method: :post, data: { turbo: true }, class: "favorite-button" do %>
       <i class="fa-solid fa-heart"></i>
     <% end %>
   </div>

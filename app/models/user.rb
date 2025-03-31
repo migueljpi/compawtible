@@ -19,7 +19,7 @@ class User < ApplicationRecord
   enum :role, { adopter: "adopter", provider: "provider" }, validate: true
   # enum role: { adopter: "adopter", provider: "provider"}
   # enum :role, { adopter: "adopter", provider: "provider"}, default: :adopter, validate: true
-  enum :role, { adopter: "adopter", provider: "provider" }, validate: true
+  # enum :role, { adopter: "adopter", provider: "provider" }, validate: true
 
   # Validations
   validates :first_name, presence: true
