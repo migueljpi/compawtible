@@ -2,8 +2,7 @@ class FavoritesController < ApplicationController
   before_action :set_pet, only: %i[create destroy]
 
   def create
-    current_user.favorite(pet: @pet)
-    # redirect_to request.referer || root_path, notice: "Pet was successfully favorited."
+    current_user.favorite(@pet)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @pet }
@@ -11,11 +10,18 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    current_user.unfavorite(@pet)
-    # redirect_to request.referer || root_path, notice: "Pet was successfully unfavorited."
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @pet }
+    favorite = current_user.favorites.find_by(favoritable: @pet)
+    if favorite
+      current_user.unfavorite(@pet)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @pet }
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("favorite_icon_#{@pet.id}") }
+        format.html { redirect_to @pet }
+      end
     end
   end
 
