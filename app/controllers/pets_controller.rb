@@ -8,6 +8,8 @@ class PetsController < ApplicationController
 
   def show
     # @user = User.find(params[:user_id])
+    # @pet = @user.pets.find(params[:id])
+    @message = Message.new
     @pet = Pet.find(params[:id])
     @provider = @pet.provider
 

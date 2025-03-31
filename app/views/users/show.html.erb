@@ -1,27 +1,19 @@
 <div class="container-user-profile">
 
 <% if @user.provider? %>
-  <h1 id="user-greeting">Hello <%= @user.first_name %></h1>
+  <h1 id="user-greeting">Hello, <%= @user.first_name %>! </h1>
   <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
   <div class="user-card">
-    <div class="user-info">
-      <h3><strong>Name:</strong></h3>
-      <h3><strong>Role:</strong></h3>
-      <h3><strong>Age:</strong></h3>
-      <h3><strong>Email:</strong></h3>
-      <h3><strong>Address:</strong></h3>
-      <h3><strong>About me:</strong></h3>
+    <div>
+      <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
     </div>
     <div class="user-input">
-      <h3><%= @user.first_name %> <%= @user.last_name %></h3>
-      <h3><%= @user.role %></h3>
-      <h3><%= @user.age %></h3>
-      <h3><%= @user.email %></h3>
-      <h3><%= @user.location %></h3>
-      <h3><%= @user.about_me %></h3>
-    </div>
-    <div>
-      <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, class: "image-profile-user" %>
+      <h3><strong><%= @user.first_name %> <%= @user.last_name %> (<%= @user.age %>), <%= @user.location %></strong></h3>
+      <h3 id="user-role"><%= @user.role.capitalize %></h3>
+      <h3><strong>Email: </strong></h3>
+      <h4><%= @user.email %></h4>
+      <h3><strong>About me:</strong></h3>
+      <h4><%= @user.about_me %></h4>
     </div>
   </div>
 
@@ -90,16 +82,18 @@
                 </div>
               <% end %>
               </div>
-              <div class="animal-info">
-                <p><strong>Name:</strong> <%= pet.name %></p>
-                <p><strong>Species:</strong> <%= pet.species %></p>
-                <p><strong>Breed:</strong> <%= pet.breed %></p>
-              </div>
+              <div class="pet-info-button">
+                <div class="animal-info">
+                  <p><strong>Name:</strong> <%= pet.name %></p>
+                  <p><strong>Species:</strong> <%= pet.species %></p>
+                  <p><strong>Breed:</strong> <%= pet.breed %></p>
+                </div>
 
-              <!-- Add the Remove Pet button -->
-              <div class= "user-button">
-                <%= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary" %>
-                <%= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+                <!-- Add the Remove Pet button -->
+                <div class= "user-button">
+                  <%= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
+                  <%= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+                </div>
               </div>
             </div>
           </div>
@@ -110,33 +104,26 @@
   </div>
 
 <%# if @user.adopter? %>
-
 <% else %>
-  <h1 id="user-greeting">Hello <%= @user.first_name %></h1>
+  <h1 id="user-greeting">Hello, <%= @user.first_name %>! </h1>
   <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
   <div class="user-card">
-    <div class="user-info">
-      <h3><strong>Name:</strong></h3>
-      <h3><strong>Role:</strong></h3>
-      <h3><strong>Age:</strong></h3>
-      <h3><strong>Email:</strong></h3>
-      <h3><strong>Address:</strong></h3>
-      <h3><strong>About me:</strong></h3>
+    <div>
+      <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
     </div>
     <div class="user-input">
-      <h3><%= @user.first_name %> <%= @user.last_name %></h3>
-      <h3><%= @user.role %></h3>
-      <h3><%= @user.age %></h3>
-      <h3><%= @user.email %></h3>
-      <h3><%= @user.location %></h3>
-      <h3><%= @user.about_me %></h3>
-    </div>
-
-    <div>
-      <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, class: "image-profile-user" %>
+      <h3><strong><%= @user.first_name %> <%= @user.last_name %> (<%= @user.age %>), <%= @user.location %></strong></h3>
+      <h3 id="user-role"><%= @user.role.capitalize %></h3>
+      <h3><strong>Email: </strong></h3>
+      <h4><%= @user.email %></h4>
+      <h3><strong>About me:</strong></h3>
+      <h4><%= @user.about_me %></h4>
     </div>
   </div>
 
+  <div class="user-animals">
+    <h3 id="your-favourites"><strong>Your favourites</strong></h3>
+  </div>
 <div class="user-animals">
   <h3 id="your-animals"><strong>Your favorited pets (<%= @user.favorited_pets.count %>)</strong></h3>
   <ul>
@@ -152,3 +139,5 @@
   </div>
   <div class="button-add-pet"><%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %></div>
 <% end %>
+
+</div>

@@ -19,11 +19,19 @@
   border: white 1px solid;
 }
 
-#image-profile-user, #image-profile-pet {
+#image-profile-pet {
   width: 400px;
   height: 400px;
   object-fit: cover;
-  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+#image-profile-user {
+  margin-right: 70px;
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
