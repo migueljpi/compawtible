@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :pets, only: [:show, :new, :create, :edit, :update, :destroy] do
+      resources :favorites, only: [:create, :destroy]
       collection do
         post :update_breeds
       end
@@ -36,6 +37,6 @@ Rails.application.routes.draw do
   # delete '/pets/:id', to: 'pets#destroy', as: 'remove_pet'
   delete '/users/:user_id/pets/:id', to: 'pets#destroy', as: 'remove_pet'
 
-  resources :bookmarks, only: [:create, :destroy]
+  # delete '/users/:user_id/pets/:pet_id/favorites', to: 'favorites#destroy', as: 'user_pet_favorites'
 
 end

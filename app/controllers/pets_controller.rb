@@ -1,7 +1,6 @@
 class PetsController < ApplicationController
-  before_action :set_user, only: [:show, :new, :create, :edit, :update, :destroy]
-  before_action :set_pet, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_user, only: %i[show new create edit update destroy]
+  before_action :set_pet, only: %i[show edit update destroy favorite]
 
   def index
     @pets = Pet.all
@@ -9,7 +8,7 @@ class PetsController < ApplicationController
 
   def show
     # @user = User.find(params[:user_id])
-    # @pet = @user.pets.find(params[:id])
+    @pet = Pet.find(params[:id])
     @provider = @pet.provider
 
     return unless @pet.geocoded?
@@ -18,6 +17,11 @@ class PetsController < ApplicationController
       lat: @pet.latitude,
       lng: @pet.longitude
     }]
+  end
+
+  def favorite
+    current_user.favorite(@pet)
+    redirect_to pet_path(@pet)
   end
 
   def new
@@ -72,7 +76,7 @@ class PetsController < ApplicationController
 
   def update_breeds
     @pet = Pet.new(species: pet_params_new[:pet][:species])
-    render partial: "breeds_select", locals: { f:  ActionView::Helpers::FormBuilder.new(:pet, @pet, self, {}) }
+    render partial: "breeds_select", locals: { f: ActionView::Helpers::FormBuilder.new(:pet, @pet, self, {}) }
   end
 
   private
@@ -86,10 +90,12 @@ class PetsController < ApplicationController
   end
 
   def pet_params_new
-    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size, :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified, photos: [])
+    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size,
+                                :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified, photos: [])
   end
 
   def pet_params_edit
-    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size, :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified)
+    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size,
+                                :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified)
   end
 end

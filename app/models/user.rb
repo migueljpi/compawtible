@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_favoritor
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
@@ -12,8 +13,6 @@ class User < ApplicationRecord
   has_many :interactions, foreign_key: "adopter_id", dependent: :destroy
   has_many :interacted_pets, through: :interactions, source: :pet
   has_one_attached :photo
-  has_many :bookmarks, dependent: :destroy
-  has_many :bookmarked_pets, through: :bookmarks, source: :pet
 
   # enum role: { adopter: "adopter", provider: "provider"}
   # enum :role, { adopter: "adopter", provider: "provider"}, default: :adopter, validate: true

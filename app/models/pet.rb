@@ -1,4 +1,5 @@
 class Pet < ApplicationRecord
+  acts_as_favoritable
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
@@ -49,8 +50,7 @@ class Pet < ApplicationRecord
   belongs_to :provider, class_name: 'User'
   has_many :interactions, dependent: :destroy
   has_one :adopters, through: :interactions, source: :user
-  has_many :bookmarks, dependent: :destroy
-  has_many :bookmarked_users, through: :bookmarks, source: :user
+  has_many :favoritors, through: :favorites, source: :user
 
   # photos
   # has_one_attached :photo

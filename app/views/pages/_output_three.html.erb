@@ -20,8 +20,12 @@
                     <div class="pet-image-main">
                       <div class="animal-images">
                         <div class="image-container">
-                          <%= button_to bookmarks_path(pet_id: pet.id), method: :post, remote: true, class: "bookmark-btn" do %>
-                            <i class="fa-regular fa-heart"></i>
+                          <%= button_to user_pet_favorites_path(current_user, pet), method: :post, remote: true, class: "bookmark-btn" do %>
+                            <% if current_user.favorited?(pet) %>
+                              <i class="fa-solid fa-heart"></i>
+                            <% else %>
+                              <i class="fa-regular fa-heart"></i>
+                            <% end %>
                           <% end %>
                           <% if pet.photos.attached? %>
                             <%= link_to user_pet_path(pet.provider, pet), data: { turbo: false } do %>

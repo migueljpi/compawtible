@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_28_111600) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_29_100438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,13 +53,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_28_111600) do
     t.index ["prompt_id"], name: "index_adoption_locations_on_prompt_id"
   end
 
-  create_table "bookmarks", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "pet_id", null: false
+  create_table "favorites", force: :cascade do |t|
+    t.string "favoritable_type", null: false
+    t.bigint "favoritable_id", null: false
+    t.string "favoritor_type", null: false
+    t.bigint "favoritor_id", null: false
+    t.string "scope", default: "favorite", null: false
+    t.boolean "blocked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pet_id"], name: "index_bookmarks_on_pet_id"
-    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+    t.index ["blocked"], name: "index_favorites_on_blocked"
+    t.index ["favoritable_id", "favoritable_type"], name: "fk_favoritables"
+    t.index ["favoritable_type", "favoritable_id", "favoritor_type", "favoritor_id", "scope"], name: "uniq_favorites__and_favoritables", unique: true
+    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable"
+    t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
+    t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor"
+    t.index ["scope"], name: "index_favorites_on_scope"
   end
 
   create_table "interactions", force: :cascade do |t|
@@ -130,8 +139,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_28_111600) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "adoption_locations", "prompts"
-  add_foreign_key "bookmarks", "pets"
-  add_foreign_key "bookmarks", "users"
   add_foreign_key "interactions", "pets"
   add_foreign_key "interactions", "users", column: "adopter_id"
   add_foreign_key "pets", "users", column: "provider_id"
