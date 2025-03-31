@@ -36,6 +36,7 @@
 }
 .modal-header-retry {
   border-bottom: none !important;
+  padding: 15px
 }
 
 .modal-footer {
@@ -43,7 +44,7 @@
 }
 
 .modal-subheader {
-  margin: 15px !important;
+  padding: 15px !important;
 }
 
 // .show-modal {
@@ -62,11 +63,38 @@
 }
 
 .square-image {
-  width: 300px;
+  width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  // transition: transform 0.5s ease;
+
+  // &:hover {
+  //   cursor: pointer;
+  //   transform: scale(1.05);
+  //   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5);
+  // }
+}
+
+.other-matches-btn-div {
+  margin-bottom: 25px;
+}
+
+.modal-button {
+  margin: 15px;
+}
+
+.pet-card-container {
+  padding: 40px;
+}
+
+.pet-image-modal {
+  // padding: 10px;
+  width: 100%;
+  background-color: $beije-light;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
 
   &:hover {
     cursor: pointer;
@@ -75,8 +103,9 @@
   }
 }
 
-.other-matches-btn-div {
-  margin-bottom: 25px;
+.pet-card-modal-button {
+  padding: 15px;
 }
+
 
 // end of search modal
