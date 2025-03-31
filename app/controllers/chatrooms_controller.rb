@@ -13,20 +13,16 @@ class ChatroomsController < ApplicationController
     @provider = @pet.provider
     @adopter = current_user
 
-    # Try to find an existing chatroom between the provider, adopter, and pet
-    @chatroom = Chatroom.joins(:messages)
-                        .where(messages: { user_id: [@provider.id, @adopter.id] })
-                        .where(pet: @pet)
-                        .distinct
-                        .first
+    @chatroom ||= Chatroom.create(
+      name: "Chatroom between #{@provider.first_name || 'unknown'} and #{@adopter.first_name || 'unknown'}",
+      pet: @pet
+    )
 
-    # If no chatroom exists, create a new one
-    unless @chatroom
-      @chatroom = Chatroom.new(
-        name: "Chatroom between #{@provider.first_name || 'unknown'} and #{@adopter.first_name || 'unknown'}",
-        pet: @pet
-      )
-      @chatroom.save
+    # return redirect_to user_chatrooms_path(@adopter) unless @chatroom.save
+
+    # end
+    @chatroom.messages.find_or_create_by(user: @provider) do |msg|
+      msg.content = "Hello! You have reached #{@provider.first_name}, the owner of #{@pet.name}."
     end
 
     @message = @chatroom.messages.create(
