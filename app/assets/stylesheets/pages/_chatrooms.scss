@@ -4,9 +4,6 @@
   height: 80%;
   font-family: $body-font;
 }
-.test-class{
-  background-color: red;
-}
 
 .chat-sidebar {
   width: 30%;
@@ -15,8 +12,7 @@
   // border-right: 1px solid $grey;
   display: flex;
   flex-direction: column;
-  // gap: 16px;
-  background-color: yellow;
+  gap: 8px;
 
   h2 {
     font-family: $headers-font;
