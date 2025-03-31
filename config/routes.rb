@@ -14,14 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :pets, only: [:show, :new, :create, :edit, :update, :destroy] do
-<<<<<<< HEAD
       resources :favorites, only: [:create, :destroy]
-=======
-      # member do
-      #   post :create_chatroom
-      # end
-      post 'create_chatroom', to: 'chatrooms#create_chatroom', as: 'create_chatroom'
->>>>>>> 0b91dc68b74680ed8b9def9154adb002f44e3c84
       collection do
         post :update_breeds
       end
