@@ -22,14 +22,14 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-body">
-            <div class="modal-header d-flex justify-content-center align-items-center position-relative">
-              <h2 class="modal-title" id="outputThreeLabel">Here are your top matches!</h2>
-              <!-- Custom close button -->
-              <button type="button" class="position-absolute" style="top: 12px; right: 20px; background: none; border: none;" data-action="output#hideOutput" aria-label="Close">
-                <h1><i class="fa-solid fa-xmark"></i></h1>
-              </button>
-            </div>
             <% if @best_matches.present? %>
+              <div class="modal-header d-flex justify-content-center align-items-center position-relative">
+                <h2 class="modal-title" id="outputThreeLabel">Here are your top matches!</h2>
+                <!-- Custom close button -->
+                <button type="button" class="position-absolute" style="top: 12px; right: 20px; background: none; border: none;" data-action="output#hideOutput" aria-label="Close">
+                  <h1><i class="fa-solid fa-xmark"></i></h1>
+                </button>
+              </div>
               <div class="row d-flex justify-content-between pet-three-row">
                 <% @best_matches.first(3).each do |pet| %>
                   <div class="col-md-4 justify-content-center">
@@ -53,10 +53,20 @@
                   </div>
                 <% end %>
               </div>
+              <div class="text-center other-matches-btn-div">
+                <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn btn-secondary", data: { turbo: false } %>
+              </div>
+            <% else %>
+              <div class="modal-header-retry d-flex justify-content-center align-items-center position-relative">
+                <h2 class="modal-title" id="outputThreeLabel">We couldn't any matches for you.</h2>
+              </div>
+              <div class="text-center modal-subheader">
+                <h3>Try again with a different prompt or location!.</h3>
+              </div>
+              <div class="text-center my-5">
+                <%= link_to "Try Again", search_path, class: "btn btn-secondary", data: { turbo: false } %>
+              </div>
             <% end %>
-            <div class="text-center other-matches-btn-div">
-              <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn btn-secondary", data: { turbo: false } %>
-            </div>
           </div>
         </div>
       </div>
