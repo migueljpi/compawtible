@@ -41,3 +41,81 @@
 .modal-footer {
   border-top: none !important; /* Remove the horizontal line above the footer */
 }
+
+#modalPetShow {
+  .modal-content {
+    background-color: white !important;
+  }
+  .modal-header {
+    // border:none;
+
+    button {
+  //     background: none;
+  //     border-radius: 100px 100px 0 0;
+  //     padding: 5px 10px;
+  //     opacity: 1;
+  //     position: relative;
+  //     top: 3px;
+  //     border: solid 2px $primary;
+
+  //     // @media (min-width: $bootstrap-lg) {
+  //     //   top: 15px;
+  //     // }
+
+  //     &:hover {
+  //       top: 3px;
+  //     }
+      padding: 10px 15px;
+    }
+
+    span {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  .modal-body {
+    margin: 0 auto !important;
+    position: relative !important;
+    // height: 100% !important;
+    // width: 1000px !important;
+    // button .carousel-control-prev, .carousel-control-next {
+    //   color: red !important;
+    // }
+    // span .carousel-control-prev-icon, .carousel-control-next-icon {
+    //   color: red !important;
+
+    // }
+
+    // .carousel-control-prev-icon {
+    //   span {
+    //     margin-left: 10px !important;
+    //     color: $primary !important;
+    //   }
+    // }
+
+    // button {
+    //   background: none;
+    //   // border-radius: 100px 100px 0 0;
+    //   padding: 5px 10px;
+    //   opacity: 1;
+    //   position: relative;
+    //   // top: 3px;
+    //   left: 100px;
+    //   border: solid 2px $primary;
+    //   color: $primary !important;
+
+
+    //   // @media (min-width: $bootstrap-lg) {
+    //   //   top: 15px;
+    //   // }
+
+    //   &:hover {
+    //     // top: 3px;
+    //   }
+    // }
+
+    // span {
+    //   color: $primary !important;
+    // }
+  }
+}

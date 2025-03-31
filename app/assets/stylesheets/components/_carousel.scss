@@ -1,0 +1,61 @@
+// .carousel-control-prev, .carousel-control-next {
+//     color: red !important;
+//   // }
+// }
+
+#carouselPetShowModal {
+  // position: relative;
+
+  // .fixed-carousel-control {
+  //   position: absolute;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  //   width: 5%; /* Adjust width as needed */
+  //   height: auto;
+  //   z-index: 10;
+  // }
+
+  // .carousel-control-prev {
+  //   left: 10px; /* Adjust left positioning */
+  //   span {
+  //     color: black !important;
+  //   }
+  // }
+
+  // .carousel-control-next {
+  //   right: 10px; /* Adjust right positioning */
+  //   color: black !important;
+  // }
+
+  // .carousel-control-next-icon {
+  //   color: red !important;
+  // }
+
+}
+
+.image-pet {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+  // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.image-pet-modal {
+  height: 75vh;
+  width: auto;
+  object-fit: cover;
+  // border-radius: 5px;
+  // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.pet-image-main {
+  max-width: 400px;
+  // max-height: 400px;
+  // object-fit: cover;
+
+  margin-top: 50px;
+
+  margin-left: 10px;
+  margin-right: 10px;
+}
