@@ -8,9 +8,9 @@
               <h2 class="modal-title" id="outputThreeLabel">We couldn't process your request.</h2>
             </div>
             <div class="text-center modal-subheader">
-              <h3>Please try again.</h3>
+              <h3>Try again with a different prompt or location!</h3>
             </div>
-            <div class="text-center my-5">
+            <div class="text-center modal-button">
               <%= link_to "Try Again", search_path, class: "btn btn-secondary", data: { turbo: false } %>
             </div>
           </div>
@@ -18,48 +18,86 @@
       </div>
     </div>
   <% else %>
-    <div class="modal fade <%= @prompt&.output.present? ? 'show' : 'd-none' %>" tabindex="-1" data-output-target="outputThree" role="dialog" aria-labelledby="outputThreeLabel" aria-hidden="<%= @prompt&.output.present? ? 'false' : 'true' %>">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="modal-header d-flex justify-content-center align-items-center position-relative">
-              <h2 class="modal-title" id="outputThreeLabel">Here are your top matches!</h2>
-              <!-- Custom close button -->
-              <button type="button" class="position-absolute" style="top: 12px; right: 20px; background: none; border: none;" data-action="output#hideOutput" aria-label="Close">
-                <h1><i class="fa-solid fa-xmark"></i></h1>
-              </button>
-            </div>
-            <% if @best_matches.present? %>
+    <% if @best_matches.present? %>
+      <div class="modal fade <%= @prompt&.output.present? ? 'show' : 'd-none' %>" tabindex="-1" data-output-target="outputThree" role="dialog" aria-labelledby="outputThreeLabel" aria-hidden="<%= @prompt&.output.present? ? 'false' : 'true' %>">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="modal-header d-flex justify-content-center align-items-center position-relative">
+                <h2 class="modal-title" id="outputThreeLabel">Here are your top matches!</h2>
+                <button type="button" class="position-absolute" style="top: 12px; right: 20px; background: none; border: none;" data-action="output#hideOutput" aria-label="Close">
+                  <h1><i class="fa-solid fa-xmark"></i></h1>
+                </button>
+              </div>
               <div class="row d-flex justify-content-between pet-three-row">
-                <% @best_matches.first(3).each do |pet| %>
-                  <div class="col-md-4 justify-content-center">
+                <% @best_matches.first(3).each_with_index do |pet, index| %>
+                  <div class="col-md-4 justify-content-center pet-card-container">
                     <div class="pet-image-modal">
-                      <div class="animal-images ">
+                      <div class="animal-images">
                         <% if pet.photos.attached? %>
-                          <%= link_to user_pet_path(pet.provider, pet), data: { turbo: false } do %>
-                            <%= cl_image_tag pet.photos.first.key, class: "square-image", style: "border-radius: 15px" %>
-                          <% end %>
-                        <% else %>
-                          <%= link_to user_pet_path(pet.provider, pet) do %>
-                            <%= image_tag "dog.jpg", id: "image-profile-pet" %>
-                          <% end %>
+                          <div id="carouselExampleControls_<%= index %>" class="carousel slide">
+                            <div class="carousel-inner">
+                              <% pet.photos.each_with_index do |photo, idx| %>
+                                <div class="carousel-item <%= 'active' if idx == 0 %>">
+                                  <% if photo.present? %>
+                                    <%= image_tag(photo, class: "square-image") %>
+                                  <% else %>
+                                    <%= image_tag('dog.jpg', class: "square-image") %>
+                                  <% end %>
+                                </div>
+                              <% end %>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>
                         <% end %>
                         <div class="animal-info">
-                          <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %> </p>
-                          <p><%= pet.description %></p>
+                          <div class="pet-name-modal-card">
+                            <p><strong><%= pet.name %></strong></p>
+                          </div>
+                          <div class="pet-description-modal-card">
+                            <p><%= pet.description %></p>
+                          </div>
+                        </div>
+                        <div class="pet-card-modal-button d-flex justify-content-end">
+                          <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
                         </div>
                       </div>
                     </div>
                   </div>
                 <% end %>
               </div>
-            <% end %>
-            <div class="text-center other-matches-btn-div">
-              <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn btn-secondary", data: { turbo: false } %>
+              <div class="text-center other-matches-btn-div">
+                <%= link_to "Other matches", other_matches_path(prompt_id: @prompt.id), class: "btn btn-secondary", data: { turbo: false } %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <% else %>
+      <div class="modal fade <%= @prompt&.output.present? ? 'show' : 'd-none' %>" tabindex="-1" data-output-target="outputThree" role="dialog" aria-labelledby="outputThreeLabel" aria-hidden="<%= @prompt&.output.present? ? 'false' : 'true' %>">
+        <div class="modal-dialog modal-dialog-centered modal-retry" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="modal-header-retry d-flex justify-content-center align-items-center position-relative">
+                <h2 class="modal-title" id="outputThreeLabel">We couldn't find any matches for you.</h2>
+              </div>
+              <div class="text-center modal-subheader">
+                <h3>Try again with a different prompt or location!</h3>
+              </div>
+              <div class="text-center modal-button">
+                <%= link_to "Try Again", search_path, class: "btn btn-secondary", data: { turbo: false } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </turbo-frame>

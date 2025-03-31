@@ -25,7 +25,7 @@ class Prompt < ApplicationRecord
     client = OpenAI::Client.new
     full_prompt = "Respond only with a valid JSON array of ranked ids (e.g., [1, 2, 3]). Do not include any other text, characters, formatting, or explanation. Analyze the user input: #{self.input}. Compare it to the pets: #{self.pets_for_prompt}. Always return 10 pet IDs unless fewer exist. If a preferred species is mentioned, rank all matches first — no exceptions. Order explicitly preferred pets by best suitability. Fill remaining spots with others only after ranking all preferred pets. Never rank a non-preferred species above a preferred one."
 
-    max_retries = 1
+    max_retries = 2
     retries = 0
 
     begin

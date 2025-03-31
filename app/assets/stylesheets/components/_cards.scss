@@ -32,14 +32,9 @@
 }
 
 .animal-info {
-  margin-top: 10px;
+  margin: 15px;
 }
 
-.pet-image-modal {
-  padding-left: 50px;
-  padding-right: 50px;
-  width: 100%;
-}
 
 .pet-image-main {
   margin-top: 0px;
@@ -48,15 +43,14 @@
   margin-bottom: 50px;
 }
 
-.animal-images {
-  margin-top: 0px;
-  margin-bottom: 15px;
-}
-
 .pet-info-button {
   margin-top: 0px;
   background-color: $yellow;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); ;
+}
+
+.other-pets-card-container {
+  padding: 20px;
 }
