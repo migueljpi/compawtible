@@ -1,36 +1,45 @@
-<div class="chats-container p-2" data-controller="chatroom-subscription"  data-user-id="<%= current_user.id %>" >
-  <div class="chat-sidebar">
-    <h2>Chats</h2>
+<h2 class="test-class">Messages</h2>
+<div class="chats-container p2" data-controller="chatroom-subscription"  data-user-id="<%= current_user.id %>" >
+  <aside class="chat-sidebar">
+    <h2>Chats <i class="fas fa-comments"></i></h2>
     <ul class="chat-list">
       <% current_user.chatrooms.each do |chatroom| %>
 
-      <li class="chat-item" data-action="click->chatroom-subscription#selectChatroom" data-chatroom-id="<%= chatroom.id %>">
+      <li class="chat-item <%= 'active' if chatroom.id == params[:chatroom_id] %>" data-action="click->chatroom-subscription#selectChatroom" data-chatroom-id="<%= chatroom.id %>">
         <%# <img src="avatar2.jpg" alt="John D."> %>
+        <%# <% if current_user.photo.attached? %>
+          <%# <%= cl_image_tag current_user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, class: "", alt: "dropdown menu"%>
+        <%# <% else %>
+        <div class="chat-avatar">
+            <%= cl_image_tag chatroom.pet.photos[0].key, width: 50, height: 50, crop: :thumb, gravity: :face, class: "", alt: "dropdown menu" %>
+          </div>
         <div>
           <p class="chat-name"> <%= other_user_name_from_chatroom(chatroom.users.map()) %> </p>
-          <p class="chat-preview">
-            <%= chatroom.messages.last&.user&.first_name || "No messages yet" %>:
-            <%= chatroom.messages.last&.content || "No messages yet" %>
-          </p>
+          <div class="chat-preview text-secondary"><%= truncate(chatroom.messages.last.content, length: 30) || "" %></div>
         </div>
-        <%# <span class="chat-time">20:13</span> %>
+        <span class="chat-time">20:13</span>
       </li>
     <% end %>
-
     </ul>
-  </div>
+  </aside>
 
   <div class="chat-main" >
-    <div class="chat-header">
-      <%# <img src="avatar4.jpg" alt="Kevin Miller"> %>
-      <%# <h3><%= other_user_name_from_chatroom(current_user.chatrooms) %></h3>
-    </div>
+    <header class="chat-header">
+      <div class="chat-user-info">
+        <%# <%= cl_image_tag chatroom.pet.photo.key[0], width: 50, height: 50, crop: :thumb, gravity: :face, class: "", alt: "dropdown menu" %>
+        <div>image</div>
+        <div><h5><%= current_user.chatrooms[0].name %></h5> from <h6></h6> </div>
+      </div>
+    </header>
+
     <div class="chat-messages" data-chatroom-subscription-target="messages">
+      <%# // Filled by JS %>
     </div>
+
     <div class="chat-input">
       <input type="text" placeholder="Type here..." data-chatroom-subscription-target="input">
       <button type="submit" data-action="click->chatroom-subscription#sendMessage">
-      <i class="icon-send"></i>
+      <i class="fas fa-paper-plane icon-send"></i>
       </button>
     </div>
   </div>

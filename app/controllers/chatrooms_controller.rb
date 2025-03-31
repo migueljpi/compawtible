@@ -5,6 +5,7 @@ class ChatroomsController < ApplicationController
     @chatrooms = current_user.chatrooms
     @chatroom = @chatrooms.find_by(id: params[:chatroom_id])
     @message = @chatroom.messages.new if @chatroom
+    # @chatroom_pet = @chatroom.pet
   end
 
   def create_chatroom
@@ -22,7 +23,7 @@ class ChatroomsController < ApplicationController
     # If no chatroom exists, create a new one
     unless @chatroom
       @chatroom = Chatroom.new(
-        name: "Chatroom between #{@provider.first_name || "unknown" } and #{@adopter.first_name || "unknown" }",
+        name: "Chatroom between #{@provider.first_name || 'unknown'} and #{@adopter.first_name || 'unknown'}",
         pet: @pet
       )
       @chatroom.save
