@@ -77,7 +77,8 @@
 }
 
 .other-matches-btn-div {
-  margin-bottom: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .modal-button {
@@ -85,19 +86,19 @@
 }
 
 .pet-card-container {
-  padding: 40px;
+  padding: 0px 60px;
 }
 
 .pet-image-modal {
   // padding: 10px;
   width: 100%;
-  background-color: $beije-light;
+  background-color: #f5ede3;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 
   &:hover {
-    cursor: pointer;
+    // cursor: pointer;
     transform: scale(1.05);
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5);
   }
@@ -106,6 +107,18 @@
 .pet-card-modal-button {
   padding: 15px;
 }
+
+.pet-description-modal-card {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  height: calc(1.5em * 2);
+}
+
+
 
 
 // end of search modal

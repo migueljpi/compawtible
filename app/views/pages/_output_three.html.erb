@@ -58,15 +58,15 @@
                           </div>
                         <% end %>
                         <div class="animal-info">
-                          <div>
-                            <p><strong><%= pet.name %></strong> - <%= pet.breed %> <%= pet.species %></p>
+                          <div class="pet-name-modal-card">
+                            <p><strong><%= pet.name %></strong></p>
                           </div>
-                          <div>
+                          <div class="pet-description-modal-card">
                             <p><%= pet.description %></p>
                           </div>
                         </div>
                         <div class="pet-card-modal-button d-flex justify-content-end">
-                          <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary" %>
+                          <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
                         </div>
                       </div>
                     </div>
