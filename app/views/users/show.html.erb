@@ -2,7 +2,9 @@
 
 <% if @user.provider? %>
   <h1 id="user-greeting">Hello, <%= @user.first_name %>! </h1>
-  <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
+  <% if current_user.role == "provider" %>
+    <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
+  <% end %>
   <div class="user-card">
     <div>
       <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
@@ -10,7 +12,6 @@
     <div class="user-input">
       <h3><strong><%= @user.first_name %> <%= @user.last_name %> (<%= @user.age %>), <%= @user.location %></strong></h3>
       <h3 id="user-role"><%= @user.role.capitalize %></h3>
-      <h3><strong>Email: </strong></h3>
       <h4><%= @user.email %></h4>
       <h3><strong>About me:</strong></h3>
       <h4><%= @user.about_me %></h4>
@@ -91,8 +92,11 @@
 
                 <!-- Add the Remove Pet button -->
                 <div class= "user-button">
-                  <%= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
-                  <%= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+                  <%#= link_to 'See pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
+                  <%= link_to "See #{pet.name.presence}" || 'View pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
+                  <% if current_user.role == 'provider' %>
+                    <%= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -100,13 +104,19 @@
         <% end %>
       </div>
     </div>
-    <div class="button-add-pet"><%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %></div>
+    <% if current_user.role == 'provider' %>
+    <div class="button-add-pet">
+      <%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %>
+    </div>
+    <% end %>
   </div>
 
 <%# if @user.adopter? %>
 <% else %>
   <h1 id="user-greeting">Hello, <%= @user.first_name %>! </h1>
-  <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
+  <% if current_user.role == "adopter" %>
+    <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
+  <% end %>
   <div class="user-card">
     <div>
       <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
@@ -114,7 +124,6 @@
     <div class="user-input">
       <h3><strong><%= @user.first_name %> <%= @user.last_name %> (<%= @user.age %>), <%= @user.location %></strong></h3>
       <h3 id="user-role"><%= @user.role.capitalize %></h3>
-      <h3><strong>Email: </strong></h3>
       <h4><%= @user.email %></h4>
       <h3><strong>About me:</strong></h3>
       <h4><%= @user.about_me %></h4>
@@ -137,7 +146,6 @@
     <%#= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary" %>
     <%#= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
   </div>
-  <div class="button-add-pet"><%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %></div>
 <% end %>
 
 </div>

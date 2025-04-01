@@ -2,12 +2,16 @@ class ChatroomsController < ApplicationController
   before_action :set_user, only: [:index]
 
   def index
+    @chatrooms = policy_scope(Chatroom)
+    authorize @chatrooms
     @chatrooms = current_user.chatrooms
     @chatroom = @chatrooms.find_by(id: params[:chatroom_id])
     @message = @chatroom.messages.new if @chatroom
   end
 
   def create_chatroom
+    @chatroom = policy_scope(Chatroom)
+    authorize @chatroom
     @pet = Pet.find(params[:pet_id])
     @provider = @pet.provider
     @adopter = current_user
