@@ -31,20 +31,103 @@
   //   color: red !important;
   // }
 
+
+
+}
+
+// .fixed-carousel-control {
+//   position: absolute;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   width: auto;
+//   background: rgba(0, 0, 0, 0.5);
+//   border-radius: 50%;
+//   padding: 5px;
+// }
+
+// .fixed-carousel-control.carousel-control-prev {
+//   left: 10px;
+// }
+
+// .fixed-carousel-control.carousel-control-next {
+//   right: 10px;
+// }
+
+.fixed-carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  // height: 35px;
+  // background: var(--bs-primary); /* Bootstrap primary color */
+  // background-color: #007bff;
+  // border-radius: 50%;
+  // padding: 5px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+}
+
+.fixed-carousel-control:hover {
+  opacity: 1;
+}
+
+/* Left control (10px from modal left) */
+.carousel-control-prev.fixed-carousel-control {
+  left: 10px;
+}
+
+/* Right control (10px from modal right) */
+.carousel-control-next.fixed-carousel-control {
+  right: 10px;
+}
+
+// /* Change the color of the control icons */
+// .fixed-carousel-control .carousel-control-prev-icon,
+// .fixed-carousel-control .carousel-control-next-icon {
+//   filter: brightness(0) invert(1); /* Makes icon white */
+//   background-color: transparent; /* Ensures no background color */
+// }
+
+/* Change the color of the control icons */
+.fixed-carousel-control .carousel-control-prev-icon,
+.fixed-carousel-control .carousel-control-next-icon {
+  background-image: none; /* Remove default Bootstrap icon */
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+}
+
+/* Custom orange arrow icons */
+.fixed-carousel-control .carousel-control-prev-icon::after,
+.fixed-carousel-control .carousel-control-next-icon::after {
+  content: "❮"; /* Left arrow */
+  font-size: 30px;
+  color: $color-secondary; /* Change this to your desired shade of orange */
+}
+
+.fixed-carousel-control .carousel-control-next-icon::after {
+  content: "❯"; /* Right arrow */
 }
 
 .image-pet {
+  height: 80vh;
   width: 400px;
-  height: 400px;
   object-fit: cover;
   border-radius: 5px;
+  cursor: pointer;
   // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .image-pet-modal {
   height: 75vh;
-  width: auto;
+  max-width: 80%;
   object-fit: cover;
+  // position: absolute;
+  // top: 50%;
+  // transform: translateY(-50%);
   // border-radius: 5px;
   // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }

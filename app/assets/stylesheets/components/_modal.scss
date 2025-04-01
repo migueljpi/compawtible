@@ -45,6 +45,7 @@
 #modalPetShow {
   .modal-content {
     background-color: white !important;
+    position: relative !important; /* Ensures controls are placed relative to modal */
   }
   .modal-header {
     // border:none;
@@ -65,7 +66,7 @@
   //     &:hover {
   //       top: 3px;
   //     }
-      padding: 10px 15px;
+      padding: 8px 20px;
     }
 
     span {
@@ -75,7 +76,7 @@
 
   .modal-body {
     margin: 0 auto !important;
-    position: relative !important;
+    // position: relative !important;
     // height: 100% !important;
     // width: 1000px !important;
     // button .carousel-control-prev, .carousel-control-next {
