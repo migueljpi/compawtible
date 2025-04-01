@@ -1,3 +1,7 @@
+// .location-radius-row {
+//   border:#007bff 2px solid;
+// }
+
 .empty-space {
   height: 500px;
 }
@@ -9,7 +13,7 @@
 .input-form {
   margin-bottom: 50px;
   padding: 30px;
-  border: 2px solid #001eff;
+  // border: 2px solid #001eff;
 }
 
 
@@ -21,6 +25,7 @@
 }
 
 .slider-container {
+  margin: 15px 0px;
   // max-width: 600px;
   // width: 100%;
   // box-sizing: border-box;
@@ -81,4 +86,120 @@
   background-color: $beije-main;
   border-radius: 15px;
   // height: 500px;
+}
+
+.large-input {
+  box-sizing: border-box;
+  width: 100%;
+  // max-width: 600px;
+  font-size: 1.2rem;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 2px solid #AFAEAE;
+  border-radius: 15px;
+  background-color: $beije-light;
+  height: 150px;
+  margin-left: auto;
+}
+
+.small-input {
+  margin: 15px 0px;
+  font-size: 1.2rem;
+  // font-weight: bold;
+  padding: 15px;
+  border: 2px solid #AFAEAE;
+  border-radius: 15px;
+  background-color: $beije-light;
+  // margin-right: 15px;
+  // height: 150px;
+}
+
+// Tablet screens
+@media (max-width: 1024px) {
+  .input-form {
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .header-top {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+  }
+
+  .slider-container {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .thick-slider {
+    height: 8px;
+  }
+
+  .radius-text {
+    padding-right: 10px;
+    font-size: 0.9rem;
+  }
+
+  .top-three {
+    margin: 0px 50px;
+    padding: 20px;
+  }
+
+  .large-input {
+    font-size: 1rem;
+    height: 120px;
+  }
+
+  .small-input {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+// Phone screens
+@media (max-width: 768px) {
+  .input-form {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .header-top {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .slider-container {
+    margin: 5px 0px;
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .thick-slider {
+    height: 6px;
+  }
+
+  .radius-text {
+    padding-right: 5px;
+    font-size: 0.8rem;
+  }
+
+  .top-three {
+    margin: 0px 20px;
+    padding: 15px;
+  }
+
+  .large-input {
+    margin: 10px 0px;
+    font-size: 0.9rem;
+    height: 100px;
+  }
+
+  .small-input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
 }
