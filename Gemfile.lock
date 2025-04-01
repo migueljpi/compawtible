@@ -80,6 +80,8 @@ GEM
       minitest (>= 5.1)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
+    acts_as_favoritor (6.0.2)
+      activerecord (>= 5.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
@@ -159,6 +161,8 @@ GEM
       csv (>= 3.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    humanize_boolean (0.0.2)
+      i18n
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.3)
@@ -390,6 +394,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  acts_as_favoritor
   autoprefixer-rails
   bootsnap
   bootstrap (~> 5.2)
@@ -401,6 +406,7 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-sass (~> 6.1)
   geocoder
+  humanize_boolean
   importmap-rails (~> 1.2.3)
   jbuilder
   pg (~> 1.1)

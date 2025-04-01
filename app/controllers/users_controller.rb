@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
     authorize @user
 
+
     @pets = @user.pets
 
     return unless @user.geocoded?

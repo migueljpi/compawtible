@@ -32,13 +32,7 @@
 }
 
 .animal-info {
-  margin-top: 10px;
-}
-
-.pet-image-modal {
-  padding-left: 50px;
-  padding-right: 50px;
-  width: 100%;
+  margin: 15px;
 }
 
 .pet-image-main {
@@ -48,15 +42,36 @@
   margin-bottom: 50px;
 }
 
-.animal-images {
-  margin-top: 0px;
-  margin-bottom: 15px;
-}
-
 .pet-info-button {
   margin-top: 0px;
   background-color: $yellow;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); ;
+}
+
+.animal-images {
+  position: relative;
+}
+
+.favorite-button {
+  color: $orange-main;
+  background-color: transparent;
+  border-style: none;
+  font-size: 30px;
+  cursor: pointer;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.other-pets-card-container {
+  padding: 20px;
 }
