@@ -159,6 +159,8 @@ GEM
       csv (>= 3.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    humanize_boolean (0.0.2)
+      i18n
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.3)
@@ -401,6 +403,7 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-sass (~> 6.1)
   geocoder
+  humanize_boolean
   importmap-rails (~> 1.2.3)
   jbuilder
   pg (~> 1.1)

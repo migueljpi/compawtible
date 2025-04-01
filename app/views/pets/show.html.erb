@@ -161,6 +161,8 @@
       <% if @pet.provider == current_user %>
         <%= link_to 'Edit', edit_user_pet_path(@user, @pet), class: "btn btn-primary button-action" %>
         <%= link_to 'Remove Pet', remove_pet_path(@user, @pet), method: :delete, class: 'btn btn-danger button-action', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+      <% else %>
+        <%= render "contact_provider" %>
       <% end %>
     </div>
 
@@ -168,7 +170,7 @@
 
   <script>
 
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipTriggerList = docbvccfgvvbbv bbv                                                b b b                                                   ument.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
     const $slider = document.getElementById('slider');
@@ -179,7 +181,5 @@
     });
 
   </script>
-
-  <%= render "contact_provider" %>
 
 </div>
