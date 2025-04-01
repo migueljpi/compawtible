@@ -4,19 +4,6 @@
 
     <%= link_to 'Back to Profile', user_path(@user) %>
 
-<div class="image-container" id="favorite_icon_<%= @pet.id %>">
-  <% if current_user.favorited?(@pet) %>
-    <% favorite = current_user.favorites.find_by(favoritable: @pet) %>
-    <%= button_to user_pet_favorite_path(current_user, @pet, favorite), method: :delete, data: { turbo: true } do %>
-      <i class="fa-solid fa-heart"></i>
-    <% end %>
-  <% else %>
-    <%= button_to user_pet_favorites_path(current_user, @pet), method: :post, data: { turbo: true } do %>
-      <i class="fa-regular fa-heart"></i>
-    <% end %>
-  <% end %>
-</div>
-
     <div class="row d-flex align-items-center justify-content-md-center">
 
       <!-- Pet Information -->
@@ -46,11 +33,24 @@
 
       <!-- Pet Photo Carousel -->
       <div class="col-md-6 d-flex justify-content-center h-100">
-
         <% if @pet.photos.attached? %>
           <div id="carouselPetShow" class="carousel slide"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Click for Gallery.">
             <div class="carousel-inner">
               <% @pet.photos.each_with_index do |photo, idx| %>
+                <!-- Bookmark icon -->
+                <div class="image-container" id="favorite_icon_<%= @pet.id %>">
+                  <% if current_user.favorited?(@pet) %>
+                    <% favorite = current_user.favorites.find_by(favoritable: @pet) %>
+                    <%= button_to user_pet_favorite_path(current_user, @pet, favorite), method: :delete, data: { turbo: true }, class: "favorite-button"  do %>
+                      <i class="fa-solid fa-heart"></i>
+                    <% end %>
+                  <% else %>
+                    <%= button_to user_pet_favorites_path(current_user, @pet), method: :post, data: { turbo: true }, class: "favorite-button"  do %>
+                      <i class="fa-regular fa-heart"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+                <!-- End of bookmark icon -->
                 <div class="carousel-item <%= 'active' if idx == 0 %>" data-bs-toggle="modal" data-bs-target="#modalPetShow" data-turbo="false">
                   <%= cl_image_tag photo.key, class: "img-fluid image-pet" %>
                 </div>
@@ -71,8 +71,7 @@
           <!-- No images -->
           <p>No image available</p>
         <% end %>
-
-      </div>
+    </div>
 
     <!-- Pet Modal Gallery -->
       <div class="modal fade" id="modalPetShow" tabindex="-1" data-turbo="false" aria-labelledby="modalPetShowTitle" aria-hidden="true">
