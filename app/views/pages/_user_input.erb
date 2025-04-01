@@ -2,7 +2,7 @@
   html: { id: "search-form", novalidate: false },
   data: { turbo_frame: "output-three", action: "turbo:submit-start->output#showLoadingModal turbo:submit-end->output#showOutput" } do |f| %>
   <div class="form-inputs">
-    <div class="row">
+    <div class="row location-radius-row">
       <div class="col-md-4" id="location" data-controller="address-autofill">
         <%= text_field_tag :location, current_user.location,
               required: true,

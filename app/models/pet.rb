@@ -1,4 +1,5 @@
 class Pet < ApplicationRecord
+  acts_as_favoritable
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
@@ -10,18 +11,20 @@ class Pet < ApplicationRecord
               "Scottish Fold", "Norwegian Forest Cat", "Russian Blue", "Birman", "Savannah", "Oriental Shorthair",
               "Turkish Angora", "Other"],
     "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Flemish Giant", "Lionhead", "Rex", "Mini Lop", "English Angora",
-                "French Lop", "Dutch", "Harlequin", "Other"],
+                 "French Lop", "Dutch", "Harlequin", "Other"],
     "Hamster" => ["Syrian Hamster", "Dwarf Campbell Russian Hamster", "Dwarf Winter White Russian Hamster",
                   "Roborovski Hamster", "Chinese Hamster", "Other"],
     "Guinea pig" => ["American", "Abyssinian", "Peruvian", "Teddy", "Silkie", "Texel", "Himalayan", "Baldwin", "Other"],
     "Ferret" => ["Standard", "Albino", "Sable", "Black Sable", "Chocolate", "Cinnamon", "Champagne", "Other"],
     "Bird" => ["Canary", "Finch", "Budgerigar", "Cockatiel", "Lovebird", "Dove", "Pigeon", "Other"],
     "Turtle" => ["Red-Eared Slider", "Box Turtle", "Painted Turtle", "Musk Turtle", "Wood Turtle", "Other"],
-    "Fish" => ["Betta", "Goldfish", "Guppy", "Tetra", "Angelfish", "Cichlid", "Molly", "Platy", "Catfish", "Koi", "Other"],
+    "Fish" => ["Betta", "Goldfish", "Guppy", "Tetra", "Angelfish", "Cichlid", "Molly", "Platy", "Catfish", "Koi",
+               "Other"],
     "Mouse" => ["Fancy Mouse", "Hairless Mouse", "Other"],
     "Rat" => ["Dumbo Rat", "Standard Rat", "Hairless Rat", "Other"],
     "Chinchilla" => ["Standard Gray", "Black Velvet", "Beige", "White", "Other"],
-    "Lizard" => ["Bearded Dragon", "Leopard Gecko", "Crested Gecko", "Green Iguana", "Blue-Tongued Skink", "Tegu", "Other"],
+    "Lizard" => ["Bearded Dragon", "Leopard Gecko", "Crested Gecko", "Green Iguana", "Blue-Tongued Skink", "Tegu",
+                 "Other"],
     "Tarantula" => ["Mexican Red Knee", "Chilean Rose", "Goliath Birdeater", "Pink Toe", "Other"],
     "Frog" => ["White’s Tree Frog", "Poison Dart Frog", "Pacman Frog", "African Clawed Frog", "Other"],
     "Goat" => ["Nubian", "Pygmy", "Boer", "Alpine", "Saanen", "Toggenburg", "Other"],
@@ -48,6 +51,7 @@ class Pet < ApplicationRecord
   has_many :interactions, dependent: :destroy
   has_one :adopters, through: :interactions, source: :user
   has_many :chatrooms
+  has_many :favoritors, through: :favorites, source: :user
 
   # photos
   # has_one_attached :photo
@@ -80,9 +84,9 @@ class Pet < ApplicationRecord
   def breed_matches_species
     return if species.blank? || breed.blank?
 
-    unless BREEDS[species]&.include?(breed)
-      errors.add(:breed, "is not a valid breed for the selected species")
-    end
+    return if BREEDS[species]&.include?(breed)
+
+    errors.add(:breed, "is not a valid breed for the selected species")
   end
 
   # def breed_matches_species
@@ -95,5 +99,4 @@ class Pet < ApplicationRecord
   #     errors.add(:breed, "is not a valid breed for the selected species")
   #   end
   # end
-
 end
