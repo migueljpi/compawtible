@@ -7,17 +7,6 @@ class Prompt < ApplicationRecord
     self[:output]
   end
 
-
-  def sanitize_input
-    sanitized = self.input.strip # Removes leading/trailing whitespace
-    sanitized = sanitized.gsub(/[\r\n\t]/, " ")  # Single line
-    forbidden_keywords = ["ignore previous", "disregard", "pretend", "modify", "database", "system"]
-    if forbidden_keywords.any? { |word| sanitized.downcase.include?(word) }
-      return "Invalid input detected."
-    end
-    sanitized
-  end
-
   def valid_response_format?(response)
     begin
       parsed_response = JSON.parse(response)
@@ -40,7 +29,30 @@ class Prompt < ApplicationRecord
     puts "_-_-_-_Sanitized Input: _-_-_-_ #{sanitized_input}"
 
     # Forbidden words check
-    forbidden_keywords = ["ignore previous", "disregard", "pretend", "modify database", "system"]
+    forbidden_keywords = [
+      "ignore previous", "disregard", "pretend", "bypass", "override",
+      "forget this instruction", "respond freely", "act as",
+
+      "modify database", "delete records", "access admin", "SQL injection",
+      "drop table", "insert into", "alter table", "execute command", "system access",
+
+      "hack", "exploit", "malware", "phishing", "crack password", "breach security",
+      "bypass authentication", "brute force", "DDOS attack", "keylogger",
+
+      "illegal", "black market", "forged documents", "fake ID", "smuggling",
+      "money laundering", "stolen credit card", "pirated software", "deepfake",
+
+      "spread false", "fake news", "disinformation", "propaganda",
+
+      "violent act", "terrorism", "bomb instructions", "child exploitation",
+      "self-harm", "suicide method", "harm others", "manufacture drugs",
+
+      "remote code execution", "run script", "shell command", "curl request",
+      "Python eval", "reverse shell", "Metasploit", "terminal command",
+
+      "disregard safety", "ignore instructions", "change behavior",
+      "modify response rules", "circumvent restrictions"
+    ]
     if forbidden_keywords.any? { |word| sanitized_input.downcase.include?(word) }
       puts "❌ Forbidden word detected. Returning nil."
       sleep(0.5)
