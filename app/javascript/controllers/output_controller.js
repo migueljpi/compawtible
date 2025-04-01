@@ -4,67 +4,69 @@ export default class extends Controller {
   static targets = ["outputThree"];
 
   connect() {
-    console.log("OutputController connected");
+    console.log("✅ OutputController connected");
 
-    // Get the prompt ID and output attribute from the Turbo Frame data attributes
-    const promptId = this.element.dataset.outputPromptId;
-    const hasOutput = !!this.element.dataset.outputHasOutput; // Check if the output attribute exists
+    // Bind the methods to the controller instance
+    this.handleFrameLoad = this.handleFrameLoad.bind(this);
 
-    // Listen for Turbo Frame load (triggers when Turbo replaces the frame)
-    document.addEventListener("turbo:frame-load", (event) => {
-      if (event.target.id === "output-three" && hasOutput) {
-        console.log("Turbo Frame updated, showing output...");
-        this.showOutput();
-      }
-    });
+    // Add the event listener
+    document.addEventListener("turbo:frame-load", this.handleFrameLoad);
 
-    // On page load, check if we should show the modal
-    document.addEventListener("turbo:load", () => {
-      if (promptId && hasOutput) {
-        console.log("Prompt with output detected, showing output...");
-        this.showOutput();
-      } else {
-        console.log("No prompt with output detected, keeping modal hidden.");
-      }
-    });
+    const promptId = this.getRailsParam("prompt_id");
+    if (promptId) {
+      console.log("✅ Prompt ID detected:", promptId);
+      this.showOutput();
+    }
   }
 
+  disconnect() {
+    console.log("❌ OutputController disconnected");
 
+    // Remove the event listener
+    document.removeEventListener("turbo:frame-load", this.handleFrameLoad);
+  }
+
+  handleFrameLoad(event) {
+    if (event.target.id === "output-three") {
+      this.showOutput();
+    }
+  }
 
   showOutput() {
-    console.log("OutputController showOutput");
+    if (this.outputThreeTarget) {
+      this.outputThreeTarget.classList.remove("d-none");
 
-    if (this.hasOutputThreeTarget) {
-      setTimeout(() => {
-        this.outputThreeTarget.classList.remove("d-none");
+      let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
+      if (!modal) {
+        modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: true, focus: true });
+      }
 
-        let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
-        if (!modal) {
-          modal = new bootstrap.Modal(this.outputThreeTarget, { backdrop: false, focus: false });
-        }
-        modal.show();
+      modal.show();
 
-        console.log("Modal should be visible now");
-      }, 100);
+      console.log("Modal should be visible now");
     } else {
-      console.error("Output target not found!");
+      console.error("❌ Output target not found.");
     }
   }
 
   hideOutput() {
-    console.log("OutputController hideOutput");
-
-    if (this.hasOutputThreeTarget) {
-      const modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
-      modal.hide(); // Hide the modal
-
-      setTimeout(() => {
-        this.outputThreeTarget.classList.add("d-none"); // ADD d-none after modal is hidden
-      }, 300); // Delay slightly to let Bootstrap animation complete
-
-      localStorage.setItem("showOutput", "false"); // Store state in localStorage
-    } else {
-      console.error("Output target not found!");
+    if (this.outputThreeTarget) {
+      let modal = bootstrap.Modal.getInstance(this.outputThreeTarget);
+      if (modal) {
+        this.outputThreeTarget.addEventListener(
+          "hidden.bs.modal",
+          () => {
+            this.outputThreeTarget.classList.add("d-none");
+          },
+          { once: true }
+        );
+        modal.hide();
+      }
     }
+  }
+
+  getRailsParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
   }
 }

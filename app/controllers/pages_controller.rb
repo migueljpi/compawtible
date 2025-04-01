@@ -5,16 +5,17 @@ class PagesController < ApplicationController
   end
 
   def search
-    Rails.logger.info("^^^^^^Incoming params: #{params.inspect}")
-    @users = User.all
-    @pets = Pet.all
-
     if params[:prompt_id].present?
-      # Case 1: A prompt_id is provided, retrieve the existing prompt
       @prompt = Prompt.find(params[:prompt_id])
-      @output = @prompt.output # Use the stored output, do not call the OpenAI API again
-      ids = JSON.parse(@output)
-      @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
+      @output = @prompt.generate_output
+
+      if @output.nil?
+        @retry = true # Flag to indicate invalid response
+        @best_matches = [] # No matches to display
+      else
+        ids = JSON.parse(@output)
+        @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
+      end
     else
       # Case 2: No prompt_id is provided, initialize a new prompt
       @prompt = Prompt.new
@@ -34,14 +35,21 @@ class PagesController < ApplicationController
           @prompt.pets_for_prompt = @pets_nearby.to_json # PETS FOR PROMPT
 
           if @prompt.save
-            @output = @prompt.output # OUTPUT
-            Rails.logger.info("Prompt saved with output: " + @output)
-            ids = JSON.parse(@output) # Parse the IDs
-            @prompt.update(best_matches: ids) # Update the best_matches column with the IDs
-            @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
+            @output = @prompt.generate_output # Explicitly generate the output
+
+            if @output.nil?
+              @retry = true # Flag to indicate invalid response
+              @best_matches = [] # No matches to display
+            else
+              Rails.logger.info("Prompt saved with output: " + @output)
+              ids = JSON.parse(@output) # Parse the IDs
+              @prompt.update(best_matches: ids) # Update the best_matches column with the IDs
+              @best_matches = ids.map { |id| Pet.find_by(id: id) }.compact
+            end
 
             # Render the Turbo Frame content
-            render turbo_frame: "output-three", partial: "pages/output_three", locals: { best_matches: @best_matches&.first(3) }
+            sleep(5)
+            render turbo_frame: "output-three", partial: "pages/output_three", locals: { best_matches: @best_matches }
           else
             flash.now[:alert] = "There was an error saving the data."
             render :search, status: :unprocessable_entity

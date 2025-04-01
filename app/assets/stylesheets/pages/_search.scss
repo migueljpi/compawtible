@@ -1,55 +1,79 @@
 .empty-space {
   height: 500px;
-  // background-color: $beije-light;
 }
 
+#radius-slider {
+  width: 100%;
+}
 
 .input-form {
   margin-bottom: 50px;
-  padding: 0px 30px;
+  padding: 30px;
+  border: 2px solid #001eff;
 }
+
 
 .header-top {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 50px;
 }
 
+.slider-container {
+  // max-width: 600px;
+  // width: 100%;
+  // box-sizing: border-box;
+  background-color: $beije-light;
+  border: 2px solid #AFAEAE;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.slider {
+  flex: 1;
+
+
+}
+
 .thick-slider {
+  // background: #007bff;
   height: 10px;
   // background: #d3d3d3;
   border-radius: 5px;
   outline: none;
   -webkit-appearance: none;
   // padding-left: 20px;
+  width: 100% !important;
+}
+
+
+
+.thick-slider::-webkit-slider-runnable-track {
+  background: $orange-light;
+  height: 10px;
+  border-radius: 5px;
 }
 
 .thick-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Remove default browser styling for the thumb */
+  -webkit-appearance: none;
   appearance: none;
-  width: 20px; /* Width of the thumb */
-  height: 20px; /* Height of the thumb */
-  background: #007bff; /* Color of the thumb */
-  border-radius: 50%; /* Make the thumb circular */
-  cursor: pointer; /* Change the cursor to a pointer */
+  width: 20px;
+  height: 20px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-// .thick-slider::-moz-range-thumb {
-//   width: 20px;
-//   height: 60px;
-//   background: #007bff;
-//   border-radius: 50%;
-//   cursor: pointer;
-// }
+.radius-text {
+  flex: 0 0 auto;
+  padding-right: 15px;
+}
 
-// .thick-slider::-ms-thumb {
-//   width: 20px;
-//   height: 20px;
-//   background: #007bff;
-//   border-radius: 50%;
-//   cursor: pointer;
-// }
+
 
 .top-three {
   margin: 0px 100px;
@@ -57,11 +81,4 @@
   background-color: $beije-main;
   border-radius: 15px;
   // height: 500px;
-}
-
-.square-image {
-  width: 100%; /* Make the image take up the full width of the parent */
-  aspect-ratio: 1 / 1; /* Maintain a 1:1 aspect ratio (square) */
-  object-fit: cover; /* Ensure the image covers the square area without distortion */
-  display: block; /* Remove any inline spacing issues */
 }

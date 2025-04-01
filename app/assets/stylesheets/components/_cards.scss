@@ -1,12 +1,15 @@
 .user-card {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin-left: 60px;
-  margin-right: 60px;
-  margin-bottom: 50px;
-  margin-top: 30px;
-  h3 {
+  // justify-content: space-between;
+  margin-left: 40px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  margin-top: 40px;
+  background-color: $yellow;
+  padding: 30px;
+  border-radius: 5px;
+  h3, h4 {
     margin-top: 20px;
     margin-bottom: 20px;
   }
@@ -24,15 +27,29 @@
   margin-bottom: 100px;
 }
 
-.user-info {
-  margin-right: 60px;
-  width: 200px;
-}
-
 .user-input {
   margin-right: 60px;
 }
 
 .animal-info {
-  margin-top: 30px;
+  margin: 15px;
+}
+
+.pet-image-main {
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 10px;
+  margin-bottom: 50px;
+}
+
+.pet-info-button {
+  margin-top: 0px;
+  background-color: $yellow;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); ;
+}
+
+.other-pets-card-container {
+  padding: 20px;
 }
