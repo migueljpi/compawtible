@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    # @user = User.find(params[:id])
+    @user = User.find(params[:id])
     @pets = @user.pets
 
     return unless @user.geocoded?

@@ -5,6 +5,11 @@ html, body {
   overflow-y: auto;
 }
 
+.home-banner h1 {
+  margin-top: 20px;
+  margin-bottom: 4rem;
+}
+
 .home-banner {
   display: flex;
   flex-direction: column;
@@ -52,7 +57,6 @@ html, body {
 }
 
 .home-banner .home-logo-title {
-  font-size: 3rem;
   font-weight: bold;
   color: black;
 }
@@ -63,11 +67,12 @@ html, body {
 }
 
 .home-banner .home-logo-img {
-  width: 70px;
+  width: 40px;
   height: auto;
   position: relative;
-  top: -16px;
-  margin-left: -52px;
+  top: -10px;
+  margin-left: -40px;
+  margin-right: 12px;
 }
 
 .home-landing-img {
