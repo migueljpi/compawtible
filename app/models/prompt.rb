@@ -8,6 +8,16 @@ class Prompt < ApplicationRecord
   end
 
 
+  def sanitize_input
+    sanitized = self.input.strip # Removes leading/trailing whitespace
+    sanitized = sanitized.gsub(/[\r\n\t]/, " ")  # Single line
+    forbidden_keywords = ["ignore previous", "disregard", "pretend", "modify", "database", "system"]
+    if forbidden_keywords.any? { |word| sanitized.downcase.include?(word) }
+      return "Invalid input detected."
+    end
+    sanitized
+  end
+
   def valid_response_format?(response)
     begin
       parsed_response = JSON.parse(response)
@@ -23,7 +33,13 @@ class Prompt < ApplicationRecord
 
     puts "_-_-_-_OPENAI API IS BEING CALLED_-_-_-_"
     client = OpenAI::Client.new
-    full_prompt = "Respond only with a valid JSON array of ranked ids (e.g., [1, 2, 3]). Do not include any other text, characters, formatting, or explanation. Analyze the user input: #{self.input}. Compare it to the pets: #{self.pets_for_prompt}. Always return 10 pet IDs unless fewer exist. If a preferred species is mentioned, rank all matches first — no exceptions. Order explicitly preferred pets by best suitability. Fill remaining spots with others only after ranking all preferred pets. Never rank a non-preferred species above a preferred one."
+    puts "_-_-_-_-INPUT _-_-_-_ #{self.input}"
+    # Sanitize the input
+    sanitized_input = self.input.strip # Removes leading/trailing whitespace
+    sanitized_input = sanitized_input.gsub(/[\r\n\t]/, " ")  # Single line
+    puts "_-_-_-_Sanitized Input: _-_-_-_ #{sanitized_input}"
+
+    full_prompt = "Respond only with a valid JSON array of ranked ids (e.g., [1, 2, 3]). Do not include any other text, characters, formatting, or explanation. Analyze the user input: #{sanitized_input}. Compare it to the pets: #{self.pets_for_prompt}. Always return 10 pet IDs unless fewer exist. If a preferred species is mentioned, rank all matches first — no exceptions. Order explicitly preferred pets by best suitability. Fill remaining spots with others only after ranking all preferred pets. Never rank a non-preferred species above a preferred one."
 
     max_retries = 2
     retries = 0
