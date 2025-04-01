@@ -39,6 +39,14 @@ class Prompt < ApplicationRecord
     sanitized_input = sanitized_input.gsub(/[\r\n\t]/, " ")  # Single line
     puts "_-_-_-_Sanitized Input: _-_-_-_ #{sanitized_input}"
 
+    # Forbidden words check
+    forbidden_keywords = ["ignore previous", "disregard", "pretend", "modify database", "system"]
+    if forbidden_keywords.any? { |word| sanitized_input.downcase.include?(word) }
+      puts "❌ Forbidden word detected. Returning nil."
+      sleep(0.5)
+      return nil
+    end
+
     full_prompt = "Respond only with a valid JSON array of ranked ids (e.g., [1, 2, 3]). Do not include any other text, characters, formatting, or explanation. Analyze the user input: #{sanitized_input}. Compare it to the pets: #{self.pets_for_prompt}. Always return 10 pet IDs unless fewer exist. If a preferred species is mentioned, rank all matches first — no exceptions. Order explicitly preferred pets by best suitability. Fill remaining spots with others only after ranking all preferred pets. Never rank a non-preferred species above a preferred one."
 
     max_retries = 2
