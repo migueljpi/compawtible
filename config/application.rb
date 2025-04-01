@@ -8,7 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Compawtible
   class Application < Rails::Application
-    config.action_controller.raise_on_missing_callback_actions = false if Rails.version >= "7.1.0"
+    if Rails.version >= "7.1"
+      config.action_controller.raise_on_missing_callback_actions = false
+    end
     config.generators do |generate|
       generate.assets false
       generate.helper false
@@ -29,5 +31,6 @@ module Compawtible
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
   end
 end

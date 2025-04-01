@@ -4,10 +4,13 @@ class PetsController < ApplicationController
 
 
   def index
-    @pets = Pet.all
+    # @pets = Pet.all
+    @pets = policy_scope(Pet)
   end
 
   def show
+    authorize @pet
+    policy_scope(Pet)
     # @user = User.find(params[:user_id])
     # @pet = @user.pets.find(params[:id])
     @message = Message.new
@@ -23,8 +26,10 @@ class PetsController < ApplicationController
 
   def new
     @pet = Pet.new
+    policy_scope(Pet)
     @url_action = params[:action]
     @pet.location = current_user.location
+    authorize @pet
     # @pet.skip_breed_validations = true
     # @pet.skip_description_validations = true
   end
@@ -33,6 +38,9 @@ class PetsController < ApplicationController
     # raise
     @pet = Pet.new(pet_params_new)
     @pet.provider = current_user
+
+    authorize @pet
+    policy_scope(Pet)
 
     # @pet.skip_breed_validations = false
     # @pet.skip_description_validations = false
@@ -48,10 +56,26 @@ class PetsController < ApplicationController
 
   def edit
     # raise
+    # @pet = Pet.find(params[:id])
+    # @user = @pet.user  # Assuming that each pet belongs to a user
+
+    # This will check if the current user is allowed to edit the pet
+    authorize @pet
+    policy_scope(Pet)
+
+
+
     @url_action = params[:action]
   end
 
   def update
+    # @pet = Pet.find(params[:id])
+    # @user = @pet.user  # Assuming that each pet belongs to a user
+
+    # Authorize the pet to ensure that the current user can update it
+    authorize @pet
+    policy_scope(Pet)
+
     if @pet.update(pet_params_edit)
       if params[:pet][:photos].present?
         params[:pet][:photos].each do |photo|
@@ -65,6 +89,8 @@ class PetsController < ApplicationController
   end
 
   def destroy
+    authorize @pet
+    policy_scope(Pet)
     # Rails.logger.debug "params[:user_id]: #{params[:user_id]}"  # Print out the user_id to check
     @pet.destroy
     # raise

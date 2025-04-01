@@ -1,10 +1,19 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home]
+  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: :home, unless: :skip_pundit?
+  skip_after_action :verify_policy_scoped, only: [:index]
+
 
   def home
+    authorize :page, :home?
+  end
+
+  def index
   end
 
   def search
+    authorize :page, :search?
     if params[:prompt_id].present?
       @prompt = Prompt.find(params[:prompt_id])
       @output = @prompt.generate_output
@@ -63,6 +72,7 @@ class PagesController < ApplicationController
   end
 
   def other_matches
+    authorize :page, :other_matches?
     @prompt = Prompt.find(params[:prompt_id])
     pet_ids = @prompt.best_matches
 
@@ -73,5 +83,9 @@ class PagesController < ApplicationController
 
   def prompt_params
     params.require(:prompt).permit(:input, :pets_for_prompt) # Only permit input and pets_for_prompt
+  end
+
+  def skip_pundit?
+    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 end
