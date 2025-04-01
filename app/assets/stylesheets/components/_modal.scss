@@ -220,6 +220,29 @@
     height: calc(1.3em * 2); /* Further adjust height */
   }
 }
+}
 
 
 // end of search modal
+
+#modalPetShow {
+  .modal-content {
+    background-color: white !important;
+    position: relative !important; /* Ensures controls are placed relative to modal */
+  }
+  .modal-header {
+    // border:none;
+
+    button {
+      padding: 8px 20px;
+    }
+
+    span {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  .modal-body {
+    margin: 0 auto !important;
+  }
+}
