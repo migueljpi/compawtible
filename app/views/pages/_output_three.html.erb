@@ -31,7 +31,7 @@
             </div>
             <% if @best_matches.present? %>
               <div class="row d-flex justify-content-between pet-three-row">
-                <% @best_matches.first(3).each do |pet| %>
+                <% @best_matches.first(3).each_with_index do |pet, index| %>
                   <div class="col-md-4 justify-content-center">
                     <div class="pet-image-modal">
                       <div class="animal-images ">
