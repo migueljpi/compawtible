@@ -1,7 +1,7 @@
 <div class="container-user-profile">
 
 <% if @user.provider? %>
-  <h1 id="user-greeting">Hello, <%= @user.first_name %>! </h1>
+  <h1 id="user-greeting"><%= @user.first_name %> </h1>
   <% if current_user.role == "provider" %>
     <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
   <% end %>
@@ -63,13 +63,13 @@
                 <div id="carouselExampleControls_<%= index %>" class="carousel slide">
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <%= image_tag("dog.jpg", id: "image-profile-pet") %>
+                      <%= image_tag("https://images.unsplash.com/photo-1574295643019-78def6d2731c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", id: "image-profile-pet") %>
                     </div>
                     <div class="carousel-item">
-                      <%= image_tag("cat.jpg", id: "image-profile-pet") %>
+                      <%= image_tag("https://images.unsplash.com/photo-1725876197013-b34e4bb61a99?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", id: "image-profile-pet") %>
                     </div>
                     <div class="carousel-item">
-                      <%= image_tag("rabbit.jpg", id: "image-profile-pet") %>
+                      <%= image_tag("https://images.unsplash.com/photo-1497296690583-da0e2a4ce49a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", id: "image-profile-pet") %>
                     </div>
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
@@ -113,7 +113,7 @@
 
 <%# if @user.adopter? %>
 <% else %>
-  <h1 id="user-greeting">Hello, <%= @user.first_name %>! </h1>
+  <h1 id="user-greeting"><%= @user.first_name %> </h1>
   <% if current_user.role == "adopter" %>
     <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
   <% end %>
