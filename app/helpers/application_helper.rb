@@ -26,9 +26,9 @@ module ApplicationHelper
       "Cow" => "🐄",
       "Alpaca" => "🦙",
       "Parrot" => "🦜",
-      "Other" => "🌺"
+      "Other" => "🐾"
     }
-    emojis[species] || "🌺" # Default emoji if species is not found
+    emojis[species] || "🐾" # Default emoji if species is not found
   end
 
 
