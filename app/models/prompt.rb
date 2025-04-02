@@ -71,7 +71,13 @@ class Prompt < ApplicationRecord
       })
       response_content = chatgpt_response["choices"][0]["message"]["content"]
 
-      puts "_-_-_-_ChatGPT Response: _-_-_-_ #{response_content}"
+
+      parsed_pets = JSON.parse(pets_for_prompt) # Converts JSON string to Hash or Array
+      parsed_pets.length
+      puts "#{parsed_pets.length} pets sent: #{parsed_pets}"
+      puts "Prompt sent: #{full_prompt}"
+      puts "ChatGPT Response: #{response_content}"
+
 
       # Validate the response format
       if valid_response_format?(response_content)
