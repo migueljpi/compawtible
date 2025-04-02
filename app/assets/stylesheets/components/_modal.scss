@@ -40,6 +40,17 @@
 .modal-header {
   border-bottom: none !important;
 }
+
+.modal-header button {
+  position: absolute;
+  top: 12px; /* Default top position */
+  right: 20px; /* Default right position */
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10; /* Ensure the button is above other elements */
+}
+
 .modal-header-retry {
   border-bottom: none !important;
   padding: 15px
@@ -134,6 +145,14 @@
   p {
     margin-bottom: 0px;
   }
+
+  // .exit-button {
+  //   position: absolute;
+  //   // background: none;
+  //   // border: none;
+  //   top: 12px;
+  //   right: 20px;
+  // }
 }
 
 
@@ -205,6 +224,9 @@
   .modal-header {
     font-size: 1.5rem; /* Further reduce font size */
     text-align: center; /* Center-align text */
+    // margin: 10px 10px 0px 10px; /* Adjust padding */
+    position: static !important;
+    margin-top: 15px;;
   }
 
   .modal-subheader {
@@ -234,6 +256,21 @@
     font-size: 1rem; /* Further adjust font size */
     height: calc(1.5em * 2); /* Further adjust height */
     margin-bottom: 15px;
+  }
+
+  // .modal-title {
+  //   font-size: 1.5rem; /* Further reduce font size */
+  //   text-align: center; /* Center-align text */
+
+  // }
+
+  .modal-header button {
+    top: 10px; /* Adjust top position for small screens */
+    right: 10px; /* Adjust right position for small screens */
+  }
+
+  .pet-three-row {
+    margin: 0px 10px;
   }
 }
 
