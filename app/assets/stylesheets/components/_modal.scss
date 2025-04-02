@@ -39,10 +39,6 @@
   border-bottom: none !important;
   padding: 15px
 }
-.modal-header-loading {
-  border-bottom: none !important;
-  padding: 15px 15px 0px 15px !important;
-}
 
 .modal-footer {
   border-top: none !important;
@@ -90,7 +86,7 @@
 }
 
 .pet-card-container {
-  padding: 0px 40px;
+  padding: 0px 50px;
 }
 
 .pet-image-modal {
@@ -122,14 +118,6 @@
   }
 }
 
-.animal-info {
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
-  justify-content: space-between; /* Ensure proper spacing between children */
-  padding: 10px; /* Add padding inside the container */
-  margin: 15px;
-}
-
 .pet-description-modal-card {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -138,14 +126,8 @@
   text-overflow: ellipsis;
   white-space: normal;
   height: calc(1.5em * 2);
-  // p {
-  //   margin-bottom: 50px;
-  // }
-}
-
-@media (min-width: 1025px) { /* Large screens */
-  .modal-dialog {
-    margin: 0 100px; /* 100px margin from the left and right edges */
+  p {
+    margin-bottom: 0px;
   }
 }
 
@@ -153,7 +135,6 @@
 // Tablet screens (768px to 1024px)
 @media (max-width: 1024px) {
   .modal-dialog {
-    margin: 0 80px;
     max-width: 900px; /* Reduce modal width */
   }
 
@@ -175,11 +156,11 @@
   }
 
   .pet-card-container {
-    padding: 0px 50px; /* Reduce padding */
+    padding: 0px 40px; /* Reduce padding */
   }
 
   .pet-image-modal {
-    border-radius: 10px; /* Adjust border radius */
+    border-radius: 10px;
   }
 
   .pet-card-modal-button {
@@ -193,22 +174,16 @@
   }
 
   .pet-description-modal-card {
-    font-size: 0.9rem; /* Adjust font size */
-    height: calc(1.6em * 2); /* Adjust height */
-    margin-bottom: 15px;
-  }
-
-  .animal-info {
-    margin: 5px;
-    padding: 5px;
+    font-size: 0.9rem;
+    height: calc(1.6em * 2);
   }
 }
 
 // Phone screens (below 768px)
 @media (max-width: 768px) {
   .modal-dialog {
-    margin: 25px;
     max-width: 100%;
+    margin: 10px;
   }
 
   .modal-content {
@@ -245,19 +220,9 @@
   }
 
   .pet-description-modal-card {
-    font-size: 1rem;
-    height: calc(1.5em * 2);
+    font-size: 1rem; /* Further adjust font size */
+    height: calc(1.5em * 2); /* Further adjust height */
     margin-bottom: 15px;
-  }
-  .pet-name {
-    p {
-      font-size: 1.2rem;
-    }
-  }
-
-  .animal-info {
-    margin: 10px;
-    padding: 10px;
   }
 }
 

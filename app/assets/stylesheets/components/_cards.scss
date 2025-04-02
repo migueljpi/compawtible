@@ -31,7 +31,9 @@
   margin-right: 60px;
 }
 
-
+.animal-info {
+  margin: 15px;
+}
 
 .pet-image-main {
   margin-top: 0px;
@@ -67,25 +69,4 @@
 
 .other-pets-card-container {
   padding: 20px;
-  margin: 0 auto;
-}
-
-// @media (min-width: 1025px) { /* Large screens */
-//   .row.mt-2.d-flex {
-//     margin: 0 100px; /* 100px margin from the left and right edges */
-//   }
-// }
-
-// @media (max-width: 1024px) and (min-width: 769px) { /* Medium screens */
-//   .row.mt-2.d-flex {
-//     margin: 0 80px; /* 80px margin from the left and right edges */
-//   }
-// }
-
-
-
-@media (max-width: 768px) { /* Small screens */
-  .row.mt-2.d-flex {
-    margin: 0 25px;
-  }
 }
