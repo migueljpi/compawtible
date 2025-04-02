@@ -31,9 +31,7 @@
   margin-right: 60px;
 }
 
-.animal-info {
-  margin: 15px;
-}
+
 
 .pet-image-main {
   margin-top: 0px;
@@ -84,8 +82,10 @@
 //   }
 // }
 
+
+
 @media (max-width: 768px) { /* Small screens */
   .row.mt-2.d-flex {
-    margin: 0 20px; /* 20px margin from the left and right edges */
+    margin: 0 25px;
   }
 }

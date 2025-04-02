@@ -127,6 +127,7 @@
   flex-direction: column; /* Stack children vertically */
   justify-content: space-between; /* Ensure proper spacing between children */
   padding: 10px; /* Add padding inside the container */
+  margin: 15px;
 }
 
 .pet-description-modal-card {
@@ -194,6 +195,12 @@
   .pet-description-modal-card {
     font-size: 0.9rem; /* Adjust font size */
     height: calc(1.6em * 2); /* Adjust height */
+    margin-bottom: 15px;
+  }
+
+  .animal-info {
+    margin: 5px;
+    padding: 5px;
   }
 }
 
@@ -246,6 +253,11 @@
     p {
       font-size: 1.2rem;
     }
+  }
+
+  .animal-info {
+    margin: 10px;
+    padding: 10px;
   }
 }
 
