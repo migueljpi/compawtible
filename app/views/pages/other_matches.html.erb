@@ -1,9 +1,11 @@
-<div class="header-top">
+<div class="return-to-search">
   <h1>
     <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: false } do %>
       <i class="fa-solid fa-arrow-left"></i>
     <% end %>
   </h1>
+</div>
+<div class="header-top">
   <h1>Here are some other matches for you.</h1>
 </div>
 
