@@ -1,16 +1,16 @@
 <div class="header-top">
+  <h1>
+    <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: false } do %>
+      <i class="fa-solid fa-arrow-left"></i>
+    <% end %>
+  </h1>
   <h1>Here are some other matches for you.</h1>
 </div>
 
-<h1>
-  <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: false } do %>
-    <i class="fa-solid fa-arrow-left"></i>
-  <% end %>
-</h1>
   <div class="row mt-2 d-flex">
     <% if @best_matches.present? %>
       <% @best_matches.each_with_index do |pet, index| %>
-        <div class="col-md-3 other-pets-card-container">
+        <div class="col-lg-3 col-md-4  other-pets-card-container">
           <div class="pet-image-modal">
             <div class="animal-images">
                 <% if pet.photos.attached? %>
@@ -38,7 +38,9 @@
               <% end %>
               <div class="animal-info">
                 <div class="pet-name-modal-card">
-                  <p><strong><%= pet.name %></strong></p>
+                  <div class="pet-name">
+                    <p><strong><%= pet.name %></strong></p>
+                  </div>
                   <!-- Bookmark icon -->
                   <span id="favorite_icon_<%= pet.id %>" class="ms-2">
                     <% if current_user.favorited?(pet) %>

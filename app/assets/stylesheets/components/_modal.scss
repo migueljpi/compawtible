@@ -39,6 +39,10 @@
   border-bottom: none !important;
   padding: 15px
 }
+.modal-header-loading {
+  border-bottom: none !important;
+  padding: 15px 15px 0px 15px !important;
+}
 
 .modal-footer {
   border-top: none !important;
@@ -86,7 +90,7 @@
 }
 
 .pet-card-container {
-  padding: 0px 60px;
+  padding: 0px 40px;
 }
 
 .pet-image-modal {
@@ -118,6 +122,14 @@
   }
 }
 
+.animal-info {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: space-between; /* Ensure proper spacing between children */
+  padding: 10px; /* Add padding inside the container */
+  margin: 15px;
+}
+
 .pet-description-modal-card {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -131,10 +143,17 @@
   // }
 }
 
+@media (min-width: 1025px) { /* Large screens */
+  .modal-dialog {
+    margin: 0 100px; /* 100px margin from the left and right edges */
+  }
+}
+
 
 // Tablet screens (768px to 1024px)
 @media (max-width: 1024px) {
   .modal-dialog {
+    margin: 0 80px;
     max-width: 900px; /* Reduce modal width */
   }
 
@@ -156,7 +175,7 @@
   }
 
   .pet-card-container {
-    padding: 0px 40px; /* Reduce padding */
+    padding: 0px 50px; /* Reduce padding */
   }
 
   .pet-image-modal {
@@ -176,14 +195,20 @@
   .pet-description-modal-card {
     font-size: 0.9rem; /* Adjust font size */
     height: calc(1.6em * 2); /* Adjust height */
+    margin-bottom: 15px;
+  }
+
+  .animal-info {
+    margin: 5px;
+    padding: 5px;
   }
 }
 
 // Phone screens (below 768px)
 @media (max-width: 768px) {
   .modal-dialog {
-    max-width: 100%; /* Full width for smaller screens */
-    margin: 10px; /* Add margin for spacing */
+    margin: 25px;
+    max-width: 100%;
   }
 
   .modal-content {
@@ -220,8 +245,19 @@
   }
 
   .pet-description-modal-card {
-    font-size: 0.8rem; /* Further adjust font size */
-    height: calc(1.3em * 2); /* Further adjust height */
+    font-size: 1rem;
+    height: calc(1.5em * 2);
+    margin-bottom: 15px;
+  }
+  .pet-name {
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  .animal-info {
+    margin: 10px;
+    padding: 10px;
   }
 }
 

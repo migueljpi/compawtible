@@ -19,9 +19,22 @@
 
 .header-top {
   display: flex;
-  justify-content: center;
+  align-items: center;
   margin-top: 50px;
   margin-bottom: 50px;
+  position: relative;
+}
+
+.header-top h1:first-child {
+  position: absolute;
+  left: 0;
+  margin: 0;
+  top: 2px;
+}
+
+.header-top h1:last-child {
+  margin: 0 auto;
+  text-align: center;
 }
 
 .slider-container {
@@ -123,9 +136,25 @@
   }
 
   .header-top {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 10px 20px;
+  }
+
+  .header-top h1:first-child {
+    margin-top: 5px;
+    text-align: left;
+    width: auto;
+  }
+
+  .header-top h1:last-child {
+    font-size: 2rem;
+    margin: 0;
+    text-align: center;
+    flex: 1;
   }
 
   .slider-container {
@@ -160,16 +189,27 @@
 
 // Phone screens
 @media (max-width: 768px) {
-  .input-form {
-    padding: 15px;
-    margin-bottom: 20px;
+  .header-top {
+    flex-direction: column; /* Stack the icon and text vertically */
+    align-items: center; /* Center-align the text */
+    text-align: center; /* Center-align the text */
+    position: relative; /* Ensure proper positioning for the icon */
   }
 
-  .header-top {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-    text-align: center;
+  .header-top h1:first-child {
+    position: static; /* Remove absolute positioning */
+    align-self: flex-start; /* Align the icon to the leftmost side */
+    margin-bottom: 10px; /* Add spacing below the icon */
+    margin-left: 50px;
+    text-align: left; /* Ensure the icon is aligned to the left */
+    width: 100%; /* Make the icon span the full width */
+  }
+
+  .header-top h1:last-child {
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+    margin: 0; /* Remove extra margins */
+    text-align: center; /* Keep the text centered */
+    width: 100%; /* Ensure the text spans the full width */
   }
 
   .slider-container {
