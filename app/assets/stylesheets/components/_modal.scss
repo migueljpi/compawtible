@@ -3,6 +3,7 @@
   position: fixed !important;
   // z-index: 99999 !important; /* Much higher z-index */
   // display: block !important;
+
 }
 
 .modal-backdrop {
@@ -28,8 +29,12 @@
 }
 
 .modal-dialog {
-  max-width: 1300px;
-  // width: 100% !important;
+  position: relative;
+  margin: 0 auto; /* Center horizontally */
+  // top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  max-width: 1300px; /* Maximum width for the modal */
+  width: calc(100% - 200px);
 }
 
 .modal-header {
@@ -134,8 +139,11 @@
 
 // Tablet screens (768px to 1024px)
 @media (max-width: 1024px) {
+
+
   .modal-dialog {
     max-width: 900px; /* Reduce modal width */
+    width: calc(100% - 160px);
   }
 
   .modal-content {
@@ -181,9 +189,12 @@
 
 // Phone screens (below 768px)
 @media (max-width: 768px) {
+
+
   .modal-dialog {
-    max-width: 100%;
-    margin: 10px;
+    // max-width: 100%;
+    margin: 25px auto; /* Center modal */
+    width: calc(100% - 50px);
   }
 
   .modal-content {
