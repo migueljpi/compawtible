@@ -43,12 +43,16 @@
 
 .modal-header button {
   position: absolute;
-  top: 12px; /* Default top position */
-  right: 20px; /* Default right position */
+  top: 0px; /* Default top position */
+  right: 5px; /* Default right position */
   background: none;
   border: none;
   cursor: pointer;
   z-index: 10; /* Ensure the button is above other elements */
+}
+
+.modal-header button i {
+  font-size: 3rem; /* Increase the size of the icon */
 }
 
 .modal-header-retry {
@@ -229,6 +233,10 @@
     margin-top: 15px;;
   }
 
+  .modal-header button i {
+    font-size: 2rem; /* Slightly smaller size for small screens */
+  }
+
   .modal-subheader {
     font-size: 1.2rem; /* Further reduce font size */
     text-align: center; /* Center-align text */
@@ -268,6 +276,7 @@
     top: 10px; /* Adjust top position for small screens */
     right: 10px; /* Adjust right position for small screens */
   }
+
 
   .pet-three-row {
     margin: 0px 10px;
