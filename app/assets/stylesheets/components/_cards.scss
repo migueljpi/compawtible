@@ -70,3 +70,11 @@
 .other-pets-card-container {
   padding: 20px;
 }
+
+
+// ROWS NOT TOUCHING THE EDGE
+@media (max-width: 768px) { /* Small screens */
+  .row.mt-2.d-flex {
+    margin: 0 25px;
+  }
+}
