@@ -46,6 +46,7 @@
 
         <% if current_user.role == "adopter" %>
           <%= render "contact_provider" %>
+          <%= link_to "Messages", user_chatrooms_path(current_user), class: "dropdown-item" %>
         <% end %>
 
       </div>
@@ -136,7 +137,7 @@
 
   <!-- Pet Modal Gallery -->
   <div class="modal fade" id="modalPetShow" tabindex="-1" data-turbo="false" aria-labelledby="modalPetShowTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered mx-auto">
       <div class="modal-content d-block">
         <div class="modal-header">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">

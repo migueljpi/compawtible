@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "reviews/new"
   devise_for :users, controllers: { registrations: "registrations" }
   root to: "pages#home"
   post "/", to: "pages#home"
@@ -26,7 +27,10 @@ Rails.application.routes.draw do
         end
       end
     end
+    resources :reviews, only: [:index, :create, :update]
   end
+
+  resources :reviews, only: :destroy
 
   # Defines the root path route ("/")
   # root "posts#index"

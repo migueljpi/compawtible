@@ -1,0 +1,9 @@
+  <%=  @chatrooms_to_review %>
+  <%=  @pets_to_review %>
+  <% @pets_to_review.each do |pet| %>
+<%= pet.name %>
+<% end %>
+
+
+<%= @chatrooms_to_review.to_a.inspect %>
+<%= @pets_to_review.to_a.inspect %>

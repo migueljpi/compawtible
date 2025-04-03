@@ -30,6 +30,24 @@ class UsersController < ApplicationController
       lng: @user.longitude
     }]
 
+    @provider = User.find(params[:id])
+    @adopter = current_user
+
+    # @chatrooms_to_review = Chatroom.where(user_id: @adopter.id)
+    #
+    # @chatrooms_to_review = Chatroom.joins(:messages).where(messages: { user_id: @adopter.id }).distinct
+    #
+    # Find chatrooms where both the adopter and provider have participated
+    @chatrooms_to_review = Chatroom.joins(:messages)
+                                    .where(messages: { user_id: [@adopter.id, @provider.id] })
+                                    .group('chatrooms.id')
+                                    .having('COUNT(DISTINCT messages.user_id) = 2')
+
+    @pets_to_review = Pet.where(id: @chatrooms_to_review.pluck(:pet_id))
+    # @pet_to_review = Pet.where(id: @chatrooms_to_review.pluck)
+
+    # @pet_to_review = Pet.where(chatroom_id: @chatrooms_to_review.pluck(:id))
+    # @reviews_user = Review.where(booking_id: @bookings_reviewed.pluck(:id))
 
   end
 

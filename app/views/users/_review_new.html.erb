@@ -1,0 +1,61 @@
+<%# if on providers page as current user adopter %>
+
+<%# and there is a chatroom with the provider  %>
+<%# if chatroom exists between on params user (provider) and current user (adopter)%>
+
+<%# button for leave a review dropdown %>
+<h1>Leave a review</h1>
+<div id="form-review" class="form-container">
+  <%= simple_form_for [@booking, @tour, @review], url: tour_booking_reviews_path(@booking) do |f| %>
+  <h3 class="mb-4 text-start">How was your experience on <%=  @booking.tour.name %>?</h3>
+    <%= f.input :review_content, label: false, :input_html => {:rows => 5} %>
+
+      <div class="my-4">
+        <h4>Tour Rating</h4>
+        <div class="star-rating">
+            <% (1..5).reverse_each do |i| %>
+              <%= f.radio_button :tour_rating, i, id: "tour_star_#{i}" %>
+              <label for="tour_star_<%= i %>"></label>
+            <% end %>
+        </div>
+        <div class="mt-3">
+          <span id="tour-rating-value" class="h4">0</span> out of 5 stars
+        </div>
+      </div>
+
+      <div class="my-4">
+        <h4>Guide Rating</h4>
+        <div class="star-rating ">
+          <% (1..5).reverse_each do |i| %>
+            <%= f.radio_button :guide_rating, i, id: "guide_star_#{i}" %>
+            <label for="guide_star_<%= i %>"></label>
+          <% end %>
+        </div>
+        <div class="mt-3">
+          <span id="guide-rating-value" class="h4">0</span> out of 5 stars
+        </div>
+      </div>
+
+    <%= f.submit "Leave a Review", class: "btn btn-secondary my-3" %>
+  <% end %>
+</div>
+
+<script>
+  const tourStarRating = document.querySelectorAll('input[name="review[tour_rating]"]');
+  const tourRatingValue = document.getElementById('tour-rating-value');
+
+  tourStarRating.forEach(star => {
+    star.addEventListener('change', function(e) {
+      tourRatingValue.textContent = e.target.value;
+    });
+  });
+
+  const guideStarRating = document.querySelectorAll('input[name="review[guide_rating]"]');
+  const guideRatingValue = document.getElementById('guide-rating-value');
+
+  guideStarRating.forEach(star => {
+    star.addEventListener('change', function(e) {
+      guideRatingValue.textContent = e.target.value;
+    });
+  });
+</script>
