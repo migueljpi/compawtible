@@ -9,14 +9,14 @@ Interaction.destroy_all
 puts "Existing records destroyed!"
 
 COUNTRIES = [
-  { name: "Portugal", cities: ["Rua Eça De Quiróz, 2670-652 Bucelas, Lisbon, Portugal", "Rua Da Praia, 4485-495 Mindelo, Porto, Portugal"], provider_person: "João", provider_institution: "Hopeful Paws Shelter", adopter: "Miguel", last_name: "Silva", adopter_city: "Lisbon" },
+  { name: "Portugal", cities: ["Rua Eça De Quiróz, 2670-652 Bucelas, Lisbon, Portugal", "Rua Da Praia, 4485-495 Mindelo, Porto, Portugal"], provider_person: "João", provider_institution: "Hopeful Paws", adopter: "Miguel", last_name: "Silva", adopter_city: "Lisbon" },
   { name: "Spain", cities: ["Avenida De La Estación, 28970 Humanes de Madrid, Madrid, Spain", "Avinguda Pau Clarís, 08760 Martorell, Barcelona, Spain"], provider_person: "Carlos", provider_institution: "Haven for Pets", adopter: "Javier", last_name: "García", adopter_city: "Lisbon" },
   { name: "France", cities: ["Rue De Limours, 91470 Limours, France", "Rue Des Dîmes, 69250 Montanay, France"], provider_person: "Pierre", provider_institution: "Compassionate Tails", adopter: "Jean", last_name: "Dubois", adopter_city: "Lyon" },
   { name: "The Netherlands", cities: ["Bovenkerkerweg, 1188 XH Amstelveen, Netherlands", "2e Tochtweg, 2913 LS Nieuwerkerk aan den IJssel, Netherlands"], provider_person: "Daan", provider_institution: "Safe Haven Rescue", adopter: "Lars", last_name: "Jansen", adopter_city: "Amsterdam" },
-  { name: "Belgium", cities: ["Leyburgstraat, 1651 Beersel, Flemish Brabant, Belgium", "Boechoutsesteenweg, 2150 Borsbeek, Antwerp, Belgium"], provider_person: "Mathieu", provider_institution: "Kindred Hearts Shelter", adopter: "Benoît", last_name: "Dupont", adopter_city: "Ghent" },
-  { name: "Luxembourg", cities: ["Rue Jean-Pierre Thill, 4924 Hautcharage, Luxembourg", "Rue Du Moulin, 7423 Dondelange, Luxembourg"], provider_person: "Marc", provider_institution: "New Beginnings Animal Center", adopter: "Luc", last_name: "Schmit", adopter_city: "Luxembourg City" },
+  { name: "Belgium", cities: ["Leyburgstraat, 1651 Beersel, Flemish Brabant, Belgium", "Boechoutsesteenweg, 2150 Borsbeek, Antwerp, Belgium"], provider_person: "Mathieu", provider_institution: "Kindred Hearts", adopter: "Benoît", last_name: "Dupont", adopter_city: "Ghent" },
+  { name: "Luxembourg", cities: ["Rue Jean-Pierre Thill, 4924 Hautcharage, Luxembourg", "Rue Du Moulin, 7423 Dondelange, Luxembourg"], provider_person: "Marc", provider_institution: "New Beginnings Animal", adopter: "Luc", last_name: "Schmit", adopter_city: "Luxembourg City" },
   { name: "Switzerland", cities: ["Drisglerstrasse, 8107 Buchs, Switzerland", "Route De Soral, 1233 Bernex, Switzerland"], provider_person: "Luca", provider_institution: "Forever Home Rescue", adopter: "Noah", last_name: "Müller", adopter_city: "Zurich" },
-  { name: "Italy", cities: ["Via Leonida Magnolini, 00123 Roma Rome, Italy", "Cascina Molino Mora, 20050 Liscate Milan, Italy"], provider_person: "Luca", provider_institution: "Paws & Claws Sanctuary", adopter: "Matteo", last_name: "Rossi", adopter_city: "Genova" },
+  { name: "Italy", cities: ["Via Leonida Magnolini, 00123 Roma Rome, Italy", "Cascina Molino Mora, 20050 Liscate Milan, Italy"], provider_person: "Luca", provider_institution: "Paws & Claws", adopter: "Matteo", last_name: "Rossi", adopter_city: "Genova" },
 ]
 
 puts "Creating users..."
@@ -47,7 +47,7 @@ COUNTRIES.each do |country|
     email: "provider2.#{country_code}@provider.com",
     password: "123456",
     first_name: country[:provider_institution],
-    # last_name: "Institution",
+    last_name: "Shelter",
     age: rand(17..100),
     location: country[:cities].last,
     role: "provider",
@@ -113,21 +113,34 @@ BREED_PHOTOS = {
   "Rhode Island Red" => ["rhode island red chicken.jpg", "rhode island red chicken2.jpg"],
   "Leghorn" => ["leghorn1.jpg", "Leghorn2.jpg"]
 }
+
+STRAY_PHOTOS = {
+  "Dog" => {
+    "Other" => [["strayA.jpg", "strayA2.jpg"], ["strayB.jpg", "strayB2.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg"], ["strayE.jpg", "strayE2.jpg", "strayE3.jpg", "strayE4.jpg"],
+                ["strayF.jpg", "strayF2.jpg"], ["strayG.jpg", "strayG2.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg", "strayI3.jpg"]],
+  },
+  "Cat" => {
+    "Other" => [["strayA.jpg", "strayA2.jpg", "strayA3.jpg"], ["strayB.jpg", "strayB2.jpg", "strayB3.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg", "strayD3.jpg"],
+                ["strayE.jpg", "strayE2.jpg"]],
+  }
+}
+
+
 SPECIES = {
   "Dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Beagle", "Chihuahua",  "Other"],
-    "Cat" => ["Siamese", "Persian", "Maine Coon", "Sphynx", "Other"],
-    "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Other"],
-    "Hamster" => ["Syrian Hamster", "Dwarf Campbell Russian Hamster", "Other"],
-    "Guinea pig" => ["American", "Abyssinian", "Other"],
-    "Ferret" => ["Standard", "Other"],
-    "Bird" => ["Canary", "Cockatiel", "Other"],
-    "Turtle" => ["Red-Eared Slider", "Box Turtle", "Other"],
-    "Fish" => ["Betta", "Goldfish", "Koi", "Other"],
-    "Mouse" => ["Fancy Mouse", "Other"],
-    "Chinchilla" => ["Standard Gray", "Other"],
-    "Lizard" => ["Bearded Dragon", "Green Iguana", "Other"],
-    "Goat" => ["Nubian", "Other"],
-    "Chicken" => ["Rhode Island Red", "Leghorn", "Silkie", "Other"],
+  "Cat" => ["Siamese", "Persian", "Maine Coon", "Sphynx", "Other"],
+  "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Other"],
+  "Hamster" => ["Syrian Hamster", "Dwarf Campbell Russian Hamster", "Other"],
+  "Guinea pig" => ["American", "Abyssinian", "Other"],
+  "Ferret" => ["Standard", "Other"],
+  "Bird" => ["Canary", "Cockatiel", "Other"],
+  "Turtle" => ["Red-Eared Slider", "Box Turtle", "Other"],
+  "Fish" => ["Betta", "Goldfish", "Koi", "Other"],
+  "Mouse" => ["Fancy Mouse", "Other"],
+  "Chinchilla" => ["Standard Gray", "Other"],
+  "Lizard" => ["Bearded Dragon", "Green Iguana", "Other"],
+  "Goat" => ["Nubian", "Other"],
+  "Chicken" => ["Rhode Island Red", "Leghorn", "Silkie", "Other"],
 }
 
 BREED_SIZES = {
@@ -323,10 +336,10 @@ FEMALE_PET_NAMES = [
 
 puts "Creating pets..."
 User.where(role: "provider").each do |provider|
-  if provider.last_name == "Institution"
+  if provider.last_name == "Shelter"
     species = ["Dog", "Cat"].sample
-    rand(3..4).times do
-      breed = SPECIES[species].reject { |b| b == "Other" }.sample
+    rand(3..6).times do
+      breed = "Other"
       gender = ["Male", "Female"].sample
       pet_name = gender == "Male" ? MALE_PET_NAMES.sample : FEMALE_PET_NAMES.sample
       age = rand(SPECIES_AGE_RANGES[species]) || rand(1..10)
@@ -336,7 +349,7 @@ User.where(role: "provider").each do |provider|
         provider: provider,
         name: pet_name,
         species: species,
-        breed: breed,
+        breed: "Other",
         age: age,
         size: BREED_SIZES[species][breed] || "Medium",
         activity_level: ["Low", "Moderate", "High"].sample,
@@ -348,20 +361,25 @@ User.where(role: "provider").each do |provider|
         description: DESCRIPTIONS[species].sample
       )
 
-      if BREED_PHOTOS.key?(pet.breed)
-        puts "Retrieving photos for #{pet.breed}"
+      if STRAY_PHOTOS[pet.species] && STRAY_PHOTOS[pet.species]["Other"]
+        puts "Retrieving stray photos for #{pet.species} (Other breed)"
 
-        files = BREED_PHOTOS[pet.breed].map do |filename|
-          file_path = Rails.root.join("app/assets/images/breeds/#{filename}")
+        # Randomly select a set of photos from the "Other" key
+        photo_set = STRAY_PHOTOS[pet.species]["Other"].sample
+        files = photo_set.map do |filename|
+          if pet.species == "Dog"
+            file_path = Rails.root.join("app/assets/images/breeds/others/dogs/#{filename}")
+          elsif pet.species == "Cat"
+            file_path = Rails.root.join("app/assets/images/breeds/others/cats/#{filename}")
+          end
           puts "Opening file: #{file_path}"
           { io: File.open(file_path), filename: filename, content_type: "image/jpeg" }
         end
 
-        puts "Attaching photos..."
+        puts "Attaching stray photos..."
         pet.photos.attach(files)
-        puts "Photos attached"
+        puts "Shelter animal photos attached"
       end
-
       pet.save!
     end
   else
