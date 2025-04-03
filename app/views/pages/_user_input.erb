@@ -3,7 +3,7 @@
   data: { turbo_frame: "output-three", action: "turbo:submit-start->output#showLoadingModal turbo:submit-end->output#showOutput" } do |f| %>
   <div class="form-inputs">
     <div class="row location-radius-row">
-      <div class="col-md-4" id="location" data-controller="address-autofill">
+      <div class="col-md-6" id="location" data-controller="address-autofill">
         <%= text_field_tag :location, current_user.location,
               required: true,
               class: "form-control small-input",
@@ -15,7 +15,7 @@
         <datalist id="location-options" class="location-options">
         </datalist>
       </div>
-      <div class="col-md-2"></div>
+      <%# <div class="col-md-1"></div> %>
       <div class="col-md-6" data-controller="radius" id="radius">
         <div class="slider-container">
           <span id="radius-value" class="radius-text" data-radius-target="output">100 km</span>
