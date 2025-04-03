@@ -9,16 +9,14 @@ Interaction.destroy_all
 puts "Existing records destroyed!"
 
 COUNTRIES = [
-  { name: "Portugal", cities: ["Loures, Lisbon", "Vila do Conde, Porto"], provider_person: "João", provider_institution: "Hopeful Paws Shelter", adopter: "Miguel", last_name: "Silva" },
-  { name: "Spain", cities: ["Alcorcón, Madrid", "Sabadell, Barcelona"], provider_person: "Carlos", provider_institution: "Haven for Pets", adopter: "Javier", last_name: "García" },
-  { name: "France", cities: ["Saint-Denis, Paris", "Vénissieux, Lyon"], provider_person: "Pierre", provider_institution: "Compassionate Tails", adopter: "Jean", last_name: "Dubois" },
-  { name: "The Netherlands", cities: ["Zaandam, Amsterdam", "Dordrecht, Rotterdam"], provider_person: "Daan", provider_institution: "Safe Haven Rescue", adopter: "Lars", last_name: "Jansen" },
-  { name: "Belgium", cities: ["Zaventem, Brussels", "Sint-Niklaas, Antwerp"], provider_person: "Mathieu", provider_institution: "Kindred Hearts Shelter", adopter: "Benoît", last_name: "Dupont" },
-  { name: "Luxembourg", cities: ["Esch-sur-Alzette", "Dudelange"], provider_person: "Marc", provider_institution: "New Beginnings Animal Center", adopter: "Luc", last_name: "Schmit" },
-  { name: "Switzerland", cities: ["Winterthur, Zurich", "Nyon, Geneva"], provider_person: "Luca", provider_institution: "Forever Home Rescue", adopter: "Noah", last_name: "Müller" },
-  { name: "Italy", cities: ["Guidonia Montecelio, Rome", "Bergamo, Milan"], provider_person: "Luca", provider_institution: "Paws & Claws Sanctuary", adopter: "Matteo", last_name: "Rossi" },
-  { name: "United Kingdom", cities: ["Barking, London", "Bolton, Manchester"], provider_person: "James", provider_institution: "Furry Friends Refuge", adopter: "Oliver", last_name: "Smith" },
-  { name: "Ireland", cities: ["Swords, Dublin", "Mallow, Cork"], provider_person: "Liam", provider_institution: "Loving Paws Shelter", adopter: "Sean", last_name: "O'Connor" }
+  { name: "Portugal", cities: ["Rua Eça De Quiróz, 2670-652 Bucelas, Lisbon, Portugal", "Rua Da Praia, 4485-495 Mindelo, Porto, Portugal"], provider_person: "João", provider_institution: "Hopeful Paws Shelter", adopter: "Miguel", last_name: "Silva", adopter_city: "Lisbon" },
+  { name: "Spain", cities: ["Avenida De La Estación, 28970 Humanes de Madrid, Madrid, Spain", "Avinguda Pau Clarís, 08760 Martorell, Barcelona, Spain"], provider_person: "Carlos", provider_institution: "Haven for Pets", adopter: "Javier", last_name: "García", adopter_city: "Lisbon" },
+  { name: "France", cities: ["Rue De Limours, 91470 Limours, France", "Rue Des Dîmes, 69250 Montanay, France"], provider_person: "Pierre", provider_institution: "Compassionate Tails", adopter: "Jean", last_name: "Dubois", adopter_city: "Lyon" },
+  { name: "The Netherlands", cities: ["Bovenkerkerweg, 1188 XH Amstelveen, Netherlands", "2e Tochtweg, 2913 LS Nieuwerkerk aan den IJssel, Netherlands"], provider_person: "Daan", provider_institution: "Safe Haven Rescue", adopter: "Lars", last_name: "Jansen", adopter_city: "Amsterdam" },
+  { name: "Belgium", cities: ["Leyburgstraat, 1651 Beersel, Flemish Brabant, Belgium", "Boechoutsesteenweg, 2150 Borsbeek, Antwerp, Belgium"], provider_person: "Mathieu", provider_institution: "Kindred Hearts Shelter", adopter: "Benoît", last_name: "Dupont", adopter_city: "Ghent" },
+  { name: "Luxembourg", cities: ["Rue Jean-Pierre Thill, 4924 Hautcharage, Luxembourg", "Rue Du Moulin, 7423 Dondelange, Luxembourg"], provider_person: "Marc", provider_institution: "New Beginnings Animal Center", adopter: "Luc", last_name: "Schmit", adopter_city: "Luxembourg City" },
+  { name: "Switzerland", cities: ["Drisglerstrasse, 8107 Buchs, Switzerland", "Route De Soral, 1233 Bernex, Switzerland"], provider_person: "Luca", provider_institution: "Forever Home Rescue", adopter: "Noah", last_name: "Müller", adopter_city: "Zurich" },
+  { name: "Italy", cities: ["Via Leonida Magnolini, 00123 Roma Rome, Italy", "Cascina Molino Mora, 20050 Liscate Milan, Italy"], provider_person: "Luca", provider_institution: "Paws & Claws Sanctuary", adopter: "Matteo", last_name: "Rossi", adopter_city: "Genova" },
 ]
 
 puts "Creating users..."
@@ -49,7 +47,7 @@ COUNTRIES.each do |country|
     email: "provider2.#{country_code}@provider.com",
     password: "123456",
     first_name: country[:provider_institution],
-    last_name: "Institution",
+    # last_name: "Institution",
     age: rand(17..100),
     location: country[:cities].last,
     role: "provider",
@@ -96,6 +94,7 @@ BREED_PHOTOS = {
   "Sphynx"  => ["sphynx.jpg", "sphynx2.jpg"],
   "Holland Lop" => ["holland lop1.jpg", "holland lop2.jpg"],
   "Netherland Dwarf" => ["netherland dwarf.jpg", "netherland dwarf2.jpg"],
+  "Syrian Hamster" => ["syrian.jpg", "syrian2.jpg"],
   "American"  => ["american.jpg", "american2.jpg"],
   "Abyssinian" => ["abyssinian.jpg", "abyssinian2.jpg"],
   "Standard" => ["standard.jpg", "standard2.jpg"],

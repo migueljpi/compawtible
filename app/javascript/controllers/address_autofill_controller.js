@@ -20,7 +20,7 @@ export default class extends Controller {
     if (event.target.value.length >= 3) {
       console.log(event.target.value);
       const location = event.target.value
-      const accessToken = ''
+      const accessToken = 'pk.eyJ1IjoibWlndWVsanBpIiwiYSI6ImNtOHlkYWU2dTA5YXgycXNlN2RwYmo4N2cifQ.p9t2LcscAabKOEI0OS8A9Q'
       const apiEndpoint = `https://api.mapbox.com/search/geocode/v6/forward?q=${location}&access_token=${accessToken}`
       const locationOptions = document.getElementById("location-options");
       locationOptions.innerHTML = '';
