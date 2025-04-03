@@ -20,7 +20,7 @@
 .header-top {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 25px;
   margin-bottom: 50px;
 }
 
@@ -174,7 +174,7 @@
 
   .slider-container {
     margin: 5px 0px;
-    padding: 8px;
+    // padding: 8px;
     font-size: 0.9rem;
   }
 
@@ -201,5 +201,13 @@
   .small-input {
     font-size: 0.9rem;
     padding: 8px;
+  }
+}
+
+// OTHER MATCHES
+
+.return-to-search {
+  h1 {
+    font-size: 3.5rem;
   }
 }

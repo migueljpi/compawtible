@@ -1,8 +1,15 @@
 <%= turbo_stream.replace "favorite_icon_#{@pet.id}" do %>
   <div id="favorite_icon_<%= @pet.id %>">
     <% favorite = current_user.favorites.find_by(favoritable: @pet) %>
-    <%= button_to user_pet_favorite_path(current_user, @pet, favorite), method: :delete, data: { turbo: true } do %>
+    <%= button_to user_pet_favorite_path(current_user, @pet, favorite), method: :delete, data: { turbo: true }, class:"favorite-button" do %>
       <i class="fa-solid fa-heart"></i>
     <% end %>
+  </div>
+<% end %>
+
+<%= turbo_stream.append "pet-show" do %>
+  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+    <%= flash.now[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% end %>
