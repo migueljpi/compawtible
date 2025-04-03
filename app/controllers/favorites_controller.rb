@@ -3,6 +3,7 @@ class FavoritesController < ApplicationController
 
   def create
     current_user.favorite(@pet)
+    flash.now[:notice] = "Pet bookmarked!"
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @pet }
@@ -13,11 +14,13 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(favoritable: @pet)
     if favorite
       current_user.unfavorite(@pet)
+      flash.now[:notice] = "Pet unbookmarked!"
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to @pet }
       end
     else
+      flash.now[:notice] = "Pet unbookmarked!"
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.remove("favorite_icon_#{@pet.id}") }
         format.html { redirect_to @pet }
