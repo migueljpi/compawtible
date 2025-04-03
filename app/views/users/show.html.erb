@@ -130,16 +130,68 @@
     </div>
   </div>
 
-  <div class="user-animals">
-    <h3 id="your-favourites"><strong>Your favourites</strong></h3>
-  </div>
 <div class="user-animals">
   <h3 id="your-animals"><strong>Your favorited pets (<%= @user.favorited_pets.count %>)</strong></h3>
-  <ul>
-    <% @user.favorited_pets.each do |pet| %>
-      <li><%= link_to pet.name, user_pet_path(@user, pet) %></li>
-    <% end %>
-  </ul>
+    <div class="row mt-2 d-flex">
+      <% @user.favorited_pets.each_with_index do |pet, index| %>
+        <!-- favorited pets display -->
+        <div class="col-md-3 other-pets-card-container">
+            <div class="pet-image-modal">
+              <div class="animal-images">
+                  <% if pet.photos.attached? %>
+                  <div id="carouselExampleControls_<%= index %>" class="carousel slide">
+                    <div class="carousel-inner">
+                      <% pet.photos.each_with_index do |photo, idx| %>
+                        <div class="carousel-item <%= 'active' if idx == 0 %>">
+                          <% if photo.present? %>
+                            <%= image_tag(photo, class: "square-image") %>
+                          <% else %>
+                            <%= image_tag('dog.jpg', class: "square-image") %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                <% end %>
+                <div class="animal-info">
+                  <div class="pet-name-modal-card">
+                    <p><strong><%= pet.name %></strong></p>
+                    <!-- bookmark icon -->
+                    <span id="favorite_icon_<%= pet.id %>" class="ms-2">
+                      <% if current_user.favorited?(pet) %>
+                        <% favorite = current_user.favorites.find_by(favoritable: pet) %>
+                        <%= button_to user_pet_favorite_path(current_user, pet, favorite), method: :delete, class: "favorite-button" do %>
+                          <i class="fa-solid fa-heart"></i>
+                        <% end %>
+                      <% else %>
+                        <%= button_to user_pet_favorites_path(current_user, pet), method: :post, class: "favorite-button" do %>
+                          <i class="fa-regular fa-heart"></i>
+                        <% end %>
+                      <% end %>
+                    </span>
+                    <!-- end of bookmark icon -->
+                  </div>
+                  <div class="pet-description-modal-card">
+                    <p><%= pet.description %></p>
+                  </div>
+                  <div class="pet-card-modal-button d-flex justify-content-end">
+                    <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- end of favorited pets display -->
+      <% end %>
+    </div>
 </div>
 
   <div class= "user-button">
