@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
   # Validations
   validates :first_name, presence: true
-  validates :last_name, presence: true
+  # validates :last_name, presence: true
   validates :age, presence: true, numericality: { greater_than: 16, only_integer: true }
   # validates :provider, inclusion: { in: [true, false] }
 

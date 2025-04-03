@@ -3,6 +3,7 @@
   position: fixed !important;
   // z-index: 99999 !important; /* Much higher z-index */
   // display: block !important;
+
 }
 
 .modal-backdrop {
@@ -28,13 +29,33 @@
 }
 
 .modal-dialog {
-  max-width: 1300px;
-  // width: 100% !important;
+  position: relative;
+  margin: 0 auto; /* Center horizontally */
+  // top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  max-width: 1300px; /* Maximum width for the modal */
+  width: calc(100% - 200px);
 }
 
 .modal-header {
   border-bottom: none !important;
 }
+
+.modal-header button {
+  position: absolute;
+  top: 0px; /* Default top position */
+  right: 5px; /* Default right position */
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10; /* Ensure the button is above other elements */
+}
+
+
+.modal-header button i {
+  font-size: 3rem; /* Increase the size of the icon */
+}
+
 .modal-header-retry {
   border-bottom: none !important;
   padding: 15px
@@ -86,7 +107,7 @@
 }
 
 .pet-card-container {
-  padding: 0px 60px;
+  padding: 0px 50px;
 }
 
 .pet-image-modal {
@@ -126,16 +147,27 @@
   text-overflow: ellipsis;
   white-space: normal;
   height: calc(1.5em * 2);
-  // p {
-  //   margin-bottom: 50px;
+  p {
+    margin-bottom: 0px;
+  }
+
+  // .exit-button {
+  //   position: absolute;
+  //   // background: none;
+  //   // border: none;
+  //   top: 12px;
+  //   right: 20px;
   // }
 }
 
 
 // Tablet screens (768px to 1024px)
 @media (max-width: 1024px) {
+
+
   .modal-dialog {
     max-width: 900px; /* Reduce modal width */
+    width: calc(100% - 160px);
   }
 
   .modal-content {
@@ -160,7 +192,7 @@
   }
 
   .pet-image-modal {
-    border-radius: 10px; /* Adjust border radius */
+    border-radius: 10px;
   }
 
   .pet-card-modal-button {
@@ -174,16 +206,19 @@
   }
 
   .pet-description-modal-card {
-    font-size: 0.9rem; /* Adjust font size */
-    height: calc(1.6em * 2); /* Adjust height */
+    font-size: 0.9rem;
+    height: calc(1.6em * 2);
   }
 }
 
 // Phone screens (below 768px)
 @media (max-width: 768px) {
+
+
   .modal-dialog {
-    max-width: 100%; /* Full width for smaller screens */
-    margin: 10px; /* Add margin for spacing */
+    // max-width: 100%;
+    margin: 25px auto; /* Center modal */
+    width: calc(100% - 50px);
   }
 
   .modal-content {
@@ -194,6 +229,13 @@
   .modal-header {
     font-size: 1.5rem; /* Further reduce font size */
     text-align: center; /* Center-align text */
+    // margin: 10px 10px 0px 10px; /* Adjust padding */
+    position: static !important;
+    margin-top: 15px;;
+  }
+
+  .modal-header button i {
+    font-size: 2rem; /* Slightly smaller size for small screens */
   }
 
   .modal-subheader {
@@ -220,8 +262,25 @@
   }
 
   .pet-description-modal-card {
-    font-size: 0.8rem; /* Further adjust font size */
-    height: calc(1.3em * 2); /* Further adjust height */
+    font-size: 1rem; /* Further adjust font size */
+    height: calc(1.5em * 2); /* Further adjust height */
+    margin-bottom: 15px;
+  }
+
+  // .modal-title {
+  //   font-size: 1.5rem; /* Further reduce font size */
+  //   text-align: center; /* Center-align text */
+
+  // }
+
+  .modal-header button {
+    top: 10px; /* Adjust top position for small screens */
+    right: 10px; /* Adjust right position for small screens */
+  }
+
+
+  .pet-three-row {
+    margin: 0px 10px;
   }
 }
 

@@ -6,3 +6,10 @@
     <% end %>
   </div>
 <% end %>
+
+<%= turbo_stream.append "pet-show" do %>
+  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+    <%= flash.now[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
