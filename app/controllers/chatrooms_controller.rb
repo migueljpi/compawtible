@@ -1,14 +1,17 @@
 class ChatroomsController < ApplicationController
-  before_action :set_user, only: [:index]
+  before_action :set_user, only: %i[index provider_info]
+  before_action :set_chatroom, only: :provider_info
 
   def index
     @chatrooms = current_user.chatrooms
     @chatroom = @chatrooms.find_by(id: params[:chatroom_id])
-    @message = @chatroom.messages.new if @chatroom
-    # @chatroom_pet = @chatroom.pet
+    return unless @chatroom.present?
+
+    @message = @chatroom.messages.new
   end
 
-  def create_chatroom
+  # // creates the first message from both users and then it creates the chatroom
+  def create_chatroom # rubocop:disable Metrics/MethodLength
     @pet = Pet.find(params[:pet_id])
     @provider = @pet.provider
     @adopter = current_user
@@ -18,9 +21,6 @@ class ChatroomsController < ApplicationController
       pet: @pet
     )
 
-    # return redirect_to user_chatrooms_path(@adopter) unless @chatroom.save
-
-    # end
     @chatroom.messages.find_or_create_by(user: @provider) do |msg|
       msg.content = "Hello! You have reached #{@provider.first_name}, the owner of #{@pet.name}."
     end
@@ -38,6 +38,21 @@ class ChatroomsController < ApplicationController
     end
   end
 
+  def provider_info
+    return render json: { error: "Chatroom not found" }, status: 404 unless @chatroom
+
+    @provider = @chatroom.users.where.not(id: current_user.id).first
+
+    if @provider
+      render json: {
+        name: @provider.first_name,
+        image_url: @provider.photo.attached? ? url_for(@provider.photo) : "/default_avatar.png"
+      }
+    else
+      render json: { error: "Provider not found" }, status: 404
+    end
+  end
+
   private
 
   def set_user
@@ -46,5 +61,9 @@ class ChatroomsController < ApplicationController
 
   def set_pet
     @pet = Pet.find(params[:pet_id])
+  end
+
+  def set_chatroom
+    @chatroom = Chatroom.find(params[:id])
   end
 end

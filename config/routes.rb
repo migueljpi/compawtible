@@ -23,6 +23,9 @@ Rails.application.routes.draw do
       end
     end
     resources :chatrooms, only: [:index, :create] do
+      member do
+        get :provider_info
+      end
       resources :messages, only: [:create, :update] do
         collection do
           get :chatroom_messages
