@@ -6,6 +6,20 @@
 
 }
 
+.modal-header-loading {
+
+}
+
+.fun-fact {
+  width: 100%;
+  text-align: center;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.5;
+  max-width: 350px;
+  margin: 20px auto;
+}
+
 .modal-backdrop {
   position: fixed !important;
   // z-index: 99998 !important; /* Just below modal */
