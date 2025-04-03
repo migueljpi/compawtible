@@ -1,24 +1,23 @@
 .chats-container {
   display: flex;
   flex-direction: row;
-  height: 80%;
+  max-height: 100vh;
   font-family: $body-font;
 }
 
 .chat-sidebar {
   width: 30%;
   // background: $white;
-  padding: 16px;
   // border-right: 1px solid $grey;
   display: flex;
   flex-direction: column;
-  gap: 8px;
 
   h2 {
     font-family: $headers-font;
     color: $blue-main;
     font-size: 1.5rem;
     margin-bottom: 10px;
+    min-height: 10vh;
   }
 
   .chat-list {
@@ -34,7 +33,6 @@
     border-radius: $border-radius-xxl;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
-    // gap: 14px;
     background: $beije-light;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     border: 1px solid $grey;
@@ -60,24 +58,32 @@
   width: 70%;
   display: flex;
   flex-direction: column;
-  background: $white;
   padding: 10px;
-  border-radius: $border-radius-xxl;
   background: $beije-light;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   border: 1px solid $grey;
+  border-radius: $border-radius-xxl;
 }
 
 .chat-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  // background: $blue-main;
-  color: $white;
-  // font-size: 1.4rem;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-content: center;
+  min-height: 10vh;
+  color: $black;
   font-family: $headers-font;
-  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.chat-provider-info{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .chat-messages {
@@ -87,7 +93,6 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: $beije-medium;
 }
 
 .message {
@@ -113,46 +118,43 @@
 .chat-input {
   display: flex;
   padding: 10px;
-  background: $white;
-  border-top: 1px solid $grey;
   align-items: center;
-  gap: 12px;
+  padding: 12px;
+  font-size: 1rem;
+  position: relative;
 
   input {
     flex: 1;
-    border: none;
-    padding: 12px;
-    border-radius: $border-radius-xl;
-    background: $beije-light;
-    font-size: 1rem;
+    border-radius: 1rem;
+    background: $light-grey;
     transition: box-shadow 0.2s;
+    outline: none;
+    border: none;
+    padding: 20 20;
 
     &:focus {
       box-shadow: 0 0 5px $blue-main;
-      outline: none;
     }
   }
 
   button {
-    background: $color-primary;
-    border: none;
     padding: 10px 14px;
-    border-radius: $border-radius-xl;
-    color: $white;
     font-size: 1.3rem;
     cursor: pointer;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     transition: background 0.3s, transform 0.2s;
 
     &:hover {
-      background: $blue-medium;
+      color: $blue-main;
       transform: scale(1.1);
     }
   }
 
   .icon-send {
     font-size: 1.6rem;
+    position: absolute;
+    right: 20px;
+    color: $light-grey;
   }
 }
