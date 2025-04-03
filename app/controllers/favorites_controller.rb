@@ -24,13 +24,13 @@ class FavoritesController < ApplicationController
     authorize favorite
     if favorite
       current_user.unfavorite(@pet)
-      flash.now[:notice] = "Pet unbookmarked!"
+      flash[:notice] = "Pet unbookmarked!"
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to @pet }
       end
     else
-      flash.now[:notice] = "Pet unbookmarked!"
+      flash[:notice] = "Pet unbookmarked!"
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.remove("favorite_icon_#{@pet.id}") }
         format.html { redirect_to @pet }
