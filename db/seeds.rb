@@ -68,7 +68,7 @@ COUNTRIES.each do |country|
     first_name: country[:adopter],
     last_name: country[:last_name],
     age: rand(18..70),
-    location: country[:cities].sample,
+    location: country[:adopter_city],
     role: "adopter",
     about_me: "Looking for a new furry friend to adopt!"
   )
