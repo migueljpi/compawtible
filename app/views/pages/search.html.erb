@@ -1,11 +1,13 @@
-<div class="header-top">
-  <h1>Tell us about yourself and the friend you are looking for.</h1>
+<div id="search">
+  <div class="header-top">
+    <h1>Tell us about yourself and the friend you are looking for.</h1>
+  </div>
+
+
+  <div class="input-form">
+    <%= render "user_input" %>
+  </div>
+
+  <%= render "loading" %>
+  <%= render "output_three", best_matches: @best_matches&.first(3) %>
 </div>
-
-
-<div class="input-form">
-  <%= render "user_input" %>
-</div>
-
-<%= render "loading" %>
-<%= render "output_three", best_matches: @best_matches&.first(3) %>
