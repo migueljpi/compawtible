@@ -2,6 +2,14 @@
 
   <div id="slider" class="slide-in">
 
+    <div class="return-to-search">
+      <h1>
+        <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: false } do %>
+          <i class="fa-solid fa-arrow-left"></i>
+        <% end %>
+      </h1>
+    </div>
+
     <%= link_to 'Back to Profile', user_path(@user) %>
 
     <div class="row d-flex align-items-center justify-content-md-center">
