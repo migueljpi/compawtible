@@ -19,7 +19,12 @@
       data-action="click->chatroom-subscription#selectChatroom"
       data-chatroom-id="<%= chatroom.id %>"
       >
-            <%= cl_image_tag chatroom.pet.photos[0].key, width: 50, height: 50, crop: :thumb, gravity: :face, class: "", alt: "dropdown menu", class: "chatroom-avatar" %>
+            <% petPhoto = chatroom.pet.photos[0]&.key %>
+            <% if petPhoto.present? %>
+              <%= cl_image_tag petPhoto, width: 50, height: 50, crop: :thumb, gravity: :face, class: "chatroom-avatar", alt: "Pet photo" %>
+            <% else %>
+              <i class="fa-solid fa-dog chatroom-avatar"></i>
+            <% end %>
           <div class="sidebar-info" >
             <p class="sidebar-name"> <%= chatroom.pet.name %> </p>
             <div class="sidebar-preview text-secondary"><%= truncate(chatroom.messages.last.content, length: 25) || "" %></div>
