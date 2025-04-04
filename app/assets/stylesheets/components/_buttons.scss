@@ -9,6 +9,17 @@
   margin-right: 15px;
 }
 
+.btn-primary {
+  background-color: $blue-main;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  // cursor: pointer;
+  &:hover {
+    background-color: $orange-main;
+  }
+}
+
 .btn-secondary {
   background-color: #FD8B51;
   color: white;
@@ -17,6 +28,9 @@
   border-radius: 15px;
   font-size: 1.2rem;
   // cursor: pointer;
+  &:hover {
+    background-color: $blue-main;
+  }
 }
 
 .button-add-pet {
