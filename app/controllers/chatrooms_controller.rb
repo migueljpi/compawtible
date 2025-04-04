@@ -10,7 +10,7 @@ class ChatroomsController < ApplicationController
     @message = @chatroom.messages.new
   end
 
-  # // creates the first message from both users and then it creates the chatroom
+  # // creates the first message from both users, then creates the chatroom
   def create_chatroom # rubocop:disable Metrics/MethodLength
     @pet = Pet.find(params[:pet_id])
     @provider = @pet.provider
@@ -22,7 +22,7 @@ class ChatroomsController < ApplicationController
     )
 
     @chatroom.messages.find_or_create_by(user: @provider) do |msg|
-      msg.content = "Hello! You have reached #{@provider.first_name}, the owner of #{@pet.name}."
+      msg.content = "You have reached #{@provider.first_name}, the owner of #{@pet.name}."
     end
 
     @message = @chatroom.messages.create(
