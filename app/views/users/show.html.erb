@@ -91,7 +91,7 @@
                 </div>
 
                 <!-- Add the Remove Pet button -->
-                <div class= "user-button">
+                <div class= "user-button d-flex justify-content-between m-2">
                   <%#= link_to 'See pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
                   <%= link_to "See #{pet.name.presence}" || 'View pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
                   <% if current_user.role == 'provider' %>

@@ -25,12 +25,16 @@
   color: white;
   border: none;
   padding: 10px 30px;
-  border-radius: 15px;
+  border-radius: 10px;
   font-size: 1.2rem;
   // cursor: pointer;
   &:hover {
     background-color: $blue-main;
   }
+}
+
+.btn-danger {
+  border-radius: 10px;
 }
 
 .button-add-pet {
