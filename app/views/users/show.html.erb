@@ -91,7 +91,7 @@
                 </div>
 
                 <!-- Add the Remove Pet button -->
-                <div class= "user-button">
+                <div class= "user-button d-flex justify-content-between m-2">
                   <%#= link_to 'See pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
                   <%= link_to "See #{pet.name.presence}" || 'View pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
                   <% if current_user.role == 'provider' %>
@@ -182,7 +182,7 @@
                   <div class="pet-description-modal-card">
                     <p><%= pet.description %></p>
                   </div>
-                  <div class="pet-card-modal-button d-flex justify-content-end">
+                  <div class="pet-card-modal-button d-flex justify-content-center">
                     <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
                   </div>
                 </div>

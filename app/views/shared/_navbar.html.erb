@@ -7,9 +7,11 @@
       </div>
     <% end %>
 
+    <!-- hamburger button for mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+       <span class="navbar-toggler-icon"></span>
     </button>
+    <!-- end of hamburger button for mobile -->
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
@@ -22,11 +24,13 @@
               <i class="fa-solid fa-user nav-avatar-circle"></i>
             <% end %>
           </a>
+          <!-- dropdown menu -->
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Messages", user_chatrooms_path(current_user), class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
+          <!-- end of dropdown menu -->
           </li>
         <% else %>
           <li class="nav-item">

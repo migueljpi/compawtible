@@ -4,13 +4,9 @@ html {
 
 body {
   min-height: 100%;
-  // margin: 0;
-  // line-height: 1.6;
-  // padding: 0;
-  // overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(rgba(255, 241, 241, 0.937), rgba(255, 241, 241, 0.937)),
+  background-image: linear-gradient(rgba(244, 244, 244, 0.85), rgba(244, 244, 244, 0.85)),
                     url('https://res.cloudinary.com/dw3ilbsnz/image/upload/v1742493824/hyd05e2mo4q0zdgqszzs.jpg');
   background-size: cover;
   background-position: center;
@@ -30,7 +26,6 @@ body {
 
 .container {
   position: relative;
-  // z-index: 1;
   padding-bottom: 40px;
 }
 

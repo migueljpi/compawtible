@@ -1,6 +1,7 @@
 .user-card {
   display: flex;
   flex-direction: row;
+  align-items: center;
   // justify-content: space-between;
   margin-left: 40px;
   margin-right: 10px;
@@ -45,8 +46,9 @@
 .pet-info-button {
   margin-top: 0px;
   background-color: $yellow;
+  background-color: #f5ede3;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 0 0 15px 15px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); ;
 }
 
