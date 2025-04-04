@@ -1,4 +1,21 @@
 require "open-uri"
+
+# METHODS START
+def cycle_through_array(array)
+  @cycled_arrays ||= {}
+  key = array.object_id
+
+  if @cycled_arrays[key].nil? || @cycled_arrays[key].empty?
+    @cycled_arrays[key] = array.shuffle
+  end
+
+  @cycled_arrays[key].pop
+end
+# METHODS END
+
+
+
+
 # Destroy existing records
 puts "Destroying existing records..."
 Chatroom.destroy_all
@@ -318,14 +335,14 @@ DESCRIPTIONS = {
 }
 
 SPECIES_AGE_RANGES = {
-  "Dog" => (1..15),
-  "Cat" => (1..20),
-  "Rabbit" => (1..12),
+  "Dog" => (2..15),
+  "Cat" => (2..20),
+  "Rabbit" => (2..12),
   "Hamster" => (1..3),
   "Guinea pig" => (1..8),
-  "Ferret" => (1..10),
-  "Bird" => (1..20),
-  "Turtle" => (1..50),
+  "Ferret" => (2..10),
+  "Bird" => (2..20),
+  "Turtle" => (2..15),
   "Fish" => (1..10),
   "Mouse" => (1..3),
   "Chinchilla" => (1..15),
@@ -355,15 +372,18 @@ FEMALE_PET_NAMES = [
 
 
 
+
+
 puts "Creating pets..."
 User.where(role: "provider").each do |provider|
   if provider.last_name == "Shelter"
     species = ["Dog", "Cat"].sample
-    rand(3..6).times do
+    rand(3..7).times do
       breed = "Other"
       gender = ["Male", "Female"].sample
       pet_name = gender == "Male" ? MALE_PET_NAMES.sample : FEMALE_PET_NAMES.sample
       age = rand(SPECIES_AGE_RANGES[species]) || rand(1..10)
+      description = cycle_through_array(DESCRIPTIONS[species])
 
       pet = Pet.create!(
         location: provider.location,
@@ -379,14 +399,14 @@ User.where(role: "provider").each do |provider|
         sociable_with_animals: [true, false].sample,
         sociable_with_children: [true, false].sample,
         certified: [true, false].sample,
-        description: DESCRIPTIONS[species].sample
+        description: description
       )
 
       if STRAY_PHOTOS[pet.species] && STRAY_PHOTOS[pet.species]["Other"]
         puts "Retrieving stray photos for #{pet.species} (Other breed)"
 
         # Randomly select a set of photos from the "Other" key
-        photo_set = STRAY_PHOTOS[pet.species]["Other"].sample
+        photo_set = cycle_through_array(STRAY_PHOTOS[pet.species]["Other"])
         files = photo_set.map do |filename|
           if pet.species == "Dog"
             file_path = Rails.root.join("app/assets/images/breeds/others/dogs/#{filename}")
@@ -402,11 +422,13 @@ User.where(role: "provider").each do |provider|
         puts "Shelter animal photos attached"
       end
       pet.save!
+      puts "Pet created: #{pet.name} (#{pet.species}, #{pet.breed})"
+      puts "Pet description: #{pet.description}"
     end
   else
-    rand(1..3).times do
+    rand(1..2).times do
       species = SPECIES.keys.sample
-      breed = SPECIES[species].reject { |b| b == "Other" }.sample
+      breed = cycle_through_array(SPECIES[species].reject { |b| b == "Other" })
       gender = ["Male", "Female"].sample
       pet_name = gender == "Male" ? MALE_PET_NAMES.sample : FEMALE_PET_NAMES.sample
       age = rand(SPECIES_AGE_RANGES[species]) || rand(1..10)
@@ -418,7 +440,7 @@ User.where(role: "provider").each do |provider|
         species: species,
         breed: breed,
         age: age,
-        size: breed,
+        size: BREED_SIZES[species][breed] || "Medium",
         activity_level: ["Low", "Moderate", "High"].sample,
         gender: gender,
         neutered: [true, false].sample,
@@ -443,6 +465,8 @@ User.where(role: "provider").each do |provider|
       end
 
       pet.save!
+      puts "Pet created: #{pet.name} (#{pet.species}, #{pet.breed})"
+      puts "Pet description: #{pet.description}"
     end
   end
 end
