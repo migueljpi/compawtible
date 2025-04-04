@@ -20,7 +20,7 @@
 .header-top {
   display: flex;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 50px;
   margin-bottom: 50px;
 }
 
@@ -214,4 +214,11 @@
   h1 {
     font-size: 3.5rem;
   }
+}
+
+.return-from-show {
+  position: absolute;
+  // top: 20px;
+  // left: 20px;
+  z-index: 1000;
 }
