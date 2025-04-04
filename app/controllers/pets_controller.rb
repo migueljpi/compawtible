@@ -1,16 +1,22 @@
 class PetsController < ApplicationController
-  before_action :set_user, only: [:show, :new, :create, :edit, :update, :destroy]
-  before_action :set_pet, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_user, only: %i[show new create edit update destroy]
+  before_action :set_pet, only: %i[show edit update destroy favorite]
 
   def index
-    @pets = Pet.all
+    # @pets = Pet.all
+    @pets = policy_scope(Pet)
   end
 
   def show
+    authorize @pet
+    policy_scope(Pet)
+    if params[:prompt_id].present?
+      @prompt = Prompt.find(params[:prompt_id])
+    end
     # @user = User.find(params[:user_id])
     # @pet = @user.pets.find(params[:id])
     @message = Message.new
+    @pet = Pet.find(params[:id])
     @provider = @pet.provider
 
     return unless @pet.geocoded?
@@ -21,10 +27,17 @@ class PetsController < ApplicationController
     }]
   end
 
+  def favorite
+    current_user.favorite(@pet)
+    redirect_to pet_path(@pet)
+  end
+
   def new
     @pet = Pet.new
+    policy_scope(Pet)
     @url_action = params[:action]
     @pet.location = current_user.location
+    authorize @pet
     # @pet.skip_breed_validations = true
     # @pet.skip_description_validations = true
   end
@@ -33,6 +46,9 @@ class PetsController < ApplicationController
     # raise
     @pet = Pet.new(pet_params_new)
     @pet.provider = current_user
+
+    authorize @pet
+    policy_scope(Pet)
 
     # @pet.skip_breed_validations = false
     # @pet.skip_description_validations = false
@@ -48,10 +64,26 @@ class PetsController < ApplicationController
 
   def edit
     # raise
+    # @pet = Pet.find(params[:id])
+    # @user = @pet.user  # Assuming that each pet belongs to a user
+
+    # This will check if the current user is allowed to edit the pet
+    authorize @pet
+    policy_scope(Pet)
+
+
+
     @url_action = params[:action]
   end
 
   def update
+    # @pet = Pet.find(params[:id])
+    # @user = @pet.user  # Assuming that each pet belongs to a user
+
+    # Authorize the pet to ensure that the current user can update it
+    authorize @pet
+    policy_scope(Pet)
+
     if @pet.update(pet_params_edit)
       if params[:pet][:photos].present?
         params[:pet][:photos].each do |photo|
@@ -65,6 +97,8 @@ class PetsController < ApplicationController
   end
 
   def destroy
+    authorize @pet
+    policy_scope(Pet)
     # Rails.logger.debug "params[:user_id]: #{params[:user_id]}"  # Print out the user_id to check
     @pet.destroy
     # raise
@@ -73,7 +107,7 @@ class PetsController < ApplicationController
 
   def update_breeds
     @pet = Pet.new(species: pet_params_new[:pet][:species])
-    render partial: "breeds_select", locals: { f:  ActionView::Helpers::FormBuilder.new(:pet, @pet, self, {}) }
+    render partial: "breeds_select", locals: { f: ActionView::Helpers::FormBuilder.new(:pet, @pet, self, {}) }
   end
 
   private
@@ -87,10 +121,12 @@ class PetsController < ApplicationController
   end
 
   def pet_params_new
-    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size, :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified, photos: [])
+    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size,
+                                :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified, photos: [])
   end
 
   def pet_params_edit
-    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size, :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified)
+    params.require(:pet).permit(:name, :species, :breed, :description, :location, :user_id, :age, :size,
+                                :activity_level, :gender, :neutered, :medical_conditions, :sociable_with_animals, :sociable_with_children, :certified)
   end
 end

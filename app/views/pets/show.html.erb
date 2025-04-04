@@ -1,90 +1,212 @@
-<div class="container">
+<div id="pet-show" class="container">
 
-  <%= link_to 'Back to Profile', user_path(@user) %>
+  <div id="slider" class="slide-in">
 
-  <div class="row">
 
-    <h1 class="my-4"><strong><%= @pet.name %></strong></h1>
+    <% if @prompt %>
+      <div class="return-to-search return-from-show">
+        <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: false }, class: "btn btn-secondary" do %>
+          <i class="fa-solid fa-arrow-left"></i> Back to search results
+        <% end %>
+      </div>
+    <% end %>
 
-    <div class="col-md-9">
-      <% [
-        ["Species", @pet.species],
-        ["Breed", @pet.breed],
-        ["Location", @pet.location],
-        ["Age (in years)", @pet.age],
-        ["Size", @pet.size],
-        ["Gender", @pet.gender],
-        ["Activity level", @pet.activity_level],
-        ["Description", @pet.description],
-        ["Sociable with animals", @pet.sociable_with_animals],
-        ["Sociable with children", @pet.sociable_with_children],
-        ["Neutered", @pet.neutered],
-        ["Certified", @pet.certified],
-        ["Medical conditions", @pet.medical_conditions],
+    <%#= link_to 'Back to Profile', user_path(@user) %>
 
-        # ["Provider", link_to("#{@pet.provider.first_name} #{@pet.provider.last_name}", user_path(@pet.provider))]
-        ["Provider", link_to("#{@provider.first_name}", user_path(@provider))]
-      ].each do |label, value| %>
-        <% if value.present? %>
-          <div class="row my-2">
-            <div class="col-md-5 align-self-start">
-              <h3 class="mb-0 fw-semibold"><%= label %>:</h3>
-            </div>
-            <div class="col-md-7">
-              <% if [true, false].include?(value) %>
-                <%# <p class="mb-0"><%= value.humanize %></p>
-              <% else %>
-                <p class="mb-0"><%= value %></p>
+    <div class="row d-flex align-items-center justify-content-md-center">
+
+      <!-- Pet Information -->
+      <div class="col-md-6 text-center d-flex flex-column justify-content-center h-100">
+
+        <h1 class="my-4 d-flex align-items-center justify-content-center"><strong><%= @pet.name %></strong>
+          <!-- Bookmark icon -->
+          <div class="image-container" id="favorite_icon_<%= @pet.id %>">
+            <% if current_user.favorited?(@pet) %>
+              <% favorite = current_user.favorites.find_by(favoritable: @pet) %>
+              <%= button_to user_pet_favorite_path(current_user, @pet, favorite), method: :delete, data: { turbo: true }, class: "favorite-button"  do %>
+                <i class="fa-solid fa-heart"></i>
+              <% end %>
+            <% else %>
+              <%= button_to user_pet_favorites_path(current_user, @pet), method: :post, data: { turbo: true }, class: "favorite-button"  do %>
+                <i class="fa-regular fa-heart"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- End of bookmark icon -->
+        </h1>
+        <p>
+          <span class="fs-4">
+          <%= species_emoji(@pet.species) %>
+          <%= @pet.species %>
+          <%= gender_emoji(@pet.gender) %>
+          </span>
+        </p>
+        <p><%= @pet.age %> years</p>
+        <p>From Provider: <%= link_to("#{@provider.first_name}", user_path(@provider)) %></p>
+        <p>
+          <%= link_to "#{country_flag(@pet.latitude, @pet.longitude)} #{@pet.location}", "#pet-map", class: "text-decoration-none" %>
+          <%# <%= country_flag(@pet.latitude, @pet.longitude) %>
+          <%# <%= @pet.location %>
+        </p>
+        <h4>About <%= @pet.name %></h4>
+        <p><%= @pet.description %></p>
+
+        <%= link_to "More info about #{ @pet.name}", "#pet-more-info", class: "text-decoration-none" %>
+
+        <% if current_user.role == "adopter" %>
+          <%= render "contact_provider" %>
+        <% end %>
+
+      </div>
+
+      <!-- Pet Photo Carousel -->
+      <div class="col-md-6 d-flex justify-content-center h-100">
+        <% if @pet.photos.attached? %>
+          <div id="carouselPetShow" class="carousel slide"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Click for Gallery.">
+            <div class="carousel-inner">
+              <% @pet.photos.each_with_index do |photo, idx| %>
+                <div class="carousel-item <%= 'active' if idx == 0 %>" data-bs-toggle="modal" data-bs-target="#modalPetShow" data-turbo="false">
+                  <%= cl_image_tag photo.key, class: "img-fluid image-pet" %>
+                </div>
               <% end %>
             </div>
+            <% if @pet.photos.count > 1 %>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselPetShow" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselPetShow" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            <% end %>
           </div>
+        <% else %>
+          <!-- No images -->
+          <p>No image available</p>
         <% end %>
-      <% end %>
+      </div>
+
     </div>
 
-    <!-- Main Pet Photo -->
-    <div class="col-md-3 text-center">
-      <% if @pet.photos.any? %>
-        <%= cl_image_tag @pet.photos.first.key, class: "img-fluid image-pet" %>
-      <% else %>
-        <p>No image available</p>
-      <% end %>
+    <!-- Additional Pet Info -->
+    <div class="row my-4 d-flex align-items-stretch" style="min-height: 400px;">
 
-      <h3 class="fw-semibold">Map</h3>
-      <div class="map-pet-show"
-        data-controller="map"
-        data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+      <%# Pet map %>
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <%# <h3>I am here:</h3> %>
+        <div id="pet-map" class="map-pet-show w-100 h-75"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+        </div>
       </div>
+
+      <div id="pet-more-info" class="col-md-6 text-center d-flex flex-column justify-content-center">
+        <%# <h3 id="pet-more-info" class="my-3">Additional Information</h3> %>
+        <% [
+          ["Breed", @pet.breed],
+          ["Size", @pet.size],
+          ["Activity level", @pet.activity_level],
+          ["Sociable with animals", @pet.sociable_with_animals],
+          ["Sociable with children", @pet.sociable_with_children],
+          ["Neutered", @pet.neutered],
+          ["Certified", @pet.certified],
+          ["Medical conditions", @pet.medical_conditions],
+
+        ].each do |label, value| %>
+          <% if value.present? %>
+            <div class="row my-2 d-flex align-items-start">
+              <div class="col-md-6 text-md-end">
+                <p class="mb-0 fw-semibold"><%= label %>:</p>
+              </div>
+              <div class="col-md-6 text-md-start">
+                <% if [true, false].include?(value) %>
+                  <p class="mb-0"><%= value.humanize %></p>
+                <% else %>
+                  <p class="mb-0"><%= value %></p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
     </div>
 
-
-    <!-- Additional Pet Photos -->
-    <% if @pet.photos.any? %>
-    <h3 class="my-3 fw-semibold">Photos (<%= @pet.photos.count %>)</h3>
-      <% @pet.photos.each do |photo| %>
-      <div class="col-md-4 my-2">
-        <%= cl_image_tag photo.key, class: "img-fluid image-pet" %>
-      </div>
+    <div class="row mb-5 align-items-center justify-content-center">
+      <% if @pet.provider == current_user %>
+        <%= link_to 'Edit', edit_user_pet_path(@user, @pet), class: "btn btn-primary button-action" %>
+        <%= link_to 'Remove Pet', remove_pet_path(@user, @pet), method: :delete, class: 'btn btn-danger button-action', data: { confirm: 'Are you sure you want to remove this pet?' } %>
       <% end %>
-    <% end %>
+    </div>
 
   </div>
 
-  <% if @pet.provider == current_user %>
-    <div class="my-5">
-        <%= link_to 'Edit', edit_user_pet_path(@user, @pet), class: "btn btn-primary" %>
-        <%= link_to 'Remove Pet', remove_pet_path(@user, @pet), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
-    </div>
+  <!-- Pet Modal Gallery -->
+  <div class="modal fade" id="modalPetShow" tabindex="-1" data-turbo="false" aria-labelledby="modalPetShowTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content d-block">
+        <div class="modal-header">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
 
-  <% else %>
-    <div class="my-5">
-      <%# I don't know the path to the messages yet but sg like: %>
-      <%= render "messages" %>
-      <%= link_to 'Message Provider', "#", class: "btn btn-primary" %>
-    </div>
-  <% end %>
+        <div class="modal-body">
 
-  <%= render "contact_provider" %>
+          <% if @pet.photos.attached? %>
+            <div id="carouselPetShowModal" class="carousel slide">
+              <div class="carousel-inner">
+                <% @pet.photos.each_with_index do |photo, idx| %>
+                  <div class="carousel-item <%= 'active' if idx == 0 %>">
+                    <div class="position-relative w-100 h-100 d-flex justify-content-center align-items-center">
+                    <%= cl_image_tag photo.key, class: "img-fluid image-pet-modal" %>
+                  </div>
+                  </div>
+                <% end %>
+              </div>
+
+              <% if @pet.photos.count > 1 %>
+                <button class="carousel-control-prev fixed-carousel-control" type="button" data-bs-target="#carouselPetShowModal" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next fixed-carousel-control" type="button" data-bs-target="#carouselPetShowModal" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              <% end %>
+
+            </div>
+
+          <% else %>
+            <p>No image available</p>
+          <% end %>
+        </div>
+
+        <div class="modal-footer my-3">
+          <%# <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Bootstrap tooltips
+    document.addEventListener("turbo:load", function() {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    });
+
+    // slider
+    const $slider = document.getElementById('slider');
+    const $toggle = document.getElementById('toggle');
+    $toggle.addEventListener('click', function() {
+      const isOpen = $slider.classList.contains('slide-in');
+      $slider.setAttribute('class', isOpen ? 'slide-out' : 'slide-in');
+    });
+
+  </script>
 
 </div>

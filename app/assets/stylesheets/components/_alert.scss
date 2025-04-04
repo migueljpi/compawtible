@@ -1,6 +1,30 @@
 .alert {
   position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 1000;
+  bottom: 50px;
+  right: 40px;
+  z-index: 10000;
+  transition: opacity 0.5s ease-out;
+  background-color: $beije-light;
+  padding: 20px 50px 20px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  font-family: $headers-font;
+  border: solid 1px $blue;
+
+  display: flex;
+  align-items: center;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.alert-dismissible {
+  .btn-close {
+    position: absolute;
+    top: 4px;
+    right: 0px;
+    z-index: 2;
+  }
 }

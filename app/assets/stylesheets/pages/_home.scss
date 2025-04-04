@@ -5,6 +5,10 @@ html, body {
   overflow-y: auto;
 }
 
+.home-banner h1 {
+  margin-bottom: 1rem;
+}
+
 .home-banner {
   display: flex;
   flex-direction: column;
@@ -30,7 +34,6 @@ html, body {
   font-size: 1.5rem;
   font-weight: normal;
   color: $dark-blue;
-  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -43,7 +46,6 @@ html, body {
   border-radius: 10px;
   text-transform: uppercase;
   transition: all 0.3s ease;
-  margin-top: -150px;
 
   &:hover {
     background-color: darken($orange-main, 10%);
@@ -52,7 +54,6 @@ html, body {
 }
 
 .home-banner .home-logo-title {
-  font-size: 3rem;
   font-weight: bold;
   color: black;
 }
@@ -63,17 +64,18 @@ html, body {
 }
 
 .home-banner .home-logo-img {
-  width: 70px;
+  width: 40px;
   height: auto;
   position: relative;
-  top: -16px;
-  margin-left: -52px;
+  top: -10px;
+  margin-left: -40px;
+  margin-right: 12px;
 }
 
 .home-landing-img {
   width: 90%;
   height: auto;
-  margin-top: -140px;
+  padding-bottom: 30px;
 }
 
 @media (max-width: 768px) {

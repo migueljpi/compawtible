@@ -1,20 +1,10 @@
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  margin-top: auto;
   background: #EEEEEE;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1000;
-  height: 45px;
-  width: 100%;
-  padding: 0px 24px;
   color: rgba(0,0,0,0.8);
   font-size: 0.8rem;
   font-family: $headers-font;
-  margin-top: auto;
-  flex-wrap: wrap;
+  text-align: center;
 }
 
 .footer-link {

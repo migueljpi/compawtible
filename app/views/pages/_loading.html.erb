@@ -2,11 +2,17 @@
   <div data-loading-target="loadingModal" class="modal fade d-none" tabindex="-1" aria-labelledby="loadingModalLabel" inert>
     <div class="modal-dialog modal-dialog-centered modal-retry" role="document">
       <div class="modal-content text-center p-4">
-        <div class="modal-header-retry">
-          <h3>Finding your perfect pet...</h3>
-        </div>
-        <div>
-          <%= image_tag("loading.gif", width: 400, height: 400) %>
+        <div class="modal-body">
+          <div class="modal-header-loading">
+            <h3>Finding your perfect pet...</h3>
+            <div class="fun-fact">
+              <h4>Fun fact:</h4>
+              <h5><%= @pet_facts.sample %></h5>
+            </div>
+          </div>
+          <div>
+            <%= image_tag("loading.gif", width: 250, height: 250) %>
+          </div>
         </div>
       </div>
     </div>

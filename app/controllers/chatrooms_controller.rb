@@ -3,6 +3,8 @@ class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: :provider_info
 
   def index
+    @chatrooms = policy_scope(Chatroom)
+    authorize @chatrooms
     @chatrooms = current_user.chatrooms
     @chatroom = @chatrooms.find_by(id: params[:chatroom_id])
     return unless @chatroom.present?
@@ -10,8 +12,9 @@ class ChatroomsController < ApplicationController
     @message = @chatroom.messages.new
   end
 
-  # // creates the first message from both users, then creates the chatroom
-  def create_chatroom # rubocop:disable Metrics/MethodLength
+  def create_chatroom
+    @chatroom = policy_scope(Chatroom)
+    authorize @chatroom
     @pet = Pet.find(params[:pet_id])
     @provider = @pet.provider
     @adopter = current_user

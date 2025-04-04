@@ -1,0 +1,73 @@
+.fixed-carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.fixed-carousel-control:hover {
+  opacity: 1;
+}
+
+/* Left control (10px from modal left) */
+.carousel-control-prev.fixed-carousel-control {
+  left: 10px;
+}
+
+/* Right control (10px from modal right) */
+.carousel-control-next.fixed-carousel-control {
+  right: 10px;
+}
+
+/* Change the color of the control icons */
+.fixed-carousel-control .carousel-control-prev-icon,
+.fixed-carousel-control .carousel-control-next-icon {
+  background-image: none; /* Remove default Bootstrap icon */
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+}
+
+/* Custom orange arrow icons */
+.fixed-carousel-control .carousel-control-prev-icon::after,
+.fixed-carousel-control .carousel-control-next-icon::after {
+  content: "❮"; /* Left arrow */
+  font-size: 30px;
+  color: $color-secondary;
+}
+
+.fixed-carousel-control .carousel-control-next-icon::after {
+  content: "❯"; /* Right arrow */
+}
+
+.image-pet {
+  height: 80vh;
+  width: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.image-pet-modal {
+  height: 75vh;
+  max-width: 80%;
+  object-fit: cover;
+}
+
+.pet-image-main {
+  max-width: 400px;
+  // max-height: 400px;
+  // object-fit: cover;
+
+  margin-top: 50px;
+
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.carousel-inner {
+  border-radius: 10px 10px 0 0;
+}

@@ -1,6 +1,7 @@
 .user-card {
   display: flex;
   flex-direction: row;
+  align-items: center;
   // justify-content: space-between;
   margin-left: 40px;
   margin-right: 10px;
@@ -32,7 +33,7 @@
 }
 
 .animal-info {
-  margin-top: 10px;
+  margin: 15px;
 }
 
 .pet-image-main {
@@ -42,15 +43,40 @@
   margin-bottom: 50px;
 }
 
-.animal-images {
-  margin-top: 0px;
-  margin-bottom: 15px;
-}
-
 .pet-info-button {
   margin-top: 0px;
   background-color: $yellow;
+  background-color: #f5ede3;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 0 0 15px 15px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); ;
+}
+
+.favorite-button {
+  color: $orange-main;
+  background-color: transparent;
+  border-style: none;
+  font-size: 26px;
+  cursor: pointer;
+  margin: 6px;
+  padding: 0;
+  z-index: 2;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.other-pets-card-container {
+  padding: 20px;
+}
+
+
+// ROWS NOT TOUCHING THE EDGE
+@media (max-width: 768px) {
+  .row.mt-2.d-flex {
+    margin: 0 25px;
+  }
 }

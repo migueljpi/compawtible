@@ -1,6 +1,9 @@
+// .location-radius-row {
+//   border:#007bff 2px solid;
+// }
+
 .empty-space {
   height: 500px;
-  // background-color: $beije-light;
 }
 
 #radius-slider {
@@ -9,38 +12,41 @@
 
 .input-form {
   margin-bottom: 50px;
-  padding: 0px 30px;
+  padding: 30px;
+  // border: 2px solid #001eff;
 }
+
 
 .header-top {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 50px;
 }
 
 .slider-container {
+  margin: 15px 0px;
+  // max-width: 600px;
+  // width: 100%;
+  // box-sizing: border-box;
   background-color: $beije-light;
   border: 2px solid #AFAEAE;
   padding: 15px;
   border-radius: 15px;
   font-size: 1.2rem;
-  display: flex; /* Use Flexbox for layout */
-  align-items: center; /* Vertically align items */
-  justify-content: space-between; /* Ensure proper spacing */
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .slider {
-  flex: 1; /* Allow the slider to take up the remaining space */
+  flex: 1;
 
-  // display: flex;
-  // // justify-content: space-between;
-  // align-items: center;
+
 }
 
 .thick-slider {
   // background: #007bff;
-  height: 10px;
+  height: 12px;
   // background: #d3d3d3;
   border-radius: 5px;
   outline: none;
@@ -50,8 +56,9 @@
 }
 
 
+
 .thick-slider::-webkit-slider-runnable-track {
-  background: $orange-light;
+  background: #d3d3d3;
   height: 10px;
   border-radius: 5px;
 }
@@ -61,7 +68,7 @@
   appearance: none;
   width: 20px;
   height: 20px;
-  background: #007bff;
+  background: $orange-main;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -71,21 +78,11 @@
   padding-right: 15px;
 }
 
-// .thick-slider::-moz-range-thumb {
-//   width: 20px;
-//   height: 60px;
-//   background: #007bff;
-//   border-radius: 50%;
-//   cursor: pointer;
-// }
+.thick-slider:active::-webkit-slider-thumb {
+  background-color: $rusty-red-main;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
-// .thick-slider::-ms-thumb {
-//   width: 20px;
-//   height: 20px;
-//   background: #007bff;
-//   border-radius: 50%;
-//   cursor: pointer;
-// }
 
 .top-three {
   margin: 0px 100px;
@@ -95,13 +92,135 @@
   // height: 500px;
 }
 
-.square-image {
-  width: 100%; /* Make the image take up the full width of the parent */
-  aspect-ratio: 1 / 1; /* Maintain a 1:1 aspect ratio (square) */
-  object-fit: cover; /* Ensure the image covers the square area without distortion */
-  display: block; /* Remove any inline spacing issues */
+.large-input {
+  box-sizing: border-box;
+  width: 100%;
+  // max-width: 600px;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 2px solid #AFAEAE;
+  border-radius: 15px;
+  background-color: $beije-light;
+  height: 150px;
+  margin-left: auto;
 }
 
-// datalist {
-//   display: block;
-// }
+.small-input {
+  margin: 15px 0px;
+  font-size: 1.2rem;
+  // font-weight: bold;
+  padding: 15px;
+  border: 2px solid #AFAEAE;
+  border-radius: 15px;
+  background-color: $beije-light;
+  // margin-right: 15px;
+  // height: 150px;
+}
+
+// Tablet screens
+@media (max-width: 1024px) {
+  .input-form {
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .header-top {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+  }
+
+  .slider-container {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .thick-slider {
+    height: 9px;
+  }
+
+  .radius-text {
+    padding-right: 10px;
+    font-size: 1rem;
+  }
+
+  .top-three {
+    margin: 0px 50px;
+    padding: 20px;
+  }
+
+  .large-input {
+    margin-top: 10px;
+    font-size: 1rem;
+    height: 120px;
+  }
+
+  .small-input {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+// Phone screens
+@media (max-width: 768px) {
+  .input-form {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .header-top {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .slider-container {
+    margin: 10px 0px;
+    // padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .thick-slider {
+    height: 6px;
+  }
+
+  .radius-text {
+    padding-right: 5px;
+    font-size: 0.8rem;
+  }
+
+  .top-three {
+    margin: 0px 20px;
+    padding: 15px;
+  }
+
+  .large-input {
+    margin: 10px 0px;
+    font-size: 0.9rem;
+    height: 100px;
+  }
+
+  .small-input {
+    margin: 10px 0px;
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
+
+// OTHER MATCHES
+
+.return-to-search {
+  h1 {
+    font-size: 3.5rem;
+  }
+}
+
+.return-from-show {
+  position: absolute;
+  // top: 20px;
+  // left: 20px;
+  z-index: 1000;
+}

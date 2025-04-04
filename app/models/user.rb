@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_favoritor
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
@@ -16,10 +17,13 @@ class User < ApplicationRecord
   has_many :chatrooms, -> { distinct }, through: :messages
 
   enum :role, { adopter: "adopter", provider: "provider" }, validate: true
+  # enum role: { adopter: "adopter", provider: "provider"}
+  # enum :role, { adopter: "adopter", provider: "provider"}, default: :adopter, validate: true
+  # enum :role, { adopter: "adopter", provider: "provider" }, validate: true
 
   # Validations
   validates :first_name, presence: true
-  validates :last_name, presence: true
+  # validates :last_name, presence: true
   validates :age, presence: true, numericality: { greater_than: 16, only_integer: true }
   # validates :provider, inclusion: { in: [true, false] }
 
