@@ -46,7 +46,7 @@
   height: 80vh;
   width: 400px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
@@ -66,4 +66,8 @@
 
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.carousel-inner {
+  border-radius: 10px 10px 0 0;
 }

@@ -3,7 +3,7 @@ import { createConsumer } from "@rails/actioncable";
 
 // Connects to data-controller="chatroom-subscription"
 export default class extends Controller {
-  static targets = ["chatroom", "messages", "input"];
+  static targets = ["provider", "messages", "input"];
 
 
   connect() {
@@ -25,6 +25,7 @@ export default class extends Controller {
     window.history.pushState({}, "", url);
 
     this.loadMessages();
+    this.updateChatroomHeader();
 
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -85,5 +86,29 @@ export default class extends Controller {
       input.focus();
     })
     .catch(error => console.error("Error sending message:", error));
+  }
+
+  updateChatroomHeader() {
+
+    fetch(`/users/${this.userId}/chatrooms/${this.chatroomId}/provider_info`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => {
+      if (!text) throw new Error("Empty response from server");
+      return JSON.parse(text);
+    })
+    .then(provider => {
+      this.providerTarget.innerHTML = `
+        <div class="chat-provider-info">
+          <img src="${provider.image_url}" class="chatroom-avatar" alt="Provider Avatar">
+          <div><h5>${provider.name}</h5></div>
+        </div>
+      `;
+    })
+    .catch(error => console.error("Error updating chatroom header:", error));
   }
 }

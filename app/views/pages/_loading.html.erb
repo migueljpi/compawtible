@@ -5,9 +5,13 @@
         <div class="modal-body">
           <div class="modal-header-loading">
             <h3>Finding your perfect pet...</h3>
+            <div class="fun-fact">
+              <h4>Fun fact:</h4>
+              <h5><%= @pet_facts.sample %></h5>
+            </div>
           </div>
           <div>
-            <%= image_tag("loading.gif", width: 400, height: 400) %>
+            <%= image_tag("loading.gif", width: 250, height: 250) %>
           </div>
         </div>
       </div>

@@ -1,4 +1,21 @@
 require "open-uri"
+
+# METHODS START
+def cycle_through_array(array)
+  @cycled_arrays ||= {}
+  key = array.object_id
+
+  if @cycled_arrays[key].nil? || @cycled_arrays[key].empty?
+    @cycled_arrays[key] = array.shuffle
+  end
+
+  @cycled_arrays[key].pop
+end
+# METHODS END
+
+
+
+
 # Destroy existing records
 puts "Destroying existing records..."
 Chatroom.destroy_all
@@ -117,14 +134,15 @@ BREED_PHOTOS = {
 STRAY_PHOTOS = {
   "Dog" => {
     "Other" => [["strayA.jpg", "strayA2.jpg"], ["strayB.jpg", "strayB2.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg"], ["strayE.jpg", "strayE2.jpg", "strayE3.jpg", "strayE4.jpg"],
-                ["strayF.jpg", "strayF2.jpg"], ["strayG.jpg", "strayG2.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg", "strayI3.jpg"]],
+                ["strayF.jpg", "strayF2.jpg"], ["strayG.jpg", "strayG2.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg", "strayI3.jpg"], ["strayJ.jpg", "strayJ2.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"],
+                ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayM.jpg", "strayM2.jpg", "strayM3.jpg"]],
   },
   "Cat" => {
     "Other" => [["strayA.jpg", "strayA2.jpg", "strayA3.jpg"], ["strayB.jpg", "strayB2.jpg", "strayB3.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg", "strayD3.jpg"],
-                ["strayE.jpg", "strayE2.jpg"]],
+                ["strayE.jpg", "strayE2.jpg"], ["strayF.jpg", "strayF2.jpg", "strayF3.jpg"], ["strayG.jpg", "strayG2.jpg", "strayG3.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg"],
+                ["strayJ.jpg", "strayJ2.jpg", "strayJ3.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"], ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"]],
   }
 }
-
 
 SPECIES = {
   "Dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Beagle", "Chihuahua",  "Other"],
@@ -190,18 +208,38 @@ BREED_SIZES = {
 
 DESCRIPTIONS = {
   "Dog" => [
-    "Whether it’s chasing a ball or just lounging at your feet, this pup is always happy to be near you. Loves meeting new people, going on walks, and getting belly rubs whenever possible.",
-    "This affectionate goofball lives for playtime and snuggles. Zoomies in the backyard, naps on the couch, and enthusiastic tail wags are all part of the daily routine.",
-    "Always curious and ready for the next adventure, this pup is up for anything. Long walks, car rides, or just sniffing around the yard—every day is a chance to explore.",
-    "Couch potato or hiking buddy? Why not both? Loves a good nap just as much as an energetic run. Super friendly and eager to be part of a family that will love those puppy-dog eyes.",
-    "A gentle soul with a heart full of love, always looking for someone to cuddle. Loves ear scratches, following you around the house, and making sure no snack goes unnoticed."
+    "Chases balls with enthusiasm, but just as happy flopped at someone's feet. Loves meeting new people, going on walks, and soaking up attention—especially belly rubs.",
+    "Affectionate goofball with a passion for zoomies, naps, and full-body tail wags. Lives for playtime and cozy couch time.",
+    "Curious and always ready for the next thing. Whether it's a long walk, a car ride, or just sniffing around the garden, every day is an adventure.",
+    "Couch potato *and* hiking buddy. Loves energetic runs just as much as lazy naps. Always eager to be part of the action, especially when treats are nearby.",
+    "Gentle soul with a soft spot for cuddles. Sticks close by, enjoys ear scratches, and keeps a keen eye on every snack situation.",
+    "Big eyes always watching, waiting for the next outing. Loves muddy puddles, clean towels, and greeting familiar faces like long-lost friends.",
+    "Big personality with a lot to say. Loves warm laps, barking at imaginary intruders, and acting like the boss of the house.",
+    "Calm and patient, with a comforting presence. Enjoys leaning in for affection and lounging like a furry weighted blanket.",
+    "Always sniffing, always exploring. Finds joy in every stick, every breeze, every corner of the park.",
+    "Awkward in the cutest way. Thinks every lap is the perfect size. Loves routines, soft toys, and sticking close to the humans.",
+    "Always on patrol, always alert—except during nap time. Loves morning walks, squeaky toys, and flopping over dramatically for belly rubs like it’s a full-time job.",
+    "Knows how to keep things interesting. One minute chasing leaves, the next curled up snoring like a log. Lives for treats, ear scratches, and sticking close to the action.",
+    "Endlessly loyal and just a little goofy. Loves routine, greeting guests like long-lost friends, and flopping on the floor mid-play like a fuzzy sack of potatoes.",
+    "Tail wags like a metronome when the leash comes out. Loves exploring new trails, checking every scent twice, and celebrating the return home like it’s a hero’s welcome.",
+    "Eager face, wiggly body, heart of gold. Enjoys chasing shadows, stealing socks, and collapsing into a pile of contentment the moment the zoomies wear off."
   ],
   "Cat" => [
-    "Curious and independent, but always up for a good cuddle when the mood strikes. Loves watching the world from the highest perch in the house and will never say no to a sunny nap spot.",
-    "A playful little troublemaker who finds joy in batting at anything that moves. Will happily chase toys, explore every corner, and then curl up on your lap like nothing ever happened.",
-    "Purrs like a motor at the first sign of affection and never turns down a good head scratch. Loves stretching out in warm spots and watching birds from the window for hours.",
-    "Sassy, smart, and full of personality. Enjoys a good game of hide-and-seek, demanding treats with an adorable stare, and making sure every box in the house is properly inspected.",
-    "Whether it’s chasing toy mice or claiming every soft blanket as their own, life is never boring with this cat around. Enjoys gentle pets and will find the best spot to nap—usually your chair."
+    "Curious and independent, but always ready for a quiet cuddle when the mood strikes. Prefers high perches and sunny nap spots.",
+    "Playful little mischief-maker. Bats at anything that moves, explores every corner, then curls up like nothing ever happened.",
+    "Purrs at the lightest touch, stretches out in warm spots, and spends hours watching the world from the windowsill.",
+    "Sassy, smart, and full of personality. Loves hide-and-seek, dramatic stares, and turning cardboard boxes into fortresses.",
+    "Life is never dull with this one. Chases toy mice, claims every soft blanket, and always finds the coziest nap spot—often the comfiest chair.",
+    "Soft as a cloud with a flair for drama. Yells for food, walks away mid-bite, then naps in fresh laundry like royalty.",
+    "Appears instantly at the sound of a tuna can. Enjoys head boops, warm laps, and uninvited bathroom visits.",
+    "Slow to warm up, but deeply loyal once settled. Loves quiet company, chin scratches, and naps by the feet like a little guardian.",
+    "Stealthy and fast. Enjoys midnight zoomies, blanket ambushes, and pretending not to care while secretly caring a lot.",
+    "All about the vibes. Prefers calm mornings, bird-watching, and stretching dramatically in sunbeams like a feline model.",
+    "Moves like a shadow and disappears just as easily. Finds the tiniest box, the sunniest spot, and the loudest way to announce dinner should’ve happened 10 minutes ago.",
+    "Every curtain, shelf, and bag is fair game. Naps like a professional, watches birds with laser focus, and makes a sport out of knocking pens off the table.",
+    "Expert-level napper with a love for chaos. A single crinkle can trigger full zoomies, followed by a perfectly timed stretch in the middle of a freshly made bed.",
+    "Greets the day with a slow blink and dramatic stretch. Prefers windowsills to laps, climbs like gravity doesn’t exist, and always finds the warmest, softest thing in the room.",
+    "Silent most of the time—until suddenly not. Enjoys sneaky shoulder taps, blank stares from across the room, and claiming every cardboard box as personal property."
   ],
   "Rabbit" => [
     "Loves to zoom around the room, then flop over dramatically for a nap. Always on the lookout for a tasty snack, especially fresh greens, and enjoys gentle head rubs after playtime.",
@@ -297,14 +335,14 @@ DESCRIPTIONS = {
 }
 
 SPECIES_AGE_RANGES = {
-  "Dog" => (1..15),
-  "Cat" => (1..20),
-  "Rabbit" => (1..12),
+  "Dog" => (2..15),
+  "Cat" => (2..20),
+  "Rabbit" => (2..12),
   "Hamster" => (1..3),
   "Guinea pig" => (1..8),
-  "Ferret" => (1..10),
-  "Bird" => (1..20),
-  "Turtle" => (1..50),
+  "Ferret" => (2..10),
+  "Bird" => (2..20),
+  "Turtle" => (2..15),
   "Fish" => (1..10),
   "Mouse" => (1..3),
   "Chinchilla" => (1..15),
@@ -334,15 +372,18 @@ FEMALE_PET_NAMES = [
 
 
 
+
+
 puts "Creating pets..."
 User.where(role: "provider").each do |provider|
   if provider.last_name == "Shelter"
     species = ["Dog", "Cat"].sample
-    rand(3..6).times do
+    rand(3..7).times do
       breed = "Other"
       gender = ["Male", "Female"].sample
       pet_name = gender == "Male" ? MALE_PET_NAMES.sample : FEMALE_PET_NAMES.sample
       age = rand(SPECIES_AGE_RANGES[species]) || rand(1..10)
+      description = cycle_through_array(DESCRIPTIONS[species])
 
       pet = Pet.create!(
         location: provider.location,
@@ -358,14 +399,14 @@ User.where(role: "provider").each do |provider|
         sociable_with_animals: [true, false].sample,
         sociable_with_children: [true, false].sample,
         certified: [true, false].sample,
-        description: DESCRIPTIONS[species].sample
+        description: description
       )
 
       if STRAY_PHOTOS[pet.species] && STRAY_PHOTOS[pet.species]["Other"]
         puts "Retrieving stray photos for #{pet.species} (Other breed)"
 
         # Randomly select a set of photos from the "Other" key
-        photo_set = STRAY_PHOTOS[pet.species]["Other"].sample
+        photo_set = cycle_through_array(STRAY_PHOTOS[pet.species]["Other"])
         files = photo_set.map do |filename|
           if pet.species == "Dog"
             file_path = Rails.root.join("app/assets/images/breeds/others/dogs/#{filename}")
@@ -381,11 +422,13 @@ User.where(role: "provider").each do |provider|
         puts "Shelter animal photos attached"
       end
       pet.save!
+      puts "Pet created: #{pet.name} (#{pet.species}, #{pet.breed})"
+      puts "Pet description: #{pet.description}"
     end
   else
-    rand(1..3).times do
+    rand(1..2).times do
       species = SPECIES.keys.sample
-      breed = SPECIES[species].reject { |b| b == "Other" }.sample
+      breed = cycle_through_array(SPECIES[species].reject { |b| b == "Other" })
       gender = ["Male", "Female"].sample
       pet_name = gender == "Male" ? MALE_PET_NAMES.sample : FEMALE_PET_NAMES.sample
       age = rand(SPECIES_AGE_RANGES[species]) || rand(1..10)
@@ -397,7 +440,7 @@ User.where(role: "provider").each do |provider|
         species: species,
         breed: breed,
         age: age,
-        size: breed,
+        size: BREED_SIZES[species][breed] || "Medium",
         activity_level: ["Low", "Moderate", "High"].sample,
         gender: gender,
         neutered: [true, false].sample,
@@ -422,6 +465,8 @@ User.where(role: "provider").each do |provider|
       end
 
       pet.save!
+      puts "Pet created: #{pet.name} (#{pet.species}, #{pet.breed})"
+      puts "Pet description: #{pet.description}"
     end
   end
 end
@@ -430,13 +475,10 @@ puts "Pets created!"
 puts "Seeded #{User.count} users and #{Pet.count} pets!"
 
 puts "Creating chatrooms..."
-User.where(role: "adopter").each do |adopter|
-  # provider = User.where(role: "provider").sample
-  pet = Pet.all.sample
-  # ensuring the pet belongs to the provider - for reviews testing
-  provider = pet.user
 
-  next unless provider && pet
+Pet.each do |pet|
+  provider = pet.provider
+  adopter = User.where(role: "adopter").sample
 
   chatroom = Chatroom.create!(
     name: "Chat between #{adopter.first_name} and #{provider.first_name} about #{pet.name}",
@@ -465,3 +507,38 @@ User.where(role: "adopter").each do |adopter|
   puts "15 messages  created on chatroom: #{chatroom.name}"
 end
 puts "Chatrooms and messages created"
+
+# end
+# User.where(role: "adopter").each do |adopter|
+#   provider = User.where(role: "provider").sample
+#   next unless provider && provider.pets.any?
+#   pet = provider.pets.sample
+#   next unless pet
+
+#   chatroom = Chatroom.create!(
+#     name: "Chat between #{adopter.first_name} and #{provider.first_name} about #{pet.name}",
+#     pet_id: pet.id
+#   )
+#   puts "Chatroom created: #{chatroom.name} (Pet: #{pet.name})"
+
+#   Message.create!(
+#     chatroom: chatroom,
+#     user: adopter,
+#     content: "Hello, I'm interested in #{pet.name}!"
+#   )
+#   Message.create!(
+#     chatroom: chatroom,
+#     user: provider,
+#     content: "hi #{adopter.first_name}, i can tell you more about #{pet.name}!"
+#   )
+#   13.times do |i|
+#     sender = [adopter, provider].sample
+#     Message.create!(
+#       chatroom: chatroom,
+#       user: sender,
+#       content: "Example message nº#{i + 3} from #{sender.first_name}"
+#     )
+#   end
+#   puts "15 messages  created on chatroom: #{chatroom.name}"
+# end
+# puts "Chatrooms and messages created"

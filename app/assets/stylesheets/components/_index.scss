@@ -13,21 +13,22 @@
 @import "slider";
 @import "star_ratings";
 
-#user-greeting {
-  margin-left: 40px;
-  margin-top: 0px;
-  padding-top: 30px
-}
+//#user-greeting {
+//  margin-left: 40px;
+//  margin-top: 0px;
+//  padding-top: 30px
+//}
 
 #location-shelter {
   margin-left: 0px;
-  margin-top: 30px;
-  margin-bottom: 50px;
+  margin-top: 0px;
+  margin-bottom: 60px;
 }
 
 #your-animals {
   margin-bottom: 0px;
-  margin-top: 30px;
+  margin-top: 0px;
+  margin-right: 40px;
 }
 
 .container {
@@ -42,4 +43,14 @@
   margin-bottom: 0px;
   margin-top: 50px;
   margin-left: 10px;
+}
+
+.large-emoji {
+  font-size: 2rem;
+}
+
+.user-animals-header {
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
 }

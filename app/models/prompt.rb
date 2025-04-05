@@ -67,6 +67,7 @@ class Prompt < ApplicationRecord
     begin
       chatgpt_response = client.chat(parameters: {
         model: "gpt-3.5-turbo",
+        #model: "gpt-4o",
         messages: [{ role: "user", content: full_prompt }],
       })
       response_content = chatgpt_response["choices"][0]["message"]["content"]

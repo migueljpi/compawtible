@@ -1,12 +1,39 @@
-.user-buttons {
+#user-buttons {
   display: flex;
   margin-top: 20px;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
   margin-left: 60px;
+}
+
+#edit-button {
+  font-size: 1rem;
 }
 
 .button {
   margin-right: 15px;
+}
+
+.btn-primary {
+  background-color: $blue-main;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+  // cursor: pointer;
+
+  &:hover {
+    background-color: $blue-medium;
+  }
+
+  &:active {
+    background-color: $dark-blue;
+  }
+
+  &:disabled {
+    background-color: $blue-light;
+    color: $grey;
+    cursor: not-allowed;
+  }
 }
 
 .btn-secondary {
@@ -14,9 +41,16 @@
   color: white;
   border: none;
   padding: 10px 30px;
-  border-radius: 15px;
+  border-radius: 10px;
   font-size: 1.2rem;
   // cursor: pointer;
+  &:hover {
+    background-color: $blue-main;
+  }
+}
+
+.btn-danger {
+  border-radius: 10px;
 }
 
 .button-add-pet {

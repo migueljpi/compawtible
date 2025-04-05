@@ -3,7 +3,7 @@
   data: { turbo_frame: "output-three", action: "turbo:submit-start->output#showLoadingModal turbo:submit-end->output#showOutput" } do |f| %>
   <div class="form-inputs">
     <div class="row location-radius-row">
-      <div class="col-md-6" id="location" data-controller="address-autofill">
+      <div class="col-md-6" id="location" data-controller="address-autofill" data-api-key="<%= ENV['MAPBOX_ACCESS_TOKEN'] || Rails.application.credentials.api_key %>">
         <%= text_field_tag :location, current_user.location,
               required: true,
               class: "form-control small-input",

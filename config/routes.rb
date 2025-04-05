@@ -26,6 +26,9 @@ Rails.application.routes.draw do
     end
 
     resources :chatrooms, only: [:index, :create] do
+      member do
+        get :provider_info
+      end
       resources :messages, only: [:create, :update] do
         collection do
           get :chatroom_messages
@@ -58,4 +61,7 @@ Rails.application.routes.draw do
 
   # delete '/users/:user_id/pets/:pet_id/favorites', to: 'favorites#destroy', as: 'user_pet_favorites'
 
+
+  get "/404", to: "errors#not_found", as: :not_found
+  match "*path", to: "errors#not_found", via: :all
 end

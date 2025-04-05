@@ -1,37 +1,61 @@
-<div class="chats-container p-2" data-controller="chatroom-subscription"  data-user-id="<%= current_user.id %>" >
-  <div class="chat-sidebar">
-    <h2>Chats</h2>
-    <ul class="chat-list">
+<div class="chats-container p2" data-controller="chatroom-subscription"  data-user-id="<%= current_user.id %>" >
+  <div class="row">
+    <div class="col-4 aside-header">
+       <h2>Chats <i class="fa-regular fa-comment"></i></h2>
+    </div>
+    <div class="col-8">
+      <header class="chat-header" data-chatroom-subscription-target="provider">
+      <%# // Filled by JS %>
+    </header>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+       <aside class="sidebar">
+    <ul class="sidebar-list">
       <% current_user.chatrooms.each do |chatroom| %>
-
-      <li class="chat-item" data-action="click->chatroom-subscription#selectChatroom" data-chatroom-id="<%= chatroom.id %>">
-        <%# <img src="avatar2.jpg" alt="John D."> %>
-        <div>
-          <p class="chat-name"> <%= other_user_name_from_chatroom(chatroom.users.map()) %> </p>
-          <p class="chat-preview">
-            <%= chatroom.messages.last&.user&.first_name || "No messages yet" %>:
-            <%= chatroom.messages.last&.content || "No messages yet" %>
-          </p>
-        </div>
-        <%# <span class="chat-time">20:13</span> %>
+      <li
+      class="sidebar-item <%= 'active' if chatroom.id == params[:chatroom_id] %>"
+      data-action="click->chatroom-subscription#selectChatroom"
+      data-chatroom-id="<%= chatroom.id %>"
+      >
+            <% petPhoto = chatroom.pet.photos[0]&.key %>
+            <% if petPhoto.present? %>
+              <%= cl_image_tag petPhoto, width: 50, height: 50, crop: :thumb, gravity: :face, class: "chatroom-avatar", alt: "Pet photo" %>
+            <% else %>
+              <i class="fa-solid fa-dog chatroom-avatar"></i>
+            <% end %>
+          <div class="sidebar-info" >
+            <p class="sidebar-name"> <%= chatroom.pet.name %> </p>
+            <div class="sidebar-preview text-secondary"><%= truncate(chatroom.messages.last.content, length: 25) || "" %></div>
+          </div>
+            <span class="sidebar-time"><%= chatroom.messages.last.updated_at.strftime("%d.%m") %></span>
       </li>
     <% end %>
-
     </ul>
-  </div>
+  </aside>
+    </div>
+    <div class="col-8">
+       <div class="chat-main" >
 
-  <div class="chat-main" >
-    <div class="chat-header">
-      <%# <img src="avatar4.jpg" alt="Kevin Miller"> %>
-      <%# <h3><%= other_user_name_from_chatroom(current_user.chatrooms) %></h3>
+    <div class="chat-body">
+      <div class="chat-messages" data-chatroom-subscription-target="messages">
+        <%# // Filled by JS %>
+        <div>
+          <p>No messages yet!</p>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="chat-input">
+          <input type="text" placeholder="Type here..." data-chatroom-subscription-target="input">
+          <button type="submit" data-action="click->chatroom-subscription#sendMessage">
+          <div class="icon-send"><i class="fa-regular fa-paper-plane"></i></div>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="chat-messages" data-chatroom-subscription-target="messages">
-    </div>
-    <div class="chat-input">
-      <input type="text" placeholder="Type here..." data-chatroom-subscription-target="input">
-      <button type="submit" data-action="click->chatroom-subscription#sendMessage">
-      <i class="icon-send"></i>
-      </button>
+  </div>
     </div>
   </div>
 </div>

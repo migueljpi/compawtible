@@ -6,8 +6,33 @@
   </div>
 <% end %>
 
+<%# PET SHOW %>
 <%= turbo_stream.append "pet-show" do %>
-  <div class="alert alert-danger alert-dismissible fade show m-1" role="alert">
+  <div class="alert alert-danger alert-dismissible fade show m-1" data-controller="flash" role="alert">
+    <%= flash.now[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+<%# USER SHOW %>
+<%= turbo_stream.append "user-show" do %>
+  <div class="alert alert-warning alert-dismissible fade show m-1" data-controller="flash" role="alert">
+    <%= flash.now[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+<%# SEARCH %>
+<%= turbo_stream.append "search" do %>
+  <div class="alert alert-warning alert-dismissible fade show m-1" data-controller="flash" role="alert">
+    <%= flash.now[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+<%# OTHER-MATCHES %>
+<%= turbo_stream.append "other-matches" do %>
+  <div class="alert alert-warning alert-dismissible fade show m-1" data-controller="flash" role="alert">
     <%= flash.now[:notice] %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>

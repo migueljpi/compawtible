@@ -1,145 +1,60 @@
-<div class="container-user-profile">
+<div id="user-show">
+  <div class="container-user-profile">
 
-<% if @user.provider? %>
-  <h1 id="user-greeting"><%= @user.first_name %> </h1>
-  <% if current_user.role == "provider" %>
-    <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
-  <% end %>
-  <div class="user-card">
-    <div>
-      <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
-    </div>
-    <div class="user-input">
-      <h3><strong><%= @user.first_name %> <%= @user.last_name %> (<%= @user.age %>), <%= @user.location %></strong></h3>
-      <h3 id="user-role"><%= @user.role.capitalize %></h3>
-      <h4><%= @user.email %></h4>
-      <h3><strong>About me:</strong></h3>
-      <h4><%= @user.about_me %></h4>
-    </div>
-  </div>
+  <%# User is an provider %>
+  <% if @user.provider? %>
 
-  <div class="user-pets-location">
-
-    <div class="user-map">
-      <h3 id="location-shelter"><strong>We are located here</strong></h3>
-      <div class="map-user-show"
-        data-controller="map"
-        data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+    <div class="user-card">
+      <div>
+        <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
+      </div>
+      <div class="user-input">
+        <h3><strong><%= @user.first_name %> <%= @user.last_name %></strong>
+          <span id="edit-button">
+          <% if current_user.role == "provider" %>
+            <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
+          <% end %>
+          </span>
+        </h3>
+        <p id="user-role"><span><%= @user.role.capitalize %></span></p>
+        <p><span class="large-emoji">📧</span> <%= @user.email %></p>
+        <p><span class="large-emoji">🏠</span> <%= @user.location %></p>
+        <h3><strong>About me:</strong></h3>
+        <p><%= @user.about_me %></p>
       </div>
     </div>
 
-    <div class="user-animals">
+    <div class="user-pets-location">
+
+      <div class="user-map">
+        <h3 id="location-shelter"><strong>We are located here</strong></h3>
+        <div class="map-user-show"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+        </div>
+      </div>
+
+      <div class="user-animals">
+        <% if current_user.role == 'provider' %>
+
+  <div class="user-animals-header">
+    <div>
       <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
-      <div class="row mt-5">
-        <% @user.pets.each_with_index do |pet, index| %>
-          <div class="col-md-4">
-            <div class="pet-image-main">
-              <div class="animal-images">
-              <% if pet.photos.attached? %>
-                <div id="carouselExampleControls_<%= index %>" class="carousel slide">
-                  <div class="carousel-inner">
-                    <% pet.photos.each_with_index do |photo, idx| %>
-                      <div class="carousel-item <%= 'active' if idx == 0 %>">
-                        <% if photo.present? %>
-                          <%= image_tag(photo, id: "image-profile-pet") %>
-                        <% else %>
-                          <%= image_tag('dog.jpg', id: "image-profile-pet") %>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
-              <% else %>
-                <!-- Placeholder carousel images -->
-                <div id="carouselExampleControls_<%= index %>" class="carousel slide">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <%= image_tag("https://images.unsplash.com/photo-1574295643019-78def6d2731c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", id: "image-profile-pet") %>
-                    </div>
-                    <div class="carousel-item">
-                      <%= image_tag("https://images.unsplash.com/photo-1725876197013-b34e4bb61a99?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", id: "image-profile-pet") %>
-                    </div>
-                    <div class="carousel-item">
-                      <%= image_tag("https://images.unsplash.com/photo-1497296690583-da0e2a4ce49a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", id: "image-profile-pet") %>
-                    </div>
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
-              <% end %>
-              </div>
-              <div class="pet-info-button">
-                <div class="animal-info">
-                  <p><strong>Name:</strong> <%= pet.name %></p>
-                  <p><strong>Species:</strong> <%= pet.species %></p>
-                  <p><strong>Breed:</strong> <%= pet.breed %></p>
-                </div>
-
-                <!-- Add the Remove Pet button -->
-                <div class= "user-button">
-                  <%#= link_to 'See pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
-                  <%= link_to "See #{pet.name.presence}" || 'View pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary btn-view" %>
-                  <% if current_user.role == 'provider' %>
-                    <%= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
     </div>
-    <% if current_user.role == 'provider' %>
-    <div class="button-add-pet">
-      <%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %>
-    </div>
-    <% end %>
-
-    <%= render "review_new" %>
-    <%= render "reviews" %>
-
-  </div>
-
-<%# if @user.adopter? %>
-<% else %>
-  <h1 id="user-greeting"><%= @user.first_name %> </h1>
-  <% if current_user.role == "adopter" %>
-    <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
-  <% end %>
-  <div class="user-card">
     <div>
-      <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
-    </div>
-    <div class="user-input">
-      <h3><strong><%= @user.first_name %> <%= @user.last_name %> (<%= @user.age %>), <%= @user.location %></strong></h3>
-      <h3 id="user-role"><%= @user.role.capitalize %></h3>
-      <h4><%= @user.email %></h4>
-      <h3><strong>About me:</strong></h3>
-      <h4><%= @user.about_me %></h4>
+      <% if current_user.role == 'provider' %>
+        <%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 
-<div class="user-animals">
-  <h3 id="your-animals"><strong>Your favorited pets (<%= @user.favorited_pets.count %>)</strong></h3>
-    <div class="row mt-2 d-flex">
-      <% @user.favorited_pets.each_with_index do |pet, index| %>
-        <!-- favorited pets display -->
-        <div class="col-md-3 other-pets-card-container">
+        <% else %>
+          <h3 id="your-animals"><strong><%= @user.first_name %>'s pets (<%= @user.pets.count %>)</strong></h3>
+        <% end %>
+        <div class="row mt-5">
+          <% @user.pets.each_with_index do |pet, index| %>
+          <div class="col-lg-3 col-md-4  other-pets-card-container">
             <div class="pet-image-modal">
               <div class="animal-images">
                   <% if pet.photos.attached? %>
@@ -148,7 +63,7 @@
                       <% pet.photos.each_with_index do |photo, idx| %>
                         <div class="carousel-item <%= 'active' if idx == 0 %>">
                           <% if photo.present? %>
-                            <%= image_tag(photo, class: "square-image") %>
+                            <%= cl_image_tag photo.key, class: "square-image" %>
                           <% else %>
                             <%= image_tag('dog.jpg', class: "square-image") %>
                           <% end %>
@@ -164,47 +79,151 @@
                       <span class="visually-hidden">Next</span>
                     </button>
                   </div>
-                <% end %>
+                  <% else %>
+                    <!-- Placeholder carousel images -->
+                    <div id="carouselExampleControls_<%= index %>" class="carousel slide">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <%= image_tag("https://images.unsplash.com/photo-1574295643019-78def6d2731c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "square-image") %>
+                        </div>
+                        <div class="carousel-item">
+                          <%= image_tag("https://images.unsplash.com/photo-1725876197013-b34e4bb61a99?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "square-image") %>
+                        </div>
+                        <div class="carousel-item">
+                          <%= image_tag("https://images.unsplash.com/photo-1497296690583-da0e2a4ce49a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "square-image") %>
+                        </div>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                  <% end %>
                 <div class="animal-info">
                   <div class="pet-name-modal-card">
-                    <p><strong><%= pet.name %></strong></p>
-                    <!-- bookmark icon -->
-                    <span id="favorite_icon_<%= pet.id %>" class="ms-2">
-                      <% if current_user.favorited?(pet) %>
-                        <% favorite = current_user.favorites.find_by(favoritable: pet) %>
-                        <%= button_to user_pet_favorite_path(current_user, pet, favorite), method: :delete, class: "favorite-button" do %>
-                          <i class="fa-solid fa-heart"></i>
-                        <% end %>
-                      <% else %>
-                        <%= button_to user_pet_favorites_path(current_user, pet), method: :post, class: "favorite-button" do %>
-                          <i class="fa-regular fa-heart"></i>
-                        <% end %>
-                      <% end %>
-                    </span>
-                    <!-- end of bookmark icon -->
+                    <div class="pet-name">
+                      <p><strong><%= pet.name %></strong></p>
+                    </div>
                   </div>
                   <div class="pet-description-modal-card">
                     <p><%= pet.description %></p>
                   </div>
-                  <div class="pet-card-modal-button d-flex justify-content-end">
-                    <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
-                  </div>
+                    <div class="pet-card-modal-button d-flex justify-content-between">
+                      <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
+                      <%#= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+                      <% if current_user.role == 'provider' %>
+                          <%= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+                      <% end %>
+                    </div>
                 </div>
               </div>
             </div>
           </div>
-        <!-- end of favorited pets display -->
-      <% end %>
+          <% end %>
+        </div>
+      </div>
+    
+      <%= render "review_new" %>
+      <%= render "reviews" %>
     </div>
-</div>
 
-  <div class= "user-button">
-    <%#= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary" %>
-    <%#= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
+
+  <%# User is an adopter %>
+  <% else %>
+    <div class="user-card">
+      <div>
+        <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
+      </div>
+      <div class="user-input">
+        <h3><strong><%= @user.first_name %> <%= @user.last_name %></strong>
+          <span id="edit-button">
+            <% if @user == current_user %>
+              <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
+            <% end %>
+          </span>
+        </h3>
+        <p id="user-role"><span><%= @user.role.capitalize %></span></p>
+        <p><span class="large-emoji">📧</span> <%= @user.email %></p>
+        <p><span class="large-emoji">🏠</span> <%= @user.location %></p>
+        <h3><strong>About me:</strong></h3>
+        <p><%= @user.about_me %></p>
+      </div>
+    </div>
+
+    <% if @user == current_user %>
+    <div class="user-animals">
+      <h3 id="your-animals"><strong>Your favorited pets (<%= @user.favorited_pets.count %>)</strong></h3>
+        <div class="row mt-5 d-flex">
+          <% @user.favorited_pets.each_with_index do |pet, index| %>
+            <!-- favorited pets display -->
+            <div class="col-md-3 other-pets-card-container">
+                <div class="pet-image-modal">
+                  <div class="animal-images">
+                      <% if pet.photos.attached? %>
+                      <div id="carouselExampleControls_<%= index %>" class="carousel slide">
+                        <div class="carousel-inner">
+                          <% pet.photos.each_with_index do |photo, idx| %>
+                            <div class="carousel-item <%= 'active' if idx == 0 %>">
+                              <% if photo.present? %>
+                                <%= cl_image_tag photo.key, class: "square-image" %>
+                              <% else %>
+                                <%= image_tag('dog.jpg', class: "square-image") %>
+                              <% end %>
+                            </div>
+                          <% end %>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                    <% end %>
+                    <div class="animal-info">
+                      <div class="pet-name-modal-card">
+                        <p><strong><%= pet.name %></strong></p>
+                        <!-- bookmark icon -->
+                        <span id="favorite_icon_<%= pet.id %>" class="ms-2">
+                          <% if current_user.favorited?(pet) %>
+                            <% favorite = current_user.favorites.find_by(favoritable: pet) %>
+                            <%= button_to user_pet_favorite_path(current_user, pet, favorite), method: :delete, class: "favorite-button" do %>
+                              <i class="fa-solid fa-heart"></i>
+                            <% end %>
+                          <% else %>
+                            <%= button_to user_pet_favorites_path(current_user, pet), method: :post, class: "favorite-button" do %>
+                              <i class="fa-regular fa-heart"></i>
+                            <% end %>
+                          <% end %>
+                        </span>
+                        <!-- end of bookmark icon -->
+                      </div>
+                      <div class="pet-description-modal-card">
+                        <p><%= pet.description %></p>
+                      </div>
+                      <div class="pet-card-modal-button d-flex justify-content-center">
+                        <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- end of favorited pets display -->
+          <% end %>
+        </div>
+    </div>
+  
+    <%= link_to "My Reviews", my_reviews_path, class: "btn btn-primary" %>
+
+    <% end %>
+
+  <% end %>
+
   </div>
-
-  <%= link_to "My Reviews", my_reviews_path, class: "btn btn-primary" %>
-
-<% end %>
-
 </div>

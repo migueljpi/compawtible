@@ -13,6 +13,8 @@ class PagesController < ApplicationController
   end
 
   def search
+    @pet_facts = Pet.get_facts
+
     authorize :page, :search?
     if params[:prompt_id].present?
       @prompt = Prompt.find(params[:prompt_id])
@@ -57,7 +59,7 @@ class PagesController < ApplicationController
             end
 
             # Render the Turbo Frame content
-            # sleep(60)
+            sleep(2)
             render turbo_frame: "output-three", partial: "pages/output_three", locals: { best_matches: @best_matches }
           else
             flash.now[:alert] = "There was an error saving the data."

@@ -20,7 +20,7 @@
 .header-top {
   display: flex;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 50px;
   margin-bottom: 50px;
 }
 
@@ -46,7 +46,7 @@
 
 .thick-slider {
   // background: #007bff;
-  height: 10px;
+  height: 12px;
   // background: #d3d3d3;
   border-radius: 5px;
   outline: none;
@@ -58,7 +58,7 @@
 
 
 .thick-slider::-webkit-slider-runnable-track {
-  background: $orange-light;
+  background: #d3d3d3;
   height: 10px;
   border-radius: 5px;
 }
@@ -68,7 +68,7 @@
   appearance: none;
   width: 20px;
   height: 20px;
-  background: #007bff;
+  background: $orange-main;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -78,6 +78,10 @@
   padding-right: 15px;
 }
 
+.thick-slider:active::-webkit-slider-thumb {
+  background-color: $rusty-red-main;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
 
 .top-three {
@@ -93,7 +97,7 @@
   width: 100%;
   // max-width: 600px;
   font-size: 1.2rem;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 30px;
   padding: 15px;
   border: 2px solid #AFAEAE;
@@ -134,12 +138,12 @@
   }
 
   .thick-slider {
-    height: 8px;
+    height: 9px;
   }
 
   .radius-text {
     padding-right: 10px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .top-three {
@@ -148,6 +152,7 @@
   }
 
   .large-input {
+    margin-top: 10px;
     font-size: 1rem;
     height: 120px;
   }
@@ -173,7 +178,7 @@
   }
 
   .slider-container {
-    margin: 5px 0px;
+    margin: 10px 0px;
     // padding: 8px;
     font-size: 0.9rem;
   }
@@ -199,6 +204,7 @@
   }
 
   .small-input {
+    margin: 10px 0px;
     font-size: 0.9rem;
     padding: 8px;
   }
@@ -210,4 +216,11 @@
   h1 {
     font-size: 3.5rem;
   }
+}
+
+.return-from-show {
+  position: absolute;
+  // top: 20px;
+  // left: 20px;
+  z-index: 1000;
 }

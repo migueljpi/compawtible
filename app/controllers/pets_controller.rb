@@ -10,6 +10,9 @@ class PetsController < ApplicationController
   def show
     authorize @pet
     policy_scope(Pet)
+    if params[:prompt_id].present?
+      @prompt = Prompt.find(params[:prompt_id])
+    end
     # @user = User.find(params[:user_id])
     # @pet = @user.pets.find(params[:id])
     @message = Message.new
