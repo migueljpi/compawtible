@@ -39,10 +39,8 @@
                             <div class="carousel-inner">
                               <% pet.photos.each_with_index do |photo, idx| %>
                                 <div class="carousel-item <%= 'active' if idx == 0 %>">
-                                  <% if photo.present? %>
+                                  <% if photo.key.present? %>
                                     <%= cl_image_tag photo.key, class: "square-image" %>
-                                  <% else %>
-                                    <%= image_tag('dog.jpg', class: "square-image") %>
                                   <% end %>
                                 </div>
                               <% end %>
@@ -56,6 +54,8 @@
                               <span class="visually-hidden">Next</span>
                             </button>
                           </div>
+                        <% else %>
+                          <%= image_tag "logo_paw_print.png", class: "square-image" %>
                         <% end %>
                         <div class="animal-info">
                           <div class="pet-name-modal-card">

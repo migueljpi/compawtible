@@ -16,27 +16,29 @@
             <div class="pet-image-modal">
               <div class="animal-images">
                   <% if pet.photos.attached? %>
-                  <div id="carouselExampleControls_<%= index %>" class="carousel slide">
-                    <div class="carousel-inner">
-                      <% pet.photos.each_with_index do |photo, idx| %>
-                        <div class="carousel-item <%= 'active' if idx == 0 %>">
-                          <% if photo.present? %>
-                            <%= cl_image_tag photo.key, class: "square-image" %>
-                          <% else %>
-                            <%= image_tag('dog.jpg', class: "square-image") %>
-                          <% end %>
-                        </div>
-                      <% end %>
+                    <div id="carouselExampleControls_<%= index %>" class="carousel slide">
+                      <div class="carousel-inner">
+                        <% pet.photos.each_with_index do |photo, idx| %>
+                          <div class="carousel-item <%= 'active' if idx == 0 %>">
+                            <% if photo.present? %>
+                              <%= cl_image_tag photo.key, class: "square-image" %>
+                            <% else %>
+                              <%= image_tag "http://res.cloudinary.com/du1ev4qra/image/upload/v1743878120/logo_paw_print.png", class: "square-image" %>
+                            <% end %>
+                          </div>
+                        <% end %>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
+                  <% else %>
+                    <%= image_tag "logo_paw_print.png", class: "square-image" %>
                 <% end %>
                 <div class="animal-info">
                   <div class="pet-name-modal-card">
