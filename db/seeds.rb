@@ -475,7 +475,6 @@ puts "Pets created!"
 puts "Seeded #{User.count} users and #{Pet.count} pets!"
 
 puts "Creating chatrooms..."
-
 Pet.each do |pet|
   provider = pet.provider
   adopter = User.where(role: "adopter").sample
