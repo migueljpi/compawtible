@@ -475,10 +475,9 @@ puts "Pets created!"
 puts "Seeded #{User.count} users and #{Pet.count} pets!"
 
 puts "Creating chatrooms..."
-User.where(role: "adopter").each do |adopter|
-  provider = User.where(role: "provider").sample
-  pet = Pet.all.sample
-  next unless provider && pet
+Pet.each do |pet|
+  provider = pet.provider
+  adopter = User.where(role: "adopter").sample
 
   chatroom = Chatroom.create!(
     name: "Chat between #{adopter.first_name} and #{provider.first_name} about #{pet.name}",
@@ -507,3 +506,38 @@ User.where(role: "adopter").each do |adopter|
   puts "15 messages  created on chatroom: #{chatroom.name}"
 end
 puts "Chatrooms and messages created"
+
+# end
+# User.where(role: "adopter").each do |adopter|
+#   provider = User.where(role: "provider").sample
+#   next unless provider && provider.pets.any?
+#   pet = provider.pets.sample
+#   next unless pet
+
+#   chatroom = Chatroom.create!(
+#     name: "Chat between #{adopter.first_name} and #{provider.first_name} about #{pet.name}",
+#     pet_id: pet.id
+#   )
+#   puts "Chatroom created: #{chatroom.name} (Pet: #{pet.name})"
+
+#   Message.create!(
+#     chatroom: chatroom,
+#     user: adopter,
+#     content: "Hello, I'm interested in #{pet.name}!"
+#   )
+#   Message.create!(
+#     chatroom: chatroom,
+#     user: provider,
+#     content: "hi #{adopter.first_name}, i can tell you more about #{pet.name}!"
+#   )
+#   13.times do |i|
+#     sender = [adopter, provider].sample
+#     Message.create!(
+#       chatroom: chatroom,
+#       user: sender,
+#       content: "Example message nº#{i + 3} from #{sender.first_name}"
+#     )
+#   end
+#   puts "15 messages  created on chatroom: #{chatroom.name}"
+# end
+# puts "Chatrooms and messages created"

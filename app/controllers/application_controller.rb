@@ -15,14 +15,13 @@ class ApplicationController < ActionController::Base
   skip_after_action :verify_authorized, if: -> { devise_controller? }
 
   # Skip verify_policy_scoped specifically for the sessions controller actions
-  skip_after_action :verify_policy_scoped, only: [:new, :create], if: -> { devise_controller? && controller_name == 'sessions' }
-
-
+  skip_after_action :verify_policy_scoped, only: %i[new create], if: lambda {
+    devise_controller? && controller_name == 'sessions'
+  }
 
   # Skip verify_authorized and verify_policy_scoped for Devise controllers (sessions, registrations, etc.)
   after_action :verify_authorized, unless: :devise_controller?
   after_action :verify_policy_scoped, unless: :devise_controller?
-
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name age role location about_me photo])
@@ -30,11 +29,9 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.role == "provider"
-      return user_path(resource)
-    else
-      return get_search_path
-    end
+    return user_path(resource) if resource.role == "provider"
+
+    return get_search_path
   end
 
   private

@@ -1,6 +1,9 @@
 class MessagesController < ApplicationController
   before_action :set_chatroom, only: [:chatroom_messages]
 
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
+
   def chatroom_messages
     @chatroom = Chatroom.find(params[:chatroom_id])
     @messages = @chatroom.messages.order(:created_at)

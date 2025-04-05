@@ -1,0 +1,217 @@
+.chats-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  font-family: $body-font;
+}
+.aside-header{
+  display: flex;
+  justify-content: flex-start;
+  h2 {
+    font-family: $headers-font;
+    color: $blue-main;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+.sidebar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.90;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-bottom: 10px;
+  height: 32em;
+
+  .sidebar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-radius: $border-radius-xl;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    background: $beije-light;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid $grey;
+
+    &:hover, &.active {
+      opacity: 0.8;
+      transform: translateY(-2px);
+    }
+    .sidebar-info{
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      min-width: 0;
+      .sidebar-name {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .sidebar-preview {
+        font-size: 0.9rem;
+        color: $grey;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 90%;
+      }
+    }
+    span {
+      align-self: flex-start;
+      color: $grey;
+    }
+  }
+}
+
+.chat-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chat-header {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-content: center;
+  height: 8em;
+  color: $black;
+  font-family: $headers-font;
+
+  .chat-provider-info{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+.chat-body{
+  display: flex;
+  flex-direction: column;
+  background: $beije-light;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid $grey;
+  border-radius: $border-radius-xl;
+  opacity: 0.90;
+  height: auto;
+  max-height: 31em;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+
+.chat-messages {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: calc(100% - 60px);
+}
+
+.message {
+  max-width: 65%;
+  padding: 14px;
+  border-radius: $border-radius-xl;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.received {
+  background: $beije-main;
+  align-self: flex-start;
+}
+
+.sent {
+  background: $blue-main;
+  color: $white;
+  align-self: flex-end;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  margin: 5px 10px 0px;
+  font-size: 1rem;
+  position: relative;
+  flex: 1;
+  padding: 14px 40px 14px 16px;
+  border-radius: 1rem;
+  background: $light-grey;
+  transition: box-shadow 0.2s;
+
+  input {
+    background-color: $light-grey;
+    outline: none;
+    border: none;
+    width: 90%;
+    height: 100%;
+  }
+    &:focus {
+      box-shadow: 0 0 5px $blue-main;
+    }
+
+    button {
+      position: absolute;
+      right: 15px;
+      padding: 10px 14px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: flex-end;
+      border: none;
+      background-color: $light-grey;
+      transition: background 0.3s, transform 0.2s;
+
+      &:hover {
+        color: $blue-main;
+        opacity: 0.8;
+      }
+    }
+
+
+  .icon-send {
+    font-size: 1.2rem;
+    color: $blue-medium;
+  }
+}
+
+.chatroom-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+// hide scrollbar
+.sidebar-list::-webkit-scrollbar {
+  display: none;
+}
+.sidebar-list {
+  scrollbar-width: none; /* For Firefox */
+}
+.chat-messages::-webkit-scrollbar {
+  display: none;
+}
+.chat-messages {
+  scrollbar-width: none; /* For Firefox */
+}
