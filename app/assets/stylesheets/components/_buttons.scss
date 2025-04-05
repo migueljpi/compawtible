@@ -18,9 +18,21 @@
   color: white;
   border: none;
   border-radius: 10px;
+  transition: background-color 0.2s ease;
   // cursor: pointer;
+
   &:hover {
-    background-color: $orange-main;
+    background-color: $blue-medium;
+  }
+
+  &:active {
+    background-color: $dark-blue;
+  }
+
+  &:disabled {
+    background-color: $blue-light;
+    color: $grey;
+    cursor: not-allowed;
   }
 }
 

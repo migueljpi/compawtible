@@ -1,0 +1,35 @@
+<div class="container">
+
+  <%= link_to "< Back to Profile", user_path(@user), class: "btn btn-primary my-3" %>
+
+  <h1 class="my-4">My Reviews</h1>
+
+  <% if @reviews_per_adopter.present? %>
+
+    <% @reviews_per_adopter.each do |review| %>
+
+      <h3 class="my-3">About <%= review.pet.name %> from <%= review.pet.provider.first_name %></h3>
+      <% if review.provider_review_content.present? %>
+        <p class="fw-lighter fst-italic">"<%= review.provider_review_content %>"</p>
+      <% end %>
+      <p>
+        <% review.provider_rating.to_i.times do  %>
+          <i class="bi bi-star-fill"></i>
+        <% end %>
+        (<%= review.provider_rating %>)
+      </p>
+
+      <%= link_to "Delete",
+        review_path(review),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+
+        <hr>
+    <% end %>
+
+  <% else %>
+    <p class="fw-lighter fst-italic">You have no reviews yet. </p>
+    <%# <p class="fw-lighter fst-italic">You have no reviews yet. Write one here: </p> %>
+    <%# <%= link_to "Write Review", "#{user_path(@user)}#to-review", class: "btn btn-secondary my-3" %>
+  <% end %>
+
+</div>

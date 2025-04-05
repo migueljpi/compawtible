@@ -1,0 +1,24 @@
+<%# if on providers page as current user adopter %>
+<%# reviews only shows if messages exist between adopter and provider - there has to be messages from both %>
+<% if current_user.role == 'adopter' %>
+<%# <% if current_user.role == 'adopter' && @pets_to_review.any? %>
+
+<%# <% if @chatrooms_to_review.reviews.any.empty? %>
+  <%# <h1>Leave a Review</h1> %>
+
+  <% @chatrooms_to_review.each do |chatroom| %>
+    <% next if chatroom.review.present? %>
+
+    <%= simple_form_for([@provider, chatroom, Review.new]) do |f| %>
+      <h3 class="mb-4 text-start">How was your experience with <%= chatroom.pet.provider.first_name %> about <%= chatroom.pet.name %>?</h3>
+        <%= f.input :provider_review_content, label: false, :input_html => {:rows => 2} %>
+        <%# <%= f.input :provider_rating, collection: (1..5).to_a, label: "Rate your experience" %>
+        <%= f.input :provider_rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}}, tooltip: false %>
+        <%= f.submit "Leave a Review", class: "btn btn-secondary my-3" %>
+    <% end %>
+
+  <% end %>
+
+  <%# <% end %>
+
+<% end %>

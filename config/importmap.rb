@@ -10,3 +10,4 @@ pin "@popperjs/core", to: "popper.js", preload: true
 pin "mapbox-gl", to: "https://ga.jspm.io/npm:mapbox-gl@3.1.2/dist/mapbox-gl.js"
 pin "process", to: "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/browser/process-production.js"
 pin "@rails/actioncable", to: "https://ga.jspm.io/npm:@rails/actioncable@8.0.200/app/assets/javascripts/actioncable.esm.js"
+pin "star-rating.js", to: "https://cdn.jsdelivr.net/npm/star-rating.js@4.3.1/dist/star-rating.esm.js"

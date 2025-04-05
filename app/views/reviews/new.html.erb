@@ -1,0 +1,17 @@
+<%# for testing %>
+
+<%= @adopter.first_name %>
+
+<% @chatrooms_to_review.each do |chatroom| %>
+
+  <%= chatroom.messages.first.user.role %>
+
+
+  <%= simple_form_for([@provider, chatroom, Review.new]) do |f| %>
+      <h3 class="mb-4 text-start">How was your experience with <%= chatroom.pet.provider.first_name %> about <%= chatroom.pet.name %>?</h3>
+        <%= f.input :provider_review_content, label: false, :input_html => {:rows => 2} %>
+        <%= f.input :provider_rating, collection: (1..5).to_a, label: "Rate your experience" %>
+        <%= f.submit "Leave a Review", class: "btn btn-secondary my-3" %>
+    <% end %>
+
+  <% end %>

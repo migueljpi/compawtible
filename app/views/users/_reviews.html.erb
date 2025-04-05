@@ -1,0 +1,35 @@
+<h2>Reviews for <%= @provider.first_name %></h2>
+
+<% if @reviews_per_provider.present? %>
+
+  <%# correct the stars display %>
+  <% @provider_average_rating.to_i.times do  %>
+    <i class="bi bi-star-fill"></i>
+  <% end %>
+
+  (<%= @provider_average_rating.round(1) %>)
+
+  <% @reviews_per_provider.each do |review| %>
+
+    <p><%= review.user.first_name %> 's experience with <%= review.pet.provider.first_name %> about <%= review.pet.name %>:</p>
+
+    <% if review.provider_review_content.present? %>
+      <p class="fw-lighter fst-italic">"<%= review.provider_review_content %>"</p>
+    <% end %>
+
+    <p>
+      <% review.provider_rating.to_i.times do  %>
+        <i class="bi bi-star-fill"></i>
+      <% end %>
+      (<%= review.provider_rating %>)
+    </p>
+
+    <%= link_to "Delete",
+      review_path(review, provider_id: @provider.id),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+
+  <% end %>
+
+<% else %>
+  <p class="fw-light"> <%= @provider.first_name %> has no reviews yet.</p>
+<% end %>
