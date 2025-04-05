@@ -1,13 +1,13 @@
 .user-card {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   // justify-content: space-between;
-  margin-left: 40px;
+  margin-left: 0px;
   margin-right: 10px;
   margin-bottom: 0px;
   margin-top: 40px;
-  background-color: $yellow;
+  // background-color: $yellow;
   padding: 30px;
   border-radius: 5px;
   h3, h4 {
@@ -30,6 +30,18 @@
 
 .user-input {
   margin-right: 60px;
+  // display: grid;
+  // place-items: center;
+  // width: 50%;           /* Set a fixed width */
+  // margin: 0 auto;
+  p {
+    display: flex;               /* Enable flexbox */
+    align-items: center;         /* Vertically center the content */
+  }
+  .large-emoji {
+    font-size: 2rem;             /* Make the emoji larger */
+    margin-right: 8px;           /* Add a little space between the emoji and the email */
+  }
 }
 
 .animal-info {

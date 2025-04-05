@@ -1,8 +1,12 @@
-.user-buttons {
+#user-buttons {
   display: flex;
   margin-top: 20px;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
   margin-left: 60px;
+}
+
+#edit-button {
+  font-size: 1rem;
 }
 
 .button {
