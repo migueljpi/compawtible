@@ -431,8 +431,11 @@ puts "Seeded #{User.count} users and #{Pet.count} pets!"
 
 puts "Creating chatrooms..."
 User.where(role: "adopter").each do |adopter|
-  provider = User.where(role: "provider").sample
+  # provider = User.where(role: "provider").sample
   pet = Pet.all.sample
+  # ensuring the pet belongs to the provider - for reviews testing
+  provider = pet.user
+
   next unless provider && pet
 
   chatroom = Chatroom.create!(

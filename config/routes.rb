@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "reviews/new"
   devise_for :users, controllers: { registrations: "registrations" }
   root to: "pages#home"
   post "/", to: "pages#home"
@@ -14,22 +13,31 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   resources :users, only: [:show] do
+
     resources :pets, only: [:show, :new, :create, :edit, :update, :destroy] do
+
       resources :favorites, only: [:create, :destroy]
+      post 'create_chatroom', to: 'chatrooms#create_chatroom', as: 'create_chatroom'
+
       collection do
         post :update_breeds
       end
+
     end
+
     resources :chatrooms, only: [:index, :create] do
       resources :messages, only: [:create, :update] do
         collection do
           get :chatroom_messages
         end
       end
+      # resources :reviews, only: [:new, :create, :update]
+      resources :reviews, only: [:create, :update]
     end
-    resources :reviews, only: [:index, :create, :update]
+    # resources :reviews, only: [:index]
   end
 
+  get '/my_reviews', to: 'reviews#index', as: 'my_reviews'
   resources :reviews, only: :destroy
 
   # Defines the root path route ("/")

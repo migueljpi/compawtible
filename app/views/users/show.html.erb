@@ -109,6 +109,10 @@
       <%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %>
     </div>
     <% end %>
+
+    <%= render "review_new" %>
+    <%= render "reviews" %>
+
   </div>
 
 <%# if @user.adopter? %>
@@ -198,9 +202,9 @@
     <%#= link_to 'View Pet', user_pet_path(user_id: @user.id, id: pet.id), class: "btn btn-primary" %>
     <%#= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
   </div>
-<% end %>
 
-  <%# <%= render "review_new" %>
-  <%= render "reviews" %>
+  <%= link_to "My Reviews", my_reviews_path, class: "btn btn-primary" %>
+
+<% end %>
 
 </div>

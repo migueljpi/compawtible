@@ -33,21 +33,19 @@ class UsersController < ApplicationController
     @provider = User.find(params[:id])
     @adopter = current_user
 
-    # @chatrooms_to_review = Chatroom.where(user_id: @adopter.id)
-    #
-    # @chatrooms_to_review = Chatroom.joins(:messages).where(messages: { user_id: @adopter.id }).distinct
-    #
-    # Find chatrooms where both the adopter and provider have participated
+    # only works if there are messages from both adopter and provider in the chatroom
     @chatrooms_to_review = Chatroom.joins(:messages)
-                                    .where(messages: { user_id: [@adopter.id, @provider.id] })
-                                    .group('chatrooms.id')
-                                    .having('COUNT(DISTINCT messages.user_id) = 2')
+                                .where(messages: { user_id: [@adopter.id, @provider.id] })
+                                .group('chatrooms.id')
+                                .having('COUNT(DISTINCT messages.user_id) = 2')
+                                .to_a
 
-    @pets_to_review = Pet.where(id: @chatrooms_to_review.pluck(:pet_id))
-    # @pet_to_review = Pet.where(id: @chatrooms_to_review.pluck)
+    @pets_to_review = Pet.where(id: @chatrooms_to_review.pluck(:pet_id)).to_a
 
-    # @pet_to_review = Pet.where(chatroom_id: @chatrooms_to_review.pluck(:id))
-    # @reviews_user = Review.where(booking_id: @bookings_reviewed.pluck(:id))
+    @reviews_per_provider = Review.joins(chatroom: { pet: :provider }).where(users: {id: @provider.id}).to_a
+
+    @reviews_per_provider_for_average = Review.joins(chatroom: { pet: :provider }).where(users: {id: @provider.id}).pluck(:provider_rating)
+    @provider_average_rating = @reviews_per_provider_for_average.sum.to_f / @reviews_per_provider_for_average.count
 
   end
 

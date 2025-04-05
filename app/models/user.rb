@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_one_attached :photo
   has_many :messages
   has_many :chatrooms, -> { distinct }, through: :messages
+  has_many :reviews
 
   enum :role, { adopter: "adopter", provider: "provider" }, validate: true
   # enum role: { adopter: "adopter", provider: "provider"}

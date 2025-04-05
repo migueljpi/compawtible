@@ -8,28 +8,30 @@ class ReviewPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      scope.all
+      # scope.all
+      scope.where(user: user)
     end
   end
 
-  def index?
-    true
-    # user.admin? || user.regular?  # Adjust this based on your app's roles
-  end
+  # def new?
+  #   # user.provider?
+  #   # true
+  # end
 
   def create?
-    # user.provider?
     true
   end
 
   def update?
     # return record.provider_id == user.id
-    true
+    record.user == user
+    # true
   end
 
   def destroy?
     # return record.provider_id == user.id
-    true
+    record.user == user
+    # true
   end
 
 end
