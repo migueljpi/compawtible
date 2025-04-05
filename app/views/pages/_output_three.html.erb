@@ -40,7 +40,7 @@
                               <% pet.photos.each_with_index do |photo, idx| %>
                                 <div class="carousel-item <%= 'active' if idx == 0 %>">
                                   <% if photo.present? %>
-                                    <%= image_tag(photo, class: "square-image") %>
+                                    <%= cl_image_tag photo.key, class: "square-image" %>
                                   <% else %>
                                     <%= image_tag('dog.jpg', class: "square-image") %>
                                   <% end %>
