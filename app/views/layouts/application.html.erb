@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Compawtible" %></title>
-    <link rel='shortcut icon' type='image/png' href='favicon.png'/>
+    <link rel="icon" type="image/png" href="<%= asset_path('favicon.png') %>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -11,10 +11,6 @@
 
     <%= yield :head %>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%# <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' /> %>
     <script id="search-js" defer src="https://api.mapbox.com/search-js/v1.0.0/web.js"></script>
