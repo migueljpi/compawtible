@@ -12,11 +12,11 @@
 @import "tooltips";
 @import "slider";
 
-#user-greeting {
-  margin-left: 40px;
-  margin-top: 0px;
-  padding-top: 30px
-}
+//#user-greeting {
+//  margin-left: 40px;
+//  margin-top: 0px;
+//  padding-top: 30px
+//}
 
 #location-shelter {
   margin-left: 0px;
@@ -41,4 +41,8 @@
   margin-bottom: 0px;
   margin-top: 50px;
   margin-left: 10px;
+}
+
+.large-emoji {
+  font-size: 2rem;
 }
