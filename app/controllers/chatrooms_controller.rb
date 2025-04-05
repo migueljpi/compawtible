@@ -2,9 +2,14 @@ class ChatroomsController < ApplicationController
   before_action :set_user, only: %i[index provider_info]
   before_action :set_chatroom, only: :provider_info
 
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
   def index
-    @chatrooms = policy_scope(Chatroom)
-    authorize @chatrooms
+    if params[:user_id].to_i != current_user.id
+      render file: Rails.root.join('public', '404.html'), status: :not_found,
+             layout: false
+    end
+
     @chatrooms = current_user.chatrooms
     @chatroom = @chatrooms.find_by(id: params[:chatroom_id])
     return unless @chatroom.present?
@@ -12,9 +17,7 @@ class ChatroomsController < ApplicationController
     @message = @chatroom.messages.new
   end
 
-  def create_chatroom
-    @chatroom = policy_scope(Chatroom)
-    authorize @chatroom
+  def create_chatroom # rubocop:disable Metrics/MethodLength
     @pet = Pet.find(params[:pet_id])
     @provider = @pet.provider
     @adopter = current_user
