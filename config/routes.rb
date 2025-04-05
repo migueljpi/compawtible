@@ -13,13 +13,18 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   resources :users, only: [:show] do
+
     resources :pets, only: [:show, :new, :create, :edit, :update, :destroy] do
+
       resources :favorites, only: [:create, :destroy]
       post 'create_chatroom', to: 'chatrooms#create_chatroom', as: 'create_chatroom'
+
       collection do
         post :update_breeds
       end
+
     end
+
     resources :chatrooms, only: [:index, :create] do
       member do
         get :provider_info
@@ -29,8 +34,14 @@ Rails.application.routes.draw do
           get :chatroom_messages
         end
       end
+      # resources :reviews, only: [:new, :create, :update]
+      resources :reviews, only: [:create, :update]
     end
+    # resources :reviews, only: [:index]
   end
+
+  get '/my_reviews', to: 'reviews#index', as: 'my_reviews'
+  resources :reviews, only: :destroy
 
   # Defines the root path route ("/")
   # root "posts#index"

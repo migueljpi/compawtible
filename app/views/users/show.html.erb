@@ -126,7 +126,11 @@
           <% end %>
         </div>
       </div>
+    
+      <%= render "review_new" %>
+      <%= render "reviews" %>
     </div>
+
 
   <%# User is an adopter %>
   <% else %>
@@ -214,6 +218,9 @@
           <% end %>
         </div>
     </div>
+  
+    <%= link_to "My Reviews", my_reviews_path, class: "btn btn-primary" %>
+
     <% end %>
 
   <% end %>

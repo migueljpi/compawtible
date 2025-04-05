@@ -308,8 +308,7 @@
 #modalPetShow {
   .modal-content {
     // background-color: white !important;
-    background-color: #f3efeb !important;
-    position: relative !important; /* Ensures controls are placed relative to modal */
+    // position: relative !important; /* Ensures controls are placed relative to modal */
   }
   .modal-header {
     // border:none;
@@ -324,6 +323,6 @@
   }
 
   .modal-body {
-    margin: 0 auto !important;
+    // margin: 0 auto !important;
   }
 }
