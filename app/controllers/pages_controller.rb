@@ -59,7 +59,7 @@ class PagesController < ApplicationController
             end
 
             # Render the Turbo Frame content
-            sleep(2)
+            # countdown(60) # for testing
             render turbo_frame: "output-three", partial: "pages/output_three", locals: { best_matches: @best_matches }
           else
             flash.now[:alert] = "There was an error saving the data."
@@ -89,5 +89,12 @@ class PagesController < ApplicationController
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
+  end
+
+  def countdown(seconds)
+    seconds.times do |i|
+      sleep(1)
+      puts "#{seconds - i} seconds remaining..."
+    end
   end
 end
