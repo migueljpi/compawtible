@@ -37,7 +37,18 @@
 
       <div class="user-animals">
         <% if current_user.role == 'provider' %>
-          <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
+
+  <div class="user-animals-header">
+    <div>
+      <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
+    </div>
+    <div>
+      <% if current_user.role == 'provider' %>
+        <%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+
         <% else %>
           <h3 id="your-animals"><strong><%= @user.first_name %>'s pets (<%= @user.pets.count %>)</strong></h3>
         <% end %>
@@ -68,6 +79,29 @@
                       <span class="visually-hidden">Next</span>
                     </button>
                   </div>
+                  <% else %>
+                    <!-- Placeholder carousel images -->
+                    <div id="carouselExampleControls_<%= index %>" class="carousel slide">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <%= image_tag("https://images.unsplash.com/photo-1574295643019-78def6d2731c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "square-image") %>
+                        </div>
+                        <div class="carousel-item">
+                          <%= image_tag("https://images.unsplash.com/photo-1725876197013-b34e4bb61a99?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "square-image") %>
+                        </div>
+                        <div class="carousel-item">
+                          <%= image_tag("https://images.unsplash.com/photo-1497296690583-da0e2a4ce49a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "square-image") %>
+                        </div>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
                   <% end %>
                 <div class="animal-info">
                   <div class="pet-name-modal-card">
@@ -92,12 +126,6 @@
           <% end %>
         </div>
       </div>
-
-      <% if current_user.role == 'provider' %>
-      <div class="button-add-pet">
-        <%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %>
-      </div>
-      <% end %>
     </div>
 
   <%# User is an adopter %>
@@ -116,6 +144,7 @@
         </h3>
         <p id="user-role"><span><%= @user.role.capitalize %></span></p>
         <p><span class="large-emoji">📧</span> <%= @user.email %></p>
+        <p><span class="large-emoji">🏠</span> <%= @user.location %></p>
         <h3><strong>About me:</strong></h3>
         <p><%= @user.about_me %></p>
       </div>
@@ -124,7 +153,7 @@
     <% if @user == current_user %>
     <div class="user-animals">
       <h3 id="your-animals"><strong>Your favorited pets (<%= @user.favorited_pets.count %>)</strong></h3>
-        <div class="row mt-2 d-flex">
+        <div class="row mt-5 d-flex">
           <% @user.favorited_pets.each_with_index do |pet, index| %>
             <!-- favorited pets display -->
             <div class="col-md-3 other-pets-card-container">
