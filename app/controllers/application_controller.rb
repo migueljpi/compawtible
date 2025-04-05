@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   include Pundit::Authorization
@@ -34,7 +35,24 @@ class ApplicationController < ActionController::Base
     return get_search_path
   end
 
+  #404 page
+
+  rescue_from Pundit::NotAuthorizedError, with: :render_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+  rescue_from ActionController::RoutingError, with: :render_not_found
+  rescue_from AbstractController::ActionNotFound, with: :render_not_found
+
+
   private
+
+  def render_not_found(exception = nil)
+    respond_to do |format|
+      format.html { render template: "errors/not_found", status: :not_found }
+      format.all  { render plain: "404 Not Found", status: :not_found }
+    end
+  end
+
+  # 404 page
 
   def skip_pundit?
     devise_controller? || (controller_name == 'pages' && action_name == 'home')

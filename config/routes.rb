@@ -50,4 +50,7 @@ Rails.application.routes.draw do
 
   # delete '/users/:user_id/pets/:pet_id/favorites', to: 'favorites#destroy', as: 'user_pet_favorites'
 
+
+  get "/404", to: "errors#not_found", as: :not_found
+  match "*path", to: "errors#not_found", via: :all
 end
