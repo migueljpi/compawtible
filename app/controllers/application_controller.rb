@@ -37,10 +37,10 @@ class ApplicationController < ActionController::Base
 
   #404 page
 
-  # rescue_from Pundit::NotAuthorizedError, with: :render_not_found
-  # rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-  # rescue_from ActionController::RoutingError, with: :render_not_found
-  # rescue_from AbstractController::ActionNotFound, with: :render_not_found
+  rescue_from Pundit::NotAuthorizedError, with: :render_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+  rescue_from ActionController::RoutingError, with: :render_not_found
+  rescue_from AbstractController::ActionNotFound, with: :render_not_found
 
 
   private
