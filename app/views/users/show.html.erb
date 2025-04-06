@@ -38,16 +38,16 @@
       <div class="user-animals">
         <% if current_user.role == 'provider' %>
 
-  <div class="user-animals-header">
-    <div>
-      <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
-    </div>
-    <div>
-      <% if current_user.role == 'provider' %>
-        <%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
+        <div class="user-animals-header">
+          <div>
+            <h3 id="your-animals"><strong>Your animals (<%= @user.pets.count %>)</strong></h3>
+          </div>
+          <div>
+            <% if current_user.role == 'provider' %>
+              <%= link_to "Add a pet", new_user_pet_path(current_user), class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
 
         <% else %>
           <h3 id="your-animals"><strong><%= @user.first_name %>'s pets (<%= @user.pets.count %>)</strong></h3>

@@ -3,6 +3,14 @@ class Pet < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
+  include PgSearch::Model
+
+    pg_search_scope :search_by_name_and_species_age_size_gender_description_location_breed_activity_level_neutered,
+    against: [ :name, :species, :age, :size, :gender, :description, :location, :breed, :activity_level, :neutered ],
+    using: {
+      tsearch: { prefix: true }
+    }
+
   BREEDS = {
     "Dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Poodle", "Bulldog",
               "Beagle", "Chihuahua", "Dachshund", "Siberian Husky", "Boxer", "Doberman", "Shih Tzu", "Border Collie",

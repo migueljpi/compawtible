@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
 
-    resources :pets, only: [:show, :new, :create, :edit, :update, :destroy] do
+    resources :pets, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
 
       resources :favorites, only: [:create, :destroy]
       post 'create_chatroom', to: 'chatrooms#create_chatroom', as: 'create_chatroom'
