@@ -72,3 +72,4 @@ end
 gem "ruby-openai"
 gem "geocoder"
 gem "pundit"
+gem "pg_search"

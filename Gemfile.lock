@@ -230,6 +230,9 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
+    pg_search (2.3.7)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
@@ -410,6 +413,7 @@ DEPENDENCIES
   importmap-rails (~> 1.2.3)
   jbuilder
   pg (~> 1.1)
+  pg_search
   puma (>= 5.0)
   pundit
   rails (~> 7.2.2, >= 7.2.2.1)

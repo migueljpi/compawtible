@@ -12,6 +12,10 @@ class PetPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    user.present?
+  end
+
   def show?
     true
   end

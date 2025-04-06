@@ -3,8 +3,19 @@ class PetsController < ApplicationController
   before_action :set_pet, only: %i[show edit update destroy favorite]
 
   def index
-    # @pets = Pet.all
-    @pets = policy_scope(Pet)
+    # Apply the filter if params[:query] is present, otherwise get all pets
+    if params[:query].present?
+      # @pets = Pet.where(species: params[:query])
+      @pets = Pet.search_by_name_and_species_age_size_gender_description_location_breed_activity_level_neutered(params[:query])
+    else
+      @pets = Pet.all
+    end
+
+    # Ensure the user has access to the pets collection
+    authorize @pets
+
+    # Apply the policy scope to ensure users can only see what they're authorized to
+    @pets = policy_scope(@pets)
   end
 
   def show
