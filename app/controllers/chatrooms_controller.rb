@@ -40,7 +40,6 @@ class ChatroomsController < ApplicationController
       redirect_to user_chatrooms_path(@adopter), notice: "Chatroom and message created successfully!"
     else
       flash[:error] = "Message creation failed!"
-      render 'new'
     end
   end
 
@@ -50,9 +49,17 @@ class ChatroomsController < ApplicationController
     @provider = @chatroom.users.where.not(id: current_user.id).first
 
     if @provider
+      profile_url = view_context.user_path(@provider)
+      image_url = if @provider.photo.attached?
+                    view_context.cl_image_path(@provider.photo.key, width: 50, height: 50, crop: :thumb,
+                                                                    gravity: :face)
+                  else
+                    ""
+                  end
       render json: {
         name: @provider.first_name,
-        image_url: @provider.photo.attached? ? url_for(@provider.photo) : "/default_avatar.png"
+        image_url: image_url,
+        profile_url: profile_url
       }
     else
       render json: { error: "Provider not found" }, status: 404
