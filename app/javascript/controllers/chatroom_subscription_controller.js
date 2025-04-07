@@ -102,6 +102,7 @@ export default class extends Controller {
       return JSON.parse(text);
     })
     .then(provider => {
+      console.log("Provider Info:", provider);
       this.providerTarget.innerHTML = `
         <div class="chat-provider-info">
           <img src="${provider.image_url}" class="chatroom-avatar" alt="Provider Avatar">
