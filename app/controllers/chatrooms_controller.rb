@@ -40,7 +40,6 @@ class ChatroomsController < ApplicationController
       redirect_to user_chatrooms_path(@adopter), notice: "Chatroom and message created successfully!"
     else
       flash[:error] = "Message creation failed!"
-      render 'new'
     end
   end
 
