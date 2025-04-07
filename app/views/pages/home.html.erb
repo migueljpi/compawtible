@@ -22,7 +22,9 @@
     <% end %>
   </section>
   <section class="home-action-btn">
-    <%= link_to "See all pets", user_pets_path(current_user), class: "btn btn-primary home-button" %>
+    <% if current_user %>
+      <%= link_to "See all pets", user_pets_path(current_user), class: "btn btn-primary home-button" %>
+    <% end %>
   </section>
 
 </div>
