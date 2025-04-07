@@ -30,6 +30,15 @@
   margin-top: 0px;
   margin-right: 40px;
 }
+#clean-link {
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
 
 .container {
 
