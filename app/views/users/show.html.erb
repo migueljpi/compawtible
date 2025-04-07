@@ -27,7 +27,7 @@
     <div class="user-pets-location">
 
       <div class="user-map">
-        <h3 id="location-shelter"><strong>We are located here</strong></h3>
+        <h3 id="location-shelter"><strong>📍 We are located here</strong></h3>
         <div class="map-user-show"
           data-controller="map"
           data-map-markers-value="<%= @markers.to_json %>"
@@ -112,7 +112,7 @@
                   <div class="pet-description-modal-card">
                     <p><%= pet.description %></p>
                   </div>
-                    <div class="pet-card-modal-button d-flex justify-content-between">
+                    <div class="pet-card-modal-button d-flex justify-content-center">
                       <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
                       <%#= link_to 'Remove Pet', remove_pet_path(user_id: @user.id, id: pet.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to remove this pet?' } %>
                       <% if current_user.role == 'provider' %>
