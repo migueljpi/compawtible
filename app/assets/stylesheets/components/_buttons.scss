@@ -24,20 +24,10 @@
   &:hover {
     background-color: $blue-medium;
   }
-
-  &:active {
-    background-color: $dark-blue;
-  }
-
-  &:disabled {
-    background-color: $blue-light;
-    color: $grey;
-    cursor: not-allowed;
-  }
 }
 
 .btn-secondary {
-  background-color: #FD8B51;
+  background-color: $orange-main;
   color: white;
   border: none;
   padding: 10px 30px;
@@ -45,12 +35,22 @@
   font-size: 1.2rem;
   // cursor: pointer;
   &:hover {
-    background-color: $blue-main;
+    background-color: $orange-medium;
   }
 }
 
 .btn-danger {
   border-radius: 10px;
+  background-color: transparent;
+  color: black;
+  border: 2px solid $rusty-red-main;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    background-color: $rusty-red-main;
+    color: $white;
+    border-color: $rusty-red-main;
+  }
 }
 
 .button-add-pet {
@@ -61,6 +61,19 @@
 #button-edit {
   margin-left: 40px;
   text-decoration: none;
+  border-radius: 10px;
+}
+
+.btn-warning {
+  background-color: $rusty-red-main;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  &:hover {
+    background-color: $red;
+    color: white;
+  }
 }
 
 .button-action {

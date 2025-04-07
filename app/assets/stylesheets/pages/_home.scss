@@ -33,24 +33,23 @@ html, body {
   font-family: $body-font;
   font-size: 1.5rem;
   font-weight: normal;
-  color: $dark-blue;
+  color: $black;
   text-align: center;
 }
 
 .home-button {
   font-size: 1.2rem;
   padding: 10px 20px;
-  background-color: $blue-main;
   color: white;
   border: none;
   border-radius: 10px;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+// '  transition: all 0.3s ease;
 
-  &:hover {
-    background-color: darken($orange-main, 10%);
-    transform: scale(1.05);
-  }
+//   &:hover {
+//     background-color: darken($orange-main, 10%);
+//     transform: scale(1.05);
+//   }'
 }
 
 .home-banner .home-logo-title {
