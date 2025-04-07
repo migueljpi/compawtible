@@ -104,8 +104,10 @@ export default class extends Controller {
     .then(provider => {
       this.providerTarget.innerHTML = `
         <div class="chat-provider-info">
-          <img src="${provider.image_url}" class="chatroom-avatar" alt="Provider Avatar">
+        <img src="${provider.image_url}" class="chatroom-avatar" alt="Provider Avatar">
+        <a href="${provider.profile_url}">
           <div><h5>${provider.name}</h5></div>
+        </a>
         </div>
       `;
     })

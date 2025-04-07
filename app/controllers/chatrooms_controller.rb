@@ -50,6 +50,7 @@ class ChatroomsController < ApplicationController
     @provider = @chatroom.users.where.not(id: current_user.id).first
 
     if @provider
+      profile_url = view_context.user_path(@provider)
       image_url = if @provider.photo.attached?
                     view_context.cl_image_path(@provider.photo.key, width: 50, height: 50, crop: :thumb,
                                                                     gravity: :face)
@@ -58,7 +59,8 @@ class ChatroomsController < ApplicationController
                   end
       render json: {
         name: @provider.first_name,
-        image_url: image_url
+        image_url: image_url,
+        profile_url: profile_url
       }
     else
       render json: { error: "Provider not found" }, status: 404
