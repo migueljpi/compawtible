@@ -1,11 +1,12 @@
 <%= simple_form_for [@user, @pet, :create_chatroom, @message],
   url: user_pet_create_chatroom_path(@user, @pet),
-  html: {class: "d-flex"} do |f|
+  html: {class: "d-flex", novalidate: false} do |f|
 %>
   <%= f.input :content,
     label: false,
     placeholder: "Hello, I'm looking forward to adopt #{@pet.name || "this pet"}.",
-    wrapper_html: {class: "flex-grow-1"}
+    wrapper_html: {class: "flex-grow-1"},
+    required: true
   %>
   <%= f.submit "Send", class: "btn btn-primary mb-3" %>
 <% end %>
