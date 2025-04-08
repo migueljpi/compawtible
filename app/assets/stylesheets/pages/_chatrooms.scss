@@ -109,7 +109,7 @@
   border-radius: $border-radius-xl;
   opacity: 0.90;
   height: auto;
-  max-height: 31em;
+  max-height: 31.1em;
   overflow: hidden;
   padding-bottom: 20px;
 }
@@ -196,10 +196,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 // hide scrollbar
