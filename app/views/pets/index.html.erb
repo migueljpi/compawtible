@@ -1,11 +1,12 @@
 <div id="pets-index">
-  <div class="header-top">
+  <div class="header-top-pet-index">
     <h1>All pets</h1>
   </div>
 
   <div data-controller="search">
-
-    <%= render "index_search" %>
+    <div class="input-form">
+      <%= render "index_search" %>
+    </div>
 
     <div id="pets_list" class="row mt-2 d-flex" data-search-target="results">
       <% @pets.each_with_index do |pet, index| %>
