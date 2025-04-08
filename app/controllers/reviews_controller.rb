@@ -49,7 +49,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Review successfully created."
       redirect_to user_path(@provider)
     else
-      flash[:alert] = "Review was not created."
+      flash[:danger] = "Review was not created."
       # redirect_to user_path(@provider)
       redirect_back(fallback_location: root_path)
       # render :new, status: :unprocessable_entity
