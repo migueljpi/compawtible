@@ -54,7 +54,7 @@ class ChatroomsController < ApplicationController
     end
   end
 
-  def provider_info
+  def provider_info # rubocop:disable Metrics/MethodLength
     return render json: { error: "Chatroom not found" }, status: 404 unless @chatroom
 
     @provider = @chatroom.users.where.not(id: current_user.id).first

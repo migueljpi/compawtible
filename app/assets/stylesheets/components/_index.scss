@@ -30,14 +30,8 @@
   margin-top: 0px;
   margin-right: 40px;
 }
-#clean-link {
-  a {
+.decoration-none {
     text-decoration: none;
-
-    &:hover {
-      text-decoration: none;
-    }
-  }
 }
 
 .container {
