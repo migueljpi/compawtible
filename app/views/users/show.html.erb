@@ -129,9 +129,15 @@
   <%# User is an adopter %>
   <% else %>
     <div class="user-card">
-      <div>
-        <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
-      </div>
+      <% if photo.present? %>
+        <div>
+          <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, gravity: :face, id: "image-profile-user" %>
+        </div>
+      <% else %>
+        <div>
+          <%= image_tag "http://res.cloudinary.com/du1ev4qra/image/upload/v1743878120/logo_paw_print.png", id: "image-profile-user" %>
+        </div>
+      <% end %>
       <div class="user-input">
         <h3><strong><%= @user.first_name %> <%= @user.last_name %></strong>
           <span id="edit-button">
