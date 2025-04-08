@@ -45,16 +45,27 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params.merge(chatroom: @chatroom, user: @adopter))
     authorize @review
 
-    if @review.save
-      flash[:notice] = "Review successfully created."
-      redirect_to user_path(@provider)
-    else
-      flash[:danger] = "Review was not created."
-      # redirect_to user_path(@provider)
-      redirect_back(fallback_location: root_path)
-      # render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @review.save
+        # flash[:notice] = "Review successfully created."
+        # redirect_to user_path(@provider)
+        format.html { redirect_to user_path(@provider), notice: "Review was successfully created." }
+        format.json
+      else
+        # flash[:danger] = "Review was not created."
+        # redirect_to user_path(@provider)
+        # redirect_back(fallback_location: root_path)
+        # render :new, status: :unprocessable_entity
+        # format.html { redirect_to user_path(@provider), alert: "Review was not created." }
+        # format.turbo_stream
+        format.html do
+          flash[:notice] = "Review was not created."
+          redirect_back(fallback_location: root_path)
+        end
+        format.json
+        # flash[:notice] = "Review was not created."
+      end
     end
-
   end
 
   # work in progress

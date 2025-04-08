@@ -121,8 +121,10 @@
         </div>
       </div>
 
-      <%= render "review_new" %>
-      <%= render "reviews" %>
+      <turbo-frame id="user-reviews">
+        <%= render "review_new" %>
+        <%= render "reviews" %>
+      </turbo-frame>
     </div>
 
 
