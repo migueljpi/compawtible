@@ -22,6 +22,17 @@ class ChatroomsController < ApplicationController
     @provider = @pet.provider
     @adopter = current_user
 
+    existing_chatroom = Chatroom.joins(:users)
+                                .where(pet: @pet)
+                                .where(users: { id: [@provider.id, @adopter.id] })
+                                .group("chatrooms.id")
+                                .having("COUNT(users.id) = 2")
+                                .first
+    if existing_chatroom
+      redirect_to user_chatrooms_path(@adopter), notice: "Chatroom already exists!"
+      return
+    end
+
     @chatroom ||= Chatroom.create(
       name: "Chatroom between #{@provider.first_name || 'unknown'} and #{@adopter.first_name || 'unknown'}",
       pet: @pet
@@ -43,7 +54,7 @@ class ChatroomsController < ApplicationController
     end
   end
 
-  def provider_info
+  def provider_info # rubocop:disable Metrics/MethodLength
     return render json: { error: "Chatroom not found" }, status: 404 unless @chatroom
 
     @provider = @chatroom.users.where.not(id: current_user.id).first

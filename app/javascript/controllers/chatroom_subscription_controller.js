@@ -106,10 +106,9 @@ export default class extends Controller {
       this.providerTarget.innerHTML = `
         <div class="chat-provider-info">
         <img src="${provider.image_url}" class="chatroom-avatar" alt="Provider Avatar">
-        <a href="${provider.profile_url}">
+        <a class="decoration-none" href="${provider.profile_url}">
           <div><h5>${provider.name}</h5></div>
         </a>
-        </div>
       `;
     })
     .catch(error => console.error("Error updating chatroom header:", error));
