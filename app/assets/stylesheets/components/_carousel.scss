@@ -71,3 +71,16 @@
 .carousel-inner {
   border-radius: 10px 10px 0 0;
 }
+
+#carouselPetShow {
+  .carousel-item {
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      // cursor: pointer;
+      // transform: scale(1.05);
+      // box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5);
+    }
+    // border-radius: 10px 10px 0 0;
+  }
+}
