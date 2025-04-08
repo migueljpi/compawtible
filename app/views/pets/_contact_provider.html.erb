@@ -1,12 +1,17 @@
+<h4 class="mb-3">Message <%= @pet.provider.first_name %></h4>
 <%= simple_form_for [@user, @pet, :create_chatroom, @message],
   url: user_pet_create_chatroom_path(@user, @pet),
-  html: {class: "d-flex", novalidate: false} do |f|
+  html: {class: "d-flex flex-column", novalidate: false} do |f|
 %>
   <%= f.input :content,
+    as: :text,
     label: false,
-    placeholder: "Hello, I'm looking forward to adopt #{@pet.name || "this pet"}.",
-    wrapper_html: {class: "flex-grow-1"},
+    # placeholder: "Hello, I'm looking forward to adopt #{@pet.name || "this pet"}.",
+    placeholder: "Hi, I'm interested in adopting #{@pet.name || "this pet"}.",
+    # wrapper_html: {class: "flex-grow-1"},
+    input_html: { rows: 2, class: "form-control small-input form-input-msg" },
     required: true
   %>
-  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+  <%# <%= f.submit "Message #{@pet.provider.first_name}", class: "btn btn-secondary mb-3" %>
+  <%= f.submit "Send", class: "btn btn-secondary mb-3 align-self-center" %>
 <% end %>

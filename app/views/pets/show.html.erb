@@ -1,4 +1,4 @@
-<div id="pet-show" class="container">
+<div id="pet-show" class="container" data-controller="tooltip">
 
   <div id="slider" class="slide-in">
 
@@ -13,7 +13,7 @@
 
     <%#= link_to 'Back to Profile', user_path(@user) %>
 
-    <div class="row d-flex align-items-center justify-content-md-center">
+    <div class="row d-flex align-items-center justify-content-md-center mt-4">
 
       <!-- Pet Information -->
       <div class="col-md-6 text-center d-flex flex-column justify-content-center h-100">
@@ -51,17 +51,17 @@
         <h4>About <%= @pet.name %></h4>
         <p><%= @pet.description %></p>
 
-        <%= link_to "More info about #{ @pet.name}", "#pet-more-info", class: "text-decoration-none" %>
+        <%= link_to "More info about #{ @pet.name}", "#pet-more-info", class: "text-decoration-none mb-5" %>
 
         <% if current_user.role == "adopter" %>
           <%= render "contact_provider" %>
-          <%= link_to "Messages", user_chatrooms_path(current_user), class: "dropdown-item" %>
+          <%# <%= link_to "Messages", user_chatrooms_path(current_user), class: "dropdown-item" %>
         <% end %>
 
       </div>
 
       <!-- Pet Photo Carousel -->
-      <div class="col-md-6 d-flex justify-content-center h-100">
+      <div id="pet-show-carousel" class="col-md-6 d-flex justify-content-center h-100">
         <% if @pet.photos.attached? %>
           <div id="carouselPetShow" class="carousel slide"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Click for Gallery.">
             <div class="carousel-inner">
@@ -84,7 +84,8 @@
           </div>
         <% else %>
           <!-- No images -->
-          <p>No image available</p>
+          <%# <p>No image available</p> %>
+          <%= image_tag('logo_paw_print.png', class: "square-image") %>
         <% end %>
       </div>
 
@@ -195,10 +196,10 @@
 
   <script>
     // Initialize Bootstrap tooltips
-    document.addEventListener("turbo:load", function() {
-      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-    });
+    // document.addEventListener("turbo:load", function() {
+    //   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    //   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    // });
 
     // slider
     const $slider = document.getElementById('slider');

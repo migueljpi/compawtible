@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+  <div class="col-sm-8 my-3">
+    <%= form_with url: user_pets_path, method: :get, class: "d-flex flex-column", data: { action: "keyup->search#search input->search#search" } do %>
+      <div>
+        <!-- Checkbox for "Use my location" -->
+        <div class="mb-3">
+          <%= check_box_tag :use_my_location, "1", false,
+                class: "form-check-input",
+                data: { action: "change->search#toggleLocationFields", search_target: "checkbox" } %>
+          <%= label_tag :use_my_location, "Use my location", class: "form-check-label" %>
+        </div>
+
+        <!-- Location and Radius Fields -->
+        <div class="row location-radius-row" id="location-fields" data-search-target="locationFields" style="display: none;">
+          <!-- Location Input -->
+          <div class="col-md-6">
+            <%= text_field_tag :location,
+                  current_user.location,
+                  class: "form-control small-input",
+                  placeholder: "Enter a location",
+                  data: { search_target: "location" } %>
+          </div>
+
+          <!-- Radius Slider -->
+          <div class="col-md-6">
+            <div class="slider-container">
+              <span id="radius-value" class="radius-text" data-search-target="radiusOutput">100 km</span>
+              <input step="50" type="range" id="radius-slider" name="radius" min="50" max="500" value="100" class="thick-slider form-range" data-search-target="radius" data-action="input->search#updateRadiusOutput">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Query Input -->
+      <div class="mb-3">
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control small-input",
+              placeholder: "Search for pets",
+              data: { search_target: "input" } %>
+      </div>
+
+      <!-- Submit Button (Hidden) -->
+      <%= submit_tag "Search", name: "", class: "btn btn-primary", style: "display: none;" %>
+    <% end %>
+  </div>
+</div>

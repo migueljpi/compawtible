@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
     #
     # adopter can leave only for now
     @reviews_per_adopter = Review.where(user_id: @user.id)
+    # @provider = review.pet.provider
   end
   def new
     Rails.logger.debug "Current User: #{current_user.inspect}"
@@ -48,8 +49,10 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Review successfully created."
       redirect_to user_path(@provider)
     else
-      flash[:notice] = "Review was not created."
-      redirect_to user_path(@provider)
+      flash[:danger] = "Review was not created."
+      # redirect_to user_path(@provider)
+      redirect_back(fallback_location: root_path)
+      # render :new, status: :unprocessable_entity
     end
 
   end
@@ -72,7 +75,7 @@ class ReviewsController < ApplicationController
     else
         # stay wherever currently
         redirect_to user_path(@user)
-        flash[:notice] = "Review was not updated."
+        flash[:error] = "Review was not updated."
         # render :user, status: :unprocessable_entity
 
     end

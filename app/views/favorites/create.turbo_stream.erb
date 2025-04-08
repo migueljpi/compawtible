@@ -38,3 +38,11 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% end %>
+
+<%# PET INDEX %>
+<%= turbo_stream.append "pets-index" do %>
+  <div class="alert alert-warning alert-dismissible fade show m-1" data-controller="flash" role="alert">
+    <%= flash.now[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>

@@ -21,5 +21,10 @@
       <%= link_to "Search for a pet!", get_search_path, class: "btn btn-primary home-button" %>
     <% end %>
   </section>
+  <section class="home-action-btn">
+    <% if current_user %>
+      <%= link_to "See all pets", user_pets_path(current_user), class: "btn btn-primary home-button" %>
+    <% end %>
+  </section>
 
 </div>
