@@ -1,28 +1,57 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["input", "results"];
+  static targets = ["input", "results", "location", "radius", "checkbox", "locationFields", "radiusOutput"];
 
   connect() {
     console.log("Search controller connected");
+
+    // Set the initial radius value in the output
+    this.updateRadiusOutput();
   }
 
-  // Called on keyup event
-  async search() {
-    console.log("Searching...");
-    const query = this.inputTarget.value;
+  toggleLocationFields() {
+    const isChecked = this.checkboxTarget.checked;
+    console.log("Use my location:", isChecked);
 
-    // Send a request to the controller to get the pets based on the query
-    const response = await fetch(`/users/${this.data.get('userId')}/pets?query=${query}`, {
+    if (isChecked) {
+      this.locationFieldsTarget.style.display = "flex";
+    } else {
+      this.locationFieldsTarget.style.display = "none";
+      this.search(); // Trigger search to reset pets when unticked
+    }
+  }
+
+  updateRadiusOutput() {
+    // Update the radius output text
+    this.radiusOutputTarget.textContent = `${this.radiusTarget.value} km`;
+
+    // Trigger a search whenever the radius slider is updated
+    this.search();
+  }
+
+  async search() {
+    const query = this.inputTarget.value;
+    const useMyLocation = this.checkboxTarget.checked;
+    const params = new URLSearchParams({ query: query });
+
+    if (useMyLocation) {
+      const location = this.locationTarget.value;
+      const radius = this.radiusTarget.value; // Ensure the updated radius value is used
+      params.append("location", location);
+      params.append("radius", radius);
+    }
+
+    console.log("Searching with:", Object.fromEntries(params.entries()));
+
+    const response = await fetch(`/users/${this.element.dataset.searchUserId}/pets?${params.toString()}`, {
       method: "GET",
       headers: {
-        "Accept": "text/vnd.turbo-stream.html" // Turbo Stream response type
-      }
+        "Accept": "text/vnd.turbo-stream.html",
+      },
     });
 
-    // Ensure the response is successful
     if (response.ok) {
-      // Parse the Turbo Stream response and inject the results into the target container
       const turboStream = await response.text();
       this.resultsTarget.innerHTML = turboStream;
     } else {

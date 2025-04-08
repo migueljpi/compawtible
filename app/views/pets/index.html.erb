@@ -1,21 +1,11 @@
 <div id="pets-index">
-  <div class="header-top">
+  <div class="header-top-pet-index">
     <h1>All pets</h1>
   </div>
 
   <div data-controller="search">
-
-    <div class="row justify-content-center" data-search-user-id="<%= current_user.id %>">
-      <div class="col-sm-8 my-3">
-        <%= form_with url: user_pets_path, method: :get, class: "d-flex", data: { action: "keyup->search#search" } do %>
-          <%= text_field_tag :query,
-            params[:query],
-            class: "form-control mx-3",
-            placeholder: "Search for pets",
-            data: { search_target: "input" } %>
-          <%= submit_tag "Search", name: "", class: "btn btn-primary", style: "display: none;" %>
-        <% end %>
-      </div>
+    <div class="input-form">
+      <%= render "index_search" %>
     </div>
 
     <div id="pets_list" class="row mt-2 d-flex" data-search-target="results">

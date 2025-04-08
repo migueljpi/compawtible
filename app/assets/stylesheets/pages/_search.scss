@@ -24,6 +24,13 @@
   margin-bottom: 50px;
 }
 
+.header-top-pet-index {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
 .slider-container {
   margin: 15px 0px;
   // max-width: 600px;
@@ -177,6 +184,12 @@
     text-align: center;
   }
 
+  .header-top-pet-index {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
   .slider-container {
     margin: 10px 0px;
     // padding: 8px;
@@ -223,4 +236,18 @@
   // top: 20px;
   // left: 20px;
   z-index: 1000;
+}
+
+// PET INDEX
+
+.search-input {
+    margin: 500px 0px;
+  font-size: 1.2rem;
+  // font-weight: bold;
+  padding: 15px;
+  border: 2px solid #AFAEAE;
+  border-radius: 15px;
+  background-color: $beije-light;
+  // margin-right: 15px;
+  // height: 150px;
 }
