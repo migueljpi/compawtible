@@ -5,14 +5,32 @@
 
   <div data-controller="search">
 
+    <div data-controller="search">
     <div class="row justify-content-center" data-search-user-id="<%= current_user.id %>">
       <div class="col-sm-8 my-3">
-        <%= form_with url: user_pets_path, method: :get, class: "d-flex", data: { action: "keyup->search#search" } do %>
-          <%= text_field_tag :query,
-            params[:query],
-            class: "form-control mx-3",
-            placeholder: "Search for pets",
-            data: { search_target: "input" } %>
+        <%= form_with url: user_pets_path, method: :get, class: "d-flex flex-column", data: { action: "keyup->search#search input->search#search" } do %>
+          <div class="mb-3">
+            <%= text_field_tag :location,
+                  current_user.location,
+                  class: "form-control",
+                  placeholder: "Enter a location",
+                  data: { search_target: "location" } %>
+          </div>
+          <div class="mb-3">
+            <%= number_field_tag :radius,
+                  50,
+                  class: "form-control",
+                  placeholder: "Radius in km",
+                  min: 1,
+                  data: { search_target: "radius" } %>
+          </div>
+          <div class="mb-3">
+            <%= text_field_tag :query,
+                  params[:query],
+                  class: "form-control",
+                  placeholder: "Search for pets",
+                  data: { search_target: "input" } %>
+          </div>
           <%= submit_tag "Search", name: "", class: "btn btn-primary", style: "display: none;" %>
         <% end %>
       </div>

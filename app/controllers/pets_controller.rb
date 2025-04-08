@@ -4,10 +4,21 @@ class PetsController < ApplicationController
 
   def index
     # Apply the filter if params[:query] is present, otherwise get all pets
-    if params[:query].present?
-      @pets = Pet.search_by_name_and_species_age_size_gender_description_location_breed_activity_level_neutered(params[:query])
+    if params[:location].present? && params[:radius].present?
+      coordinates = Geocoder.coordinates(params[:location])
+      if coordinates.present?
+        @pets = Pet.near(coordinates, params[:radius].to_i) # Filter pets within the radius
+      else
+        flash.now[:alert] = "Invalid location. Showing all pets."
+        @pets = Pet.all
+      end
     else
       @pets = Pet.all
+    end
+
+    # Apply the search filter if params[:query] is present
+    if params[:query].present?
+      @pets = @pets.search_by_name_and_species_age_size_gender_description_location_breed_activity_level_neutered(params[:query])
     end
 
     # Ensure the user has access to the pets collection
