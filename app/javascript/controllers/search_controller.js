@@ -1,10 +1,13 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["input", "results", "location", "radius", "checkbox", "locationFields"];
+  static targets = ["input", "results", "location", "radius", "checkbox", "locationFields", "radiusOutput"];
 
   connect() {
     console.log("Search controller connected");
+
+    // Set the initial radius value in the output
+    this.updateRadiusOutput();
   }
 
   toggleLocationFields() {
@@ -12,11 +15,19 @@ export default class extends Controller {
     console.log("Use my location:", isChecked);
 
     if (isChecked) {
-      this.locationFieldsTarget.style.display = "block";
+      this.locationFieldsTarget.style.display = "flex";
     } else {
       this.locationFieldsTarget.style.display = "none";
       this.search(); // Trigger search to reset pets when unticked
     }
+  }
+
+  updateRadiusOutput() {
+    // Update the radius output text
+    this.radiusOutputTarget.textContent = `${this.radiusTarget.value} km`;
+
+    // Trigger a search whenever the radius slider is updated
+    this.search();
   }
 
   async search() {
@@ -26,7 +37,7 @@ export default class extends Controller {
 
     if (useMyLocation) {
       const location = this.locationTarget.value;
-      const radius = this.radiusTarget.value;
+      const radius = this.radiusTarget.value; // Ensure the updated radius value is used
       params.append("location", location);
       params.append("radius", radius);
     }
