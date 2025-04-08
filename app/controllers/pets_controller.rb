@@ -3,7 +3,6 @@ class PetsController < ApplicationController
   before_action :set_pet, only: %i[show edit update destroy favorite]
 
   def index
-    # Apply the filter if params[:query] is present, otherwise get all pets
     if params[:location].present? && params[:radius].present?
       coordinates = Geocoder.coordinates(params[:location])
       if coordinates.present?
@@ -16,27 +15,19 @@ class PetsController < ApplicationController
       @pets = Pet.all
     end
 
-    # Apply the search filter if params[:query] is present
     if params[:query].present?
       @pets = @pets.search_by_name_and_species_age_size_gender_description_location_breed_activity_level_neutered(params[:query])
     end
 
-    # Ensure the user has access to the pets collection
     authorize @pets
-
-    # Apply the policy scope to ensure users can only see what they're authorized to
     @pets = policy_scope(@pets)
 
-    # Check if the request is for a Turbo Stream response
     if request.format.turbo_stream?
-      # When it's a Turbo Stream request, render the partial with the results
-      render turbo_stream: turbo_stream.replace("pets_list", partial: "pets_list", locals: { pets: @pets })
+      render turbo_stream: turbo_stream.replace("pets_list", partial: "pets/pets_list", locals: { pets: @pets })
     else
-      # Otherwise, render the full page
       render :index
     end
   end
-
 
 
   def show
