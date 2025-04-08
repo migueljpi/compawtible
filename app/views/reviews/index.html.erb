@@ -1,29 +1,47 @@
-<div class="container">
+<div id="my-reviews" class="container reviews">
 
-  <%= link_to "< Back to Profile", user_path(@user), class: "btn btn-primary my-3" %>
+  <%# <%= link_to "< Back to Profile", user_path(@user), class: "btn btn-primary my-3" %>
 
-  <h1 class="my-4">My Reviews</h1>
+  <h3 class="my-5"><strong>My Reviews</strong></h3>
 
   <% if @reviews_per_adopter.present? %>
 
     <% @reviews_per_adopter.each do |review| %>
 
-      <h3 class="my-3">About <%= review.pet.name %> from <%= review.pet.provider.first_name %></h3>
-      <% if review.provider_review_content.present? %>
-        <p class="fw-lighter fst-italic">"<%= review.provider_review_content %>"</p>
-      <% end %>
-      <p>
-        <% review.provider_rating.to_i.times do  %>
-          <i class="bi bi-star-fill"></i>
-        <% end %>
-        (<%= review.provider_rating %>)
-      </p>
+      <hr class="my-4">
 
-      <%= link_to "Delete",
-        review_path(review),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+      <div class="row">
+        <div class="d-flex col-lg-4 py-2 pe-0">
 
-        <hr>
+          <h4 class="my-3"> About
+          <%= link_to user_pet_path(review.pet.provider, review.pet) do %>
+            <%= review.pet.name %>
+            <% if review.pet.photos.attached? %>
+              <%= cl_image_tag review.pet.photos.first.key, crop: :thumb, gravity: :face, class: "avatar-reviews ms-2", alt: "Pet photo" %>
+            <% else %>
+              <%= image_tag "logo_paw_print.png", class: "avatar-reviews ms-2", alt: "Default pet image" %>
+            <% end %>
+          <% end %>
+          from <%= link_to "#{review.pet.provider.first_name}", user_path(review.pet.provider) %></h4>
+
+        </div>
+
+        <div class="d-flex flex-column col-lg-8 py-2">
+          <% if review.provider_review_content.present? %>
+            <p class="fw-lighter fst-italic">"<%= review.provider_review_content %>"</p>
+          <% end %>
+
+          <div class="Stars" style="--rating: <%= rating = review.provider_rating %>;" aria-label="Rating of this product is <%= rating = review.provider_rating %> out of 5.">
+          (<%= review.provider_rating %>)
+          </div>
+
+          <%= link_to "Delete",
+            review_path(review),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger button-action my-0 mt-4 mx-0" %>
+
+        </div>
+      </div>
+
     <% end %>
 
   <% else %>

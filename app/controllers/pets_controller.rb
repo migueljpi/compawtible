@@ -3,20 +3,32 @@ class PetsController < ApplicationController
   before_action :set_pet, only: %i[show edit update destroy favorite]
 
   def index
-    # Apply the filter if params[:query] is present, otherwise get all pets
-    if params[:query].present?
-      # @pets = Pet.where(species: params[:query])
-      @pets = Pet.search_by_name_and_species_age_size_gender_description_location_breed_activity_level_neutered(params[:query])
+    if params[:location].present? && params[:radius].present?
+      coordinates = Geocoder.coordinates(params[:location])
+      if coordinates.present?
+        @pets = Pet.near(coordinates, params[:radius].to_i) # Filter pets within the radius
+      else
+        flash.now[:alert] = "Invalid location. Showing all pets."
+        @pets = Pet.all
+      end
     else
       @pets = Pet.all
     end
 
-    # Ensure the user has access to the pets collection
-    authorize @pets
+    if params[:query].present?
+      @pets = @pets.search_by_name_and_species_age_size_gender_description_location_breed_activity_level_neutered(params[:query])
+    end
 
-    # Apply the policy scope to ensure users can only see what they're authorized to
+    authorize @pets
     @pets = policy_scope(@pets)
+
+    if request.format.turbo_stream?
+      render turbo_stream: turbo_stream.replace("pets_list", partial: "pets/pets_list", locals: { pets: @pets })
+    else
+      render :index
+    end
   end
+
 
   def show
     authorize @pet

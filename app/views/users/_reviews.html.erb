@@ -1,35 +1,56 @@
-<h2>Reviews for <%= @provider.first_name %></h2>
+<div class="user-animals">
 
-<% if @reviews_per_provider.present? %>
+  <h3 class="mb-4"><strong>Reviews for <%= @provider.first_name %>
 
-  <%# correct the stars display %>
-  <% @provider_average_rating.to_i.times do  %>
-    <i class="bi bi-star-fill"></i>
-  <% end %>
+  <% if @reviews_per_provider.present? %>
 
-  (<%= @provider_average_rating.round(1) %>)
+      <div class="Stars ms-3" style="--rating: <%= rating = @provider_average_rating.to_f %>;" aria-label="Rating of this product is <%= rating = @provider_average_rating.to_f %> out of 5.">
+      (<%= @provider_average_rating.round(1) %>)
+      </div>
 
-  <% @reviews_per_provider.each do |review| %>
+      </strong></h3>
 
-    <p><%= review.user.first_name %> 's experience with <%= review.pet.provider.first_name %> about <%= review.pet.name %>:</p>
+    <% @reviews_per_provider.each do |review| %>
+        <hr class="my-4">
 
-    <% if review.provider_review_content.present? %>
-      <p class="fw-lighter fst-italic">"<%= review.provider_review_content %>"</p>
+      <div class="row reviews">
+        <div class="d-flex col-lg-5 py-2 pe-0">
+        <p><strong>
+          <%= link_to "#{review.user.first_name}", user_path(review.user) %>'s</strong> experience
+          with <%= review.pet.provider.first_name %>
+          about
+          <%= link_to user_pet_path(review.pet.provider, review.pet) do %>
+            <%= review.pet.name %>
+            <% if review.pet.photos.attached? %>
+              <%= cl_image_tag review.pet.photos.first.key, crop: :thumb, gravity: :face, class: "avatar-reviews ms-2", alt: "Pet photo" %>
+            <% else %>
+              <%= image_tag "logo_paw_print.png", class: "avatar-reviews ms-2", alt: "Default pet image" %>
+            <% end %>:
+          <% end %>
+        </div>
+
+        <div class="d-flex flex-column col-lg-7 py-2">
+          <% if review.provider_review_content.present? %>
+            <p class="fw-lighter fst-italic">"<%= review.provider_review_content %>"</p>
+          <% end %>
+          <div class="Stars" style="--rating: <%= rating = review.provider_rating %>;" aria-label="Rating of this provider is <%= rating = review.provider_rating %> out of 5.">
+          (<%= review.provider_rating %>)
+          </div>
+
+          <% if review.user == current_user %>
+            <%= link_to "Delete",
+              review_path(review, provider_id: @provider.id),
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger button-action my-0 mt-4 mx-0" %>
+          <% end %>
+
+        </div>
+      </div>
+
     <% end %>
 
-    <p>
-      <% review.provider_rating.to_i.times do  %>
-        <i class="bi bi-star-fill"></i>
-      <% end %>
-      (<%= review.provider_rating %>)
-    </p>
-
-    <%= link_to "Delete",
-      review_path(review, provider_id: @provider.id),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-
+  <% else %>
+    </h3>
+    <hr class="my-4">
+    <p class="fw-light"> <%= @provider.first_name %> has no reviews yet.</p>
   <% end %>
-
-<% else %>
-  <p class="fw-light"> <%= @provider.first_name %> has no reviews yet.</p>
-<% end %>
+</div>

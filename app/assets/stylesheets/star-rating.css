@@ -1,34 +1,3 @@
-:root {
-  --star-size: 1.2rem;
-  --star-color: #{$grey};
-  --star-background: #{$orange-main};
-}
-
-.Stars {
-  --percent: calc(var(--rating) / 5 * 100%);
-
-  display: inline-block;
-  // margin-left: 2rem;
-  font-size: var(--star-size);
-  // font-family: Times; // make sure ★ appears correctly
-  line-height: 1;
-
-  &::before {
-    content: '★★★★★';
-    letter-spacing: 3px;
-    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-}
-
-#new-stars {
-  span {
-    justify-content: center;
-  }
-}
-
-
 /**
  * Star Rating
  * @version: 4.3.0
@@ -38,17 +7,14 @@
  */
 
 :root {
-    --gl-star-empty: url('/assets/star-empty.svg');
-    --gl-star-full: url('/assets/star-full.svg');
-    --gl-star-size: 2rem;
-    // --gl-star-color: green important!;
-    // --gl-star-color-inactive: blue important!;
-    // --gl-star-rating-color: green important!;
-    // --gl-active-color: blue important!;
-    // --gl-selected-color: blue important!;
-    --gl-tooltip-background: white;
+    --gl-star-color: green;
+    --gl-star-color-inactive: blue;
+    --gl-star-empty: url('../img/star-empty.svg');
+    --gl-star-full: url('../img/star-full.svg');
+    --gl-star-size: 64px;
+    --gl-tooltip-background: rgba(17,17,17, .9);
     --gl-tooltip-border-radius: 4px;
-    --gl-tooltip-color:  #{$orange-main};
+    --gl-tooltip-color: #fff;
     --gl-tooltip-font-size: 0.875rem;
     --gl-tooltip-font-weight: 400;
     --gl-tooltip-line-height: 1;
