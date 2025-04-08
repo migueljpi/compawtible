@@ -21,7 +21,7 @@
             <% if current_user.photo.attached? %>
               <%= cl_image_tag current_user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, class: "", alt: "dropdown menu"%>
             <% else %>
-              <i class="fa-solid fa-user nav-avatar-circle"></i>
+              <%= image_tag "logo_paw_print.png", class: "avatar-profile" %>
             <% end %>
           </a>
           <!-- dropdown menu -->

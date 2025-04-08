@@ -23,7 +23,7 @@
             <% if petPhoto.present? %>
               <%= cl_image_tag petPhoto, width: 50, height: 50, crop: :thumb, gravity: :face, class: "chatroom-avatar", alt: "Pet photo" %>
             <% else %>
-              <i class="fa-solid fa-dog chatroom-avatar"></i>
+              <%= image_tag "logo_paw_print.png", class: "avatar-profile" %>
             <% end %>
           <div class="sidebar-info" >
             <p class="sidebar-name"> <%= chatroom.pet.name %> </p>

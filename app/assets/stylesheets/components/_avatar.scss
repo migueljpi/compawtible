@@ -35,6 +35,13 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
+.avatar-profile {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
 .avatar-reviews {
   width: 40px;
   height: 40px;

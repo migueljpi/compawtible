@@ -65,7 +65,7 @@ class ChatroomsController < ApplicationController
                     view_context.cl_image_path(@provider.photo.key, width: 50, height: 50, crop: :thumb,
                                                                     gravity: :face)
                   else
-                    ""
+                    view_context.asset_url("logo_paw_print.png")
                   end
       render json: {
         name: @provider.first_name,
