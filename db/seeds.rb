@@ -140,7 +140,7 @@ STRAY_PHOTOS = {
   "Cat" => {
     "Other" => [["strayA.jpg", "strayA2.jpg", "strayA3.jpg"], ["strayB.jpg", "strayB2.jpg", "strayB3.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg", "strayD3.jpg"],
                 ["strayE.jpg", "strayE2.jpg"], ["strayF.jpg", "strayF2.jpg", "strayF3.jpg"], ["strayG.jpg", "strayG2.jpg", "strayG3.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg"],
-                ["strayJ.jpg", "strayJ2.jpg", "strayJ3.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"], ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayM.jpg", "strayM2.jpg"]],
+                ["strayJ.jpg", "strayJ2.jpg", "strayJ3.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"], ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayM.jpg", "strayM2.jpg"], ["strayN.jpg", "strayN2.jpg"]],
   }
 }
 
