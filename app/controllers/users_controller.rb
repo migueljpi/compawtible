@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
     @pets_to_review = Pet.where(id: @chatrooms_to_review.pluck(:pet_id)).to_a
 
-    @reviews_per_provider = Review.joins(chatroom: { pet: :provider }).where(users: {id: @provider.id}).to_a
+    @reviews_per_provider = Review.joins(chatroom: { pet: :provider }).where(users: {id: @provider.id}).order(created_at: :desc).to_a
 
     @reviews_per_provider_for_average = Review.joins(chatroom: { pet: :provider }).where(users: {id: @provider.id}).pluck(:provider_rating)
     @provider_average_rating = @reviews_per_provider_for_average.sum.to_f / @reviews_per_provider_for_average.count

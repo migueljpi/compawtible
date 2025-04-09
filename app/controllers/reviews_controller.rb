@@ -45,11 +45,36 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params.merge(chatroom: @chatroom, user: @adopter))
     authorize @review
 
+    # respond_to do |format|
+    #   if @review.save
+    #     # flash[:notice] = "Review successfully created."
+    #     # redirect_to user_path(@provider)
+    #     format.html { redirect_to user_path(@provider), notice: "Review was successfully created." }
+    #     # needs double click
+    #     # format.turbo_stream
+    #     format.json
+    #   else
+    #     # flash[:danger] = "Review was not created."
+    #     # redirect_to user_path(@provider)
+    #     # redirect_back(fallback_location: root_path)
+    #     # render :new, status: :unprocessable_entity
+    #     # format.html { redirect_to user_path(@provider), alert: "Review was not created." }
+    #     # format.turbo_stream
+    #     format.html do
+    #       flash[:notice] = "Review was not created."
+    #       redirect_back(fallback_location: root_path)
+    #     end
+    #     format.json
+    #   end
+    # end
+    #
     respond_to do |format|
       if @review.save
         # flash[:notice] = "Review successfully created."
         # redirect_to user_path(@provider)
         format.html { redirect_to user_path(@provider), notice: "Review was successfully created." }
+        # needs double click
+        # format.turbo_stream
         format.json
       else
         # flash[:danger] = "Review was not created."
@@ -63,10 +88,44 @@ class ReviewsController < ApplicationController
           redirect_back(fallback_location: root_path)
         end
         format.json
-        # flash[:notice] = "Review was not created."
       end
     end
-  end
+
+    # # under work
+    # @reviews_per_provider = Review.where(user_id: @provider.id).includes(:pet, :user)
+    # @provider_average_rating = @reviews_per_provider.average(:provider_rating)
+
+    # respond_to do |format|
+    #   if @review.save
+    #     flash.now[:notice] = "Review was successfully created."
+
+    #     format.turbo_stream do
+    #       render turbo_stream: turbo_stream.replace(
+    #         "user-reviews",
+    #         partial: "users/review_frame",
+    #         locals: { provider: @provider,
+    #                   chatrooms_to_review: @chatrooms_to_review,
+    #                   reviews_per_provider: @reviews_per_provider,
+    #                   provider_average_rating: @provider_average_rating }
+    #       )
+    #     end
+    #   else
+    #     flash.now[:alert] = @review.errors.full_messages.to_sentence
+
+    #     format.turbo_stream do
+    #       render turbo_stream: turbo_stream.replace(
+    #         "user-reviews",
+    #         partial: "users/review_frame",
+    #         locals: { provider: @provider,
+    #                   chatrooms_to_review: @chatrooms_to_review,
+    #                   reviews_per_provider: @reviews_per_provider,
+    #                   provider_average_rating: @provider_average_rating }
+    #       )
+    #     end
+    #   end
+    # end
+
+end
 
   # work in progress
   def update
