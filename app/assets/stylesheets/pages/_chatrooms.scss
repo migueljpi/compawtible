@@ -97,7 +97,14 @@
   .chat-provider-info{
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
+  }
+  h5, p, a {
+    margin: 0;
+    padding: 0;
+  }
+  p {
+    font-size: 14px;
   }
 }
 .chat-body{
