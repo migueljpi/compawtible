@@ -31,7 +31,7 @@ COUNTRIES = [
   { name: "France", cities: ["Rue De Limours, 91470 Limours, France", "Rue Des Dîmes, 69250 Montanay, France"], provider_person: "Pierre", provider_institution: "Compassionate Tails", adopter: "Jean", last_name: "Dubois", adopter_city: "Lyon" },
   { name: "The Netherlands", cities: ["Bovenkerkerweg, 1188 XH Amstelveen, Netherlands", "2e Tochtweg, 2913 LS Nieuwerkerk aan den IJssel, Netherlands"], provider_person: "Daan", provider_institution: "Safe Haven Rescue", adopter: "Lars", last_name: "Jansen", adopter_city: "Amsterdam" },
   { name: "Belgium", cities: ["Leyburgstraat, 1651 Beersel, Flemish Brabant, Belgium", "Boechoutsesteenweg, 2150 Borsbeek, Antwerp, Belgium"], provider_person: "Mathieu", provider_institution: "Kindred Hearts", adopter: "Benoît", last_name: "Dupont", adopter_city: "Ghent" },
-  { name: "Luxembourg", cities: ["Rue Jean-Pierre Thill, 4924 Hautcharage, Luxembourg", "Rue Du Moulin, 7423 Dondelange, Luxembourg"], provider_person: "Marc", provider_institution: "New Beginnings Animal", adopter: "Luc", last_name: "Schmit", adopter_city: "Luxembourg City" },
+  { name: "Luxembourg", cities: ["Rue Jean-Pierre Thill, 4924 Hautcharage, Luxembourg", "Rue Du Moulin, 7423 Dondelange, Luxembourg"], provider_person: "Marc", provider_institution: "New Beginnings", adopter: "Luc", last_name: "Schmit", adopter_city: "Luxembourg City" },
   { name: "Switzerland", cities: ["Drisglerstrasse, 8107 Buchs, Switzerland", "Route De Soral, 1233 Bernex, Switzerland"], provider_person: "Luca", provider_institution: "Forever Home Rescue", adopter: "Noah", last_name: "Müller", adopter_city: "Zurich" },
   { name: "Italy", cities: ["Via Leonida Magnolini, 00123 Roma Rome, Italy", "Cascina Molino Mora, 20050 Liscate Milan, Italy"], provider_person: "Luca", provider_institution: "Paws & Claws", adopter: "Matteo", last_name: "Rossi", adopter_city: "Genova" },
 ]
@@ -128,7 +128,9 @@ BREED_PHOTOS = {
   "Green Iguana" => ["green iguana.jpg", "green iguana2.jpg"],
   "Nubian" => ["nubian.jpg", "nubian2.jpg"],
   "Rhode Island Red" => ["rhode island red chicken.jpg", "rhode island red chicken2.jpg"],
-  "Leghorn" => ["leghorn1.jpg", "Leghorn2.jpg"]
+  "Leghorn" => ["leghorn1.jpg", "Leghorn2.jpg"],
+  "Polish" => ["polish.jpg", "polish2.jpg"],
+  "Lionhead" => ["lionhead.jpg", "lionhead2.jpg"]
 }
 
 STRAY_PHOTOS = {
@@ -151,7 +153,7 @@ STRAY_PHOTOS = {
 SPECIES = {
   "Dog" => ["Golden Retriever", "Saint Bernard", "Labrador Retriever", "German Shepherd", "Beagle", "Chihuahua",  "Other"],
   "Cat" => ["Siamese", "Persian", "Maine Coon", "Sphynx", "Other"],
-  "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Other"],
+  "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Polish", "Lionhead", "Other"],
   "Hamster" => ["Syrian Hamster", "Dwarf Campbell Russian Hamster", "Other"],
   "Guinea pig" => ["American", "Abyssinian", "Other"],
   "Ferret" => ["Standard", "Other"],

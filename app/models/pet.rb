@@ -18,7 +18,7 @@ class Pet < ApplicationRecord
     "Cat" => ["Siamese", "Persian", "Maine Coon", "Bengal", "Ragdoll", "British Shorthair", "Sphynx", "Abyssinian",
               "Scottish Fold", "Norwegian Forest Cat", "Russian Blue", "Birman", "Savannah", "Oriental Shorthair",
               "Turkish Angora", "Other"],
-    "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Flemish Giant", "Lionhead", "Rex", "Mini Lop", "English Angora",
+    "Rabbit" => ["Holland Lop", "Netherland Dwarf", "Polish", "Lionhead", "Flemish Giant", "Lionhead", "Rex", "Mini Lop", "English Angora",
                  "French Lop", "Dutch", "Harlequin", "Other"],
     "Hamster" => ["Syrian Hamster", "Dwarf Campbell Russian Hamster", "Dwarf Winter White Russian Hamster",
                   "Roborovski Hamster", "Chinese Hamster", "Other"],
