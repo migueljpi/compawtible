@@ -14,7 +14,7 @@
         <div class="d-flex col-lg-5 py-2 pe-0">
 
           <h4 class="my-3"> My experience
-            with <%= link_to "#{review.pet.provider.first_name}", user_path(review.pet.provider) %>
+            with <%= link_to "#{review.pet.provider.first_name}", user_path(review.pet.provider) %> about
             <%= link_to user_pet_path(review.pet.provider, review.pet) do %>
               <%= review.pet.name %>
               <% if review.pet.photos.attached? %>
