@@ -162,7 +162,7 @@
 
     <% if @user == current_user %>
     <div class="user-animals">
-      <h3 id="your-animals"><strong>Your favorited pets (<%= @user.favorited_pets.count %>)</strong></h3>
+      <h3 id="your-animals"><strong>Pets you’ve liked (<%= @user.favorited_pets.count %>)</strong></h3>
         <div class="row mt-5 d-flex">
           <% @user.favorited_pets.each_with_index do |pet, index| %>
             <!-- favorited pets display -->
@@ -241,7 +241,7 @@
         </div>
     </div>
     <div class="user-animals">
-      <%= link_to "My Reviews", my_reviews_path, class: "btn btn-secondary" %>
+      <%= link_to "Reviews I’ve written", my_reviews_path, class: "btn btn-secondary" %>
     </div>
     <% end %>
 
