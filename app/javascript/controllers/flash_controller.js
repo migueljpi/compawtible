@@ -9,13 +9,17 @@ export default class extends Controller {
       this.element.classList.add('fade-out');
       console.log('fade-out applied');
     }, 4000);
+    setTimeout(() => {
+      this.element.classList.add('d-none');
+      console.log('d-none applied');
+    }, 5000);
   }
 
   removeExistingFlash() {
     const existingFlash = document.querySelectorAll('.alert[data-controller="flash"]');
     existingFlash.forEach (flash => {
       if (flash !== this.element) {
-        flash.classList.add('fade-out');
+        flash.classList.add('d-none');
       }
     })
   }
