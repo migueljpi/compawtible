@@ -1,4 +1,4 @@
-<div class="home-banner">
+<%# <div class="home-banner"> %>
   <section class="home-title">
     <h1>Your perfect pet match is waiting. Start your adoption journey today!</h1>
     <p class="home-subtitle">Looking for a furry friend to bring love and joy into your life?<br>
@@ -10,15 +10,15 @@
     </p>
   </section>
 
-  <section class="home-image">
+  <section class="home-image d-flex justify-content-center align-items-center">
     <%= image_tag "landing_page_photo.png", alt: "Landing-page-photo", class: "home-landing-img" %>
   </section>
 
-  <section class="home-action-btn">
+  <section class="home-action-btn d-flex justify-content-center align-items-center">
     <% if current_user&.provider? %>
       <%= link_to "Go to profile", user_path(current_user), class: "btn btn-primary home-button" %>
     <% else %>
       <%= link_to "Search for a pet!", get_search_path, class: "btn btn-primary home-button" %>
     <% end %>
   </section>
-</div>
+<%# </div> %>
