@@ -530,38 +530,38 @@ end
 puts "Pets created!"
 puts "Seeded #{User.count} users and #{Pet.count} pets!"
 
-puts "Creating chatrooms..."
-Pet.all.each do |pet|
-  provider = pet.provider
-  adopter = User.where(role: "adopter").sample
+# puts "Creating chatrooms..."
+# Pet.all.each do |pet|
+#   provider = pet.provider
+#   adopter = User.where(role: "adopter").sample
 
-  chatroom = Chatroom.create!(
-    name: "Chat between #{adopter.first_name} and #{provider.first_name} about #{pet.name}",
-    pet_id: pet.id
-  )
-  puts "Chatroom created: #{chatroom.name} (Pet: #{pet.name})"
+#   chatroom = Chatroom.create!(
+#     name: "Chat between #{adopter.first_name} and #{provider.first_name} about #{pet.name}",
+#     pet_id: pet.id
+#   )
+#   puts "Chatroom created: #{chatroom.name} (Pet: #{pet.name})"
 
-  Message.create!(
-    chatroom: chatroom,
-    user: adopter,
-    content: "Hello, I'm interested in #{pet.name}!"
-  )
-  Message.create!(
-    chatroom: chatroom,
-    user: provider,
-    content: "hi #{adopter.first_name}, i can tell you more about #{pet.name}!"
-  )
-  13.times do |i|
-    sender = [adopter, provider].sample
-    Message.create!(
-      chatroom: chatroom,
-      user: sender,
-      content: "Example message nº#{i + 3} from #{sender.first_name}"
-    )
-  end
-  puts "15 messages  created on chatroom: #{chatroom.name}"
-end
-puts "Chatrooms and messages created"
+#   Message.create!(
+#     chatroom: chatroom,
+#     user: adopter,
+#     content: "Hello, I'm interested in #{pet.name}!"
+#   )
+#   Message.create!(
+#     chatroom: chatroom,
+#     user: provider,
+#     content: "hi #{adopter.first_name}, i can tell you more about #{pet.name}!"
+#   )
+#   13.times do |i|
+#     sender = [adopter, provider].sample
+#     Message.create!(
+#       chatroom: chatroom,
+#       user: sender,
+#       content: "Example message nº#{i + 3} from #{sender.first_name}"
+#     )
+#   end
+#   puts "15 messages  created on chatroom: #{chatroom.name}"
+# end
+# puts "Chatrooms and messages created"
 
 # end
 # User.where(role: "adopter").each do |adopter|
