@@ -7,7 +7,7 @@
           <%= check_box_tag :use_my_location, "1", false,
                 class: "form-check-input",
                 data: { action: "change->search#toggleLocationFields", search_target: "checkbox" } %>
-          <%= label_tag :use_my_location, "Use my location", class: "form-check-label" %>
+          <%= label_tag :use_my_location, "Search near me", class: "form-check-label" %>
         </div>
 
         <!-- Location and Radius Fields -->
@@ -36,7 +36,7 @@
         <%= text_field_tag :query,
               params[:query],
               class: "form-control small-input",
-              placeholder: "Search for pets",
+              placeholder: "Search for species, breeds, or something else...",
               data: { search_target: "input" } %>
       </div>
 
