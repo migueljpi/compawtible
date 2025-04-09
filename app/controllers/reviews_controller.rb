@@ -1,6 +1,12 @@
 class ReviewsController < ApplicationController
-  skip_after_action :verify_policy_scoped
-  skip_after_action :verify_authorized
+  # to disable pundit
+  # skip_after_action :verify_policy_scoped
+  # skip_after_action :verify_authorized
+  #
+  # to enable pudit
+  after_action :verify_authorized, except: [:index]
+  after_action :verify_policy_scoped, only: [:index]
+
   def index
     @reviews = policy_scope(Review)
 
@@ -82,12 +88,12 @@ class ReviewsController < ApplicationController
       end
     end
 
-end
+  end
 
   # work in progress
   def update
     @review = Review.find(params[:id])
-    # authorize @review
+    authorize @review
     @user = User.find(params[:user_id])
 
     if @review.update(review_params)
@@ -104,9 +110,9 @@ end
         redirect_to user_path(@user)
         flash[:error] = "Review was not updated."
         # render :user, status: :unprocessable_entity
-
     end
   end
+
   def destroy
     @review = Review.find(params[:id])
     authorize @review

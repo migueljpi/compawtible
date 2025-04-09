@@ -20,13 +20,14 @@ class ReviewPolicy < ApplicationPolicy
 
   def create?
     true
+    # can be improved
   end
 
-  def update?
+  # def update?
     # return record.provider_id == user.id
-    record.user == user
+    # record.user == user
     # true
-  end
+  # end
 
   def destroy?
     # return record.provider_id == user.id
