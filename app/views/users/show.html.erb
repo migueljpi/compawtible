@@ -130,20 +130,13 @@
         </div>
       </div>
 
-      <turbo-frame id="user-reviews">
-        <%= render "review_new" %>
-        <%= render "reviews" %>
-        <%= render 'shared/flashes' %>
-      </turbo-frame>
-
-<%# under work %>
-        <%# <%= render "users/review_frame",
+        <%= render "users/review_frame",
           provider: @provider,
           chatrooms_to_review: @chatrooms_to_review,
           reviews_per_provider: @reviews_per_provider,
           provider_average_rating: @provider_average_rating %>
-    </div>
 
+    </div>
 
   <%# User is an adopter %>
   <% else %>
