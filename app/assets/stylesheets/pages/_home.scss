@@ -5,19 +5,19 @@ html, body {
   overflow-y: auto;
 }
 
-.home-banner h1 {
-  margin-bottom: 1rem;
-}
+// .home-banner h1 {
+//   margin-bottom: 1rem;
+// }
 
-.home-banner {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  padding: 20px 0 0 0;
-}
+// .home-banner {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   align-items: center;
+//   height: 100vh;
+//   text-align: center;
+//   padding: 20px 0 0 0;
+// }
 
 .home-title {
   font-family: $headers-font;
@@ -52,23 +52,25 @@ html, body {
 //   }'
 }
 
-.home-banner .home-logo-title {
-  font-weight: bold;
-  color: black;
-}
+// .home-banner .home-logo-title {
+//   font-weight: bold;
+//   color: black;
+// }
 
-.home-banner .logo-container {
-  display: inline-flex;
-  align-items: center;
-}
+// .home-banner .logo-container {
+//   display: inline-flex;
+//   align-items: center;
+// }
 
-.home-banner .home-logo-img {
-  width: 40px;
-  height: auto;
-  position: relative;
-  top: -10px;
-  margin-left: -40px;
-  margin-right: 12px;
+.home-logo-img {
+  width: 40px !important;
+  height: auto !important;
+  position: relative !important;
+  top: -13px !important;
+  right: -18px !important;
+  margin-left: -40px !important;
+  margin-right: 8px !important;
+  margin-top: 5px !important;
 }
 
 .home-landing-img {
@@ -77,9 +79,10 @@ html, body {
   padding-bottom: 30px;
 }
 
+// Phone screens (below 768px)
 @media (max-width: 768px) {
   .home-landing-img {
-    margin-top: -30px;
+    margin-top: 20px;
     width: 90%;
   }
 
@@ -90,7 +93,7 @@ html, body {
 
 @media (max-width: 480px) {
   .home-landing-img {
-    margin-top: -20px;
+    margin-top: 20px;
     width: 100%;
   }
 
