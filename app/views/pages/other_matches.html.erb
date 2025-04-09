@@ -1,6 +1,6 @@
   <div class="return-to-search">
     <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: false }, class: "btn btn-secondary" do %>
-      <i class="fa-solid fa-arrow-left"></i> Back to search results
+      <i class="fa-solid fa-arrow-left"></i> Return to top matches
     <% end %>
   </div>
 <div id="other-matches">
@@ -64,7 +64,7 @@
                   <p><%= pet.description %></p>
                 </div>
                 <div class="pet-card-modal-button d-flex justify-content-center">
-                  <%= link_to "View Pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
+                  <%= link_to "See pet", user_pet_path(pet.provider, pet), class: "btn btn-primary", data: { turbo: false } %>
                 </div>
               </div>
             </div>
@@ -76,6 +76,6 @@
     <% end %>
   </div>
   <div class="d-flex justify-content-center mt-3">
-    <%= link_to "See all of our pets", user_pets_path(current_user), class: "btn btn-primary home-button" %>
+    <%= link_to "Browse all available pets", user_pets_path(current_user), class: "btn btn-primary home-button" %>
   </div>
 </div>
