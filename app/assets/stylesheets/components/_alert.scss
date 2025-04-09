@@ -1,11 +1,12 @@
 .alert {
   position: fixed;
-  bottom: 50px;
-  right: 40px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10000;
   transition: opacity 0.5s ease-out;
   background-color: $beije-light;
-  padding: 20px 50px 20px 20px;
+  padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-size: 1.2rem;
@@ -14,11 +15,17 @@
 
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: 90%;
 }
 
 .fade-out {
   opacity: 0;
 }
+
+
+
 
 .alert-dismissible {
   .btn-close {
