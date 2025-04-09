@@ -1,0 +1,11 @@
+<turbo-frame id="user-reviews">
+  <%= render "users/review_new", provider: provider, chatrooms_to_review: chatrooms_to_review %>
+
+    <% if reviews_per_provider.any? %>
+    <%= render "users/reviews", reviews_per_provider: reviews_per_provider, provider: provider, provider_average_rating: provider_average_rating %>
+  <% else %>
+    <p>No reviews yet.</p>
+  <% end %>
+  <%# <%= render "users/reviews", reviews_per_provider: reviews_per_provider, provider: provider, provider_average_rating: provider_average_rating %>
+  <%= render "shared/flashes" %>
+</turbo-frame>
