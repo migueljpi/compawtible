@@ -5,10 +5,10 @@
         <div class="modal-content">
           <div class="modal-body">
             <div class="modal-header-retry d-flex justify-content-center align-items-center position-relative">
-              <h2 class="modal-title" id="outputThreeLabel">We couldn't process your request.</h2>
+              <h2 class="modal-title" id="outputThreeLabel">Oops, something went wrong.</h2>
             </div>
             <div class="text-center modal-subheader">
-              <h3>Try again with a different prompt or location!</h3>
+              <h3>Try changing up your prompt or location, and we’ll give it another go!</h3>
             </div>
             <div class="text-center modal-button">
               <%= link_to "Try Again", search_path, class: "btn btn-secondary", data: { turbo: false } %>
@@ -36,22 +36,22 @@
                       <div class="animal-images">
                         <% if pet.photos.attached? %>
                           <div id="carouselExampleControls_<%= index %>" class="carousel slide">
-  <div class="carousel-inner">
-    <% pet.photos.each_with_index do |photo, idx| %>
-      <div class="carousel-item <%= 'active' if idx == 0 %>">
-        <%= cl_image_tag photo.key, class: "square-image" %>
-      </div>
-    <% end %>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+                            <div class="carousel-inner">
+                              <% pet.photos.each_with_index do |photo, idx| %>
+                                <div class="carousel-item <%= 'active' if idx == 0 %>">
+                                  <%= cl_image_tag photo.key, class: "square-image" %>
+                                </div>
+                              <% end %>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_<%= index %>" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>
                         <% else %>
                           <%= image_tag "logo_paw_print.png", class: "square-image" %>
                         <% end %>
@@ -78,7 +78,7 @@
                           </div>
                         </div>
                         <div class="pet-card-modal-button d-flex justify-content-center">
-                          <%= link_to "View Pet", user_pet_path(pet.provider, pet, prompt_id: @prompt.id), class: "btn btn-primary", data: { turbo: false } %>
+                          <%= link_to "See pet", user_pet_path(pet.provider, pet, prompt_id: @prompt.id), class: "btn btn-primary", data: { turbo: false } %>
                         </div>
                       </div>
                     </div>
@@ -98,10 +98,10 @@
           <div class="modal-content">
             <div class="modal-body">
               <div class="modal-header-retry d-flex justify-content-center align-items-center position-relative">
-                <h2 class="modal-title" id="outputThreeLabel">We couldn't find any matches for you.</h2>
+                <h2 class="modal-title" id="outputThreeLabel">It’s a bit quiet around here.</h2>
               </div>
               <div class="text-center modal-subheader">
-                <h3>Try again with a different prompt or location!</h3>
+                <h3>No pets around here at the moment. How about checking a different place?</h3>
               </div>
               <div class="text-center modal-button">
                 <%= link_to "Try Again", search_path, class: "btn btn-secondary", data: { turbo: false } %>
