@@ -230,18 +230,31 @@
 
 // OTHER MATCHES
 
+.return-to-search-from-pet {
+  position: absolute;
+  top: -20px;
+  // left: -10px;
+  z-index: 10;
+  h1 {
+    font-size: 3.5rem;
+  }
+}
 .return-to-search {
+  // position: absolute;
+  // top: -20px;
+  // // left: -10px;
+  // z-index: 10;
   h1 {
     font-size: 3.5rem;
   }
 }
 
-.return-from-show {
-  position: absolute;
-  // top: 20px;
-  // left: 20px;
-  z-index: 1000;
-}
+// .return-from-show {
+//   position: absolute;
+//   top: 20px;
+//   left: 20px;
+//   z-index: 1000;
+// }
 
 // PET INDEX
 
