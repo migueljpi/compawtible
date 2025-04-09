@@ -129,8 +129,8 @@ BREED_PHOTOS = {
   "Nubian" => ["nubian.jpg", "nubian2.jpg"],
   "Rhode Island Red" => ["rhode island red chicken.jpg", "rhode island red chicken2.jpg"],
   "Leghorn" => ["leghorn1.jpg", "Leghorn2.jpg"],
-  "Polish" => ["polish.jpg", "polish2.jpg"],
-  "Lionhead" => ["lionhead.jpg", "lionhead2.jpg"]
+  "Polish" => ["polish.jpeg", "polish2.jpeg"],
+  "Lionhead" => ["lionhead.jpeg", "lionhead2.jpeg"]
 }
 
 STRAY_PHOTOS = {
@@ -138,15 +138,15 @@ STRAY_PHOTOS = {
     "Other" => [["strayA.jpg", "strayA2.jpg"], ["strayB.jpg", "strayB2.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg"], ["strayE.jpg", "strayE2.jpg", "strayE3.jpg", "strayE4.jpg"],
                 ["strayF.jpg", "strayF2.jpg"], ["strayG.jpg", "strayG2.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg", "strayI3.jpg"], ["strayJ.jpg", "strayJ2.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"],
                 ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayM.jpg", "strayM2.jpg", "strayM3.jpg"], ["strayN.jpg", "strayN2.jpg"], ["strayO.jpg", "strayO2.jpg"], ["strayP.jpg", "strayP2.jpg", "strayP3.jpg"],
-                ["strayQ.jpg", "strayQ2.jpg"], ["strayR.jpg", "strayR2.jpg", "strayR3.jpg"], ["strayS.jpg", "strayS2.jpg", "strayS3.jpg"], ["strayT.jpg", "strayT2.jpg", "strayT3.jpg"], ["strayU.jpg", "strayU2.jpg"],
+                ["strayQ.jpeg", "strayQ2.jpeg"], ["strayR.jpeg", "strayR2.jpeg", "strayR3.jpeg"], ["strayS.jpeg", "strayS2.jpeg", "strayS3.jpeg"], ["strayT.jpeg", "strayT2.jpeg", "strayT3.jpeg"], ["strayU.jpg", "strayU2.jpg"],
                 ["strayV.jpg", "strayV2.jpg"]],
   },
   "Cat" => {
     "Other" => [["strayA.jpg", "strayA2.jpg", "strayA3.jpg"], ["strayB.jpg", "strayB2.jpg", "strayB3.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg", "strayD3.jpg"],
                 ["strayE.jpg", "strayE2.jpg"], ["strayF.jpg", "strayF2.jpg", "strayF3.jpg"], ["strayG.jpg", "strayG2.jpg", "strayG3.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg"],
                 ["strayJ.jpg", "strayJ2.jpg", "strayJ3.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"], ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayM.jpg", "strayM2.jpg"], ["strayN.jpg", "strayN2.jpg"],
-                ["strayO.jpg", "strayO2.jpg"], ["strayP.jpg", "strayP2.jpg"], ["strayQ.jpg", "strayQ2.jpg", "strayQ3.jpg"], ["strayR.jpg", "strayR2.jpg", "strayR3.jpg"], ["strayS.jpg", "strayS2.jpg", "strayS3.jpg"], ["strayT.jpg", "strayT2.jpg", "strayT3.jpg"],
-                ["strayU.jpg", "strayU2.jpg"], ["strayV.jpg", "strayV2.jpg", "strayV3.jpg"], ["strayW.jpg", "strayW2.jpg", "strayW3.jpg"], ["strayX.jpg", "strayX2.jpg"], ["strayY.jpg", "strayY2.jpg"], ["strayZ.jpg", "strayZ2.jpg"], ["strayAA.jpg", "strayAA2.jpg"]]
+                ["strayO.jpeg", "strayO2.jpeg"], ["strayP.jpeg", "strayP2.jpeg"], ["strayQ.jpeg", "strayQ2.jpeg", "strayQ3.jpeg"], ["strayR.jpeg", "strayR2.jpeg", "strayR3.jpeg"], ["strayS.jpeg", "strayS2.jpeg", "strayS3.jpeg"], ["strayT.jpeg", "strayT2.jpeg", "strayT3.jpeg"],
+                ["strayU.jpeg", "strayU2.jpeg"], ["strayV.jpeg", "strayV2.jpeg", "strayV3.jpeg"], ["strayW.jpeg", "strayW2.jpeg", "strayW3.jpeg"], ["strayX.jpeg", "strayX2.jpeg"], ["strayY.jpeg", "strayY2.jpeg"], ["strayZ.jpeg", "strayZ2.jpeg"], ["strayAA.jpeg", "strayAA2.jpeg"]]
   }
 }
 
