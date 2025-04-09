@@ -102,13 +102,17 @@ export default class extends Controller {
       return JSON.parse(text);
     })
     .then(provider => {
-      console.log("Provider Info:", provider);
       this.providerTarget.innerHTML = `
         <div class="chat-provider-info">
-        <img src="${provider.image_url}" class="chatroom-avatar" alt="Provider Avatar">
-        <a class="decoration-none" href="${provider.profile_url}">
-          <div><h5>${provider.name}</h5></div>
-        </a>
+          <img src="${provider.image_url}" class="chatroom-avatar" alt="Provider Avatar">
+            <a class="decoration-none" href="${provider.profile_url}">
+              <div><h5>${provider.name}</h5></div>
+            </a>
+            <p> owner of </p>
+            <a class="decoration-none" href="${provider.pet_url}">
+              <div><h5>${provider.pet_name}</h5></div>
+            </a>
+        </div>
       `;
     })
     .catch(error => console.error("Error updating chatroom header:", error));
