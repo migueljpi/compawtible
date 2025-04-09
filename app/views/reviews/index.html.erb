@@ -11,22 +11,23 @@
       <hr class="my-4">
 
       <div class="row">
-        <div class="d-flex col-lg-4 py-2 pe-0">
+        <div class="d-flex col-lg-5 py-2 pe-0">
 
-          <h4 class="my-3"> About
-          <%= link_to user_pet_path(review.pet.provider, review.pet) do %>
-            <%= review.pet.name %>
-            <% if review.pet.photos.attached? %>
-              <%= cl_image_tag review.pet.photos.first.key, crop: :thumb, gravity: :face, class: "avatar-reviews ms-2", alt: "Pet photo" %>
-            <% else %>
-              <%= image_tag "logo_paw_print.png", class: "avatar-reviews ms-2", alt: "Default pet image" %>
+          <h4 class="my-3"> My experience
+            with <%= link_to "#{review.pet.provider.first_name}", user_path(review.pet.provider) %>
+            <%= link_to user_pet_path(review.pet.provider, review.pet) do %>
+              <%= review.pet.name %>
+              <% if review.pet.photos.attached? %>
+                <%= cl_image_tag review.pet.photos.first.key, crop: :thumb, gravity: :face, class: "avatar-reviews ms-2", alt: "Pet photo" %>
+              <% else %>
+                <%= image_tag "logo_paw_print.png", class: "avatar-reviews ms-2", alt: "Default pet image" %>
+              <% end %>
             <% end %>
-          <% end %>
-          from <%= link_to "#{review.pet.provider.first_name}", user_path(review.pet.provider) %></h4>
+          </h4>
 
         </div>
 
-        <div class="d-flex flex-column col-lg-8 py-2">
+        <div class="d-flex flex-column col-lg-7 py-2">
           <% if review.provider_review_content.present? %>
             <p class="fw-lighter fst-italic">"<%= review.provider_review_content %>"</p>
           <% end %>
