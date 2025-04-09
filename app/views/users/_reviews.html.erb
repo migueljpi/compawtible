@@ -40,7 +40,7 @@
           <% if review.user == current_user %>
             <%= link_to "Delete",
               review_path(review, provider_id: @provider.id),
-              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger button-action my-0 mt-4 mx-0" %>
+              data: {turbo_method: :delete, turbo_frame: "user-reviews", turbo_confirm: "Are you sure?"}, class: "btn btn-danger button-action my-0 mt-4 mx-0" %>
           <% end %>
 
         </div>

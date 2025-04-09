@@ -1,4 +1,4 @@
-<div id="review-form" class="user-animals reviews">
+<div id="review-form" class="user-animals reviews" data-controller="review">
   <%# if on providers page as current user adopter %>
   <%# reviews only shows if messages exist between adopter and provider - there has to be messages from both %>
   <% if current_user.role == 'adopter' %>
@@ -6,7 +6,7 @@
     <% @chatrooms_to_review.each do |chatroom| %>
       <% next if chatroom.review.present? %>
 
-      <%= simple_form_for([@provider, chatroom, Review.new], data: { turbo: true }) do |f| %>
+      <%= simple_form_for([@provider, chatroom, Review.new], data: { turbo: true, turbo_frame: "user-reviews" }) do |f| %>
 
         <h4 class="mt-5 mb-3"><strong>Leave a review about your
         <%= link_to "chat", user_chatrooms_path(@adopter) %>
