@@ -15,13 +15,13 @@
         </div>
       <% end %>
       <div class="user-input">
-        <h3><strong><%= @user.first_name %> <%= @user.last_name %></strong>
+        <h1><strong><%= @user.first_name %> <%= @user.last_name %></strong>
           <span id="edit-button">
           <% if current_user.role == "provider" %>
             <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
           <% end %>
           </span>
-        </h3>
+        </h1>
         <p id="user-role"><span><%= @user.role.capitalize %></span></p>
         <p><span class="large-emoji">📧</span> <%= @user.email %></p>
         <p><span class="large-emoji">🏠</span> <%= @user.location %></p>
@@ -158,13 +158,13 @@
         </div>
       <% end %>
       <div class="user-input">
-        <h3><strong><%= @user.first_name %> <%= @user.last_name %></strong>
+        <h1><strong><%= @user.first_name %> <%= @user.last_name %></strong>
           <span id="edit-button">
             <% if @user == current_user %>
               <%= link_to "Edit profile", edit_user_registration_path, id: "button-edit" %>
             <% end %>
           </span>
-        </h3>
+        </h1>
         <p id="user-role"><span><%= @user.role.capitalize %></span></p>
         <p><span class="large-emoji">📧</span> <%= @user.email %></p>
         <p><span class="large-emoji">🏠</span> <%= @user.location %></p>
