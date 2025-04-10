@@ -62,6 +62,7 @@
 
       <!-- Pet Photo Carousel -->
       <div id="pet-show-carousel" class="col-md-6 d-flex justify-content-center h-100">
+        <div class="pet-image-main">
         <% if @pet.photos.attached? %>
           <div id="carouselPetShow" class="carousel slide"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Click for Gallery.">
             <div class="carousel-inner">
@@ -89,6 +90,7 @@
         <% end %>
       </div>
 
+    </div>
     </div>
 
     <!-- Additional Pet Info -->

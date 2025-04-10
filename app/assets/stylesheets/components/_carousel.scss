@@ -58,18 +58,13 @@
 }
 
 .pet-image-main {
-  max-width: 400px;
-  // max-height: 400px;
-  // object-fit: cover;
-
-  margin-top: 50px;
-
-  margin-left: 10px;
-  margin-right: 10px;
+  max-width: 480px;
+  margin-top: 10px;
 }
 
 .carousel-inner {
   border-radius: 10px 10px 0 0;
+  text-align: center;
 }
 
 #carouselPetShow {
