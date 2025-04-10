@@ -797,7 +797,7 @@ john_cheddar = User.create!(
   first_name: "John",
   last_name: "Cheddar",
   age: 12,
-  location: "Mafra, Lisbon, Portugal",
+  location: "Lisbon, Lisbon, Portugal",
   role: "adopter",
   about_me: "I'm here to find a pet that can keep me company in my huge house."
 )
