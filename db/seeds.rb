@@ -575,7 +575,7 @@ green_hills = User.new(
   age: 17,
   location: "Mafra, Lisbon, Portugal",
   role: "provider",
-  about_me: "Nestled in the tranquil countryside of Mafra, approximately 40 km northwest of Lisbon, Serra Verde Animal Shelter is dedicated to rescuing and rehoming abandoned and mistreated animals. Our mission is to provide a safe and loving environment for all creatures in need."
+  about_me: "Nestled in the tranquil countryside of Mafra, approximately 40 km northwest of Lisbon, Green Hills Animal Shelter is dedicated to rescuing and rehoming abandoned and mistreated animals. Our mission is to provide a safe and loving environment for all creatures in need."
 )
 file = File.open(Rails.root.join("app/assets/images/green_hills.jpg"))
   puts "Green Hills photo opened"
