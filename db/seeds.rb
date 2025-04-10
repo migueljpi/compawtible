@@ -572,7 +572,7 @@ green_hills = User.new(
   password: "123456",
   first_name: "Green Hills",
   last_name: "Shelter",
-  age: 12,
+  age: 17,
   location: "Mafra, Lisbon, Portugal",
   role: "provider",
   about_me: "Nestled in the tranquil countryside of Mafra, approximately 40 km northwest of Lisbon, Serra Verde Animal Shelter is dedicated to rescuing and rehoming abandoned and mistreated animals. Our mission is to provide a safe and loving environment for all creatures in need."
@@ -599,7 +599,7 @@ cheese = Pet.create!(
   neutered: true,
   sociable_with_animals: true,
   sociable_with_children: true,
-  certified: true.sample,
+  certified: true,
   description: "An easygoing orange tabby who loves his alone time but always greets you with a purr when you get home. He’s independent, low-maintenance, and has a quirky side—like staring at his reflection and pretending to “help” with work. Perfect for someone who enjoys peace and a bit of charm in their companion."
 )
 # Define the folder path
@@ -796,7 +796,7 @@ john_cheddar = User.create!(
   password: "123456",
   first_name: "John",
   last_name: "Cheddar",
-  age: 12,
+  age: 30,
   location: "Lisbon, Lisbon, Portugal",
   role: "adopter",
   about_me: "I'm here to find a pet that can keep me company in my huge house."
