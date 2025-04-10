@@ -705,7 +705,7 @@ benny.save!
 bella = Pet.create!(
   location: green_hills.location,
   provider: green_hills,
-  name: "Bela",
+  name: "Bella",
   species: "Dog",
   breed: "Other",
   age: 4,

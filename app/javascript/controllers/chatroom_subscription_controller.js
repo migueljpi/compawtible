@@ -108,7 +108,7 @@ export default class extends Controller {
             <a class="decoration-none" href="${provider.profile_url}">
               <div><h5>${provider.name}</h5></div>
             </a>
-            <p> owner of </p>
+            <p> about </p>
             <a class="decoration-none" href="${provider.pet_url}">
               <div><h5>${provider.pet_name}</h5></div>
             </a>

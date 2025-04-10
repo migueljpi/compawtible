@@ -39,7 +39,7 @@ class ChatroomsController < ApplicationController
     )
 
     @chatroom.messages.find_or_create_by(user: @provider) do |msg|
-      msg.content = "You have reached #{@provider.first_name}, the owner of #{@pet.name}."
+      msg.content = "You have reached #{@provider.first_name} about #{@pet.name}."
     end
 
     @message = @chatroom.messages.create(
@@ -48,7 +48,7 @@ class ChatroomsController < ApplicationController
     )
 
     if @message.save
-      redirect_to user_chatrooms_path(@adopter), notice: "Chatroom and message created successfully!"
+      redirect_to user_chatrooms_path(@adopter), notice: "Message sent!"
     else
       flash[:error] = "Message creation failed!"
     end
