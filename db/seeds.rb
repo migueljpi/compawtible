@@ -136,17 +136,17 @@ BREED_PHOTOS = {
 STRAY_PHOTOS = {
   "Dog" => {
     "Other" => [["strayA.jpg", "strayA2.jpg"], ["strayB.jpg", "strayB2.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg"], ["strayE.jpg", "strayE2.jpg", "strayE3.jpg", "strayE4.jpg"],
-                ["strayF.jpg", "strayF2.jpg"], ["strayG.jpg", "strayG2.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg", "strayI3.jpg"], ["strayJ.jpg", "strayJ2.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"],
-                ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayM.jpg", "strayM2.jpg", "strayM3.jpg"], ["strayN.jpg", "strayN2.jpg"], ["strayO.jpg", "strayO2.jpg"], ["strayP.jpg", "strayP2.jpg", "strayP3.jpg"],
+                ["strayF.jpg", "strayF2.jpg"], ["strayG.jpg", "strayG2.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayJ.jpg", "strayJ2.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"],
+                ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayN.jpg", "strayN2.jpg"], ["strayO.jpg", "strayO2.jpg"], ["strayP.jpg", "strayP2.jpg", "strayP3.jpg"],
                 ["strayQ.jpeg", "strayQ2.jpeg"], ["strayR.jpeg", "strayR2.jpeg", "strayR3.jpeg"], ["strayS.jpeg", "strayS2.jpeg", "strayS3.jpeg"], ["strayT.jpeg", "strayT2.jpeg", "strayT3.jpeg"], ["strayU.jpg", "strayU2.jpg"],
                 ["strayV.jpg", "strayV2.jpg"]],
   },
   "Cat" => {
-    "Other" => [["strayA.jpg", "strayA2.jpg", "strayA3.jpg"], ["strayB.jpg", "strayB2.jpg", "strayB3.jpg"], ["strayC.jpg", "strayC2.jpg"], ["strayD.jpg", "strayD2.jpg", "strayD3.jpg"],
+    "Other" => [["strayA.jpg", "strayA2.jpg", "strayA3.jpg"], ["strayB.jpg", "strayB2.jpg", "strayB3.jpg"], ["strayC.jpg", "strayC2.jpg"],
                 ["strayE.jpg", "strayE2.jpg"], ["strayF.jpg", "strayF2.jpg", "strayF3.jpg"], ["strayG.jpg", "strayG2.jpg", "strayG3.jpg"], ["strayH.jpg", "strayH2.jpg"], ["strayI.jpg", "strayI2.jpg"],
-                ["strayJ.jpg", "strayJ2.jpg", "strayJ3.jpg"], ["strayK.jpg", "strayK2.jpg", "strayK3.jpg"], ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayM.jpg", "strayM2.jpg"], ["strayN.jpg", "strayN2.jpg"],
+                ["strayJ.jpg", "strayJ2.jpg", "strayJ3.jpg"], ["strayL.jpg", "strayL2.jpg", "strayL3.jpg"], ["strayM.jpg", "strayM2.jpg"], ["strayN.jpg", "strayN2.jpg"],
                 ["strayO.jpeg", "strayO2.jpeg"], ["strayP.jpeg", "strayP2.jpeg"], ["strayQ.jpeg", "strayQ2.jpeg", "strayQ3.jpeg"], ["strayR.jpeg", "strayR2.jpeg", "strayR3.jpeg"], ["strayS.jpeg", "strayS2.jpeg", "strayS3.jpeg"], ["strayT.jpeg", "strayT2.jpeg", "strayT3.jpeg"],
-                ["strayU.jpeg", "strayU2.jpeg"], ["strayV.jpeg", "strayV2.jpeg", "strayV3.jpeg"], ["strayW.jpeg", "strayW2.jpeg", "strayW3.jpeg"], ["strayX.jpeg", "strayX2.jpeg"], ["strayY.jpeg", "strayY2.jpeg"], ["strayZ.jpeg", "strayZ2.jpeg"], ["strayAA.jpeg", "strayAA2.jpeg"]]
+                ["strayU.jpeg", "strayU2.jpeg"], ["strayW.jpeg", "strayW2.jpeg", "strayW3.jpeg"], ["strayX.jpeg", "strayX2.jpeg"], ["strayY.jpeg", "strayY2.jpeg"], ["strayZ.jpeg", "strayZ2.jpeg"], ["strayAA.jpeg", "strayAA2.jpeg"]]
   }
 }
 
@@ -530,35 +530,263 @@ end
 puts "Pets created!"
 puts "Seeded #{User.count} users and #{Pet.count} pets!"
 
+
 # puts "Creating chatrooms..."
 # Pet.all.each do |pet|
 #   provider = pet.provider
 #   adopter = User.where(role: "adopter").sample
 
 #   chatroom = Chatroom.create!(
-#     name: "Chat between #{adopter.first_name} and #{provider.first_name} about #{pet.name}",
-#     pet_id: pet.id
-#   )
-#   puts "Chatroom created: #{chatroom.name} (Pet: #{pet.name})"
+  #     name: "Chat between #{adopter.first_name} and #{provider.first_name} about #{pet.name}",
+  #     pet_id: pet.id
+  #   )
+  #   puts "Chatroom created: #{chatroom.name} (Pet: #{pet.name})"
 
-#   Message.create!(
-#     chatroom: chatroom,
-#     user: adopter,
-#     content: "Hello, I'm interested in #{pet.name}!"
-#   )
-#   Message.create!(
-#     chatroom: chatroom,
-#     user: provider,
-#     content: "hi #{adopter.first_name}, i can tell you more about #{pet.name}!"
-#   )
-#   13.times do |i|
-#     sender = [adopter, provider].sample
-#     Message.create!(
-#       chatroom: chatroom,
-#       user: sender,
-#       content: "Example message nº#{i + 3} from #{sender.first_name}"
-#     )
-#   end
-#   puts "15 messages  created on chatroom: #{chatroom.name}"
-# end
-# puts "Chatrooms and messages created"
+  #   Message.create!(
+    #     chatroom: chatroom,
+    #     user: adopter,
+    #     content: "Hello, I'm interested in #{pet.name}!"
+    #   )
+    #   Message.create!(
+      #     chatroom: chatroom,
+      #     user: provider,
+      #     content: "hi #{adopter.first_name}, i can tell you more about #{pet.name}!"
+      #   )
+      #   13.times do |i|
+      #     sender = [adopter, provider].sample
+      #     Message.create!(
+        #       chatroom: chatroom,
+        #       user: sender,
+        #       content: "Example message nº#{i + 3} from #{sender.first_name}"
+        #     )
+        #   end
+        #   puts "15 messages  created on chatroom: #{chatroom.name}"
+        # end
+        # puts "Chatrooms and messages created"
+
+puts "Creating elements for presentation"
+puts "Creating Green Hills"
+
+green_hills = User.new(
+  email: "green.hills@email.com",
+  password: "123456",
+  first_name: "Green Hills",
+  last_name: "Shelter",
+  age: 12,
+  location: "Mafra, Lisbon, Portugal",
+  role: "provider",
+  about_me: "Nestled in the tranquil countryside of Mafra, approximately 40 km northwest of Lisbon, Serra Verde Animal Shelter is dedicated to rescuing and rehoming abandoned and mistreated animals. Our mission is to provide a safe and loving environment for all creatures in need."
+)
+file = File.open(Rails.root.join("app/assets/images/green_hills.jpg"))
+  puts "Green Hills photo opened"
+  puts "attaching photo"
+  green_hills.photo.attach(io: file, filename: "green_hills.jpg", content_type: "image/jpeg")
+  puts "Green Hills photo attached!"
+green_hills.save!
+
+puts "Creating animals for Green Hills"
+
+cheese = Pet.create!(
+  location: green_hills.location,
+  provider: green_hills,
+  name: "Cheese",
+  species: "Cat",
+  breed: "Other",
+  age: 3,
+  size: "Medium",
+  activity_level: "Low",
+  gender: "Male",
+  neutered: true,
+  sociable_with_animals: true,
+  sociable_with_children: true,
+  certified: true.sample,
+  description: "Cheese is a sweet and calm cat who enjoys cuddling and watching the world go by. She's been through a lot but is ready to bring joy to her forever home."
+)
+# Define the folder path
+folder_path = Rails.root.join("app/assets/images/breeds/others/Cheese")
+
+# Fetch all files in the folder and attach them to the "cheese" pet
+Dir.glob("#{folder_path}/*").each do |file_path|
+  file = File.open(file_path)
+  puts "Attaching photo: #{file_path}"
+  cheese.photos.attach(io: file, filename: File.basename(file_path), content_type: "image/jpeg")
+end
+
+puts "Photos attached to Cheese!"
+cheese.save!
+
+socks = Pet.create!(
+  location: green_hills.location,
+  provider: green_hills,
+  name: "Socks",
+  species: "Cat",
+  breed: "Other",
+  age: 4,
+  size: "Medium",
+  activity_level: "High",
+  gender: "Female",
+  neutered: true,
+  sociable_with_animals: true,
+  sociable_with_children: true,
+  certified: [true, false].sample,
+  description: "Socks is a playful black-and-white kitten with endless energy. She’s always up for a game of chase or pouncing on toys. She loves people and isn’t shy about asking for attention, but she’s also a curious adventurer who loves exploring her surroundings. Socks would do well in an active home that can keep up with her playful spirit."
+)
+# Define the folder path
+folder_path = Rails.root.join("app/assets/images/breeds/others/Socks")
+
+# Fetch all files in the folder and attach them to the "cheese" pet
+Dir.glob("#{folder_path}/*").each do |file_path|
+  file = File.open(file_path)
+  puts "Attaching photo: #{file_path}"
+  socks.photos.attach(io: file, filename: File.basename(file_path), content_type: "image/jpeg")
+end
+
+puts "Photos attached to Socks!"
+socks.save!
+
+mittens = Pet.create!(
+  location: green_hills.location,
+  provider: green_hills,
+  name: "Mittens",
+  species: "Cat",
+  breed: "Other",
+  age: 2,
+  size: "Small",
+  activity_level: ["Low", "Moderate", "High"].sample,
+  gender: "Female",
+  neutered: true,
+  sociable_with_animals: true,
+  sociable_with_children: true,
+  certified: [true, false].sample,
+  description: "Mittens is a sweet, grey-and-white tabby who’s got a heart of gold. She’s a bit more social than Cheese but still enjoys her personal space. Mittens loves curling up by the window and watching the world go by. If you’re seeking a gentle cat who loves attention but also enjoys her alone time, Mittens is ready to meet you!"
+)
+
+folder_path = Rails.root.join("app/assets/images/breeds/others/Mittens")
+
+
+Dir.glob("#{folder_path}/*").each do |file_path|
+  file = File.open(file_path)
+  puts "Attaching photo: #{file_path}"
+  mittens.photos.attach(io: file, filename: File.basename(file_path), content_type: "image/jpeg")
+end
+
+puts "Photos attached to Mittens!"
+mittens.save!
+
+benny = Pet.create!(
+  location: green_hills.location,
+  provider: green_hills,
+  name: "Benny",
+  species: "Dog",
+  breed: "Other",
+  age: 3,
+  size: "Large",
+  activity_level: "High",
+  gender: "Male",
+  neutered: true,
+  sociable_with_animals: true,
+  sociable_with_children: true,
+  certified: [true, false].sample,
+  description: "Benny is a friendly, active dog with a love for walks and playtime. A loyal companion, he’ll be your best friend on long hikes or cozy couch sessions. Benny is looking for an active family who can give him plenty of exercise and affection. He’s social with other dogs and loves to be the center of attention. If you want a dog with endless energy and love to give, Benny is your perfect match."
+)
+# Define the folder path
+folder_path = Rails.root.join("app/assets/images/breeds/others/Benny")
+
+# Fetch all files in the folder and attach them to the "cheese" pet
+Dir.glob("#{folder_path}/*").each do |file_path|
+  file = File.open(file_path)
+  puts "Attaching photo: #{file_path}"
+  benny.photos.attach(io: file, filename: File.basename(file_path), content_type: "image/jpeg")
+end
+
+puts "Photos attached to Benny!"
+benny.save!
+
+bella = Pet.create!(
+  location: green_hills.location,
+  provider: green_hills,
+  name: "Bela",
+  species: "Dog",
+  breed: "Other",
+  age: 4,
+  size: "Medium",
+  activity_level: ["Low", "Moderate", "High"].sample,
+  gender: "Female",
+  neutered: true,
+  sociable_with_animals: true,
+  sociable_with_children: true,
+  certified: [true, false].sample,
+  description: "Bella is a calm, affectionate dog who thrives on human companionship. She loves to cuddle and be by your side, whether you’re relaxing on the couch or taking a walk around the neighborhood. Bella would be ideal for a family or individual looking for a loving, low-key dog who enjoys quality time together. She’s friendly with other animals and would fit in well in a variety of homes."
+)
+# Define the folder path
+folder_path = Rails.root.join("app/assets/images/breeds/others/Bella")
+
+# Fetch all files in the folder and attach them to the "cheese" pet
+Dir.glob("#{folder_path}/*").each do |file_path|
+  file = File.open(file_path)
+  puts "Attaching photo: #{file_path}"
+  bella.photos.attach(io: file, filename: File.basename(file_path), content_type: "image/jpeg")
+end
+
+puts "Photos attached to Bella!"
+bella.save!
+
+gerty = Pet.create!(
+  location: green_hills.location,
+  provider: green_hills,
+  name: "Gerty",
+  species: "Goat",
+  breed: "Other",
+  age: 2,
+  size: "Small",
+  activity_level: "Low",
+  gender: "Female",
+  neutered: false,
+  sociable_with_animals: true,
+  sociable_with_children: true,
+  certified: false,
+  description: "Gerty is a curious and friendly goat. She enjoys interacting with people and other animals and would love to find a farm or space where she can roam and play."
+)
+# Define the folder path
+folder_path = Rails.root.join("app/assets/images/breeds/others/Gerty")
+
+# Fetch all files in the folder and attach them to the "cheese" pet
+Dir.glob("#{folder_path}/*").each do |file_path|
+  file = File.open(file_path)
+  puts "Attaching photo: #{file_path}"
+  gerty.photos.attach(io: file, filename: File.basename(file_path), content_type: "image/jpeg")
+end
+
+puts "Photos attached to Gerty!"
+gerty.save!
+
+kittens = Pet.create!(
+  location: green_hills.location,
+  provider: green_hills,
+  name: "Kittens",
+  species: "Cat",
+  breed: "Other",
+  age: 1,
+  size: "Small",
+  activity_level: "Moderate",
+  gender: ["Male", "Female"].sample,
+  neutered: false,
+  sociable_with_animals: true,
+  sociable_with_children: true,
+  certified: false,
+  description: "A litter of playful baby kittens looking for their forever homes! They’re all full of energy and ready to explore the world around them."
+)
+# Define the folder path
+folder_path = Rails.root.join("app/assets/images/breeds/others/Kittens")
+
+# Fetch all files in the folder and attach them to the "cheese" pet
+Dir.glob("#{folder_path}/*").each do |file_path|
+  file = File.open(file_path)
+  puts "Attaching photo: #{file_path}"
+  kittens.photos.attach(io: file, filename: File.basename(file_path), content_type: "image/jpeg")
+end
+
+puts "Photos attached to Kittens!"
+kittens.save!
+
+puts "Green Hills + pets created!"
