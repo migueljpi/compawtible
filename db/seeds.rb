@@ -600,7 +600,7 @@ cheese = Pet.create!(
   sociable_with_animals: true,
   sociable_with_children: true,
   certified: true.sample,
-  description: "Cheese is a sweet and calm cat who enjoys cuddling and watching the world go by. She's been through a lot but is ready to bring joy to her forever home."
+  description: "An easygoing orange tabby who loves his alone time but always greets you with a purr when you get home. He’s independent, low-maintenance, and has a quirky side—like staring at his reflection and pretending to “help” with work. Perfect for someone who enjoys peace and a bit of charm in their companion."
 )
 # Define the folder path
 folder_path = Rails.root.join("app/assets/images/breeds/others/Cheese")
