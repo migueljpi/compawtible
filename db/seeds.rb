@@ -790,3 +790,23 @@ puts "Photos attached to Kittens!"
 kittens.save!
 
 puts "Green Hills + pets created!"
+
+john_cheddar = User.create!(
+  email: "john.cheddar@email.com",
+  password: "123456",
+  first_name: "John",
+  last_name: "Cheddar",
+  age: 12,
+  location: "Mafra, Lisbon, Portugal",
+  role: "adopter",
+  about_me: "I'm here to find a pet that can keep me company in my huge house."
+)
+file = File.open(Rails.root.join("app/assets/images/john_cheddar.jpg"))
+  puts "Green Hills photo opened"
+  puts "attaching photo"
+  john_cheddar.photo.attach(io: file, filename: "john_cheddar.jpg", content_type: "image/jpeg")
+  puts "John Cheddar photo attached!"
+john_cheddar.save!
+
+puts "Created John Cheddar!"
+puts "Done!"
