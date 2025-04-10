@@ -4,7 +4,6 @@ class PagesController < ApplicationController
   after_action :verify_policy_scoped, only: :home, unless: :skip_pundit?
   skip_after_action :verify_policy_scoped, only: [:index]
 
-
   def home
     authorize :page, :home?
   end
@@ -59,7 +58,7 @@ class PagesController < ApplicationController
             end
 
             # Render the Turbo Frame content
-            # countdown(20) # for testing
+            countdown(3) # for presentation loading screen
             render turbo_frame: "output-three", partial: "pages/output_three", locals: { best_matches: @best_matches }
           else
             flash.now[:alert] = "There was an error saving the data."
