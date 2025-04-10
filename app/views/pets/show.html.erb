@@ -4,7 +4,7 @@
 
   <% if @prompt %>
     <div class="return-to-search-from-pet">
-      <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: false }, class: "btn btn-secondary" do %>
+      <%= link_to search_path(prompt_id: @prompt.id), data: { turbo: false }, class: "btn btn-primary" do %>
         <i class="fa-solid fa-arrow-left"></i> Return to top matches
       <% end %>
     </div>
