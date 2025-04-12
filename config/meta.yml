@@ -1,0 +1,6 @@
+# config/meta.yml
+meta_product_name: "Compawtible"
+meta_title: "Compawtible - Your perfect pet match is waiting"
+meta_description: "We help you find the perfect pet based on your lifestyle and preferences—whether you live in an apartment, have kids, or specific needs, we match you with a pet that truly fits your home."
+meta_image: "./../app/assets/images/landing_page_photo.png"
+twitter_account: "@product_twitter_account"
